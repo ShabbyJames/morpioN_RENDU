@@ -17,4 +17,19 @@ If you are looking for a framework to build your bots, [Bottender](https://githu
 | Package                                                        | Version                                                                                                                                     | Platform                                |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
 | [`messaging-api-messenger`](/packages/messaging-api-messenger) | [![npm](https://img.shields.io/npm/v/messaging-api-messenger.svg?style=flat-square)](https://www.npmjs.com/package/messaging-api-messenger) | [Messenger](https://www.messenger.com/) |
-| [`messaging-api-line`](/packages/messaging-api-line)           | [![npm](https://img.shields.io/npm/v/messaging-api-line.svg?style=flat-square)](https://www.npmjs.com/package/mess
+| [`messaging-api-line`](/packages/messaging-api-line)           | [![npm](https://img.shields.io/npm/v/messaging-api-line.svg?style=flat-square)](https://www.npmjs.com/package/messaging-api-line)           | [LINE](https://line.me/)                |
+| [`messaging-api-slack`](/packages/messaging-api-slack)         | [![npm](https://img.shields.io/npm/v/messaging-api-slack.svg?style=flat-square)](https://www.npmjs.com/package/messaging-api-slack)         | [Slack](https://slack.com/)             |
+| [`messaging-api-telegram`](/packages/messaging-api-telegram)   | [![npm](https://img.shields.io/npm/v/messaging-api-telegram.svg?style=flat-square)](https://www.npmjs.com/package/messaging-api-telegram)   | [Telegram](https://telegram.org/)       |
+| [`messaging-api-viber`](/packages/messaging-api-viber)         | [![npm](https://img.shields.io/npm/v/messaging-api-viber.svg?style=flat-square)](https://www.npmjs.com/package/messaging-api-viber)         | [Viber](https://www.viber.com/)         |
+| [`messaging-api-wechat`](/packages/messaging-api-wechat)       | [![npm](https://img.shields.io/npm/v/messaging-api-wechat.svg?style=flat-square)](https://www.npmjs.com/package/messaging-api-wechat)       | [WeChat](https://weixin.qq.com/)        |
+
+## Usage
+
+## Messenger
+
+<img src="https://static.xx.fbcdn.net/rsrc.php/yg/r/4_vfHVmZ5XD.ico" alt="Messenger" width="100" />
+
+Install `messaging-api-messenger` package from the registry:
+
+```sh
+npm i --save messaging-api-
