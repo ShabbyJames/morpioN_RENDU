@@ -32,4 +32,66 @@ If you are looking for a framework to build your bots, [Bottender](https://githu
 Install `messaging-api-messenger` package from the registry:
 
 ```sh
-npm i --save messaging-api-
+npm i --save messaging-api-messenger
+```
+
+or
+
+```sh
+yarn add messaging-api-messenger
+```
+
+Then, create a `MessengerClient` to call Messenger APIs:
+
+```js
+const { MessengerClient } = require('messaging-api-messenger');
+
+// get accessToken from facebook developers website
+const client = new MessengerClient({
+  accessToken: 'ACCESS_TOKEN',
+});
+
+client.sendText(userId, 'Hello World').then(() => {
+  console.log('sent');
+});
+```
+
+Check out [full API documentation](./packages/messaging-api-messenger/README.md) for more detail information.
+
+## LINE
+
+<img src="http://is5.mzstatic.com/image/thumb/Purple117/v4/01/c2/4d/01c24d99-4aae-71ea-24e2-d0b68f8c53d2/source/1200x630bb.jpg" alt="LINE" width="100" />
+
+Install `messaging-api-line` package from the registry:
+
+```sh
+npm i --save messaging-api-line
+```
+
+or
+
+```sh
+yarn add messaging-api-line
+```
+
+Then, create a `LineClient` to call LINE APIs:
+
+```js
+const { LineClient } = require('messaging-api-line');
+
+// get accessToken and channelSecret from LINE developers website
+const client = new LineClient({
+  accessToken: 'ACCESS_TOKEN',
+  channelSecret: 'CHANNEL_SECRET',
+});
+
+client.pushText(userId, 'Hello World').then(() => {
+  console.log('pushed');
+});
+```
+
+Check out [full API documentation](./packages/messaging-api-line/README.md) for more detail information.
+
+## Slack
+
+<img src="https://cdn-imag
