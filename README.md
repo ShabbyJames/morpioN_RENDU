@@ -146,4 +146,67 @@ Check out [full API documentation](./packages/messaging-api-slack/README.md) for
 
 Install `messaging-api-telegram` package from the registry:
 
-`
+```sh
+npm i --save messaging-api-telegram
+```
+
+or
+
+```sh
+yarn add messaging-api-telegram
+```
+
+Then, create a `TelegramClient` to call Telegram APIs:
+
+```js
+const { TelegramClient } = require('messaging-api-telegram');
+
+// get accessToken from telegram [@BotFather](https://telegram.me/BotFather)
+const client = new TelegramClient({
+  accessToken: '12345678:AaBbCcDdwhatever',
+});
+
+client.sendMessage(chatId, 'Hello World').then(() => {
+  console.log('sent');
+});
+```
+
+Check out [full API documentation](./packages/messaging-api-telegram/README.md) for more detail information.
+
+## Viber
+
+<img src="https://user-images.githubusercontent.com/3382565/31753411-0be75dfc-b456-11e7-9eea-b976d21fcc53.png" alt="Viber" width="100" />
+
+Install `messaging-api-viber` package from the registry:
+
+```sh
+npm i --save messaging-api-viber
+```
+
+or
+
+```sh
+yarn add messaging-api-viber
+```
+
+Then, create a `ViberClient` to call Viber APIs:
+
+```js
+const { ViberClient } = require('messaging-api-viber');
+
+// get authToken from the "edit info" screen of your Public Account.
+const client = new ViberClient({
+  accessToken: 'AUTH_TOKEN',
+  sender: {
+    name: 'Sender',
+  },
+});
+
+client.sendText(userId, 'Hello World').then(() => {
+  console.log('sent');
+});
+```
+
+Check out [full API documentation](./packages/messaging-api-viber/README.md) for more detail information.
+
+## WeChat
