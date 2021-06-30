@@ -210,3 +210,52 @@ client.sendText(userId, 'Hello World').then(() => {
 Check out [full API documentation](./packages/messaging-api-viber/README.md) for more detail information.
 
 ## WeChat
+
+<img src="https://user-images.githubusercontent.com/3382565/33652361-1dc854c6-daa4-11e7-997e-e1dedd818881.jpg" alt="WeChat" width="100" />
+
+Install `messaging-api-wechat` package from the registry:
+
+```sh
+npm i --save messaging-api-wechat
+```
+
+or
+
+```sh
+yarn add messaging-api-wechat
+```
+
+Then, create a `WechatClient` to call Wechat APIs:
+
+```js
+const { WechatClient } = require('messaging-api-wechat');
+
+// get appId, appSecret from「微信公众平台-开发-基本配置」page
+const client = new WechatClient({
+  appId: 'APP_ID',
+  appSecret: 'APP_SECRET',
+});
+
+client.sendText(userId, 'Hello World').then(() => {
+  console.log('sent');
+});
+```
+
+Check out [full API documentation](./packages/messaging-api-wechat/README.md) for more detail information.
+
+## Documentation
+
+- [Messenger](./packages/messaging-api-messenger/README.md)
+- [LINE](./packages/messaging-api-line/README.md)
+- [Slack](./packages/messaging-api-slack/README.md)
+- [Telegram](./packages/messaging-api-telegram/README.md)
+- [Viber](./packages/messaging-api-viber/README.md)
+- [WeChat](./packages/messaging-api-wechat/README.md)
+
+## Change Log
+
+Every release, along with the migration instructions, is documented on the [CHANGELOG.md](./CHANGELOG.md) file.
+
+## License
+
+MIT © [Yoctol](https://github.com/Yoctol/messaging-apis)
