@@ -94,4 +94,56 @@ Check out [full API documentation](./packages/messaging-api-line/README.md) for 
 
 ## Slack
 
-<img src="https://cdn-imag
+<img src="https://cdn-images-1.medium.com/max/1200/1*TiKyhAN2gx4PpbOsiBhYcw.png" alt="Slack" width="100" />
+
+Install `messaging-api-slack` package from the registry:
+
+```sh
+npm i --save messaging-api-slack
+```
+
+or
+
+```sh
+yarn add messaging-api-slack
+```
+
+Then, create a `SlackOAuthClient` or `SlackWebhookClient` to call Slack APIs:
+
+```js
+const { SlackOAuthClient } = require('messaging-api-slack');
+
+// get access token by setup OAuth & Permissions function to your app.
+// https://api.slack.com/docs/oauth
+const client = new SlackOAuthClient({
+  accessToken: 'xoxb-000000000000-xxxxxxxxxxxxxxxxxxxxxxxx',
+});
+
+client.postMessage('#random', 'Hello World').then(() => {
+  console.log('sent');
+});
+```
+
+```js
+const { SlackWebhookClient } = require('messaging-api-slack');
+
+// get webhook URL by adding a Incoming Webhook integration to your team.
+// https://my.slack.com/services/new/incoming-webhook/
+const client = new SlackWebhookClient({
+  url: 'https://hooks.slack.com/services/XXXXXXXX/YYYYYYYY/zzzzzZZZZZ',
+});
+
+client.sendText('Hello World').then(() => {
+  console.log('sent');
+});
+```
+
+Check out [full API documentation](./packages/messaging-api-slack/README.md) for more detail information.
+
+## Telegram
+
+<img src="https://telegram.org/img/t_logo.png" alt="Telegram" width="100" />
+
+Install `messaging-api-telegram` package from the registry:
+
+`
