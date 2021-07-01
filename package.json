@@ -5,3 +5,37 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Yoctol/messaging-apis.git"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "clean": "git clean -dfqX -- ./node_modules **/{dist,node_modules}/ ./packages/*/tsconfig*tsbuildinfo",
+    "compile": "tsc --build tsconfig.build.json",
+    "compile:clean": "tsc --build tsconfig.build.json --clean",
+    "postinstall": "lerna run prepare && yarn compile",
+    "lint": "eslint packages examples --ext=js,ts",
+    "lint:fix": "yarn lint:fix:md && yarn lint --fix",
+    "lint:fix:md": "prettier --write **/*.md",
+    "lint:staged": "lint-staged",
+    "prepare": "husky install",
+    "publish": "lerna publish",
+    "prepublishOnly": "yarn clean && yarn && yarn test",
+    "test": "yarn compile && yarn lint && yarn testonly",
+    "testonly": "jest",
+    "testonly:cov": "jest --coverage",
+    "testonly:watch": "jest --watch",
+    "typedoc": "typedoc --entryPointStrategy packages .",
+    "watch": "tsc --build tsconfig.build.json --watch"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/jest": "^26.0.10",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "axios": "^0.21.4",
+    "axios-mock-adapter": "^1.20.0",
+    "chalk": "^4.1.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-confi
