@@ -38,4 +38,27 @@
     "chalk": "^4.1.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-confi
+    "eslint-config-yoctol-base": "^0.24.1",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
+    "eslint-plugin-tsdoc": "^0.2.14",
+    "husky": "^7.0.2",
+    "jest": "^26.4.0",
+    "lerna": "^4.0.0",
+    "lint-staged": "^11.1.2",
+    "micromatch": "^4.0.4",
+    "mkdir": "^0.0.2",
+    "msw": "^0.35.0",
+    "prettier": "^2.4.0",
+    "prettier-package-json": "^2.6.0",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.2.0",
+    "typedoc": "^0.22.3",
+    "typescript": "^4.4.3"
+  },
+  "engines": {
+    "node": ">=10"
+  }
+}
