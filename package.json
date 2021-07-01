@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "name": "messaging-apis",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yoctol/messaging-apis.git"
