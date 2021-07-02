@@ -31,4 +31,12 @@ const error = new AxiosError(message, errorThrownByAxios);
 const error = new AxiosError(message, { config, request, response });
 ```
 
-Calling `console.log` on th
+Calling `console.log` on the error instance returns the formatted message. If you'd like to get the axios `request`, `response`, or `config`, you can still get them via the following keys on the error instance:
+
+```js
+console.log(error); // formatted error message
+console.log(error.stack); // error stack trace
+console.log(error.config); // axios request config
+console.log(error.request); // HTTP request
+console.log(error.response); // HTTP response
+```
