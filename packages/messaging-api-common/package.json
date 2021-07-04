@@ -17,4 +17,18 @@
     "camel-case": "^4.1.1",
     "debug": "^4.1.1",
     "lodash": "^4.17.15",
-    "map-
+    "map-obj": "^4.1.0",
+    "pascal-case": "^3.1.1",
+    "snake-case": "^3.0.3",
+    "type-fest": "1.4.0",
+    "url-join": "^4.0.1"
+  },
+  "keywords": [
+    "bot",
+    "chatbot",
+    "messaging-apis"
+  ],
+  "engines": {
+    "node": ">=10"
+  }
+}
