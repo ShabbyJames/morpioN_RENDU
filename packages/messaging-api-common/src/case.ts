@@ -142,3 +142,113 @@ function camelcase<T extends string>(text: T): CamelCase<T> {
  * ```js
  * camelcaseKeys({ 'foo_bar': true });
  * //=> { 'fooBar': true }
+ * ```
+ */
+function camelcaseKeys<T extends PlainObject, O extends MapOptions>(
+  obj: T,
+  options?: O
+): O['deep'] extends true
+  ? CamelCasedPropertiesDeep<T>
+  : CamelCasedProperties<T> {
+  return mapObject(
+    obj,
+    (key, val) => [camelcase(key as string), val],
+    options
+  ) as O['deep'] extends true
+    ? CamelCasedPropertiesDeep<T>
+    : CamelCasedProperties<T>;
+}
+
+/**
+ * Converts object keys to camel case deeply.
+ *
+ * @param obj - The input object
+ * @returns The converted object
+ *
+ * @example
+ * ```js
+ * camelcaseKeysDeep({ 'foo_bar': { 'bar_foo': true } });
+ * //=> { 'fooBar': { 'barFoo': true } }
+ * ```
+ */
+function camelcaseKeysDeep<T extends PlainObject>(
+  obj: T
+): CamelCasedPropertiesDeep<T> {
+  return camelcaseKeys(obj, { deep: true });
+}
+
+/**
+ * Converts a string to pascal case.
+ *
+ * @param text - The input string
+ * @returns The converted string
+ *
+ * @example
+ * ```js
+ * pascalcase('fooBar');
+ * //=> 'FooBar'
+ * ```
+ */
+function pascalcase<T extends string>(str: T): PascalCase<T> {
+  return pascalCase(
+    isLastCharNumber(str) ? splitLastChar(str) : str
+  ) as PascalCase<T>;
+}
+
+/**
+ * Converts object keys to pascal case.
+ *
+ * @param obj - The input object
+ * @param options - The options to config this convert function
+ * @returns The converted object
+ *
+ * @example
+ * ```js
+ * pascalcaseKeys({ 'fooBar': true });
+ * //=> { 'FooBar': true }
+ * ```
+ */
+function pascalcaseKeys<T extends PlainObject, O extends MapOptions>(
+  obj: T,
+  options?: O
+): O['deep'] extends true
+  ? PascalCasedPropertiesDeep<T>
+  : PascalCasedProperties<T> {
+  return mapObject(
+    obj,
+    (key, val) => [pascalcase(key as string), val],
+    options
+  ) as O['deep'] extends true
+    ? PascalCasedPropertiesDeep<T>
+    : PascalCasedProperties<T>;
+}
+
+/**
+ * Converts object keys to pascal case deeply.
+ *
+ * @param obj - The input object
+ * @returns The converted object
+ *
+ * @example
+ * ```js
+ * pascalcaseKeysDeep({ 'fooBar': { 'barFoo': true } });
+ * //=> { 'FooBar': { 'BarFoo': true } }
+ * ```
+ */
+function pascalcaseKeysDeep<T extends PlainObject>(
+  obj: T
+): PascalCasedPropertiesDeep<T> {
+  return pascalcaseKeys(obj, { deep: true });
+}
+
+export {
+  snakecase,
+  snakecaseKeys,
+  snakecaseKeysDeep,
+  camelcase,
+  camelcaseKeys,
+  camelcaseKeysDeep,
+  pascalcase,
+  pascalcaseKeys,
+  pascalcaseKeysDeep,
+};
