@@ -996,3 +996,1264 @@ client.pushTemplate(USER_ID, 'this is a template', {
 ## `pushButtonTemplate(userId, altText, buttonTemplate, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#buttons)
 
 Alias: `pushButtonsTemplate`.
+
+Sends button template message using ID of the receiver.
+
+<img src="https://developers.line.me/media/messaging-api/messages/buttons-86e14165.png" width="250px" />
+
+| Param                               | Type            | Description                                                                                   |
+| ----------------------------------- | --------------- | --------------------------------------------------------------------------------------------- |
+| userId                              | `String`        | ID of the receiver.                                                                           |
+| altText                             | `String`        | Alternative text.                                                                             |
+| buttonTemplate                      | `Object`        | Object contains buttonTemplate's parameters.                                                  |
+| buttonTemplate.thumbnailImageUrl    | `String`        | Image URL of buttonTemplate.                                                                  |
+| buttonTemplate.imageAspectRatio     | `String`        | Aspect ratio of the image. Specify one of the following values: `rectangle`, `square`         |
+| buttonTemplate.imageSize            | `String`        | Size of the image. Specify one of the following values: `cover`, `contain`                    |
+| buttonTemplate.imageBackgroundColor | `String`        | Background color of image. Specify a RGB color value. The default value is `#FFFFFF` (white). |
+| buttonTemplate.title                | `String`        | Title of buttonTemplate.                                                                      |
+| buttonTemplate.text                 | `String`        | Message text of buttonTemplate.                                                               |
+| buttonTemplate.defaultAction        | `Object`        | Action when image is tapped; set for the entire image, title, and text area.                  |
+| buttonTemplate.actions              | `Array<Object>` | Action when tapped.                                                                           |
+| options                             | `Object`        | Optional options.                                                                             |
+| options.quickReply                  | `Object`        | Quick reply object to attach to the message.                                                  |
+| options.quickReply.items            | `Array`         | Quick reply items.                                                                            |
+
+Example:
+
+```js
+client.pushButtonTemplate(USER_ID, 'this is a template', {
+  thumbnailImageUrl: 'https://example.com/bot/images/image.jpg',
+  title: 'Menu',
+  text: 'Please select',
+  actions: [
+    {
+      type: 'postback',
+      label: 'Buy',
+      data: 'action=buy&itemid=123',
+    },
+    {
+      type: 'postback',
+      label: 'Add to cart',
+      data: 'action=add&itemid=123',
+    },
+    {
+      type: 'uri',
+      label: 'View detail',
+      uri: 'http://example.com/page/123',
+    },
+  ],
+});
+```
+
+<br />
+
+## `pushConfirmTemplate(userId, altText, confirmTemplate, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#confirm)
+
+Sends confirm template message using ID of the receiver.
+
+<img src="https://developers.line.me/media/messaging-api/messages/confirm-444aead5.png" width="250px" />
+
+| Param                    | Type            | Description                                   |
+| ------------------------ | --------------- | --------------------------------------------- |
+| userId                   | `String`        | ID of the receiver.                           |
+| altText                  | `String`        | Alternative text.                             |
+| confirmTemplate          | `Object`        | Object contains confirmTemplate's parameters. |
+| confirmTemplate.text     | `String`        | Message text of confirmTemplate.              |
+| confirmTemplate.actions  | `Array<Object>` | Action when tapped.                           |
+| options                  | `Object`        | Optional options.                             |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message.  |
+| options.quickReply.items | `Array`         | Quick reply items.                            |
+
+Example:
+
+```js
+client.pushConfirmTemplate(USER_ID, 'this is a confirm template', {
+  text: 'Are you sure?',
+  actions: [
+    {
+      type: 'message',
+      label: 'Yes',
+      text: 'yes',
+    },
+    {
+      type: 'message',
+      label: 'No',
+      text: 'no',
+    },
+  ],
+});
+```
+
+<br />
+
+## `pushCarouselTemplate(userId, altText, carouselItems, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#carousel)
+
+Sends carousel template message using ID of the receiver.
+
+<img src="https://developers.line.me/media/messaging-api/messages/carousel-c59baef6.png" width="250px" />
+
+| Param                    | Type            | Description                                                                           |
+| ------------------------ | --------------- | ------------------------------------------------------------------------------------- |
+| userId                   | `String`        | ID of the receiver.                                                                   |
+| altText                  | `String`        | Alternative text.                                                                     |
+| carouselItems            | `Array<Object>` | Array of columns which contains object for carousel.                                  |
+| options                  | `Object`        | Object contains options.                                                              |
+| options.imageAspectRatio | `String`        | Aspect ratio of the image. Specify one of the following values: `rectangle`, `square` |
+| options.imageSize        | `String`        | Size of the image. Specify one of the following values: `cover`, `contain`            |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message.                                          |
+| options.quickReply.items | `Array`         | Quick reply items.                                                                    |
+
+Example:
+
+```js
+client.pushCarouselTemplate(USER_ID, 'this is a carousel template', [
+  {
+    thumbnailImageUrl: 'https://example.com/bot/images/item1.jpg',
+    title: 'this is menu',
+    text: 'description',
+    actions: [
+      {
+        type: 'postback',
+        label: 'Buy',
+        data: 'action=buy&itemid=111',
+      },
+      {
+        type: 'postback',
+        label: 'Add to cart',
+        data: 'action=add&itemid=111',
+      },
+      {
+        type: 'uri',
+        label: 'View detail',
+        uri: 'http://example.com/page/111',
+      },
+    ],
+  },
+  {
+    thumbnailImageUrl: 'https://example.com/bot/images/item2.jpg',
+    title: 'this is menu',
+    text: 'description',
+    actions: [
+      {
+        type: 'postback',
+        label: 'Buy',
+        data: 'action=buy&itemid=222',
+      },
+      {
+        type: 'postback',
+        label: 'Add to cart',
+        data: 'action=add&itemid=222',
+      },
+      {
+        type: 'uri',
+        label: 'View detail',
+        uri: 'http://example.com/page/222',
+      },
+    ],
+  },
+]);
+```
+
+<br />
+
+## `pushImageCarouselTemplate(userId, altText, carouselItems, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#image-carousel)
+
+Sends image carousel template message using ID of the receiver.
+
+<img src="https://developers.line.me/media/messaging-api/messages/image-carousel-301701f6.png" width="250px" />
+
+| Param                    | Type            | Description                                                |
+| ------------------------ | --------------- | ---------------------------------------------------------- |
+| userId                   | `String`        | ID of the receiver.                                        |
+| altText                  | `String`        | Alternative text.                                          |
+| carouselItems            | `Array<Object>` | Array of columns which contains object for image carousel. |
+| options                  | `Object`        | Optional options.                                          |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message.               |
+| options.quickReply.items | `Array`         | Quick reply items.                                         |
+
+Example:
+
+```js
+client.pushImageCarouselTemplate(
+  USER_ID,
+  'this is an image carousel template',
+  [
+    {
+      imageUrl: 'https://example.com/bot/images/item1.jpg',
+      action: {
+        type: 'postback',
+        label: 'Buy',
+        data: 'action=buy&itemid=111',
+      },
+    },
+    {
+      imageUrl: 'https://example.com/bot/images/item2.jpg',
+      action: {
+        type: 'message',
+        label: 'Yes',
+        text: 'yes',
+      },
+    },
+    {
+      imageUrl: 'https://example.com/bot/images/item3.jpg',
+      action: {
+        type: 'uri',
+        label: 'View detail',
+        uri: 'http://example.com/page/222',
+      },
+    },
+  ]
+);
+```
+
+<br />
+
+### Push Flex Messages
+
+## `pushFlex(userId, altText, contents, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#flex-message)
+
+Sends flex message using ID of the receiver.
+
+<img src="https://developers.line.me/media/messaging-api/using-flex-messages/bubbleSample-77d825e6.png" />
+
+| Param                    | Type     | Description                                                                                        |
+| ------------------------ | -------- | -------------------------------------------------------------------------------------------------- |
+| userId                   | `String` | ID of the receiver.                                                                                |
+| altText                  | `String` | Alternative text.                                                                                  |
+| contents                 | `Object` | Flex Message [container](https://developers.line.me/en/reference/messaging-api/#container) object. |
+| options                  | `Object` | Optional options.                                                                                  |
+| options.quickReply       | `Object` | Quick reply object to attach to the message.                                                       |
+| options.quickReply.items | `Array`  | Quick reply items.                                                                                 |
+
+Example:
+
+```js
+client.pushFlex(USER_ID, 'this is a flex', {
+  type: 'bubble',
+  header: {
+    type: 'box',
+    layout: 'vertical',
+    contents: [
+      {
+        type: 'text',
+        text: 'Header text',
+      },
+    ],
+  },
+  hero: {
+    type: 'image',
+    url: 'https://example.com/flex/images/image.jpg',
+  },
+  body: {
+    type: 'box',
+    layout: 'vertical',
+    contents: [
+      {
+        type: 'text',
+        text: 'Body text',
+      },
+    ],
+  },
+  footer: {
+    type: 'box',
+    layout: 'vertical',
+    contents: [
+      {
+        type: 'text',
+        text: 'Footer text',
+      },
+    ],
+  },
+  styles: {
+    comment: 'See the example of a bubble style object',
+  },
+});
+```
+
+<br />
+
+<a id="multicast-api" />
+
+### Multicast API - [Official Docs](https://developers.line.me/en/reference/messaging-api/#send-multicast-messages)
+
+Sends messages to multiple users at any time.
+
+## `multicast(userIds, messages)`
+
+Sends messages to multiple users.
+
+| Param    | Type            | Description                                                             |
+| -------- | --------------- | ----------------------------------------------------------------------- |
+| userIds  | `Array<String>` | IDs of the receivers.                                                   |
+| messages | `Array<Object>` | Array of objects which contains the contents of the message to be sent. |
+
+Example:
+
+```js
+client.multicast(
+  [USER_ID],
+  [
+    {
+      type: 'text',
+      text: 'Hello!',
+    },
+  ]
+);
+```
+
+<br />
+
+## `multicastText(userIds, text, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#text-message)
+
+Sends text message to multiple users.
+
+<img src="https://developers.line.me/media/messaging-api/messages/text-bf530b30.png" width="250px" />
+
+You can include LINE original emoji in text messages using character codes. For a list of LINE emoji that can be sent in LINE chats, see the [emoji list](https://developers.line.me/media/messaging-api/emoji-list.pdf).
+
+<img src="https://developers.line.me/media/messaging-api/messages/emoji-b3285d27.png" width="250px" />
+
+| Param                    | Type            | Description                                  |
+| ------------------------ | --------------- | -------------------------------------------- |
+| userIds                  | `Array<String>` | IDs of the receivers.                        |
+| text                     | `String`        | Text of the message to be sent.              |
+| options                  | `Object`        | Optional options.                            |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message. |
+| options.quickReply.items | `Array`         | Quick reply items.                           |
+
+Example:
+
+```js
+client.multicastText([USER_ID], 'Hello!');
+```
+
+<br />
+
+## `multicastImage(userIds, image, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#image-message)
+
+Sends image message to multiple users.
+
+<img src="https://developers.line.me/media/messaging-api/messages/image-167efb33.png" width="250px" /><img src="https://developers.line.me/media/messaging-api/messages/image-full-04fbba55.png" width="250px" />
+
+| Param                    | Type            | Description                                  |
+| ------------------------ | --------------- | -------------------------------------------- |
+| userIds                  | `Array<String>` | IDs of the receivers.                        |
+| image.originalContentUrl | `String`        | Image URL.                                   |
+| image.previewImageUrl    | `String`        | Preview image URL.                           |
+| options                  | `Object`        | Optional options.                            |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message. |
+| options.quickReply.items | `Array`         | Quick reply items.                           |
+
+Example:
+
+```js
+client.multicastImage([USER_ID], {
+  originalContentUrl: 'https://example.com/original.jpg',
+  previewImageUrl: 'https://example.com/preview.jpg',
+});
+```
+
+<br />
+
+## `multicastVideo(userIds, video, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#video-message)
+
+Sends video message to multiple users.
+
+<img src="https://developers.line.me/media/messaging-api/messages/video-a1bc08a4.png" width="250px" />
+
+| Param                    | Type            | Description                                  |
+| ------------------------ | --------------- | -------------------------------------------- |
+| userIds                  | `Array<String>` | IDs of the receivers.                        |
+| video.originalContentUrl | `String`        | URL of video file.                           |
+| video.previewImageUrl    | `String`        | URL of preview image.                        |
+| options                  | `Object`        | Optional options.                            |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message. |
+| options.quickReply.items | `Array`         | Quick reply items.                           |
+
+Example:
+
+```js
+client.multicastVideo([USER_ID], {
+  originalContentUrl: 'https://example.com/original.mp4',
+  previewImageUrl: 'https://example.com/preview.jpg',
+});
+```
+
+<br />
+
+## `multicastAudio(userIds, audio, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#audio-message)
+
+Sends audio message to multiple users.
+
+<img src="https://developers.line.me/media/messaging-api/messages/audio-6290d91b.png" width="250px" />
+
+| Param                    | Type            | Description                                  |
+| ------------------------ | --------------- | -------------------------------------------- |
+| userIds                  | `Array<String>` | IDs of the receivers.                        |
+| audio.originalContentUrl | `String`        | URL of audio file.                           |
+| audio.duration           | `Number`        | Length of audio file (milliseconds).         |
+| options                  | `Object`        | Optional options.                            |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message. |
+| options.quickReply.items | `Array`         | Quick reply items.                           |
+
+Example:
+
+```js
+client.multicastAudio([USER_ID], {
+  originalContentUrl: 'https://example.com/original.m4a',
+  duration: 240000,
+});
+```
+
+<br />
+
+## `multicastLocation(userIds, location, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#location-message)
+
+Sends location message to multiple users.
+
+<img src="https://developers.line.me/media/messaging-api/messages/location-8f9b6b79.png" width="250px" />
+
+| Param                    | Type            | Description                                  |
+| ------------------------ | --------------- | -------------------------------------------- |
+| userIds                  | `Array<String>` | IDs of the receivers.                        |
+| location                 | `Object`        | Object contains location's parameters.       |
+| location.title           | `String`        | Title of the location.                       |
+| location.address         | `String`        | Address of the location.                     |
+| location.latitude        | `Number`        | Latitude of the location.                    |
+| location.longitude       | `Number`        | Longitude of the location.                   |
+| options                  | `Object`        | Optional options.                            |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message. |
+| options.quickReply.items | `Array`         | Quick reply items.                           |
+
+Example:
+
+```js
+client.multicastLocation([USER_ID], {
+  title: 'my location',
+  address: '〒150-0002 東京都渋谷区渋谷２丁目２１−１',
+  latitude: 35.65910807942215,
+  longitude: 139.70372892916203,
+});
+```
+
+<br />
+
+## `multicastSticker(userIds, sticker, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#sticker-message)
+
+Sends sticker message to multiple users.  
+For a list of stickers that can be sent with the Messaging API, see the [sticker list](https://developers.line.me/media/messaging-api/messages/sticker_list.pdf).
+
+<img src="https://developers.line.me/media/messaging-api/messages/sticker-cb1a6a3a.png" width="250px" />
+
+| Param                    | Type            | Description                                  |
+| ------------------------ | --------------- | -------------------------------------------- |
+| userIds                  | `Array<String>` | IDs of the receivers.                        |
+| sticker.packageId        | `String`        | Package ID.                                  |
+| sticker.stickerId        | `String`        | Sticker ID.                                  |
+| options                  | `Object`        | Optional options.                            |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message. |
+| options.quickReply.items | `Array`         | Quick reply items.                           |
+
+Example:
+
+```js
+client.multicastSticker([USER_ID], {
+  packageId: '1',
+  stickerId: '1',
+});
+```
+
+<br />
+
+### Multicast Imagemap Messages
+
+## `multicastImagemap(userIds, altText, imagemap, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#imagemap-message)
+
+Sends imagemap message to multiple users.
+
+<img src="https://developers.line.me/media/messaging-api/messages/imagemap-dd854fa7.png" width="250px" />
+
+| Param                               | Type            | Description                                                                                 |
+| ----------------------------------- | --------------- | ------------------------------------------------------------------------------------------- |
+| userIds                             | `Array<String>` | IDs of the receivers.                                                                       |
+| altText                             | `String`        | Alternative text.                                                                           |
+| imagemap                            | `Object`        | Object contains imagemap's parameters.                                                      |
+| imagemap.baseUrl                    | `String`        | Base URL of image.                                                                          |
+| imagemap.baseSize                   | `Object`        | Base size object.                                                                           |
+| imagemap.baseSize.width             | `Number`        | Width of base image.                                                                        |
+| imagemap.baseSize.height            | `Number`        | Height of base image.                                                                       |
+| imagemap.video                      | `Object`        | Video object.                                                                               |
+| imagemap.video.originalContentUrl   | `String`        | URL of the video file (Max: 1000 characters).                                               |
+| imagemap.video.previewImageUrl      | `String`        | URL of the preview image (Max: 1000 characters).                                            |
+| imagemap.video.area.x               | `Number`        | Horizontal position of the video area relative to the top-left corner of the imagemap area. |
+| imagemap.video.area.y               | `Number`        | Vertical position of the video area relative to the top-left corner of the imagemap area.   |
+| imagemap.video.area.width           | `Number`        | Width of the video area.                                                                    |
+| imagemap.video.area.height          | `Number`        | Height of the video area.                                                                   |
+| imagemap.video.externalLink.linkUri | `String`        | Webpage URL. Called when the label displayed after the video is tapped.                     |
+| imagemap.video.externalLink.label   | `String`        | Label. Displayed after the video is finished.                                               |
+| imagemap.actions                    | `Array<Object>` | Action when tapped.                                                                         |
+| options                             | `Object`        | Optional options.                                                                           |
+| options.quickReply                  | `Object`        | Quick reply object to attach to the message.                                                |
+| options.quickReply.items            | `Array`         | Quick reply items.                                                                          |
+
+Example:
+
+```js
+client.multicastImagemap([USER_ID], 'this is an imagemap', {
+  baseUrl: 'https://example.com/bot/images/rm001',
+  baseSize: {
+    width: 1040,
+    height: 1040,
+  },
+  actions: [
+    {
+      type: 'uri',
+      linkUri: 'https://example.com/',
+      area: {
+        x: 0,
+        y: 0,
+        width: 520,
+        height: 1040,
+      },
+    },
+    {
+      type: 'message',
+      text: 'hello',
+      area: {
+        x: 520,
+        y: 0,
+        width: 520,
+        height: 1040,
+      },
+    },
+  ],
+});
+```
+
+<br />
+
+### Multicast Template Messages
+
+## `multicastTemplate(userIds, altText, template, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#template-messages)
+
+Sends template message to multiple users.
+
+| Param                    | Type            | Description                                  |
+| ------------------------ | --------------- | -------------------------------------------- |
+| userIds                  | `Array<String>` | IDs of the receivers.                        |
+| altText                  | `String`        | Alternative text.                            |
+| template                 | `Object`        | Object with the contents of the template.    |
+| options                  | `Object`        | Optional options.                            |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message. |
+| options.quickReply.items | `Array`         | Quick reply items.                           |
+
+Example:
+
+```js
+client.multicastTemplate([USER_ID], 'this is a template', {
+  type: 'buttons',
+  thumbnailImageUrl: 'https://example.com/bot/images/image.jpg',
+  title: 'Menu',
+  text: 'Please select',
+  actions: [
+    {
+      type: 'postback',
+      label: 'Buy',
+      data: 'action=buy&itemid=123',
+    },
+    {
+      type: 'postback',
+      label: 'Add to cart',
+      data: 'action=add&itemid=123',
+    },
+    {
+      type: 'uri',
+      label: 'View detail',
+      uri: 'http://example.com/page/123',
+    },
+  ],
+});
+```
+
+<br />
+
+## `multicastButtonTemplate(userIds, altText, buttonTemplate, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#buttons)
+
+Alias: `multicastButtonsTemplate`.
+
+Sends button template message to multiple users.
+
+<img src="https://developers.line.me/media/messaging-api/messages/buttons-86e14165.png" width="250px" />
+
+| Param                               | Type            | Description                                                                                   |
+| ----------------------------------- | --------------- | --------------------------------------------------------------------------------------------- |
+| userIds                             | `Array<String>` | IDs of the receivers.                                                                         |
+| altText                             | `String`        | Alternative text.                                                                             |
+| buttonTemplate                      | `Object`        | Object contains buttonTemplate's parameters.                                                  |
+| buttonTemplate.thumbnailImageUrl    | `String`        | Image URL of buttonTemplate.                                                                  |
+| buttonTemplate.imageAspectRatio     | `String`        | Aspect ratio of the image. Specify one of the following values: `rectangle`, `square`         |
+| buttonTemplate.imageSize            | `String`        | Size of the image. Specify one of the following values: `cover`, `contain`                    |
+| buttonTemplate.imageBackgroundColor | `String`        | Background color of image. Specify a RGB color value. The default value is `#FFFFFF` (white). |
+| buttonTemplate.title                | `String`        | Title of buttonTemplate.                                                                      |
+| buttonTemplate.text                 | `String`        | Message text of buttonTemplate.                                                               |
+| buttonTemplate.defaultAction        | `Object`        | Action when image is tapped; set for the entire image, title, and text area.                  |
+| buttonTemplate.actions              | `Array<Object>` | Action when tapped.                                                                           |
+| options                             | `Object`        | Optional options.                                                                             |
+| options.quickReply                  | `Object`        | Quick reply object to attach to the message.                                                  |
+| options.quickReply.items            | `Array`         | Quick reply items.                                                                            |
+
+Example:
+
+```js
+client.multicastButtonTemplate([USER_ID], 'this is a template', {
+  thumbnailImageUrl: 'https://example.com/bot/images/image.jpg',
+  title: 'Menu',
+  text: 'Please select',
+  actions: [
+    {
+      type: 'postback',
+      label: 'Buy',
+      data: 'action=buy&itemid=123',
+    },
+    {
+      type: 'postback',
+      label: 'Add to cart',
+      data: 'action=add&itemid=123',
+    },
+    {
+      type: 'uri',
+      label: 'View detail',
+      uri: 'http://example.com/page/123',
+    },
+  ],
+});
+```
+
+<br />
+
+## `multicastConfirmTemplate(userIds, altText, confirmTemplate, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#confirm)
+
+Sends confirm template message to multiple users.
+
+<img src="https://developers.line.me/media/messaging-api/messages/confirm-444aead5.png" width="250px" />
+
+| Param                    | Type            | Description                                   |
+| ------------------------ | --------------- | --------------------------------------------- |
+| userIds                  | `Array<String>` | IDs of the receivers.                         |
+| altText                  | `String`        | Alternative text.                             |
+| confirmTemplate          | `Object`        | Object contains confirmTemplate's parameters. |
+| confirmTemplate.text     | `String`        | Message text of confirmTemplate.              |
+| confirmTemplate.actions  | `Array<Object>` | Action when tapped.                           |
+| options                  | `Object`        | Optional options.                             |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message.  |
+| options.quickReply.items | `Array`         | Quick reply items.                            |
+
+Example:
+
+```js
+client.multicastConfirmTemplate([USER_ID], 'this is a confirm template', {
+  text: 'Are you sure?',
+  actions: [
+    {
+      type: 'message',
+      label: 'Yes',
+      text: 'yes',
+    },
+    {
+      type: 'message',
+      label: 'No',
+      text: 'no',
+    },
+  ],
+});
+```
+
+<br />
+
+## `multicastCarouselTemplate(userIds, altText, carouselItems, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#carousel)
+
+Sends carousel template message to multiple users.
+
+<img src="https://developers.line.me/media/messaging-api/messages/carousel-c59baef6.png" width="250px" />
+
+| Param                    | Type            | Description                                                                           |
+| ------------------------ | --------------- | ------------------------------------------------------------------------------------- |
+| userIds                  | `Array<String>` | IDs of the receivers.                                                                 |
+| altText                  | `String`        | Alternative text.                                                                     |
+| carouselItems            | `Array<Object>` | Array of columns which contains object for carousel.                                  |
+| options                  | `Object`        | Object contains options.                                                              |
+| options.imageAspectRatio | `String`        | Aspect ratio of the image. Specify one of the following values: `rectangle`, `square` |
+| options.imageSize        | `String`        | Size of the image. Specify one of the following values: `cover`, `contain`            |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message.                                          |
+| options.quickReply.items | `Array`         | Quick reply items.                                                                    |
+
+Example:
+
+```js
+client.multicastCarouselTemplate([USER_ID], 'this is a carousel template', [
+  {
+    thumbnailImageUrl: 'https://example.com/bot/images/item1.jpg',
+    title: 'this is menu',
+    text: 'description',
+    actions: [
+      {
+        type: 'postback',
+        label: 'Buy',
+        data: 'action=buy&itemid=111',
+      },
+      {
+        type: 'postback',
+        label: 'Add to cart',
+        data: 'action=add&itemid=111',
+      },
+      {
+        type: 'uri',
+        label: 'View detail',
+        uri: 'http://example.com/page/111',
+      },
+    ],
+  },
+  {
+    thumbnailImageUrl: 'https://example.com/bot/images/item2.jpg',
+    title: 'this is menu',
+    text: 'description',
+    actions: [
+      {
+        type: 'postback',
+        label: 'Buy',
+        data: 'action=buy&itemid=222',
+      },
+      {
+        type: 'postback',
+        label: 'Add to cart',
+        data: 'action=add&itemid=222',
+      },
+      {
+        type: 'uri',
+        label: 'View detail',
+        uri: 'http://example.com/page/222',
+      },
+    ],
+  },
+]);
+```
+
+<br />
+
+## `multicastImageCarouselTemplate(userIds, altText, carouselItems, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#image-carousel)
+
+Sends image carousel template message to multiple users.
+
+<img src="https://developers.line.me/media/messaging-api/messages/image-carousel-301701f6.png" width="250px" />
+
+| Param                    | Type            | Description                                                |
+| ------------------------ | --------------- | ---------------------------------------------------------- |
+| userIds                  | `Array<String>` | IDs of the receivers.                                      |
+| altText                  | `String`        | Alternative text.                                          |
+| carouselItems            | `Array<Object>` | Array of columns which contains object for image carousel. |
+| options                  | `Object`        | Optional options.                                          |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message.               |
+| options.quickReply.items | `Array`         | Quick reply items.                                         |
+
+Example:
+
+```js
+client.multicastImageCarouselTemplate(
+  [USER_ID],
+  'this is an image carousel template',
+  [
+    {
+      imageUrl: 'https://example.com/bot/images/item1.jpg',
+      action: {
+        type: 'postback',
+        label: 'Buy',
+        data: 'action=buy&itemid=111',
+      },
+    },
+    {
+      imageUrl: 'https://example.com/bot/images/item2.jpg',
+      action: {
+        type: 'message',
+        label: 'Yes',
+        text: 'yes',
+      },
+    },
+    {
+      imageUrl: 'https://example.com/bot/images/item3.jpg',
+      action: {
+        type: 'uri',
+        label: 'View detail',
+        uri: 'http://example.com/page/222',
+      },
+    },
+  ]
+);
+```
+
+<br />
+
+### Multicast Flex Messages
+
+## `multicastFlex(userIds, altText, contents, options)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#flex-message)
+
+Sends flex message to multiple users.
+
+<img src="https://developers.line.me/media/messaging-api/using-flex-messages/bubbleSample-77d825e6.png" />
+
+| Param                    | Type            | Description                                                                                        |
+| ------------------------ | --------------- | -------------------------------------------------------------------------------------------------- |
+| userIds                  | `Array<String>` | IDs of the receivers.                                                                              |
+| altText                  | `String`        | Alternative text.                                                                                  |
+| contents                 | `Object`        | Flex Message [container](https://developers.line.me/en/reference/messaging-api/#container) object. |
+| options                  | `Object`        | Optional options.                                                                                  |
+| options.quickReply       | `Object`        | Quick reply object to attach to the message.                                                       |
+| options.quickReply.items | `Array`         | Quick reply items.                                                                                 |
+
+Example:
+
+```js
+client.multicastFlex([USER_ID], 'this is a flex', {
+  type: 'bubble',
+  header: {
+    type: 'box',
+    layout: 'vertical',
+    contents: [
+      {
+        type: 'text',
+        text: 'Header text',
+      },
+    ],
+  },
+  hero: {
+    type: 'image',
+    url: 'https://example.com/flex/images/image.jpg',
+  },
+  body: {
+    type: 'box',
+    layout: 'vertical',
+    contents: [
+      {
+        type: 'text',
+        text: 'Body text',
+      },
+    ],
+  },
+  footer: {
+    type: 'box',
+    layout: 'vertical',
+    contents: [
+      {
+        type: 'text',
+        text: 'Footer text',
+      },
+    ],
+  },
+  styles: {
+    comment: 'See the example of a bubble style object',
+  },
+});
+```
+
+<br />
+
+<a id="quick-replies" />
+
+### Quick Replies - [Official Docs](https://developers.line.me/en/reference/messaging-api/#quick-reply)
+
+Sends message with buttons appear at the bottom of the chat screen.
+
+<img src="https://developers.line.me/media/messaging-api/using-quick-reply/quickReplySample2-b0da8a03.png" width="250px" />
+
+```js
+context.replyText(
+  REPLY_TOKEN,
+  'Select your favorite food category or send me your location!',
+  {
+    quickReply: {
+      items: [
+        {
+          type: 'action',
+          imageUrl: 'https://example.com/sushi.png',
+          action: {
+            type: 'message',
+            label: 'Sushi',
+            text: 'Sushi',
+          },
+        },
+        {
+          type: 'action',
+          imageUrl: 'https://example.com/tempura.png',
+          action: {
+            type: 'message',
+            label: 'Tempura',
+            text: 'Tempura',
+          },
+        },
+        {
+          type: 'action',
+          action: {
+            type: 'location',
+            label: 'Send location',
+          },
+        },
+      ],
+    },
+  }
+);
+```
+
+<br />
+
+<a id="content-api" />
+
+### Content API - [Official Docs](https://developers.line.me/en/reference/messaging-api/#get-content)
+
+## `retrieveMessageContent(messageId)`
+
+Retrieves image, video, and audio data sent in specified message.
+
+| Param     | Type     | Description |
+| --------- | -------- | ----------- |
+| messageId | `String` | Message ID. |
+
+Example:
+
+```js
+client.retrieveMessageContent(MESSAGE_ID).then((buffer) => {
+  console.log(buffer);
+  // <Buffer 61 61 73 64 ...>
+});
+```
+
+<br />
+
+<a id="profile-api" />
+
+### Profile API - [Official Docs](https://developers.line.me/en/reference/messaging-api/#get-profile)
+
+## `getUserProfile(userId)`
+
+Gets user profile information.
+
+| Param  | Type     | Description     |
+| ------ | -------- | --------------- |
+| userId | `String` | ID of the user. |
+
+Example:
+
+```js
+client.getUserProfile(USER_ID).then((profile) => {
+  console.log(profile);
+  // {
+  //   displayName: 'LINE taro',
+  //   userId: USER_ID,
+  //   pictureUrl: 'http://obs.line-apps.com/...',
+  //   statusMessage: 'Hello, LINE!',
+  // }
+});
+```
+
+<br />
+
+<a id="grouproom-member-profile-api" />
+
+### Group/Room Member Profile API - [Official Docs](https://developers.line.me/en/docs/messaging-api/group-chats/#getting-a-user-profile-of-a-member-of-a-group-or-room)
+
+## `getGroupMemberProfile(groupId, userId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#get-group-member-profile)
+
+Gets the user profile of a member of a group that the bot is in. This includes the user IDs of users who has not added the bot as a friend or has blocked the bot.
+
+| Param   | Type     | Description      |
+| ------- | -------- | ---------------- |
+| groupId | `String` | ID of the group. |
+| userId  | `String` | ID of the user.  |
+
+Example:
+
+```js
+client.getGroupMemberProfile(GROUP_ID, USER_ID).then((member) => {
+  console.log(member);
+  // {
+  //   "displayName":"LINE taro",
+  //   "userId":"Uxxxxxxxxxxxxxx...",
+  //   "pictureUrl":"http://obs.line-apps.com/..."
+  // }
+});
+```
+
+<br />
+
+## `getRoomMemberProfile(roomId, userId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#get-room-member-profile)
+
+Gets the user profile of a member of a room that the bot is in. This includes the user IDs of users who has not added the bot as a friend or has blocked the bot.
+
+| Param  | Type     | Description      |
+| ------ | -------- | ---------------- |
+| roomId | `String` | ID of the group. |
+| userId | `String` | ID of the user.  |
+
+Example:
+
+```js
+client.getRoomMemberProfile(ROOM_ID, USER_ID).then((member) => {
+  console.log(member);
+  // {
+  //   "displayName":"LINE taro",
+  //   "userId":"Uxxxxxxxxxxxxxx...",
+  //   "pictureUrl":"http://obs.line-apps.com/..."
+  // }
+});
+```
+
+<br />
+
+<a id="grouproom-member-ids-api" />
+
+### Group/Room Member IDs API - [Official Docs](https://developers.line.me/en/docs/messaging-api/group-chats/#getting-user-ids-of-the-members-of-a-group-or-room)
+
+## `getGroupMemberIds(groupId, start)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#get-group-member-user-ids)
+
+Gets the ID of the users of the members of a group that the bot is in. This includes the user IDs of users who have not added the bot as a friend or has blocked the bot.  
+This feature is only available for LINE@ Approved accounts or official accounts.
+
+| Param   | Type     | Description          |
+| ------- | -------- | -------------------- |
+| groupId | `String` | ID of the group.     |
+| start   | `String` | `continuationToken`. |
+
+Example:
+
+```js
+client.getGroupMemberIds(GROUP_ID, CURSOR).then((res) => {
+  console.log(res);
+  // {
+  //   memberIds: [
+  //     'Uxxxxxxxxxxxxxx...',
+  //     'Uxxxxxxxxxxxxxx...',
+  //     'Uxxxxxxxxxxxxxx...'
+  //   ],
+  //   next: 'jxEWCEEP...'
+  // }
+});
+```
+
+<br />
+
+## `getAllGroupMemberIds(groupId)`
+
+Recursively gets the ID of the users of the members of a group that the bot is in using cursors.  
+This feature is only available for LINE@ Approved accounts or official accounts.
+
+| Param   | Type     | Description      |
+| ------- | -------- | ---------------- |
+| groupId | `String` | ID of the group. |
+
+Example:
+
+```js
+client.getAllGroupMemberIds(GROUP_ID).then((ids) => {
+  console.log(ids);
+  // [
+  //   'Uxxxxxxxxxxxxxx..1',
+  //   'Uxxxxxxxxxxxxxx..2',
+  //   'Uxxxxxxxxxxxxxx..3',
+  //   'Uxxxxxxxxxxxxxx..4',
+  //   'Uxxxxxxxxxxxxxx..5',
+  //   'Uxxxxxxxxxxxxxx..6',
+  // ]
+});
+```
+
+<br />
+
+## `getRoomMemberIds(roomId, start)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#get-room-member-user-ids)
+
+Gets the ID of the users of the members of a room that the bot is in. This includes the user IDs of users who have not added the bot as a friend or has blocked the bot.  
+This feature is only available for LINE@ Approved accounts or official accounts.
+
+| Param  | Type     | Description          |
+| ------ | -------- | -------------------- |
+| roomId | `String` | ID of the room.      |
+| start  | `String` | `continuationToken`. |
+
+Example:
+
+```js
+client.getRoomMemberIds(ROOM_ID, CURSOR).then((res) => {
+  console.log(res);
+  // {
+  //   memberIds: [
+  //     'Uxxxxxxxxxxxxxx...',
+  //     'Uxxxxxxxxxxxxxx...',
+  //     'Uxxxxxxxxxxxxxx...'
+  //   ],
+  //   next: 'jxEWCEEP...'
+  // }
+});
+```
+
+<br />
+
+## `getAllRoomMemberIds(roomId)`
+
+Recursively gets the ID of the users of the members of a room that the bot is in using cursors.  
+This feature is only available for LINE@ Approved accounts or official accounts.
+
+| Param  | Type     | Description     |
+| ------ | -------- | --------------- |
+| roomId | `String` | ID of the room. |
+
+Example:
+
+```js
+client.getAllRoomMemberIds(ROOM_ID).then((ids) => {
+  console.log(ids);
+  // [
+  //   'Uxxxxxxxxxxxxxx..1',
+  //   'Uxxxxxxxxxxxxxx..2',
+  //   'Uxxxxxxxxxxxxxx..3',
+  //   'Uxxxxxxxxxxxxxx..4',
+  //   'Uxxxxxxxxxxxxxx..5',
+  //   'Uxxxxxxxxxxxxxx..6',
+  // ]
+});
+```
+
+<br />
+
+<a id="leave-api" />
+
+### Leave API - [Official Docs](https://developers.line.me/en/docs/messaging-api/group-chats/#leaving-a-group-or-room)
+
+## `leaveGroup(groupId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#leave-group)
+
+Leave a group.
+
+| Param   | Type     | Description      |
+| ------- | -------- | ---------------- |
+| groupId | `String` | ID of the group. |
+
+Example:
+
+```js
+client.leaveGroup(GROUP_ID);
+```
+
+<br />
+
+## `leaveRoom(roomId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#leave-room)
+
+Leave a room.
+
+| Param  | Type     | Description     |
+| ------ | -------- | --------------- |
+| roomId | `String` | ID of the room. |
+
+Example:
+
+```js
+client.leaveRoom(ROOM_ID);
+```
+
+<br />
+
+<a id="rich-menu-api" />
+
+### Rich Menu API - [Official Docs](https://developers.line.me/en/reference/messaging-api/#rich-menu)
+
+## `getRichMenuList()` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#get-rich-menu-list)
+
+Gets a list of all uploaded rich menus.
+
+Example:
+
+```js
+client.getRichMenuList().then((richMenus) => {
+  console.log(richMenus);
+  // [
+  //   {
+  //     richMenuId: 'RICH_MENU_ID',
+  //     size: {
+  //       width: 2500,
+  //       height: 1686,
+  //     },
+  //     selected: false,
+  //     name: 'Nice richmenu',
+  //     chatBarText: 'Tap here',
+  //     areas: [
+  //       {
+  //         bounds: {
+  //           x: 0,
+  //           y: 0,
+  //           width: 2500,
+  //           height: 1686,
+  //         },
+  //         action: {
+  //           type: 'postback',
+  //           data: 'action=buy&itemid=123',
+  //         },
+  //       },
+  //     ],
+  //   },
+  // ]
+});
+```
+
+<br />
+
+## `getRichMenu(richMenuId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#get-rich-menu)
+
+Gets a rich menu via a rich menu ID.
+
+| Param      | Type     | Description                  |
+| ---------- | -------- | ---------------------------- |
+| richMenuId | `String` | ID of an uploaded rich menu. |
+
+Example:
+
+```js
+client.getRichMenu(RICH_MENU_ID).then((richMenu) => {
+  console.log(richMenu);
+  // {
+  //   richMenuId: 'RICH_MENU_ID',
+  //   size: {
+  //     width: 2500,
+  //     height: 1686,
+  //   },
+  //   selected: false,
+  //   name: 'Nice richmenu',
+  //   chatBarText: 'Tap here',
+  //   areas: [
+  //     {
+  //       bounds: {
+  //         x: 0,
+  //         y: 0,
+  //         width: 2500,
+  //         height: 1686,
+  //       },
+  //       action: {
+  //         type: 'postback',
+  //         data: 'action=buy&itemid=123',
+  //       },
+  //     },
+  //   ],
+  // }
+});
+```
+
+<br />
+
+## `createRichMenu(richMenu)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#create-rich-menu)
+
+Creates a rich menu.
+
+| Param    | Type       | Description                                                                                    |
+| -------- | ---------- | ---------------------------------------------------------------------------------------------- |
+| richMenu | `RichMenu` | A [rich menu object](https://developers.line.me/en/reference/messaging-api/#rich-menu-object). |
+
+Example:
+
+```js
+client
+  .createRichMenu({
+    size: {
