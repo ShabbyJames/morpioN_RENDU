@@ -2257,3 +2257,613 @@ Example:
 client
   .createRichMenu({
     size: {
+      width: 2500,
+      height: 1686,
+    },
+    selected: false,
+    name: 'Nice richmenu',
+    chatBarText: 'Tap here',
+    areas: [
+      {
+        bounds: {
+          x: 0,
+          y: 0,
+          width: 2500,
+          height: 1686,
+        },
+        action: {
+          type: 'postback',
+          data: 'action=buy&itemid=123',
+        },
+      },
+    ],
+  })
+  .then((richMenu) => {
+    console.log(richMenu);
+    // {
+    //   richMenuId: "{richMenuId}"
+    // }
+  });
+```
+
+<br />
+
+## `deleteRichMenu(richMenuId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#delete-rich-menu)
+
+Deletes a rich menu.
+
+| Param      | Type     | Description                  |
+| ---------- | -------- | ---------------------------- |
+| richMenuId | `String` | ID of an uploaded rich menu. |
+
+Example:
+
+```js
+client.deleteRichMenu(RICH_MENU_ID);
+```
+
+<br />
+
+## `getLinkedRichMenu(userId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#get-rich-menu-id-of-user)
+
+Gets the ID of the rich menu linked to a user.
+
+| Param  | Type     | Description     |
+| ------ | -------- | --------------- |
+| userId | `String` | ID of the user. |
+
+Example:
+
+```js
+client.getLinkedRichMenu(USER_ID).then((richMenu) => {
+  console.log(richMenu);
+  // {
+  //   richMenuId: "{richMenuId}"
+  // }
+});
+```
+
+<br />
+
+## `linkRichMenu(userId, richMenuId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#link-rich-menu-to-user)
+
+Links a rich menu to a user.
+
+| Param      | Type     | Description                  |
+| ---------- | -------- | ---------------------------- |
+| userId     | `String` | ID of the user.              |
+| richMenuId | `String` | ID of an uploaded rich menu. |
+
+Example:
+
+```js
+client.linkRichMenu(USER_ID, RICH_MENU_ID);
+```
+
+<br />
+
+## `unlinkRichMenu(userId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#unlink-rich-menu-from-user)
+
+Unlinks a rich menu from a user.
+
+| Param  | Type     | Description     |
+| ------ | -------- | --------------- |
+| userId | `String` | ID of the user. |
+
+Example:
+
+```js
+client.unlinkRichMenu(USER_ID);
+```
+
+<br />
+
+## `downloadRichMenuImage(richMenuId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#download-rich-menu-image)
+
+Downloads an image associated with a rich menu.
+
+| Param      | Type     | Description                  |
+| ---------- | -------- | ---------------------------- |
+| richMenuId | `String` | ID of an uploaded rich menu. |
+
+Example:
+
+```js
+client.downloadRichMenuImage(RICH_MENU_ID).then((imageBuffer) => {
+  console.log(imageBuffer);
+  // <Buffer 61 61 73 64 ...>
+});
+```
+
+<br />
+
+## `uploadRichMenuImage(richMenuId, buffer)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#upload-rich-menu-image)
+
+Uploads and attaches an image to a rich menu.
+
+| Param      | Type     | Description                                    |
+| ---------- | -------- | ---------------------------------------------- |
+| richMenuId | `String` | ID of an uploaded rich menu.                   |
+| buffer     | `Buffer` | Image buffer which must be jpeg or png format. |
+
+Example:
+
+```js
+const fs = require('fs');
+
+client.uploadRichMenuImage(RICH_MENU_ID, fs.readFileSync('image.png'));
+```
+
+<br />
+
+## `getDefaultRichMenu()` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#get-default-rich-menu-id)
+
+Gets the ID of the default rich menu set with the Messaging API.
+
+Example:
+
+```js
+client.getDefaultRichMenu().then((richMenu) => {
+  console.log(richMenu);
+  // {
+  //   "richMenuId": "{richMenuId}"
+  // }
+});
+```
+
+<br />
+
+## `setDefaultRichMenu(richMenuId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#set-default-rich-menu)
+
+Sets the default rich menu. The default rich menu is displayed to all users who have added your bot as a friend and are not linked to any per-user rich menu.
+
+| Param      | Type     | Description                  |
+| ---------- | -------- | ---------------------------- |
+| richMenuId | `String` | ID of an uploaded rich menu. |
+
+Example:
+
+```js
+client.setDefaultRichMenu('{richMenuId}');
+```
+
+> The rich menu is displayed in the following order of priority (highest to lowest): The per-user rich menu set with the Messaging API, the default rich menu set with the Messaging API, and the default rich menu set with LINE@ Manager.
+
+<br />
+
+## `deleteDefaultRichMenu()` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#cancel-default-rich-menu)
+
+Cancels the default rich menu set with the Messaging API.
+
+Example:
+
+```js
+client.deleteDefaultRichMenu();
+```
+
+<br />
+
+<a id="account-link-api" />
+
+### Account Link API - [Official Docs](https://developers.line.me/en/reference/messaging-api/#account-link)
+
+## `issueLinkToken(userId)` - [Official Docs](https://developers.line.me/en/reference/messaging-api/#issue-link-token)
+
+Issues a link token used for the [account link](https://developers.line.me/en/docs/messaging-api/linking-accounts/) feature.
+
+| Param  | Type     | Description     |
+| ------ | -------- | --------------- |
+| userId | `String` | ID of the user. |
+
+Example:
+
+```js
+client.issueLinkToken(USER_ID).then((result) => {
+  console.log(result);
+  // {
+  //   linkToken: 'NMZTNuVrPTqlr2IF8Bnymkb7rXfYv5EY',
+  // }
+});
+```
+
+<a id="liff-api" />
+
+### LINE Front-end Framework API - [Official Docs](https://developers.line.me/en/docs/liff/reference/)
+
+## `createLiffApp(view)`
+
+Adds an app to LIFF. You can add up to 10 LIFF apps on one channel.
+
+| Param     | Type     | Description                                 |
+| --------- | -------- | ------------------------------------------- |
+| view.type | `String` | Size of the LIFF app view.                  |
+| view.url  | `String` | URL of the LIFF app. Must start with HTTPS. |
+
+Example:
+
+```js
+client.createLiffApp({
+  type: 'compact',
+  url: 'https://example.com/liff-app',
+});
+```
+
+View type can be specified one of the following values:
+
+- `compact`: 50% of the screen height of the device. This size can be specified only for the chat screen.
+- `tall`: 80% of the screen height of the device. This size can be specified only for the chat screen.
+- `full`: 100% of the screen height of the device. This size can be specified for any screens in the LINE app.
+
+<br />
+
+## `updateLiffApp(liffId, view)`
+
+Updates LIFF app settings.
+
+| Param     | Type     | Description                                 |
+| --------- | -------- | ------------------------------------------- |
+| liffId    | `String` | ID of the LIFF app to be updated.           |
+| view.type | `String` | Size of the LIFF app view.                  |
+| view.url  | `String` | URL of the LIFF app. Must start with HTTPS. |
+
+Example:
+
+```js
+client.updateLiffApp(LIFF_ID, {
+  type: 'compact',
+  url: 'https://example.com/liff-app',
+});
+```
+
+<br />
+
+## `getLiffAppList`
+
+Gets information on all the LIFF apps registered in the channel.
+
+Example:
+
+```js
+client.getLiffApps().then((apps) => {
+  console.log(apps);
+  // [
+  //   {
+  //     liffId: '{liffId}',
+  //     view: {
+  //       type: 'full',
+  //       url: 'https://example.com/myservice',
+  //     },
+  //   },
+  //   {
+  //     liffId: '{liffId}',
+  //     view: {
+  //       type: 'tall',
+  //       url: 'https://example.com/myservice2',
+  //     },
+  //   },
+  // ]
+});
+```
+
+<br />
+
+## `deleteLiffApp(liffId)`
+
+Deletes a LIFF app.
+
+| Param  | Type     | Description                       |
+| ------ | -------- | --------------------------------- |
+| liffId | `String` | ID of the LIFF app to be deleted. |
+
+Example:
+
+```js
+client.deleteLiffApp(LIFF_ID);
+```
+
+<br />
+
+## Line Pay
+
+## Initialize
+
+```js
+const { LinePay } = require('messaging-api-line');
+
+const linePay = new LinePay({
+  channelId: CHANNEL_ID,
+  channelSecret: CHANNEL_SECRET,
+  sandbox: true, // default false
+});
+```
+
+## `getPayments(options)`
+
+Gets payment information from LINE Pay.
+
+| Param                 | Type     | Description                            |
+| --------------------- | -------- | -------------------------------------- |
+| options.transactionId | `String` | ID of the transaction.                 |
+| options.orderId       | `String` | A unique number managed by a Merchant. |
+
+Example:
+
+```js
+linePay
+  .getPayments({
+    transactionId: '20140101123123123',
+    orderId: '1002045572',
+  })
+  .then((result) => {
+    console.log(result);
+    // [
+    //   {
+    //     transactionId: 1020140728100001997,
+    //     transactionDate: '2014-07-28T09:48:43Z',
+    //     transactionType: 'PARTIAL_REFUND',
+    //     amount: -5,
+    //     productName: '',
+    //     currency: 'USD',
+    //     orderId: '20140101123123123',
+    //     originalTransactionId: 1020140728100001999,
+    //   },
+    // ]
+  });
+```
+
+<br />
+
+## `getAuthorizations(options)`
+
+Gets authorization information from LINE Pay.
+
+| Param                 | Type     | Description                            |
+| --------------------- | -------- | -------------------------------------- |
+| options.transactionId | `String` | ID of the transaction.                 |
+| options.orderId       | `String` | A unique number managed by a Merchant. |
+
+Example:
+
+```js
+linePay
+  .getAuthorizations({
+    transactionId: '20140101123123123',
+    orderId: '1002045572',
+  })
+  .then((result) => {
+    console.log(result);
+    // [
+    //   {
+    //     transactionId: 201612312312333401,
+    //     transactionDate: '2014-07-28T09:48:43Z',
+    //     transactionType: 'PAYMENT',
+    //     payInfo: [
+    //       {
+    //         method: 'BALANCE',
+    //         amount: 10,
+    //       },
+    //       {
+    //         method: 'DISCOUNT',
+    //         amount: 10,
+    //       },
+    //     ],
+
+    //     productName: 'tes production',
+    //     currency: 'USD',
+    //     orderId: '20140101123123123',
+    //     payStatus: 'AUTHORIZATION',
+    //     authorizationExpireDate: '2014-07-28T09:48:43Z',
+    //   },
+    // ]
+  });
+```
+
+<br />
+
+## `reserve(payment)`
+
+Reserves payment information in LINE Pay.
+
+| Param                          | Type      | Description                                                |
+| ------------------------------ | --------- | ---------------------------------------------------------- |
+| payment.productName            | `Number`  | Product name.                                              |
+| payment.amount                 | `Number`  | Payment amount.                                            |
+| payment.currency               | `String`  | Payment currency (ISO 4217). Supported: USD, JPY, TWD, THB |
+| payment.confirmUrl             | `String`  | Merchant's URL that buyer is redirected to.                |
+| payment.orderId                | `String`  | A unique number managed by a Merchant.                     |
+| payment.productImageUrl        | `String`  | Product image URL. 84 x 84. Optional.                      |
+| payment.mid                    | `String`  | LINE member ID. Optional.                                  |
+| payment.oneTimeKey             | `String`  | One time key. Optional.                                    |
+| payment.confirmUrlType         | `String`  | confirmUrl type. Optional.                                 |
+| payment.checkConfirmUrlBrowser | `Boolean` | Whether to check browser or not. Optional.                 |
+| payment.cancelUrl              | `String`  | Payment cancellation page URL. Optional.                   |
+| payment.packageName            | `String`  | Information to avoid phishing in Android. Optional.        |
+| payment.deliveryPlacePhone     | `String`  | Recipient contact. Optional.                               |
+| payment.payType                | `String`  | Payment types. Optional.                                   |
+| payment.langCd                 | `String`  | Language code. Optional.                                   |
+| payment.capture                | `String`  | Whether to capture or not. Optional.                       |
+| payment.extras                 | `String`  | Optional.                                                  |
+
+Example:
+
+```js
+linePay
+  .reserve({
+    productName: 'test product',
+    amount: 10,
+    currency: 'USD',
+    orderId: '20140101123456789',
+    confirmUrl:
+      'naversearchapp://inappbrowser?url=http%3A%2F%2FtestMall.com%2FcheckResult.nhn%3ForderId%3D20140101123456789',
+  })
+  .then((result) => {
+    console.log(result);
+    // {
+    //   transactionId: 123123123123,
+    //   paymentUrl: {
+    //     web: 'http://web-pay.line.me/web/wait?transactionReserveId=blahblah',
+    //     app: 'line://pay/payment/blahblah',
+    //   },
+    //   paymentAccessToken: '187568751124',
+    // }
+  });
+```
+
+<br />
+
+## `confirm(transactionId, payment)`
+
+Completes the payment when `capture` parameter is `false` on payment reservation. Otherwise, authorize the payment.
+
+| Param            | Type     | Description                                                |
+| ---------------- | -------- | ---------------------------------------------------------- |
+| transactionId    | `String` | ID of the transaction.                                     |
+| payment.amount   | `Number` | Payment amount.                                            |
+| payment.currency | `String` | Payment currency (ISO 4217). Supported: USD, JPY, TWD, THB |
+
+Example:
+
+```js
+linePay
+  .confirm(TRANSACTION_ID, {
+    amount: 1000,
+    currency: 'TWD',
+  })
+  .then((result) => {
+    console.log(result);
+    // {
+    //   orderId: 'order_210124213',
+    //   transactionId: 20140101123123123,
+    //   payInfo: [
+    //     {
+    //       method: 'BALANCE',
+    //       amount: 10,
+    //     },
+    //     {
+    //       method: 'DISCOUNT',
+    //       amount: 10,
+    //     },
+    //   ],
+    // }
+  });
+```
+
+<br />
+
+## `capture(transactionId, payment)`
+
+Completes a payment that was only authorized by calling confirm API.
+
+| Param            | Type     | Description                                                |
+| ---------------- | -------- | ---------------------------------------------------------- |
+| transactionId    | `String` | ID of the transaction.                                     |
+| payment.amount   | `Number` | Payment amount.                                            |
+| payment.currency | `String` | Payment currency (ISO 4217). Supported: USD, JPY, TWD, THB |
+
+Example:
+
+```js
+linePay
+  .capture(TRANSACTION_ID, {
+    amount: 1000,
+    currency: 'TWD',
+  })
+  .then((result) => {
+    console.log(result);
+    // {
+    //   transactionId: 20140101123123123,
+    //   orderId: 'order_210124213',
+    //   payInfo: [
+    //     {
+    //       method: 'BALANCE',
+    //       amount: 10,
+    //     },
+    //     {
+    //       method: 'DISCOUNT',
+    //       amount: 10,
+    //     },
+    //   ],
+    // }
+  });
+```
+
+<br />
+
+## `void(transactionId)`
+
+Voids an authorized transaction.
+
+| Param         | Type     | Description            |
+| ------------- | -------- | ---------------------- |
+| transactionId | `String` | ID of the transaction. |
+
+Example:
+
+```js
+linePay.void(TRANSACTION_ID);
+```
+
+<br />
+
+## `refund(transactionId, options)`
+
+Requests refund of the payment.
+
+| Param                | Type     | Description            |
+| -------------------- | -------- | ---------------------- |
+| transactionId        | `String` | ID of the transaction. |
+| options.refundAmount | `Number` | Refund amount.         |
+
+Example:
+
+```js
+linePay.refund(TRANSACTION_ID).then((result) => {
+  console.log(result);
+  // {
+  //   refundTransactionId: 123123123123,
+  //   refundTransactionDate: '2014-01-01T06:17:41Z',
+  // }
+});
+```
+
+<br />
+
+## Debug Tips
+
+### Log Requests Details
+
+To enable default request debugger, use following `DEBUG` env variable:
+
+```sh
+DEBUG=messaging-api:request
+```
+
+If you want to use a custom request logging function, just provide your own `onRequest`:
+
+```js
+const client = new LineClient({
+  accessToken: ACCESS_TOKEN,
+  channelSecret: CHANNEL_SECRET,
+  onRequest: ({ method, url, headers, body }) => {
+    /* */
+  },
+});
+```
+
+## Testing
+
+### Point Requests to Your Dummy Server
+
+To avoid sending requests to real LINE server, specify the `origin` option when constructing your client:
+
+```js
+const { LineClient } = require('messaging-api-line');
+
+const client = new LineClient({
+  accessToken: ACCESS_TOKEN,
+  channelSecret: CHANNEL_SECRET,
+  origin: 'https://mydummytestserver.com',
+});
+```
+
+> Warning: Don't do this on your production server.
