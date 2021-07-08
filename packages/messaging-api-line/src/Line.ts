@@ -56,4 +56,69 @@ export function createAudio(
   };
 }
 
-exp
+export function createLocation(
+  { title, address, latitude, longitude }: LineTypes.Location,
+  options: LineTypes.MessageOptions = {}
+): LineTypes.LocationMessage {
+  return {
+    type: 'location',
+    title,
+    address,
+    latitude,
+    longitude,
+    ...options,
+  };
+}
+
+export function createSticker(
+  sticker: Omit<LineTypes.StickerMessage, 'type'>,
+  options: LineTypes.MessageOptions = {}
+): LineTypes.StickerMessage {
+  return {
+    type: 'sticker',
+    packageId: sticker.packageId,
+    stickerId: sticker.stickerId,
+    ...options,
+  };
+}
+
+export function createImagemap(
+  altText: string,
+  {
+    baseUrl,
+    baseSize,
+    video,
+    actions,
+  }: Omit<LineTypes.ImagemapMessage, 'type' | 'altText'>,
+  options: LineTypes.MessageOptions = {}
+): LineTypes.ImagemapMessage {
+  return {
+    type: 'imagemap',
+    baseUrl,
+    altText,
+    baseSize,
+    video,
+    actions,
+    ...options,
+  };
+}
+
+export function createTemplate<T extends LineTypes.Template>(
+  altText: string,
+  template: T,
+  options: LineTypes.MessageOptions = {}
+): LineTypes.TemplateMessage<T> {
+  return {
+    type: 'template',
+    altText,
+    template,
+    ...options,
+  };
+}
+
+export function createButtonTemplate(
+  altText: string,
+  {
+    thumbnailImageUrl,
+    imageAspectRatio,
+    imageSize,
