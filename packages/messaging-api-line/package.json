@@ -24,4 +24,9 @@
     "bot",
     "chatbot",
     "line",
- 
+    "messaging-apis"
+  ],
+  "engines": {
+    "node": ">=10"
+  }
+}
