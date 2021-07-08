@@ -122,3 +122,60 @@ export function createButtonTemplate(
     thumbnailImageUrl,
     imageAspectRatio,
     imageSize,
+    imageBackgroundColor,
+    title,
+    text,
+    defaultAction,
+    actions,
+  }: {
+    thumbnailImageUrl?: string;
+    imageAspectRatio?: 'rectangle' | 'square';
+    imageSize?: 'cover' | 'contain';
+    imageBackgroundColor?: string;
+    title?: string;
+    text: string;
+    defaultAction?: LineTypes.Action;
+    actions: LineTypes.Action[];
+  },
+  options: LineTypes.MessageOptions = {}
+): LineTypes.TemplateMessage<LineTypes.ButtonsTemplate> {
+  return createTemplate(
+    altText,
+    {
+      type: 'buttons',
+      thumbnailImageUrl,
+      imageAspectRatio,
+      imageSize,
+      imageBackgroundColor,
+      title,
+      text,
+      defaultAction,
+      actions,
+    },
+    options
+  );
+}
+
+export function createButtonsTemplate(
+  altText: string,
+  {
+    thumbnailImageUrl,
+    imageAspectRatio,
+    imageSize,
+    imageBackgroundColor,
+    title,
+    text,
+    defaultAction,
+    actions,
+  }: {
+    thumbnailImageUrl?: string;
+    imageAspectRatio?: 'rectangle' | 'square';
+    imageSize?: 'cover' | 'contain';
+    imageBackgroundColor?: string;
+    title?: string;
+    text: string;
+    defaultAction?: LineTypes.Action;
+    actions: LineTypes.Action[];
+  },
+  options: LineTypes.MessageOptions = {}
+): Line
