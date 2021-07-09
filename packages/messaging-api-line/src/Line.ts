@@ -178,4 +178,71 @@ export function createButtonsTemplate(
     actions: LineTypes.Action[];
   },
   options: LineTypes.MessageOptions = {}
-): Line
+): LineTypes.TemplateMessage<LineTypes.ButtonsTemplate> {
+  return createTemplate(
+    altText,
+    {
+      type: 'buttons',
+      thumbnailImageUrl,
+      imageAspectRatio,
+      imageSize,
+      imageBackgroundColor,
+      title,
+      text,
+      defaultAction,
+      actions,
+    },
+    options
+  );
+}
+
+export function createConfirmTemplate(
+  altText: string,
+  {
+    text,
+    actions,
+  }: {
+    text: string;
+    actions: LineTypes.Action[];
+  },
+  options: LineTypes.MessageOptions = {}
+): LineTypes.TemplateMessage<LineTypes.ConfirmTemplate> {
+  return createTemplate(
+    altText,
+    {
+      type: 'confirm',
+      text,
+      actions,
+    },
+    options
+  );
+}
+
+export function createCarouselTemplate(
+  altText: string,
+  columns: LineTypes.ColumnObject[],
+  {
+    imageAspectRatio,
+    imageSize,
+    quickReply,
+  }: {
+    imageAspectRatio?: 'rectangle' | 'square';
+    imageSize?: 'cover' | 'contain';
+    quickReply?: LineTypes.QuickReply;
+  } = {}
+): LineTypes.TemplateMessage<LineTypes.CarouselTemplate> {
+  return createTemplate(
+    altText,
+    {
+      type: 'carousel',
+      columns,
+      imageAspectRatio,
+      imageSize,
+    },
+    { quickReply }
+  );
+}
+
+export function createImageCarouselTemplate(
+  altText: string,
+  columns: LineTypes.ImageCarouselColum
