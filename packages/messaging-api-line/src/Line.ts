@@ -245,4 +245,28 @@ export function createCarouselTemplate(
 
 export function createImageCarouselTemplate(
   altText: string,
-  columns: LineTypes.ImageCarouselColum
+  columns: LineTypes.ImageCarouselColumnObject[],
+  options: LineTypes.MessageOptions = {}
+): LineTypes.TemplateMessage<LineTypes.ImageCarouselTemplate> {
+  return createTemplate(
+    altText,
+    {
+      type: 'image_carousel',
+      columns,
+    },
+    options
+  );
+}
+
+export function createFlex(
+  altText: string,
+  contents: LineTypes.FlexContainer,
+  options: LineTypes.MessageOptions = {}
+): LineTypes.FlexMessage {
+  return {
+    type: 'flex',
+    altText,
+    contents,
+    ...options,
+  };
+}
