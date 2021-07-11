@@ -1381,3 +1381,1234 @@ export type FlexImage = {
 export type FlexSeparator = {
   type: 'separator';
   /**
+   * Minimum space between this box and the previous component in the parent
+   * box.
+   *
+   * - `none` does not set a space while the other values set a space whose
+   *   size increases in the order of listing.
+   * - The default value is the value of the `spacing` property of the parent
+   *   box.
+   * - If this box is the first component in the parent box, the `margin`
+   *   property will be ignored.
+   */
+  margin?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+  /**
+   * Color of the separator. Use a hexadecimal color code.
+   */
+  color?: string;
+};
+
+/**
+ * This is an invisible component that places a fixed-size space at the
+ * beginning or end of the box.
+ */
+export type FlexSpacer = {
+  type: 'spacer';
+  /**
+   * Size of the space.
+   * The size increases in the order of listing.
+   * The default value is `md`.
+   */
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+};
+
+export type FlexText = {
+  type: 'text';
+  text: string;
+  /**
+   * Array of spans. Be sure to set either one of the `text` property or `contents` property. If you set the `contents` property, `text` is ignored.
+   */
+  contents?: FlexSpan[];
+  /**
+   * The ratio of the width or height of this box within the parent box.
+   *
+   * The default value for the horizontal parent box is `1`, and the default
+   * value for the vertical parent box is `0`.
+   *
+   * For more information, see
+   * [Width and height of components](https://developers.line.biz/en/docs/messaging-api/flex-message-layout/#component-width-and-height).
+   */
+  flex?: number;
+  /**
+   * Minimum space between this box and the previous component in the parent
+   * box.
+   *
+   * - `none` does not set a space while the other values set a space whose
+   *   size increases in the order of listing.
+   * - The default value is the value of the `spacing` property of the parent
+   *   box.
+   * - If this box is the first component in the parent box, the `margin`
+   *   property will be ignored.
+   */
+  margin?: 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+  /**
+   * Font size.
+   * The size increases in the order of listing.
+   * The default value is `md`.
+   */
+  size?:
+    | 'xxs'
+    | 'xs'
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | 'xxl'
+    | '3xl'
+    | '4xl'
+    | '5xl';
+  /**
+   * Horizontal alignment style. Specify one of the following values:
+   *
+   * - `start`: Left-aligned
+   * - `end`: Right-aligned
+   * - `center`: Center-aligned
+   *
+   * The default value is `start`.
+   */
+  align?: 'start' | 'end' | 'center';
+  /**
+   * Vertical alignment style. Specify one of the following values:
+   *
+   * - `top`: Top-aligned
+   * - `bottom`: Bottom-aligned
+   * - `center`: Center-aligned
+   *
+   * The default value is `top`.
+   *
+   * If the `layout` property of the parent box is `baseline`, the `gravity`
+   * property will be ignored.
+   */
+  gravity?: 'top' | 'bottom' | 'center';
+  /**
+   * `true` to wrap text.
+   *
+   * The default value is `false`.
+   *
+   * If set to `true`, you can use a new line character (`\n`) to begin on a new
+   * line.
+   */
+  wrap?: boolean;
+  /**
+   * Max number of lines. If the text does not fit in the specified number of
+   * lines, an ellipsis (…) is displayed at the end of the last line. If set to
+   * 0, all the text is displayed. The default value is 0.
+   */
+  maxLines?: number;
+  /**
+   * Font weight.
+   * Specifying `bold`makes the font bold.
+   * The default value is `regular`.
+   */
+  weight?: 'regular' | 'bold';
+  /**
+   * Font color. Use a hexadecimal color code.
+   */
+  color?: string;
+  /**
+   * Action performed when this text is tapped.
+   * Specify an [action object](https://developers.line.biz/en/reference/messaging-api/#action-objects).
+   */
+  action?: Action;
+  /**
+   * Style of the text. Specify one of the following values:
+   * - `normal`: Normal
+   * - `italic`: Italic
+   *
+   * The default value is `normal`.
+   */
+  style?: string;
+  /**
+   * Decoration of the text. Specify one of the following values:
+   * `none`: No decoration
+   * `underline`: Underline
+   * `line-through`: Strikethrough
+   *
+   * The default value is `none`.
+   */
+  decoration?: string;
+} & Offset;
+
+/**
+ * This component renders multiple text strings with different designs in one row. You can specify the color, size, weight, and decoration for the font. Span is set to `contents` property in [Text](https://developers.line.biz/en/reference/messaging-api/#f-text).
+ */
+export type FlexSpan = {
+  type: 'span';
+  /**
+   * Text. If the `wrap` property of the parent text is set to `true`, you can use a new line character (`\n`) to begin on a new line.
+   */
+  text: string;
+  /**
+   * Font color. Use a hexadecimal color code.
+   */
+  color?: string;
+  /**
+   * Font size. You can specify one of the following values: `xxs`, `xs`, `sm`, `md`, `lg`, `xl`, `xxl`, `3xl`, `4xl`, or `5xl`. The size increases in the order of listing. The default value is `md`.
+   */
+  size?: string;
+  /**
+   * Font weight. You can specify one of the following values: `regular` or `bold`. Specifying `bold` makes the font bold. The default value is `regular`.
+   */
+  weight?: string;
+  /**
+   * Style of the text. Specify one of the following values:
+   * - `normal`: Normal
+   * - `italic`: Italic
+   *
+   * The default value is `normal`.
+   */
+  style?: string;
+  /**
+   * Decoration of the text. Specify one of the following values:
+   * `none`: No decoration
+   * `underline`: Underline
+   * `line-through`: Strikethrough
+   *
+   * The default value is `none`.
+   *
+   * Note: The decoration set in the `decoration` property of the [text](https://developers.line.biz/en/reference/messaging-api/#f-text) cannot be overwritten by the `decoration` property of the span.
+   */
+  decoration?: string;
+};
+
+/**
+ * Flex Message
+ *
+ * Flex Messages are messages with a customizable layout. You can customize the layout freely based on the specification for [CSS Flexible Box (CSS Flexbox)](https://www.w3.org/TR/css-flexbox-1/). For more information, see [Sending Flex Messages](https://developers.line.biz/en/docs/messaging-api/using-flex-messages/) in the API documentation.
+ */
+export type FlexMessage = {
+  type: 'flex';
+
+  /**
+   * Alternative text
+   * - Max character limit: 400
+   */
+  altText: string;
+
+  /**
+   * Flex Message container
+   */
+  contents: FlexContainer;
+};
+
+/**
+ * Message objects
+ *
+ * JSON object which contains the contents of the message you send.
+ */
+export type Message = (
+  | TextMessage
+  | ImageMessage
+  | ImagemapMessage
+  | VideoMessage
+  | AudioMessage
+  | LocationMessage
+  | StickerMessage
+  | TemplateMessage<Template>
+  | FlexMessage
+) &
+  MessageOptions;
+
+/**
+ *
+ */
+type Area = {
+  /**
+   * Object describing the boundaries of the area in pixels.
+   */
+  bounds: {
+    /**
+     * Horizontal position of the top-left corner of the tappable area relative to the left edge of the image. Value must be `0` or higher.
+     */
+    x: number;
+
+    /**
+     * Vertical position of the top-left corner of the tappable area relative to the left edge of the image. Value must be `0` or higher.
+     */
+    y: number;
+
+    /**
+     * Width of the tappable area.
+     */
+    width: number;
+
+    /**
+     * Height of the tappable area.
+     */
+    height: number;
+  };
+
+  /**
+   * Action performed when the area is tapped.
+   */
+  action: Action;
+};
+
+export type RichMenu = {
+  /**
+   * size object which contains the width and height of the rich menu displayed in the chat. Rich menu images must be one of the following sizes (pixels): 2500x1686, 2500x843, 1200x810, 1200x405, 800x540, 800x270
+   */
+  size: {
+    width: 2500 | 1200 | 800;
+    height: 1686 | 843 | 810 | 405 | 270;
+  };
+
+  /**
+   * `true` to display the rich menu by default. Otherwise, `false`.
+   */
+  selected: boolean;
+
+  /**
+   * Name of the rich menu. This value can be used to help manage your rich menus and is not displayed to users.
+   * - Max character limit: 300
+   */
+  name: string;
+
+  /**
+   * Text displayed in the chat bar
+   * - Max character limit: 14
+   */
+  chatBarText: string;
+
+  /**
+   * Array of area objects which define the coordinates and size of tappable areas
+   * - Max: 20 area objects
+   */
+  areas: Area[];
+};
+
+export type LiffApp = {
+  /** LIFF app ID */
+  liffId: string;
+
+  view: LiffView;
+
+  /**
+   * Name of the LIFF app
+   */
+  description: string;
+
+  features: LiffFeatures;
+};
+
+export type LiffView = {
+  /**
+   * Size of the LIFF app view. Specify one of the following values:
+   * - `compact`: 50% of device screen height.
+   * - `tall`: 80% of device screen height.
+   * - `full`: 100% of device screen height.
+   */
+  type: 'compact' | 'tall' | 'full';
+
+  /**
+   * URL of the server on which the LIFF app is deployed (endpoint URL). The URL scheme must be https. Specify only the domain in this URL, without paths or query parameters.
+   */
+  url: string;
+};
+
+export type PartialLiffApp = {
+  /** LIFF app ID */
+  liffId?: string;
+
+  view?: Partial<LiffView>;
+
+  /** Name of the LIFF app */
+  description?: string;
+
+  features?: Partial<LiffFeatures>;
+};
+
+export type LiffFeatures = {
+  /**
+   * `true` if the LIFF app supports Bluetooth® Low Energy for [LINE Things](https://developers.line.biz/en/docs/line-things/). `false` otherwise.
+   */
+  ble: boolean;
+};
+
+export type MutationSuccessResponse = Record<string, never>;
+
+export type ImageMapVideo = {
+  /**
+   * URL of the video file
+   * - Max character limit: 1000
+   * - HTTPS over TLS 1.2 or later
+   * - mp4
+   * - Max: 1 minute
+   * - Max: 10 MB
+   *
+   * Note: A very wide or tall video may be cropped when played in some environments.
+   */
+  originalContentUrl: string;
+
+  /**
+   * URL of the preview image
+   * - Max character limit: 1000
+   * - HTTPS over TLS 1.2 or later
+   * - JPEG
+   * - Max: 240 x 240 pixels
+   * - Max: 1 MB
+   */
+  previewImageUrl: string;
+
+  area: {
+    /** Horizontal position of the video area relative to the left edge of the imagemap area. Value must be 0 or higher. */
+    x: number;
+
+    /** Vertical position of the video area relative to the top of the imagemap area. Value must be 0 or higher. */
+    y: number;
+
+    /** Width of the video area */
+    width: number;
+
+    /** Height of the video area */
+    height: number;
+  };
+
+  externalLink: {
+    /**
+     * Webpage URL. Called when the label displayed after the video is tapped.
+Max character limit: 1000
+The available schemes are http, https, line, and tel. For more information about the LINE URL scheme, see Using the LINE URL scheme.
+    */
+    linkUri: string;
+
+    /**
+     * Label. Displayed after the video is finished.
+     * Max character limit: 30
+     */
+    label: string;
+  };
+};
+
+export type Emoji = {
+  /**
+   * Index position for a character in text, with the first character being at position 0.
+   * The specified position must correspond to a $ character, which serves as a placeholder for the LINE emoji.
+   * If you specify a position that doesn't contain a $ character, the API returns HTTP 400 Bad request.
+   * See the text message example for details.
+   */
+  index: number;
+  /**
+   * Product ID for a set of LINE emoji. See LINE Available Emoji List: https://d.line-scdn.net/r/devcenter/sendable_line_emoji_list.pdf.
+   */
+  productId: string;
+  /**
+   * ID for a LINE emoji inside a set. See LINE Available Emoji List: https://d.line-scdn.net/r/devcenter/sendable_line_emoji_list.pdf.
+   */
+  emojiId: string;
+};
+
+export type TextMessage = {
+  type: 'text';
+  /**
+   * Message text. You can include the following emoji:
+   *
+   * Unicode emoji
+   * LINE emoji (Use a $ character as a placeholder and specify details in the emojis property)
+   * (Deprecated) LINE original emoji (Unicode code point table for LINE original emoji)
+   *
+   * Max character limit: 5000
+   */
+  text: string;
+  /**
+   * One or more LINE emoji.
+   * Max: 20 LINE emoji
+   */
+  emojis?: Emoji[];
+};
+
+export type NumberOfMessagesSentResponse = InsightStatisticsResponse & {
+  /**
+   * The number of messages sent with the Messaging API on the date specified in date.
+   * The response has this property only when the value of status is `ready`.
+   */
+  success?: number;
+};
+
+export type TargetLimitForAdditionalMessages = {
+  /**
+   * One of the following values to indicate whether a target limit is set or not.
+   *  - `none`: This indicates that a target limit is not set.
+   *  - `limited`: This indicates that a target limit is set.
+   */
+  type: 'none' | 'limited';
+  /**
+   * The target limit for additional messages in the current month.
+   * This property is returned when the `type` property has a value of `limited`.
+   */
+  value?: number;
+};
+
+export type NumberOfMessagesSentThisMonth = {
+  /**
+   * The number of sent messages in the current month
+   */
+  totalUsage: number;
+};
+
+export type InsightStatisticsResponse = {
+  /**
+   * Calculation status. One of:
+   * - `ready`: Calculation has finished; the numbers are up-to-date.
+   * - `unready`: We haven't finished calculating the number of sent messages for the specified `date`. Calculation usually takes about a day. Please try again later.
+   * - `out_of_service`: The specified `date` is earlier than the date on which we first started calculating sent messages. Different APIs have different date. Check them at the [document](https://developers.line.biz/en/reference/messaging-api/).
+   */
+  status: 'ready' | 'unready' | 'out_of_service';
+};
+
+export type NumberOfMessageDeliveries = InsightStatisticsResponse & {
+  /**
+   * Number of push messages sent to **all** of this LINE official account's friends (broadcast messages).
+   */
+  broadcast: number;
+  /**
+   * Number of push messages sent to **some** of this LINE official account's friends, based on specific attributes (targeted/segmented messages).
+   */
+  targeting: number;
+  /**
+   * Number of auto-response messages sent.
+   */
+  autoResponse: number;
+  /**
+   * Number of greeting messages sent.
+   */
+  welcomeResponse: number;
+  /**
+   * Number of messages sent from LINE Official Account Manager [Chat screen](https://www.linebiz.com/jp-en/manual/OfficialAccountManager/chats/screens/).
+   */
+  chat: number;
+  /**
+   * Number of broadcast messages sent with the [Send broadcast message](https://developers.line.biz/en/reference/messaging-api/#send-broadcast-message) Messaging API operation.
+   */
+  apiBroadcast: number;
+  /**
+   * Number of push messages sent with the [Send push message](https://developers.line.biz/en/reference/messaging-api/#send-push-message) Messaging API operation.
+   */
+  apiPush: number;
+  /**
+   * Number of multicast messages sent with the [Send multicast message](https://developers.line.biz/en/reference/messaging-api/#send-multicast-message) Messaging API operation.
+   */
+  apiMulticast: number;
+  /**
+   * Number of replies sent with the [Send reply message](https://developers.line.biz/en/reference/messaging-api/#send-reply-message) Messaging API operation.
+   */
+  apiReply: number;
+};
+
+export type NumberOfFollowers = InsightStatisticsResponse & {
+  /**
+   * The number of times, as of the specified `date`, that a user added this LINE official account as a friend. The number doesn't decrease when a user blocks the account after adding it, or when they delete their own account.
+   */
+  followers: number;
+  /**
+   * The number of users, as of the specified `date`, that the official account can reach with messages targeted by gender, age, or area. This number includes users for whom we estimated demographic attributes based on their activity in LINE and LINE-connected services.
+   */
+  targetedReaches: number;
+  /**
+   * The number of users blocking the account as of the specified `date`. The number decreases when a user unblocks the account.
+   */
+  blocks: number;
+};
+
+export type NumberOfMessageDeliveriesResponse =
+  | InsightStatisticsResponse
+  | NumberOfMessageDeliveries;
+
+export type NumberOfFollowersResponse =
+  | InsightStatisticsResponse
+  | NumberOfFollowers;
+
+type PercentageAble = {
+  /**
+   * Percentage
+   */
+  percentage: number;
+};
+
+export type FriendDemographics = {
+  /**
+   * `true` if friend demographic information is available.
+   */
+  available: boolean;
+  /**
+   * Percentage per gender
+   */
+  genders?: Array<
+    {
+      /**
+       * Gender
+       */
+      gender: 'unknown' | 'male' | 'female';
+    } & PercentageAble
+  >;
+  /**
+   * Percentage per age group
+   */
+  ages?: Array<
+    {
+      /**
+       * Age group
+       */
+      age: string;
+    } & PercentageAble
+  >;
+  /**
+   * Percentage per area
+   */
+  areas?: Array<
+    {
+      area: string;
+    } & PercentageAble
+  >;
+  /**
+   * Percentage by OS
+   */
+  appTypes?: Array<
+    {
+      appType: 'ios' | 'android' | 'others';
+    } & PercentageAble
+  >;
+  /**
+   * Percentage per friendship duration
+   */
+  subscriptionPeriods?: Array<
+    {
+      /**
+       * Friendship duration
+       */
+      subscriptionPeriod:
+        | 'over365days'
+        | 'within365days'
+        | 'within180days'
+        | 'within90days'
+        | 'within30days'
+        | 'within7days'
+        // in case for some rare cases(almost no)
+        | 'unknown';
+    } & PercentageAble
+  >;
+};
+
+/* LINE Pay */
+export type LinePayConfig = {
+  channelId: string;
+  channelSecret: string;
+  sandbox?: boolean;
+  origin?: string;
+};
+
+export type LinePayCurrency = 'USD' | 'JPY' | 'TWD' | 'THB';
+
+/* Narrowcast */
+
+export type NarrowcastOptions = {
+  /**
+   * Recipient object. You can specify recipients of the message using up to 10 audiences.
+   *
+   * If this is omitted, messages will be sent to all users who have added your LINE Official Account as a friend.
+   */
+  recipient?: RecipientObject;
+
+  /**
+   * Demographic filter object. You can use friends' attributes to filter the list of recipients.
+   *
+   * If this is omitted, messages are sent to everyone—including users with attribute values of "unknown".
+   */
+  demographic?: DemographicFilterObject;
+
+  /**
+   * The maximum number of narrowcast messages to send. Use this parameter to limit the number of narrowcast messages sent. The recipients will be chosen at random.
+   */
+  max?: number;
+};
+
+// reference: https://github.com/line/line-bot-sdk-nodejs/pull/193/files
+
+/**
+ * Logical operator objects
+ *
+ * Use logical AND, OR, and NOT operators to combine multiple recipient objects together.
+ *
+ * * Be sure to specify only one of these three properties (and, or, not). You cannot specify an empty array.
+ */
+export type FilterOperatorObject<T> = {
+  type: 'operator';
+} & (
+  | {
+      /**
+       * Create a new recipient object by taking the logical conjunction (AND) of the specified array of recipient objects. *
+       */
+      and: T | (T | FilterOperatorObject<T>)[];
+    }
+  | {
+      /**
+       * Create a new recipient object by taking the logical disjunction (OR) of the specified array of recipient objects. *
+       */
+      or: T | (T | FilterOperatorObject<T>)[];
+    }
+  | {
+      /**
+       * Create a new recipient object that excludes the specified recipient object. *
+       */
+      not: T | (T | FilterOperatorObject<T>)[];
+    }
+);
+
+export type AudienceObject = {
+  type: 'audience';
+
+  /**
+   * The audience ID. Create audiences with the manage audience API.
+   */
+  audienceGroupId: number;
+};
+
+/**
+ * Recipient objects
+ *
+ * Recipient objects represent audiences. You can specify recipients based on a combination of criteria using logical operator objects. You can specify up to 10 recipient objects per request.
+ */
+export type RecipientObject =
+  | AudienceObject
+  | FilterOperatorObject<AudienceObject>;
+
+export type DemographicAge =
+  | 'age_15'
+  | 'age_20'
+  | 'age_25'
+  | 'age_30'
+  | 'age_35'
+  | 'age_40'
+  | 'age_45'
+  | 'age_50';
+
+export type DemographicSubscriptionPeriod =
+  | 'day_7'
+  | 'day_30'
+  | 'day_90'
+  | 'day_180'
+  | 'day_365';
+
+export type DemographicArea =
+  | 'jp_01'
+  | 'jp_02'
+  | 'jp_03'
+  | 'jp_04'
+  | 'jp_05'
+  | 'jp_06'
+  | 'jp_07'
+  | 'jp_08'
+  | 'jp_09'
+  | 'jp_10'
+  | 'jp_11'
+  | 'jp_12'
+  | 'jp_13'
+  | 'jp_14'
+  | 'jp_15'
+  | 'jp_16'
+  | 'jp_17'
+  | 'jp_18'
+  | 'jp_19'
+  | 'jp_20'
+  | 'jp_21'
+  | 'jp_22'
+  | 'jp_23'
+  | 'jp_24'
+  | 'jp_25'
+  | 'jp_26'
+  | 'jp_27'
+  | 'jp_28'
+  | 'jp_29'
+  | 'jp_30'
+  | 'jp_31'
+  | 'jp_32'
+  | 'jp_33'
+  | 'jp_34'
+  | 'jp_35'
+  | 'jp_36'
+  | 'jp_37'
+  | 'jp_38'
+  | 'jp_39'
+  | 'jp_40'
+  | 'jp_41'
+  | 'jp_42'
+  | 'jp_43'
+  | 'jp_44'
+  | 'jp_45'
+  | 'jp_46'
+  | 'jp_47'
+  | 'tw_01'
+  | 'tw_02'
+  | 'tw_03'
+  | 'tw_04'
+  | 'tw_05'
+  | 'tw_06'
+  | 'tw_07'
+  | 'tw_08'
+  | 'tw_09'
+  | 'tw_10'
+  | 'tw_11'
+  | 'tw_12'
+  | 'tw_13'
+  | 'tw_14'
+  | 'tw_15'
+  | 'tw_16'
+  | 'tw_17'
+  | 'tw_18'
+  | 'tw_19'
+  | 'tw_20'
+  | 'tw_21'
+  | 'tw_22'
+  | 'th_01'
+  | 'th_02'
+  | 'th_03'
+  | 'th_04'
+  | 'th_05'
+  | 'th_06'
+  | 'th_07'
+  | 'th_08'
+  | 'id_01'
+  | 'id_02'
+  | 'id_03'
+  | 'id_04'
+  | 'id_06'
+  | 'id_07'
+  | 'id_08'
+  | 'id_09'
+  | 'id_10'
+  | 'id_11'
+  | 'id_12'
+  | 'id_05';
+
+/**
+ * Demographic filter objects
+ *
+ * Demographic filter objects represent criteria (e.g. age, gender, OS, region, and friendship duration) on which to filter the list of recipients. You can filter recipients based on a combination of different criteria using logical operator objects.
+ */
+export type DemographicObject =
+  | {
+      type: 'gender';
+      oneOf: ('male' | 'female')[];
+    }
+  | ({
+      type: 'age';
+    } & (
+      | {
+          gte: DemographicAge;
+        }
+      | {
+          lt: DemographicAge;
+        }
+    ))
+  | {
+      type: 'appType';
+      oneOf: ('ios' | 'android')[];
+    }
+  | {
+      type: 'area';
+      oneOf: DemographicArea[];
+    }
+  | ({
+      type: 'subscriptionPeriod';
+    } & (
+      | {
+          gte: DemographicSubscriptionPeriod;
+        }
+      | {
+          lt: DemographicSubscriptionPeriod;
+        }
+    ));
+
+export type DemographicFilterObject =
+  | DemographicObject
+  | FilterOperatorObject<DemographicObject>;
+
+export type NarrowcastProgressResponse = (
+  | {
+      /**
+       * The current status. One of:
+       * - waiting: Messages are not yet ready to be sent. They are currently being filtered or processed in some way.
+       * - sending: Messages are currently being sent.
+       * - succeeded: Messages were sent successfully.
+       * - failed: Messages failed to be sent. Use the failedDescription property to find the cause of the failure.
+       */
+      phase: 'waiting';
+    }
+  | ((
+      | {
+          /**
+           * The current status. One of:
+           * - waiting: Messages are not yet ready to be sent. They are currently being filtered or processed in some way.
+           * - sending: Messages are currently being sent.
+           * - succeeded: Messages were sent successfully.
+           * - failed: Messages failed to be sent. Use the failedDescription property to find the cause of the failure.
+           */
+          phase: 'sending' | 'succeeded';
+        }
+      | {
+          /**
+           * The current status. One of:
+           * - waiting: Messages are not yet ready to be sent. They are currently being filtered or processed in some way.
+           * - sending: Messages are currently being sent.
+           * - succeeded: Messages were sent successfully.
+           * - failed: Messages failed to be sent. Use the failedDescription property to find the cause of the failure.
+           */
+          phase: 'failed';
+          failedDescription: string;
+        }
+    ) & {
+      successCount: number;
+      failureCount: number;
+      targetCount: string;
+    })
+) & {
+  errorCode?: 1 | 2;
+};
+
+/* Audience */
+
+export type CreateUploadAudienceGroupOptions = {
+  /** The description to register for the job (in `jobs[].description`). */
+  uploadDescription?: string;
+};
+
+export type UpdateUploadAudienceGroupOptions =
+  CreateUploadAudienceGroupOptions & {
+    /**
+     * The audience's name. Audience names must be unique. This is case-insensitive, meaning AUDIENCE and audience are considered identical.
+     * - Max character limit: 120
+     */
+    description?: string;
+  };
+
+export type CreateClickAudienceGroupOptions = {
+  /**
+   * The URL clicked by the user. If empty, users who clicked any URL in the message are added to the list of recipients.
+   * - Max character limit: 2,000
+   */
+  clickUrl?: string;
+};
+
+export type Audience = {
+  /** A user ID or IFA. */
+  id: string;
+};
+
+export type BasicAudienceGroup = {
+  /** The audience ID. */
+  audienceGroupId: number;
+
+  /** The audience's name. */
+  description: string;
+
+  /** When the audience was created (in UNIX time). */
+  created: number;
+
+  /**
+   * The value specified when creating an audience for uploading user IDs to indicate the type of accounts that will be given as recipients. One of:
+   * - true: Accounts are specified with IFAs.
+   * - false (default): Accounts are specified with user IDs.
+   */
+  isIfaAudience: string;
+
+  /**
+   * Audience's update permission. Audiences linked to the same channel will be READ_WRITE.
+   * - READ: Can use only.
+   * - READ_WRITE: Can use and update.
+   */
+  permission: 'READ' | 'READ_WRITE';
+
+  /** How the audience was created. If omitted, all audiences are included. */
+  createRoute: 'OA_MANAGER' | 'MESSAGING_API';
+};
+
+export type UploadAudienceGroup = BasicAudienceGroup & {
+  type: 'UPLOAD';
+};
+
+export type ImpAudienceGroup = BasicAudienceGroup & {
+  type: 'IMP';
+
+  // The request ID that was specified when the audience was created.
+  requestId: string;
+};
+
+export type ClickAudienceGroup = BasicAudienceGroup & {
+  type: 'CLICK';
+
+  /** The request ID that was specified when the audience was created. */
+  requestId: string;
+
+  /** The URL that was specified when the audience was created. */
+  clickUrl?: string;
+};
+
+export type AudienceGroup = (
+  | UploadAudienceGroup
+  | ImpAudienceGroup
+  | ClickAudienceGroup
+) & {
+  audienceCount: number;
+} & (
+    | {
+        status: 'IN_PROGRESS' | 'READY' | 'EXPIRED';
+      }
+    | {
+        status: 'FAILED';
+        failedType: 'AUDIENCE_GROUP_AUDIENCE_INSUFFICIENT' | 'INTERNAL_ERROR';
+      }
+  );
+
+export type AudienceGroups = {
+  /** An array of audience data. */
+  audienceGroups: AudienceGroup[];
+
+  /** true when this is not the last page. */
+  hasNextPage: boolean;
+
+  /** The total number of audiences that can be returned with the specified filter. */
+  totalCount: number;
+
+  /** Of the audiences you can get with the specified condition, the number of audiences with the update permission set to READ_WRITE. */
+  readWriteAudienceGroupTotalCount: number;
+
+  /** The current page number. */
+  page: number;
+
+  /** The number of audiences on the current page. */
+  size: number;
+};
+
+export type Job = {
+  /** A job ID. */
+  audienceGroupJobId: number;
+
+  /** An audience ID. */
+  audienceGroupId: number;
+
+  /** The job's description. */
+  description: string;
+
+  /**
+   * The job's type. One of:
+   * - DIFF_ADD: Indicates that a user ID or IFA was added via the Messaging API.
+   */
+  type: 'DIFF_ADD';
+
+  /** The number of accounts (recipients) that were added or removed. */
+  audienceCount: number;
+
+  /** When the job was created (in UNIX time). */
+  created: number;
+} & (
+  | {
+      /** The job's status. */
+      jobStatus: 'QUEUED' | 'WORKING' | 'FINISHED';
+    }
+  | {
+      /** The job's status. */
+      jobStatus: 'FAILED';
+
+      /** The reason why the operation failed. This is only included when jobs[].jobStatus is */
+      failedType: 'INTERNAL_ERROR';
+    }
+);
+
+export type AudienceGroupWithJob = AudienceGroup & {
+  /** An array of jobs. This array is used to keep track of each attempt to add new user IDs or IFAs to an audience for uploading user IDs. null is returned for any other type of audience. */
+  jobs: Job[];
+};
+
+export type GetAudienceGroupsOptions = {
+  /**
+   * The page to return when getting (paginated) results. Must be `1` or higher.
+   */
+  page?: number;
+  /**
+   * The name of the audience(s) to return. You can search for partial matches. This is case-insensitive, meaning `AUDIENCE` and `audience` are considered identical.
+   */
+  description?: string;
+  /**
+   * The status of the audience(s) to return. One of:
+   * - `IN_PROGRESS`: Pending. It may take several hours for the status to change to `READY`.
+   * - `READY`: Ready to accept messages.
+   * - `FAILED`: An error occurred while creating the audience.
+   * - `EXPIRED`: Expired. Audiences are automatically deleted a month after they expire.
+   */
+  status?: 'IN_PROGRESS' | 'READY' | 'FAILED' | 'EXPIRED';
+  /**
+   * The number of audiences per page. Default: 20
+   * - Max: 40
+   */
+  size?: number;
+
+  /**
+   * - `true`: Get public audiences created in all channels linked to the same bot.
+   * - `false`: Get audiences created in the same channel.
+   */
+  includesExternalPublicGroups?: boolean;
+
+  /**
+   * How the audience was created. If omitted, all audiences are included.
+   * - `OA_MANAGER`: Return only audiences created with [LINE Official Account Manager](https://manager.line.biz/).
+   * - `MESSAGING_API`: Return only audiences created with Messaging API.
+   */
+  createRoute?: string;
+};
+
+export type AudienceGroupAuthorityLevel = {
+  /**
+   * The authority level for all audiences linked to a channel
+   * - `PUBLIC`: The default authority level. Audiences will be available in channels other than the one where you created the audience. For example, it will be available in [LINE Official Account Manager](https://manager.line.biz/), [LINE Ad Manager](https://admanager.line.biz/), and all channels the bot is linked to.
+   * - `PRIVATE`: Audiences will be available only in the channel where you created the audience.
+   */
+  authorityLevel: 'PUBLIC' | 'PRIVATE';
+};
+
+/**
+ * LINE Notify Config
+ */
+export type LineNotifyConfig = {
+  /**
+   * LINE Notify Service Client ID
+   */
+  clientId: string;
+
+  /**
+   * LINE Notify Service Client Secret
+   */
+  clientSecret: string;
+
+  /**
+   * LINE Notify Service Callback URL
+   */
+  redirectUri: string;
+
+  /**
+   * LINE Notify Authentication URL origin
+   */
+  origin?: string;
+
+  /**
+   * LINE Notify Notification URL origin
+   */
+  apiOrigin?: string;
+};
+
+export type LineNotifyOptions = {
+  /**
+   * Maximum size of 240×240px JPEG
+   */
+  imageThumbnail?: string;
+
+  /**
+   * Maximum size of 2048×2048px JPEG
+   */
+  imageFullsize?: string;
+
+  /**
+   * Package ID.
+   */
+  stickerPackageId?: number;
+
+  /**
+   * 	Sticker ID.
+   */
+  stickerId?: number;
+
+  /**
+   * - true: The user doesn't receive a push notification when the message is sent.
+   * - false: The user receives a push notification when the message is sent (unless they have disabled push notification in LINE and/or their device).
+   *
+   * If omitted, the value defaults to false.
+   */
+  notificationDisabled?: boolean;
+};
+
+/**
+ * Response body of get bot info.
+ *
+ * @see [Get bot info](https://developers.line.biz/en/reference/messaging-api/#get-bot-info)
+ */
+export type BotInfoResponse = {
+  /**
+   * Bot's user ID
+   */
+  userId: string;
+  /**
+   * Bot's basic ID
+   */
+  basicId: string;
+  /**
+   * Bot's premium ID. Not included in the response if the premium ID isn't set.
+   */
+  premiumId?: string;
+  /**
+   * Bot's display name
+   */
+  displayName: string;
+  /**
+   * Profile image URL. "https" image URL. Not included in the response if the bot doesn't have a profile image.
+   */
+  pictureUrl: string;
+  /**
+   * Bot's response mode set in the LINE Official Account Manager. One of:
+   * - chat: The response mode is set to "Chat".
+   * - bot: The response mode is set to "Bot".
+   */
+  chatMode: 'chat' | 'bot';
+  /**
+   * Automatic read setting for messages. If the bot's response mode is "Bot", auto is returned. If the response mode is "Chat", manual is returned.
+   * - auto: Auto read setting is enabled.
+   * - manual: Auto read setting is disabled.
+   */
+  markAsReadMode: 'auto' | 'manual';
+};
+
+/**
+ * Response body of get webhook endpoint info.
+ *
+ * @see [Get get webhook endpoint info](https://developers.line.biz/en/reference/messaging-api/#get-webhook-endpoint-information)
+ */
+export type WebhookEndpointInfoResponse = {
+  /**
+   * Webhook URL
+   */
+  endpoint: string;
+  /**
+   * Webhook usage status. Send a webhook event from the LINE platform to the webhook URL only if enabled.
+   * - true: Webhook usage is enabled.
+   * - false: Webhook usage is disabled.
+   */
+  active: boolean;
+};
+
+/**
+ * Response body of test webhook endpoint.
+ *
+ * @see [Test webhook endpoint](https://developers.line.biz/en/reference/messaging-api/#test-webhook-endpoint)
+ */
+export type TestWebhookEndpointResponse = {
+  /**
+   * Result of the communication from the LINE platform to the webhook URL.
+   * - true: Success
+   * - false: Failure
+   */
+  success: boolean;
+  /**
+   * Time of the event in milliseconds
+   */
+  timestamp: string;
+  /**
+   * The HTTP status code. If the webhook response isn't received, the status code is set to zero or a negative number.
+   */
+  statusCode: number;
+  /**
+   * Reason for the response.
+   */
+  reason: string;
+  /**
+   * Details of the response.
+   */
+  detail: string;
+};
