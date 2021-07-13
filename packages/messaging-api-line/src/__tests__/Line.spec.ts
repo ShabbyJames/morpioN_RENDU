@@ -104,4 +104,58 @@ describe('#createVideo', () => {
     });
   });
 
-  it('should work with quickRe
+  it('should work with quickReply', () => {
+    expect(
+      Line.createVideo(
+        {
+          originalContentUrl: 'http://example.com/video.mp4',
+          previewImageUrl: 'http://example.com/img.jpg',
+        },
+        { quickReply }
+      )
+    ).toEqual({
+      type: 'video',
+      originalContentUrl: 'http://example.com/video.mp4',
+      previewImageUrl: 'http://example.com/img.jpg',
+      quickReply,
+    });
+  });
+});
+
+describe('#createAudio', () => {
+  it('should return audio message object', () => {
+    expect(
+      Line.createAudio({
+        originalContentUrl: 'http://example.com/audio.mp3',
+        duration: 240000,
+      })
+    ).toEqual({
+      type: 'audio',
+      originalContentUrl: 'http://example.com/audio.mp3',
+      duration: 240000,
+    });
+  });
+
+  it('should work with quickReply', () => {
+    expect(
+      Line.createAudio(
+        {
+          originalContentUrl: 'http://example.com/audio.mp3',
+          duration: 240000,
+        },
+        { quickReply }
+      )
+    ).toEqual({
+      type: 'audio',
+      originalContentUrl: 'http://example.com/audio.mp3',
+      duration: 240000,
+      quickReply,
+    });
+  });
+});
+
+describe('#createLocation', () => {
+  it('should return location message object', () => {
+    expect(
+      Line.createLocation({
+        title: 'my location
