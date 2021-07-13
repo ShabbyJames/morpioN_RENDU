@@ -53,4 +53,55 @@ describe('#createImage', () => {
       })
     ).toEqual({
       type: 'image',
-      originalContentUrl: 'http://example.com/i
+      originalContentUrl: 'http://example.com/img1.jpg',
+      previewImageUrl: 'http://example.com/img2.jpg',
+    });
+  });
+
+  it('should work with quickReply', () => {
+    expect(
+      Line.createImage(
+        {
+          originalContentUrl: 'http://example.com/img1.jpg',
+        },
+        { quickReply }
+      )
+    ).toEqual({
+      type: 'image',
+      originalContentUrl: 'http://example.com/img1.jpg',
+      previewImageUrl: 'http://example.com/img1.jpg',
+      quickReply,
+    });
+
+    expect(
+      Line.createImage(
+        {
+          originalContentUrl: 'http://example.com/img1.jpg',
+          previewImageUrl: 'http://example.com/img2.jpg',
+        },
+        { quickReply }
+      )
+    ).toEqual({
+      type: 'image',
+      originalContentUrl: 'http://example.com/img1.jpg',
+      previewImageUrl: 'http://example.com/img2.jpg',
+      quickReply,
+    });
+  });
+});
+
+describe('#createVideo', () => {
+  it('should return video message object', () => {
+    expect(
+      Line.createVideo({
+        originalContentUrl: 'http://example.com/video.mp4',
+        previewImageUrl: 'http://example.com/img.jpg',
+      })
+    ).toEqual({
+      type: 'video',
+      originalContentUrl: 'http://example.com/video.mp4',
+      previewImageUrl: 'http://example.com/img.jpg',
+    });
+  });
+
+  it('should work with quickRe
