@@ -158,4 +158,60 @@ describe('#createLocation', () => {
   it('should return location message object', () => {
     expect(
       Line.createLocation({
-        title: 'my location
+        title: 'my location',
+        address: '〒150-0002 東京都渋谷区渋谷２丁目２１−１',
+        latitude: 35.65910807942215,
+        longitude: 139.70372892916203,
+      })
+    ).toEqual({
+      type: 'location',
+      title: 'my location',
+      address: '〒150-0002 東京都渋谷区渋谷２丁目２１−１',
+      latitude: 35.65910807942215,
+      longitude: 139.70372892916203,
+    });
+  });
+
+  it('should work with quickReply', () => {
+    expect(
+      Line.createLocation(
+        {
+          title: 'my location',
+          address: '〒150-0002 東京都渋谷区渋谷２丁目２１−１',
+          latitude: 35.65910807942215,
+          longitude: 139.70372892916203,
+        },
+        { quickReply }
+      )
+    ).toEqual({
+      type: 'location',
+      title: 'my location',
+      address: '〒150-0002 東京都渋谷区渋谷２丁目２１−１',
+      latitude: 35.65910807942215,
+      longitude: 139.70372892916203,
+      quickReply,
+    });
+  });
+});
+
+describe('#createSticker', () => {
+  it('should return sticker message object', () => {
+    expect(
+      Line.createSticker({
+        packageId: '1',
+        stickerId: '1',
+      })
+    ).toEqual({
+      type: 'sticker',
+      packageId: '1',
+      stickerId: '1',
+    });
+  });
+
+  it('should work with quickReply', () => {
+    expect(
+      Line.createSticker(
+        {
+          packageId: '1',
+          stickerId: '1',
+        },
