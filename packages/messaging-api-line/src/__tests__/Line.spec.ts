@@ -273,4 +273,63 @@ describe('#createImagemap', () => {
           area: {
             x: 0,
             y: 0,
-            widt
+            width: 520,
+            height: 1040,
+          },
+        },
+        {
+          type: 'message',
+          text: 'hello',
+          area: {
+            x: 520,
+            y: 0,
+            width: 520,
+            height: 1040,
+          },
+        },
+      ],
+    });
+  });
+
+  it('should work with quickReply', () => {
+    expect(
+      Line.createImagemap(
+        'this is an imagemap',
+        {
+          baseUrl: 'https://example.com/bot/images/rm001',
+          baseSize: {
+            width: 1040,
+            height: 1040,
+          },
+          actions: [
+            {
+              type: 'uri',
+              linkUri: 'https://example.com/',
+              area: {
+                x: 0,
+                y: 0,
+                width: 520,
+                height: 1040,
+              },
+            },
+            {
+              type: 'message',
+              text: 'hello',
+              area: {
+                x: 520,
+                y: 0,
+                width: 520,
+                height: 1040,
+              },
+            },
+          ],
+        },
+        { quickReply }
+      )
+    ).toEqual({
+      type: 'imagemap',
+      altText: 'this is an imagemap',
+      baseUrl: 'https://example.com/bot/images/rm001',
+      baseSize: {
+        width: 1040,
+ 
