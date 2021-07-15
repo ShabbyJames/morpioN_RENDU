@@ -332,4 +332,58 @@ describe('#createImagemap', () => {
       baseUrl: 'https://example.com/bot/images/rm001',
       baseSize: {
         width: 1040,
- 
+        height: 1040,
+      },
+      actions: [
+        {
+          type: 'uri',
+          linkUri: 'https://example.com/',
+          area: {
+            x: 0,
+            y: 0,
+            width: 520,
+            height: 1040,
+          },
+        },
+        {
+          type: 'message',
+          text: 'hello',
+          area: {
+            x: 520,
+            y: 0,
+            width: 520,
+            height: 1040,
+          },
+        },
+      ],
+      quickReply,
+    });
+  });
+});
+
+describe('#createButtonTemplate', () => {
+  it('should return buttons template message object', () => {
+    expect(
+      Line.createButtonTemplate('this is a buttons template', {
+        thumbnailImageUrl: 'https://example.com/bot/images/image.jpg',
+        title: 'Menu',
+        text: 'Please select',
+        defaultAction: {
+          type: 'uri',
+          label: 'View detail',
+          uri: 'http://example.com/page/123',
+        },
+        actions: [
+          {
+            type: 'postback',
+            label: 'Buy',
+            data: 'action=buy&itemid=123',
+          },
+          {
+            type: 'postback',
+            label: 'Add to cart',
+            data: 'action=add&itemid=123',
+          },
+          {
+            type: 'uri',
+            label
