@@ -538,4 +538,62 @@ describe('#createButtonTemplate', () => {
 });
 
 describe('#createConfirmTemplate', () => {
-  it('should return c
+  it('should return confirm template message object', () => {
+    expect(
+      Line.createConfirmTemplate('this is a confirm template', {
+        text: 'Are you sure?',
+        actions: [
+          {
+            type: 'message',
+            label: 'Yes',
+            text: 'yes',
+          },
+          {
+            type: 'message',
+            label: 'No',
+            text: 'no',
+          },
+        ],
+      })
+    ).toEqual({
+      type: 'template',
+      altText: 'this is a confirm template',
+      template: {
+        type: 'confirm',
+        text: 'Are you sure?',
+        actions: [
+          {
+            type: 'message',
+            label: 'Yes',
+            text: 'yes',
+          },
+          {
+            type: 'message',
+            label: 'No',
+            text: 'no',
+          },
+        ],
+      },
+    });
+  });
+
+  it('should work with quickReply', () => {
+    expect(
+      Line.createConfirmTemplate(
+        'this is a confirm template',
+        {
+          text: 'Are you sure?',
+          actions: [
+            {
+              type: 'message',
+              label: 'Yes',
+              text: 'yes',
+            },
+            {
+              type: 'message',
+              label: 'No',
+              text: 'no',
+            },
+          ],
+        },
+        
