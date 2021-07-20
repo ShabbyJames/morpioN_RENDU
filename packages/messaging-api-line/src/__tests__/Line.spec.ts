@@ -935,4 +935,56 @@ describe('#createImageCarouselTemplate', () => {
       type: 'template',
       altText: 'this is a image carousel template',
       template: {
-      
+        type: 'image_carousel',
+        columns: [
+          {
+            imageUrl: 'https://example.com/bot/images/item1.jpg',
+            action: {
+              type: 'postback',
+              label: 'Buy',
+              data: 'action=buy&itemid=111',
+            },
+          },
+          {
+            imageUrl: 'https://example.com/bot/images/item2.jpg',
+            action: {
+              type: 'message',
+              label: 'Yes',
+              text: 'yes',
+            },
+          },
+          {
+            imageUrl: 'https://example.com/bot/images/item3.jpg',
+            action: {
+              type: 'uri',
+              label: 'View detail',
+              uri: 'http://example.com/page/222',
+            },
+          },
+        ],
+      },
+      quickReply,
+    });
+  });
+});
+
+describe('#createFlex', () => {
+  it('should return flex message object', () => {
+    expect(
+      Line.createFlex('this is a flex message', {
+        type: 'bubble',
+        header: {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'text',
+              text: 'Header text',
+            },
+          ],
+        },
+        hero: {
+          type: 'image',
+          url: 'https://example.com/flex/images/image.jpg',
+        },
+        bo
