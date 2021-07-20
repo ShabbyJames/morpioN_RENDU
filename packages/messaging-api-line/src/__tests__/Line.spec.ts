@@ -1107,4 +1107,54 @@ describe('#createFlex', () => {
             },
           },
         },
-        { quickRepl
+        { quickReply }
+      )
+    ).toEqual({
+      type: 'flex',
+      altText: 'this is a flex message',
+      contents: {
+        type: 'bubble',
+        header: {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'text',
+              text: 'Header text',
+            },
+          ],
+        },
+        hero: {
+          type: 'image',
+          url: 'https://example.com/flex/images/image.jpg',
+        },
+        body: {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'text',
+              text: 'Body text',
+            },
+          ],
+        },
+        footer: {
+          type: 'box',
+          layout: 'vertical',
+          contents: [
+            {
+              type: 'text',
+              text: 'Footer text',
+            },
+          ],
+        },
+        styles: {
+          header: {
+            separator: true,
+          },
+        },
+      },
+      quickReply,
+    });
+  });
+});
