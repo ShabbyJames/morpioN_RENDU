@@ -1047,4 +1047,64 @@ describe('#createFlex', () => {
           layout: 'vertical',
           contents: [
             {
-            
+              type: 'text',
+              text: 'Footer text',
+            },
+          ],
+        },
+        styles: {
+          header: {
+            separator: true,
+          },
+        },
+      },
+    });
+  });
+
+  it('should work with quickReply', () => {
+    expect(
+      Line.createFlex(
+        'this is a flex message',
+        {
+          type: 'bubble',
+          header: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [
+              {
+                type: 'text',
+                text: 'Header text',
+              },
+            ],
+          },
+          hero: {
+            type: 'image',
+            url: 'https://example.com/flex/images/image.jpg',
+          },
+          body: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [
+              {
+                type: 'text',
+                text: 'Body text',
+              },
+            ],
+          },
+          footer: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [
+              {
+                type: 'text',
+                text: 'Footer text',
+              },
+            ],
+          },
+          styles: {
+            header: {
+              separator: true,
+            },
+          },
+        },
+        { quickRepl
