@@ -296,3 +296,84 @@ describe('Audience', () => {
         },
       ],
       hasNextPage: false,
+      totalCount: 1,
+      page: 1,
+      size: 40,
+    };
+
+    const page = 1;
+    const description = 'audienceGroupName';
+    const status = 'READY';
+    const size = 40;
+
+    it('should call getAudienceGroups api', async () => {
+      expect.assertions(3);
+
+      const { client, mock, headers } = createMock();
+
+      mock.onGet().reply((config) => {
+        expect(config.url).toEqual(
+          `/v2/bot/audienceGroup/list?page=${page}&description=${description}&status=${status}&size=${size}`
+        );
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.getAudienceGroups({
+        page,
+        description,
+        status,
+        size,
+      });
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#getAudienceGroupAuthorityLevel', () => {
+    const reply = {
+      authorityLevel: 'PUBLIC',
+    };
+
+    it('should call getAudienceGroupAuthorityLevel api', async () => {
+      expect.assertions(3);
+
+      const { client, mock, headers } = createMock();
+
+      mock.onGet().reply((config) => {
+        expect(config.url).toEqual('/v2/bot/audienceGroup/authorityLevel');
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.getAudienceGroupAuthorityLevel();
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#changeAudienceGroupAuthorityLevel', () => {
+    const reply = {};
+
+    const body = {
+      authorityLevel: 'PUBLIC',
+    };
+
+    it('should call changeAudienceGroupAuthorityLevel api', async () => {
+      expect.assertions(4);
+
+      const { client, mock, headers } = createMock();
+
+      mock.onPut().reply((config) => {
+        expect(config.url).toEqual('/v2/bot/audienceGroup/authorityLevel');
+        expect(JSON.parse(config.data)).toEqual(body);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.changeAudienceGroupAuthorityLevel('PUBLIC');
+
+      expect(res).toEqual(reply);
+    });
+  });
+});
