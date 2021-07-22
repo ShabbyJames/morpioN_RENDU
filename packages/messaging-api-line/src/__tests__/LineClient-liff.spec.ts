@@ -123,4 +123,40 @@ describe('LINE Front-end Framework', () => {
       mock.onPut().reply((config) => {
         expect(config.url).toEqual('/liff/v1/apps/liff-12345/view');
         expect(JSON.parse(config.data)).toEqual({
-          type: 'tall'
+          type: 'tall',
+          url: 'https://example.com/myservice',
+        });
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.updateLiffApp('liff-12345', {
+        type: 'tall',
+        url: 'https://example.com/myservice',
+      });
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#deleteLiffApp', () => {
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const { client, mock, headers } = createMock();
+
+      const reply = {};
+
+      mock.onDelete().reply((config) => {
+        expect(config.url).toEqual('/liff/v1/apps/liff-12345');
+        expect(config.data).toEqual(undefined);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.deleteLiffApp('liff-12345');
+
+      expect(res).toEqual(reply);
+    });
+  });
+});
