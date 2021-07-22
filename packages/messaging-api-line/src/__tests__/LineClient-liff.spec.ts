@@ -72,4 +72,55 @@ describe('LINE Front-end Framework', () => {
         },
         {
           liffId: 'liff-67890',
-      
+          view: {
+            type: 'tall',
+            url: 'https://example.com/myservice2',
+          },
+        },
+      ]);
+    });
+  });
+
+  describe('#createLiffApp', () => {
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const { client, mock, headers } = createMock();
+
+      const reply = {
+        liffId: 'liff-12345',
+      };
+
+      mock.onPost().reply((config) => {
+        expect(config.url).toEqual('/liff/v1/apps');
+        expect(JSON.parse(config.data)).toEqual({
+          type: 'tall',
+          url: 'https://example.com/myservice',
+        });
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.createLiffApp({
+        type: 'tall',
+        url: 'https://example.com/myservice',
+      });
+
+      expect(res).toEqual({
+        liffId: 'liff-12345',
+      });
+    });
+  });
+
+  describe('#updateLiffApp', () => {
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const { client, mock, headers } = createMock();
+
+      const reply = {};
+
+      mock.onPut().reply((config) => {
+        expect(config.url).toEqual('/liff/v1/apps/liff-12345/view');
+        expect(JSON.parse(config.data)).toEqual({
+          type: 'tall'
