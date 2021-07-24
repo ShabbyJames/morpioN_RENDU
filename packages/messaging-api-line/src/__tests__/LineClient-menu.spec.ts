@@ -60,4 +60,57 @@ describe('Rich Menu', () => {
                 },
                 action: {
                   type: 'postback',
-                  data: 'act
+                  data: 'action=buy&itemid=123',
+                },
+              },
+            ],
+          },
+        ],
+      };
+
+      mock.onGet().reply((config) => {
+        expect(config.url).toEqual('/v2/bot/richmenu/list');
+        expect(config.data).toEqual(undefined);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.getRichMenuList();
+
+      expect(res).toEqual([
+        {
+          richMenuId: 'richmenu-8dfdfc571eca39c0ffcd1f799519c5b5',
+          size: {
+            width: 2500,
+            height: 1686,
+          },
+          selected: false,
+          name: 'Nice richmenu',
+          chatBarText: 'Tap here',
+          areas: [
+            {
+              bounds: {
+                x: 0,
+                y: 0,
+                width: 2500,
+                height: 1686,
+              },
+              action: {
+                type: 'postback',
+                data: 'action=buy&itemid=123',
+              },
+            },
+          ],
+        },
+      ]);
+    });
+  });
+
+  describe('#getRichMenu', () => {
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const { client, mock, headers } = createMock();
+
+      const reply = {
+        richMenuId: 'richmen
