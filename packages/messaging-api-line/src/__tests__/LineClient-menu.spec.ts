@@ -113,4 +113,56 @@ describe('Rich Menu', () => {
       const { client, mock, headers } = createMock();
 
       const reply = {
-        richMenuId: 'richmen
+        richMenuId: 'richmenu-8dfdfc571eca39c0ffcd1f799519c5b5',
+        size: {
+          width: 2500,
+          height: 1686,
+        },
+        selected: false,
+        name: 'Nice richmenu',
+        chatBarText: 'Tap here',
+        areas: [
+          {
+            bounds: {
+              x: 0,
+              y: 0,
+              width: 2500,
+              height: 1686,
+            },
+            action: {
+              type: 'postback',
+              data: 'action=buy&itemid=123',
+            },
+          },
+        ],
+      };
+
+      mock.onGet().reply((config) => {
+        expect(config.url).toEqual(
+          '/v2/bot/richmenu/richmenu-8dfdfc571eca39c0ffcd1f799519c5b5'
+        );
+        expect(config.data).toEqual(undefined);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.getRichMenu(
+        'richmenu-8dfdfc571eca39c0ffcd1f799519c5b5'
+      );
+
+      expect(res).toEqual(reply);
+    });
+
+    it('should return null when no rich menu found', async () => {
+      const { client, mock } = createMock();
+
+      mock.onGet().reply(404, {
+        message: 'richmenu not found',
+        details: [],
+      });
+
+      const res = await client.getRichMenu(
+        'richmenu-8dfdfc571eca39c0ffcd1f799519c5b5'
+      );
+
+      expect(
