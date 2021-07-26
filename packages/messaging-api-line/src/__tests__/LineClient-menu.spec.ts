@@ -165,4 +165,59 @@ describe('Rich Menu', () => {
         'richmenu-8dfdfc571eca39c0ffcd1f799519c5b5'
       );
 
-      expect(
+      expect(res).toEqual(null);
+    });
+  });
+
+  describe('#createRichMenu', () => {
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const { client, mock, headers } = createMock();
+
+      const reply = {
+        richMenuId: 'richmenu-8dfdfc571eca39c0ffcd1f799519c5b5',
+      };
+
+      const richMenuObject = {
+        size: {
+          width: 2500 as const,
+          height: 1686 as const,
+        },
+        selected: false,
+        name: 'Nice richmenu',
+        chatBarText: 'Tap here',
+        areas: [
+          {
+            bounds: {
+              x: 0,
+              y: 0,
+              width: 2500,
+              height: 1686,
+            },
+            action: {
+              type: 'postback',
+              data: 'action=buy&itemid=123',
+            },
+          },
+        ],
+      };
+
+      mock.onPost().reply((config) => {
+        expect(config.url).toEqual('/v2/bot/richmenu');
+        expect(JSON.parse(config.data)).toEqual(richMenuObject);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.createRichMenu(richMenuObject);
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#deleteRichMenu', () => {
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const
