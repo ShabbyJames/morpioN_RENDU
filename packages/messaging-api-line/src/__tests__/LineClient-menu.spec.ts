@@ -220,4 +220,51 @@ describe('Rich Menu', () => {
     it('should call api', async () => {
       expect.assertions(4);
 
-      const
+      const { client, mock, headers } = createMock();
+
+      const reply = {};
+
+      mock.onDelete().reply((config) => {
+        expect(config.url).toEqual('/v2/bot/richmenu/1');
+        expect(config.data).toEqual(undefined);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.deleteRichMenu('1');
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#getLinkedRichMenu', () => {
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const { client, mock, headers } = createMock();
+
+      const reply = {
+        richMenuId: 'richmenu-8dfdfc571eca39c0ffcd1f799519c5b5',
+      };
+
+      mock.onGet().reply((config) => {
+        expect(config.url).toEqual('/v2/bot/user/1/richmenu');
+        expect(config.data).toEqual(undefined);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.getLinkedRichMenu('1');
+
+      expect(res).toEqual(reply);
+    });
+
+    it('should return null when no rich menu found', async () => {
+      const { client, mock } = createMock();
+
+      mock.onGet().reply(404, {
+        message: 'the user has no richmenu',
+        details: [],
+      });
+
+      const res = await client.getLinked
