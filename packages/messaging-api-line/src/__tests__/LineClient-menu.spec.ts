@@ -318,4 +318,54 @@ describe('Rich Menu', () => {
   });
 
   describe('#uploadRichMenuImage', () => {
-    it('should call api', async 
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const { client, dataMock, headers } = createMock();
+
+      const reply = {};
+
+      const buffer = await new Promise<Buffer>((resolve, reject): void => {
+        fs.readFile(path.join(__dirname, 'fixture.png'), (err, buf) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(buf);
+          }
+        });
+      });
+
+      dataMock.onPost().reply((config) => {
+        expect(config.url).toEqual('/v2/bot/richmenu/1/content');
+        expect(config.data).toEqual(buffer);
+        expect(config.headers).toEqual({
+          ...headers,
+          'Content-Type': 'image/png',
+        });
+        return [200, reply];
+      });
+
+      const res = await client.uploadRichMenuImage('1', buffer);
+
+      expect(res).toEqual(reply);
+    });
+
+    it('should throw error when ', async () => {
+      expect.assertions(1);
+
+      const { client, dataMock, headers } = createMock();
+
+      const reply = {};
+
+      dataMock.onPost().reply((config) => {
+        expect(config.url).toEqual('/v2/bot/richmenu/1/content');
+        expect(config.data).toEqual(undefined);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      let error;
+      try {
+        await client.uploadRichMenuImage('1', Buffer.from('a content buffer'));
+      } catch (err) {
+        error 
