@@ -368,4 +368,51 @@ describe('Rich Menu', () => {
       try {
         await client.uploadRichMenuImage('1', Buffer.from('a content buffer'));
       } catch (err) {
-        error 
+        error = err;
+      }
+
+      expect(error.message).toMatch(/image\/(jpeg|png)/);
+    });
+  });
+
+  describe('#downloadRichMenuImage', () => {
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const { client, dataMock, headers } = createMock();
+
+      const reply = Buffer.from('a content buffer');
+
+      dataMock.onGet().reply((config) => {
+        expect(config.url).toEqual('/v2/bot/richmenu/1/content');
+        expect(config.data).toEqual(undefined);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.downloadRichMenuImage('1');
+
+      expect(res).toEqual(reply);
+    });
+
+    it('should return null when no rich menu image found', async () => {
+      const { client, dataMock } = createMock();
+
+      dataMock.onGet().reply(404, Buffer.from('{"message":"Not found"}'));
+
+      const res = await client.downloadRichMenuImage(
+        'richmenu-8dfdfc571eca39c0ffcd1f799519c5b5'
+      );
+
+      expect(res).toEqual(undefined);
+    });
+  });
+
+  describe('#getDefaultRichMenu', () => {
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const { client, mock, headers } = createMock();
+
+      const reply = {
+        richMenuId: 'richmenu-8dfdfc571eca
