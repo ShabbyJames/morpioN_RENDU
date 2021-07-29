@@ -415,4 +415,54 @@ describe('Rich Menu', () => {
       const { client, mock, headers } = createMock();
 
       const reply = {
-        richMenuId: 'richmenu-8dfdfc571eca
+        richMenuId: 'richmenu-8dfdfc571eca39c0ffcd1f799519c5b5',
+      };
+
+      mock.onGet().reply((config) => {
+        expect(config.url).toEqual('/v2/bot/user/all/richmenu');
+        expect(config.data).toEqual(undefined);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.getDefaultRichMenu();
+
+      expect(res).toEqual(reply);
+    });
+
+    it('should return null when no default rich menu found', async () => {
+      const { client, mock } = createMock();
+
+      mock.onGet().reply(404, {
+        message: 'no default richmenu',
+        details: [],
+      });
+
+      const res = await client.getDefaultRichMenu();
+
+      expect(res).toEqual(null);
+    });
+  });
+
+  describe('#setDefaultRichMenu', () => {
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const { client, mock, headers } = createMock();
+
+      const reply = {};
+
+      mock.onPost().reply((config) => {
+        expect(config.url).toEqual(
+          '/v2/bot/user/all/richmenu/richmenu-8dfdfc571eca39c0ffcd1f799519c5b5'
+        );
+        expect(config.data).toEqual(undefined);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.setDefaultRichMenu(
+        'richmenu-8dfdfc571eca39c0ffcd1f799519c5b5'
+      );
+
+  
