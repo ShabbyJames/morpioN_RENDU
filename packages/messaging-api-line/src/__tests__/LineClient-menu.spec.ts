@@ -465,4 +465,28 @@ describe('Rich Menu', () => {
         'richmenu-8dfdfc571eca39c0ffcd1f799519c5b5'
       );
 
-  
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#deleteDefaultRichMenu', () => {
+    it('should call api', async () => {
+      expect.assertions(4);
+
+      const { client, mock, headers } = createMock();
+
+      const reply = {};
+
+      mock.onDelete().reply((config) => {
+        expect(config.url).toEqual('/v2/bot/user/all/richmenu');
+        expect(config.data).toEqual(undefined);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.deleteDefaultRichMenu();
+
+      expect(res).toEqual(reply);
+    });
+  });
+});
