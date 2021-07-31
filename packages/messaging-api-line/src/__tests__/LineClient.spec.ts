@@ -74,4 +74,52 @@ describe('Profile', () => {
       expect(res).toEqual(reply);
     });
 
-    it('should r
+    it('should return null when no user found', async () => {
+      const { client, mock } = createMock();
+
+      mock.onGet().reply(404, {
+        message: 'Not found',
+      });
+
+      const res = await client.getUserProfile(RECIPIENT_ID);
+
+      expect(res).toEqual(null);
+    });
+  });
+});
+
+describe('Account link', () => {
+  describe('#getLinkToken', () => {
+    it('should response data with link token', async () => {
+      expect.assertions(4);
+
+      const { client, mock, headers } = createMock();
+      const reply = {
+        linkToken: 'NMZTNuVrPTqlr2IF8Bnymkb7rXfYv5EY',
+      };
+
+      mock.onPost().reply((config) => {
+        expect(config.url).toEqual(`/v2/bot/user/${RECIPIENT_ID}/linkToken`);
+        expect(config.data).toEqual(undefined);
+        expect(config.headers).toEqual(headers);
+        return [200, reply];
+      });
+
+      const res = await client.getLinkToken(RECIPIENT_ID);
+
+      expect(res).toEqual('NMZTNuVrPTqlr2IF8Bnymkb7rXfYv5EY');
+    });
+  });
+});
+
+describe('Error', () => {
+  it('should format correctly when no details', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      message: 'The request body has 2 error(s)',
+    };
+
+    mock.onAny().reply(400, reply);
+
+    let error
