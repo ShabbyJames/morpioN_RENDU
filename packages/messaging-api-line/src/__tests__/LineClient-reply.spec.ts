@@ -1511,3 +1511,30 @@ describe('Reply Message', () => {
           body: {
             type: 'box',
             layout: 'vertical',
+            contents: [
+              {
+                type: 'text',
+                text: 'Body text',
+              },
+            ],
+          },
+          footer: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [
+              {
+                type: 'text',
+                text: 'Footer text',
+              },
+            ],
+          },
+          styles: {
+            comment: 'See the example of a bubble style object',
+          },
+        }
+      );
+
+      expect(res).toEqual(reply);
+    });
+  });
+});
