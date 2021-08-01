@@ -109,4 +109,56 @@ describe('#getAuthLink', () => {
     const result = client.getAuthLink('state');
 
     expect(result).toEqual(
-      'https://notify-bot.line.me/oau
+      'https://notify-bot.line.me/oauth/authorize?scope=notify&response_type=code&client_id=client-id&redirect_uri=https%3A%2F%2Fexample.com%2Fcallback&state=state'
+    );
+  });
+});
+
+describe('#getToken', () => {
+  it('should work', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      access_token: 'access_token',
+    };
+
+    const code = 'code';
+
+    const body = {
+      grant_type: 'authorization_code',
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      redirect_uri: REDIRECT_URI,
+      code,
+    };
+
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    };
+
+    mock.onPost().reply((config) => {
+      expect(config.url).toEqual('/oauth/token');
+      expect(querystring.decode(config.data)).toEqual(body);
+      expect(config.headers['Content-Type']).toEqual(headers['Content-Type']);
+      return [200, reply];
+    });
+
+    const result = await client.getToken('code');
+
+    expect(result).toEqual('access_token');
+  });
+});
+
+describe('#getStatus', () => {
+  it('should work', async () => {
+    const { client, apiMock } = createMock();
+
+    const reply = {
+      status: 200,
+      message: 'message',
+      targetType: 'USER',
+      target: 'user name',
+    };
+
+    const headers = {
+      Authorization: `
