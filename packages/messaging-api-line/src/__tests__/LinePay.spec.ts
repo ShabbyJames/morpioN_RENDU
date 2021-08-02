@@ -633,3 +633,84 @@ describe('#capture', () => {
 });
 
 describe('#void', () => {
+  it('should call void api', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      returnCode: '0000',
+      returnMessage: 'OK',
+    };
+
+    mock
+      .onPost('/payments/authorizations/sdhqiwouehrafdasrqoi123as/void')
+      .reply(200, reply);
+
+    const result = await client.void('sdhqiwouehrafdasrqoi123as');
+
+    expect(result).toBeUndefined();
+  });
+
+  it('should throw when not success', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      returnCode: '1104',
+      returnMessage: 'merchant not found',
+    };
+
+    mock
+      .onPost('/payments/authorizations/sdhqiwouehrafdasrqoi123as/void')
+      .reply(200, reply);
+
+    return expect(client.void('sdhqiwouehrafdasrqoi123as')).rejects.toThrow(
+      'LINE PAY API - 1104 merchant not found'
+    );
+  });
+});
+
+describe('#refund', () => {
+  it('should call refund api', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      returnCode: '0000',
+      returnMessage: 'success',
+      info: {
+        refundTransactionId: 123123123123,
+        refundTransactionDate: '2014-01-01T06:17:41Z',
+      },
+    };
+
+    mock.onPost('/payments/sdhqiwouehrafdasrqoi123as/refund').reply(200, reply);
+
+    const result = await client.refund('sdhqiwouehrafdasrqoi123as', {
+      refundAmount: 500,
+    });
+
+    expect(result).toEqual({
+      refundTransactionId: 123123123123,
+      refundTransactionDate: '2014-01-01T06:17:41Z',
+    });
+  });
+
+  it('should throw when not success', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      returnCode: '1104',
+      returnMessage: 'merchant not found',
+      info: {
+        refundTransactionId: 123123123123,
+        refundTransactionDate: '2014-01-01T06:17:41Z',
+      },
+    };
+
+    mock.onPost('/payments/sdhqiwouehrafdasrqoi123as/refund').reply(200, reply);
+
+    return expect(
+      client.refund('sdhqiwouehrafdasrqoi123as', {
+        refundAmount: 500,
+      })
+    ).rejects.toThrow('LINE PAY API - 1104 merchant not found');
+  });
+});
