@@ -161,4 +161,53 @@ describe('#getStatus', () => {
     };
 
     const headers = {
-      Authorization: `
+      Authorization: `Bearer access_token`,
+    };
+
+    apiMock.onGet().reply((config) => {
+      expect(config.url).toEqual('/api/status');
+      expect(config.headers.Authorization).toEqual(headers.Authorization);
+      return [200, reply];
+    });
+
+    const result = await client.getStatus('access_token');
+
+    expect(result).toEqual(reply);
+  });
+});
+
+describe('#sendNotify', () => {
+  it('should work', async () => {
+    const { client, apiMock } = createMock();
+
+    const reply = {
+      status: 200,
+      message: 'message',
+    };
+
+    const body = querystring.encode({
+      message: 'message',
+    });
+
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: `Bearer access_token`,
+    };
+
+    apiMock.onPost().reply((config) => {
+      expect(config.url).toEqual('/api/notify');
+      expect(config.data).toEqual(body);
+      expect(config.headers['Content-Type']).toEqual(headers['Content-Type']);
+      expect(config.headers.Authorization).toEqual(headers.Authorization);
+      return [200, reply];
+    });
+
+    const result = await client.sendNotify('access_token', 'message');
+
+    expect(result).toEqual(reply);
+  });
+});
+
+describe('#revokeToken', () => {
+  it('should work', async () => {
+    const { cli
