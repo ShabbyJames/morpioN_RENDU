@@ -210,4 +210,30 @@ describe('#sendNotify', () => {
 
 describe('#revokeToken', () => {
   it('should work', async () => {
-    const { cli
+    const { client, apiMock } = createMock();
+
+    const reply = {
+      status: 200,
+      message: 'message',
+    };
+
+    const body = {};
+
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: `Bearer access_token`,
+    };
+
+    apiMock.onPost().reply((config) => {
+      expect(config.url).toEqual('/api/revoke');
+      expect(JSON.parse(config.data)).toEqual(body);
+      expect(config.headers['Content-Type']).toEqual(headers['Content-Type']);
+      expect(config.headers.Authorization).toEqual(headers.Authorization);
+      return [200, reply];
+    });
+
+    const result = await client.revokeToken('access_token');
+
+    expect(result).toEqual(reply);
+  });
+});
