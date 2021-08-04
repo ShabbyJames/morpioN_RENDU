@@ -50,4 +50,54 @@ export function sendMessage(
     messagingType = 'MESSAGE_TAG';
   }
 
-  const batchRequestO
+  const batchRequestOptions = pickBatchOptions(options);
+
+  return sendRequest(
+    {
+      messagingType,
+      recipient,
+      message: Messenger.createMessage(msg, options),
+      ...omitUndefinedFields(omitBatchOptions(options)),
+    },
+    batchRequestOptions
+  );
+}
+
+export function sendText(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  text: string,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createText(text, options),
+    options
+  );
+}
+
+export function sendAttachment(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  attachment: MessengerTypes.Attachment,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createAttachment(attachment, options),
+    options
+  );
+}
+
+export function sendAudio(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  audio: string | MessengerTypes.MediaAttachmentPayload,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createAudio(audio, options),
+    options
+  );
+}
+
+export function sendImage(
+  psidOrRecipient: MessengerTypes.PsidOrR
