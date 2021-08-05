@@ -100,4 +100,51 @@ export function sendAudio(
 }
 
 export function sendImage(
-  psidOrRecipient: MessengerTypes.PsidOrR
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  image: string | MessengerTypes.MediaAttachmentPayload,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createImage(image, options),
+    options
+  );
+}
+
+export function sendVideo(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  video: string | MessengerTypes.MediaAttachmentPayload,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createVideo(video, options),
+    options
+  );
+}
+
+export function sendFile(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  file: string | MessengerTypes.MediaAttachmentPayload,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createFile(file, options),
+    options
+  );
+}
+
+export function sendTemplate(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  payload: MessengerTypes.TemplateAttachmentPayload,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createTemplate(payload, options),
+    options
+  );
+}
+
+e
