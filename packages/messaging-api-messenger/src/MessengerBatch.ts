@@ -147,4 +147,51 @@ export function sendTemplate(
   );
 }
 
-e
+export function sendButtonTemplate(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  text: string,
+  buttons: MessengerTypes.TemplateButton[],
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createButtonTemplate(text, buttons, options),
+    options
+  );
+}
+
+export function sendGenericTemplate(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  elements: MessengerTypes.TemplateElement[],
+  {
+    imageAspectRatio = 'horizontal',
+    ...options
+  }: {
+    imageAspectRatio?: 'horizontal' | 'square';
+  } & MessengerTypes.SendOption = {}
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createGenericTemplate(elements, {
+      ...options,
+      imageAspectRatio,
+    }),
+
+    options
+  );
+}
+
+export function sendReceiptTemplate(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  receipt: MessengerTypes.ReceiptAttributes,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createReceiptTemplate(receipt, options),
+    options
+  );
+}
+
+export function sendMediaTemplate(
+  psidOrRecipient: MessengerTypes.PsidOrRecipi
