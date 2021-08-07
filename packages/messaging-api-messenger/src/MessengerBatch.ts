@@ -236,4 +236,52 @@ export function sendAirlineItineraryTemplate(
 ): MessengerTypes.BatchItem {
   return sendMessage(
     psidOrRecipient,
-    Messenger.creat
+    Messenger.createAirlineItineraryTemplate(attrs, options),
+    options
+  );
+}
+
+export function sendAirlineUpdateTemplate(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  attrs: MessengerTypes.AirlineUpdateAttributes,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createAirlineUpdateTemplate(attrs, options),
+    options
+  );
+}
+
+export function sendOneTimeNotifReqTemplate(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  attrs: MessengerTypes.OneTimeNotifReqAttributes,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createOneTimeNotifReqTemplate(attrs, options),
+    options
+  );
+}
+
+export function getUserProfile(
+  userId: string,
+  options: {
+    fields?: MessengerTypes.UserProfileField[];
+    accessToken?: string;
+  } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const batchRequestOptions = pickBatchOptions(options);
+
+  const fields = options.fields || [
+    'id',
+    'name',
+    'first_name',
+    'last_name',
+    'profile_pic',
+  ];
+
+  return {
+    method: 'GET',
+    relativeUrl: `${userId}?fields=${
