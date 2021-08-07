@@ -194,4 +194,46 @@ export function sendReceiptTemplate(
 }
 
 export function sendMediaTemplate(
-  psidOrRecipient: MessengerTypes.PsidOrRecipi
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  elements: MessengerTypes.MediaElement[],
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createMediaTemplate(elements, options),
+    options
+  );
+}
+
+export function sendAirlineBoardingPassTemplate(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  attrs: MessengerTypes.AirlineBoardingPassAttributes,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createAirlineBoardingPassTemplate(attrs, options),
+    options
+  );
+}
+
+export function sendAirlineCheckinTemplate(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  attrs: MessengerTypes.AirlineCheckinAttributes,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.createAirlineCheckinTemplate(attrs, options),
+    options
+  );
+}
+
+export function sendAirlineItineraryTemplate(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  attrs: MessengerTypes.AirlineItineraryAttributes,
+  options?: MessengerTypes.SendOption & MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendMessage(
+    psidOrRecipient,
+    Messenger.creat
