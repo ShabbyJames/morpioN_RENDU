@@ -284,4 +284,50 @@ export function getUserProfile(
 
   return {
     method: 'GET',
-    relativeUrl: `${userId}?fields=${
+    relativeUrl: `${userId}?fields=${fields.join(',')}`.concat(
+      options.accessToken ? `&access_token=${options.accessToken}` : ''
+    ),
+    ...batchRequestOptions,
+  };
+}
+
+export function getUserPersistentMenu(
+  userId: string,
+  options: {
+    accessToken?: string;
+  } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const batchRequestOptions = pickBatchOptions(options);
+
+  return {
+    method: 'GET',
+    relativeUrl: `/me/custom_user_settings?psid=${userId}`.concat(
+      options.accessToken ? `&access_token=${options.accessToken}` : ''
+    ),
+    ...batchRequestOptions,
+  };
+}
+
+export function setUserPersistentMenu(
+  userId: string,
+  menuItems: MessengerTypes.MenuItem[] | MessengerTypes.PersistentMenuItem[],
+  options: {
+    accessToken?: string;
+  } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const batchRequestOptions = pickBatchOptions(options);
+
+  if (
+    menuItems.some(
+      (item: MessengerTypes.MenuItem | MessengerTypes.PersistentMenuItem) =>
+        'locale' in item && item.locale === 'default'
+    )
+  ) {
+    return {
+      method: 'POST',
+      relativeUrl: `/me/custom_user_settings`.concat(
+        options.accessToken ? `?access_token=${options.accessToken}` : ''
+      ),
+      body: {
+        psid: userId,
+ 
