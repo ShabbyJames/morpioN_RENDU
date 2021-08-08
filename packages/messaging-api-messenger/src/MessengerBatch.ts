@@ -330,4 +330,53 @@ export function setUserPersistentMenu(
       ),
       body: {
         psid: userId,
- 
+        persistentMenu: menuItems,
+      },
+      ...batchRequestOptions,
+    };
+  }
+
+  return {
+    method: 'POST',
+    relativeUrl: `/me/custom_user_settings`.concat(
+      options.accessToken ? `?access_token=${options.accessToken}` : ''
+    ),
+    body: {
+      psid: userId,
+      persistentMenu: [
+        {
+          locale: 'default',
+          composerInputDisabled: false,
+          callToActions: menuItems as MessengerTypes.MenuItem[],
+        },
+      ],
+    },
+    ...batchRequestOptions,
+  };
+}
+
+export function deleteUserPersistentMenu(
+  userId: string,
+  options: {
+    accessToken?: string;
+  } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const batchRequestOptions = pickBatchOptions(options);
+
+  return {
+    method: 'DELETE',
+    relativeUrl:
+      `/me/custom_user_settings?psid=${userId}&params=[%22persistent_menu%22]`.concat(
+        options.accessToken ? `&access_token=${options.accessToken}` : ''
+      ),
+    ...batchRequestOptions,
+  };
+}
+
+export function sendSenderAction(
+  psidOrRecipient: MessengerTypes.PsidOrRecipient,
+  senderAction: MessengerTypes.SenderAction,
+  options: MessengerTypes.SenderActionOption &
+    MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const re
