@@ -379,4 +379,52 @@ export function sendSenderAction(
   options: MessengerTypes.SenderActionOption &
     MessengerTypes.BatchRequestOptions = {}
 ): MessengerTypes.BatchItem {
-  const re
+  const recipient =
+    typeof psidOrRecipient === 'string'
+      ? {
+          id: psidOrRecipient,
+        }
+      : psidOrRecipient;
+
+  const batchRequestOptions = pickBatchOptions(options);
+
+  return sendRequest(
+    {
+      recipient,
+      senderAction,
+      ...omitUndefinedFields(omitBatchOptions(options)),
+    },
+    batchRequestOptions
+  );
+}
+
+export function typingOn(
+  idOrRecipient: MessengerTypes.PsidOrRecipient,
+  options?: MessengerTypes.SenderActionOption &
+    MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendSenderAction(idOrRecipient, 'typing_on', options);
+}
+
+export function typingOff(
+  idOrRecipient: MessengerTypes.PsidOrRecipient,
+  options?: MessengerTypes.SenderActionOption &
+    MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendSenderAction(idOrRecipient, 'typing_off', options);
+}
+
+export function markSeen(
+  idOrRecipient: MessengerTypes.PsidOrRecipient,
+  options?: MessengerTypes.BatchRequestOptions
+): MessengerTypes.BatchItem {
+  return sendSenderAction(idOrRecipient, 'mark_seen', options);
+}
+
+export function passThreadControl(
+  recipientId: string,
+  targetAppId: number,
+  metadata?: string,
+  options: { accessToken?: string } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const batchRequestOptions = pickBatchOptions(
