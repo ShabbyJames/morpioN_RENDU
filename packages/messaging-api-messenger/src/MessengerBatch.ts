@@ -427,4 +427,51 @@ export function passThreadControl(
   metadata?: string,
   options: { accessToken?: string } & MessengerTypes.BatchRequestOptions = {}
 ): MessengerTypes.BatchItem {
-  const batchRequestOptions = pickBatchOptions(
+  const batchRequestOptions = pickBatchOptions(options);
+
+  return {
+    method: 'POST',
+    relativeUrl: 'me/pass_thread_control',
+    body: {
+      recipient: { id: recipientId },
+      targetAppId,
+      metadata,
+      ...omitUndefinedFields(omitBatchOptions(options)),
+    },
+    ...batchRequestOptions,
+  };
+}
+
+export function passThreadControlToPageInbox(
+  recipientId: string,
+  metadata?: string,
+  options: { accessToken?: string } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  return passThreadControl(recipientId, 263902037430900, metadata, options);
+}
+
+export function takeThreadControl(
+  recipientId: string,
+  metadata?: string,
+  options: { accessToken?: string } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const batchRequestOptions = pickBatchOptions(options);
+
+  return {
+    method: 'POST',
+    relativeUrl: 'me/take_thread_control',
+    body: {
+      recipient: { id: recipientId },
+      metadata,
+      ...omitUndefinedFields(omitBatchOptions(options)),
+    },
+    ...batchRequestOptions,
+  };
+}
+
+export function requestThreadControl(
+  recipientId: string,
+  metadata?: string,
+  options: { accessToken?: string } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const batchRequestOptions = pickB
