@@ -525,4 +525,32 @@ export function associateLabel(
 export function dissociateLabel(
   userId: string,
   labelId: number,
-  options: { accessToken?: string } & MessengerTypes.BatchRequestOptio
+  options: { accessToken?: string } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const batchRequestOptions = pickBatchOptions(options);
+
+  return {
+    method: 'DELETE',
+    relativeUrl: `${labelId}/label`,
+    body: {
+      user: userId,
+      ...omitUndefinedFields(omitBatchOptions(options)),
+    },
+    ...batchRequestOptions,
+  };
+}
+
+export function getAssociatedLabels(
+  userId: string,
+  options: { accessToken?: string } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const batchRequestOptions = pickBatchOptions(options);
+
+  return {
+    method: 'GET',
+    relativeUrl: `${userId}/custom_labels`.concat(
+      options.accessToken ? `?access_token=${options.accessToken}` : ''
+    ),
+    ...batchRequestOptions,
+  };
+}
