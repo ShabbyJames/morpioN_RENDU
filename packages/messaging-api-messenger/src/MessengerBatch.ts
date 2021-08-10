@@ -474,4 +474,55 @@ export function requestThreadControl(
   metadata?: string,
   options: { accessToken?: string } & MessengerTypes.BatchRequestOptions = {}
 ): MessengerTypes.BatchItem {
-  const batchRequestOptions = pickB
+  const batchRequestOptions = pickBatchOptions(options);
+
+  return {
+    method: 'POST',
+    relativeUrl: 'me/request_thread_control',
+    body: {
+      recipient: { id: recipientId },
+      metadata,
+      ...omitUndefinedFields(omitBatchOptions(options)),
+    },
+    ...batchRequestOptions,
+  };
+}
+
+export function getThreadOwner(
+  recipientId: string,
+  options: { accessToken?: string } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const batchRequestOptions = pickBatchOptions(options);
+
+  return {
+    method: 'GET',
+    relativeUrl: `me/thread_owner?recipient=${recipientId}`.concat(
+      options.accessToken ? `&access_token=${options.accessToken}` : ''
+    ),
+    responseAccessPath: 'data[0].threadOwner',
+    ...batchRequestOptions,
+  };
+}
+
+export function associateLabel(
+  userId: string,
+  labelId: number,
+  options: { accessToken?: string } & MessengerTypes.BatchRequestOptions = {}
+): MessengerTypes.BatchItem {
+  const batchRequestOptions = pickBatchOptions(options);
+
+  return {
+    method: 'POST',
+    relativeUrl: `${labelId}/label`,
+    body: {
+      user: userId,
+      ...omitUndefinedFields(omitBatchOptions(options)),
+    },
+    ...batchRequestOptions,
+  };
+}
+
+export function dissociateLabel(
+  userId: string,
+  labelId: number,
+  options: { accessToken?: string } & MessengerTypes.BatchRequestOptio
