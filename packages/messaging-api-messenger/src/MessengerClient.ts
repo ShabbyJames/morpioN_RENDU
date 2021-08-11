@@ -1914,3 +1914,1292 @@ export default class MessengerClient {
     return this.sendMessage(
       psidOrRecipient,
       Messenger.createAirlineBoardingPassTemplate(attrs, options),
+      options
+    );
+  }
+
+  /**
+   * Send airline check-in template messages to the specified user using the Send API.
+   *
+   * <img src="https://user-images.githubusercontent.com/3382565/37411010-bfb3d8a2-27dc-11e8-91de-30653cf2d62c.png" alt="sendAirlineCheckinTemplate" width="250" />
+   *
+   * @param psidOrRecipient - A facebook page-scoped ID of the recipient or a recipient object
+   * @param attrs - [payload](https://developers.facebook.com/docs/messenger-platform/send-api-reference/airline-checkin-template#payload) of check-in template.
+   * @param options - Other optional parameters. For example, [messaging types](https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types) or [tags](https://developers.facebook.com/docs/messenger-platform/message-tags).
+   * @returns An object includes recipientId and messageId.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/template/airline#check_in
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendAirlineCheckinTemplate(USER_ID, {
+   *   introMessage: 'Check-in is available now.',
+   *   locale: 'en_US',
+   *   pnrNumber: 'ABCDEF',
+   *   flightInfo: [
+   *     {
+   *       flightNumber: 'f001',
+   *       departureAirport: {
+   *         airportCode: 'SFO',
+   *         city: 'San Francisco',
+   *         terminal: 'T4',
+   *         gate: 'G8',
+   *       },
+   *       arrivalAirport: {
+   *         airportCode: 'SEA',
+   *         city: 'Seattle',
+   *         terminal: 'T4',
+   *         gate: 'G8',
+   *       },
+   *       flightSchedule: {
+   *         boardingTime: '2016-01-05T15:05',
+   *         departureTime: '2016-01-05T15:45',
+   *         arrivalTime: '2016-01-05T17:30',
+   *       },
+   *     },
+   *   ],
+   *   checkinUrl: 'https://www.airline.com/check-in',
+   * });
+   * ```
+   *
+   */
+  sendAirlineCheckinTemplate(
+    psidOrRecipient: MessengerTypes.PsidOrRecipient,
+    attrs: MessengerTypes.AirlineCheckinAttributes,
+    options?: MessengerTypes.SendOption
+  ): Promise<MessengerTypes.SendMessageSuccessResponse> {
+    return this.sendMessage(
+      psidOrRecipient,
+      Messenger.createAirlineCheckinTemplate(attrs, options),
+      options
+    );
+  }
+
+  /**
+   * Send airline itinerary template messages to the specified user using the Send API.
+   *
+   * <img src="https://user-images.githubusercontent.com/3382565/37411025-ce27545e-27dc-11e8-91be-28ab27644db7.png" alt="sendAirlineItineraryTemplate" width="600" />
+   *
+   * @param psidOrRecipient - A facebook page-scoped ID of the recipient or a recipient object
+   * @param attrs - [payload](https://developers.facebook.com/docs/messenger-platform/send-api-reference/airline-itinerary-template#payload) of itinerary template.
+   * @param options - Other optional parameters. For example, [messaging types](https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types) or [tags](https://developers.facebook.com/docs/messenger-platform/message-tags).
+   * @returns An object includes recipientId and messageId.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/template/airline#itinerary
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendAirlineItineraryTemplate(USER_ID, {
+   *   introMessage: "Here's your flight itinerary.",
+   *   locale: 'en_US',
+   *   pnrNumber: 'ABCDEF',
+   *   passengerInfo: [
+   *     {
+   *       name: 'Farbound Smith Jr',
+   *       ticketNumber: '0741234567890',
+   *       passengerId: 'p001',
+   *     },
+   *     {
+   *       name: 'Nick Jones',
+   *       ticketNumber: '0741234567891',
+   *       passengerId: 'p002',
+   *     },
+   *   ],
+   *   flightInfo: [
+   *     {
+   *       connectionId: 'c001',
+   *       segmentId: 's001',
+   *       flightNumber: 'KL9123',
+   *       aircraftType: 'Boeing 737',
+   *       departureAirport: {
+   *         airportCode: 'SFO',
+   *         city: 'San Francisco',
+   *         terminal: 'T4',
+   *         gate: 'G8',
+   *       },
+   *       arrivalAirport: {
+   *         airportCode: 'SLC',
+   *         city: 'Salt Lake City',
+   *         terminal: 'T4',
+   *         gate: 'G8',
+   *       },
+   *       flightSchedule: {
+   *         departureTime: '2016-01-02T19:45',
+   *         arrivalTime: '2016-01-02T21:20',
+   *       },
+   *       travelClass: 'business',
+   *     },
+   *   ],
+   *   passengerSegmentInfo: [
+   *     {
+   *       segmentId: 's001',
+   *       passengerId: 'p001',
+   *       seat: '12A',
+   *       seatType: 'Business',
+   *     },
+   *     {
+   *       segmentId: 's001',
+   *       passengerId: 'p002',
+   *       seat: '12B',
+   *       seatType: 'Business',
+   *     },
+   *   ],
+   *   priceInfo: [
+   *     {
+   *       title: 'Fuel surcharge',
+   *       amount: '1597',
+   *       currency: 'USD',
+   *     },
+   *   ],
+   *   basePrice: '12206',
+   *   tax: '200',
+   *   totalPrice: '14003',
+   *   currency: 'USD',
+   * });
+   * ```
+   */
+  sendAirlineItineraryTemplate(
+    psidOrRecipient: MessengerTypes.PsidOrRecipient,
+    attrs: MessengerTypes.AirlineItineraryAttributes,
+    options?: MessengerTypes.SendOption
+  ): Promise<MessengerTypes.SendMessageSuccessResponse> {
+    return this.sendMessage(
+      psidOrRecipient,
+      Messenger.createAirlineItineraryTemplate(attrs, options),
+      options
+    );
+  }
+
+  /**
+   * Sends airline flight update template messages to the specified user using the Send API.
+   *
+   * <img src="https://user-images.githubusercontent.com/3382565/37411064-e3005a56-27dc-11e8-8486-4fc548ad7b1a.png" alt="sendAirlineUpdateTemplate" width="250" />
+   *
+   * @param psidOrRecipient - A facebook page-scoped ID of the recipient or a recipient object
+   * @param attrs - [payload](https://developers.facebook.com/docs/messenger-platform/send-api-reference/airline-update-template#payload) of update template.
+   * @param options - Other optional parameters. For example, [messaging types](https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types) or [tags](https://developers.facebook.com/docs/messenger-platform/message-tags).
+   * @returns An object includes recipientId and messageId.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/template/airline#update
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendAirlineUpdateTemplate(USER_ID, {
+   *   introMessage: 'Your flight is delayed',
+   *   updateType: 'delay',
+   *   locale: 'en_US',
+   *   pnrNumber: 'CF23G2',
+   *   updateFlightInfo: {
+   *     flightNumber: 'KL123',
+   *     departureAirport: {
+   *       airportCode: 'SFO',
+   *       city: 'San Francisco',
+   *       terminal: 'T4',
+   *       gate: 'G8',
+   *     },
+   *     arrivalAirport: {
+   *       airportCode: 'AMS',
+   *       city: 'Amsterdam',
+   *       terminal: 'T4',
+   *       gate: 'G8',
+   *     },
+   *     flightSchedule: {
+   *       boardingTime: '2015-12-26T10:30',
+   *       departureTime: '2015-12-26T11:30',
+   *       arrivalTime: '2015-12-27T07:30',
+   *     },
+   *   },
+   * });
+   * ```
+   */
+  sendAirlineUpdateTemplate(
+    psidOrRecipient: MessengerTypes.PsidOrRecipient,
+    attrs: MessengerTypes.AirlineUpdateAttributes,
+    options?: MessengerTypes.SendOption
+  ): Promise<MessengerTypes.SendMessageSuccessResponse> {
+    return this.sendMessage(
+      psidOrRecipient,
+      Messenger.createAirlineUpdateTemplate(attrs, options),
+      options
+    );
+  }
+
+  /**
+   *
+   * @param psidOrRecipient - A facebook page-scoped ID of the recipient or a recipient object
+   * @param options - Other optional parameters. For example, [messaging types](https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types) or [tags](https://developers.facebook.com/docs/messenger-platform/message-tags).
+   * @returns An object includes recipientId and messageId.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/one-time-notification/#one-time-notif
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendOneTimeNotifReqTemplate(USER_ID, {
+   *   title: '<TITLE_TEXT>',
+   *   payload: '<USER_DEFINED_PAYLOAD>',
+   * });
+   * ```
+   *
+   */
+  sendOneTimeNotifReqTemplate(
+    psidOrRecipient: MessengerTypes.PsidOrRecipient,
+    attrs: MessengerTypes.OneTimeNotifReqAttributes,
+    options?: MessengerTypes.SendOption
+  ): Promise<MessengerTypes.SendMessageSuccessResponse> {
+    return this.sendMessage(
+      psidOrRecipient,
+      Messenger.createOneTimeNotifReqTemplate(attrs, options),
+      options
+    );
+  }
+
+  /**
+   * Sends sender actions to specified user using the Send API, to let users know you are processing their requests.
+   *
+   * @param psidOrRecipient - A facebook page-scoped ID of the recipient or a recipient object
+   * @param senderAction - Message state to display to the user. One of `typing_on`, `typing_off` or `mark_seen`
+   * @param options - Other optional parameters.
+   * @param options.personaId - ID of the persona.
+   * @returns An object includes recipientId
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/sender-actions
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendSenderAction(USER_ID, 'typing_on');
+   *
+   * // Or with persona:
+   * await client.sendSenderAction(USER_ID, 'typing_on', { personaId: '<PERSONA_ID>' });
+   * ```
+   */
+  sendSenderAction(
+    psidOrRecipient: MessengerTypes.PsidOrRecipient,
+    senderAction: MessengerTypes.SenderAction,
+    options?: MessengerTypes.SenderActionOption
+  ): Promise<MessengerTypes.SendSenderActionResponse> {
+    const recipient =
+      typeof psidOrRecipient === 'string'
+        ? {
+            id: psidOrRecipient,
+          }
+        : psidOrRecipient;
+    return this.sendRawBody({
+      recipient,
+      senderAction,
+      ...options,
+    });
+  }
+
+  /**
+   * Marks last message as read for the specified user.
+   *
+   * @param psidOrRecipient - A facebook page-scoped ID of the recipient or a recipient object
+   * @returns An object includes recipientId
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/sender-actions#supported_actions
+   *
+   * @example
+   *
+   * ```js
+   * await client.markSeen(USER_ID);
+   * ```
+   */
+  markSeen(
+    psidOrRecipient: MessengerTypes.PsidOrRecipient
+  ): Promise<MessengerTypes.SendSenderActionResponse> {
+    return this.sendSenderAction(psidOrRecipient, 'mark_seen');
+  }
+
+  /**
+   * Turns typing indicators on for the specified user.
+   *
+   * @param psidOrRecipient - A facebook page-scoped ID of the recipient or a recipient object
+   * @param options - Other optional parameters.
+   * @param options.personaId - ID of the persona.
+   * @returns An object includes recipientId
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/sender-actions#supported_actions
+   *
+   * @example
+   *
+   * ```js
+   * await client.typingOn(USER_ID);
+   *
+   * // Or with persona:
+   * await client.typingOn(USER_ID, { personaId: '<PERSONA_ID>' });
+   * ```
+   * */
+  typingOn(
+    psidOrRecipient: MessengerTypes.PsidOrRecipient,
+    options?: MessengerTypes.SenderActionOption
+  ): Promise<MessengerTypes.SendSenderActionResponse> {
+    return this.sendSenderAction(psidOrRecipient, 'typing_on', options);
+  }
+
+  /**
+   * Turns typing indicators off for the specified user.
+   *
+   * @param psidOrRecipient - A facebook page-scoped ID of the recipient or a recipient object
+   * @param options - Other optional parameters.
+   * @param options.personaId - ID of the persona.
+   * @returns An object includes recipientId
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/sender-actions#supported_actions
+   *
+   * @example
+   *
+   * ```js
+   * await client.typingOff(USER_ID);
+   *
+   * // Or with persona:
+   * await client.typingOff(USER_ID, { personaId: '<PERSONA_ID>' });
+   * ```
+   */
+  typingOff(
+    psidOrRecipient: MessengerTypes.PsidOrRecipient,
+    options?: MessengerTypes.SenderActionOption
+  ): Promise<MessengerTypes.SendSenderActionResponse> {
+    return this.sendSenderAction(psidOrRecipient, 'typing_off', options);
+  }
+
+  /**
+   * Sends multiple requests in a batch.
+   *
+   * @param requests - Subrequests in the batch.
+   * @returns An array of batch results
+   *
+   * @see https://developers.facebook.com/docs/graph-api/making-multiple-requests
+   *
+   * @example
+   *
+   * ```js
+   * const { MessengerBatch } = require('messaging-api-messenger');
+   *
+   * await client.sendBatch([
+   *   MessengerBatch.sendText(USER_ID, '1'),
+   *   MessengerBatch.sendText(USER_ID, '2'),
+   *   MessengerBatch.sendText(USER_ID, '3'),
+   * ]);
+   */
+  sendBatch(
+    batch: MessengerTypes.BatchItem[],
+    { includeHeaders = true }: { includeHeaders?: boolean } = {}
+  ): Promise<
+    {
+      code: number;
+      headers?: { name: string; value: string }[];
+      body: Record<string, any>;
+    }[]
+  > {
+    invariant(
+      batch.length <= 50,
+      'limit the number of requests which can be in a batch to 50'
+    );
+
+    const responseAccessPaths = batch.map((item) => item.responseAccessPath);
+
+    const bodyEncodedbatch = batch
+      .map((item) => omit(item, 'responseAccessPath'))
+      .map((item) => {
+        if (item.body) {
+          const body = snakecaseKeysDeep(item.body) as Record<string, any>;
+          return {
+            ...item,
+            body: Object.keys(body)
+              .map((key) => {
+                const val = body[key];
+                return `${encodeURIComponent(key)}=${encodeURIComponent(
+                  typeof val === 'object' ? JSON.stringify(val) : val
+                )}`;
+              })
+              .join('&'),
+          };
+        }
+        return item;
+      });
+
+    return this.axios
+      .post('/', {
+        accessToken: this.accessToken,
+        includeHeaders,
+        batch: bodyEncodedbatch,
+      })
+      .then(
+        (res) =>
+          res.data.map(
+            (item: { code: number; body: string }, index: number) => {
+              const responseAccessPath = responseAccessPaths[index];
+              const datum = camelcaseKeysDeep(item) as Record<string, any>;
+              if (datum.body) {
+                const parsedBody = camelcaseKeysDeep(JSON.parse(datum.body));
+                return {
+                  ...datum,
+                  body: responseAccessPath
+                    ? get(parsedBody, responseAccessPath)
+                    : parsedBody,
+                };
+              }
+              return datum;
+            }
+          ),
+        handleError
+      );
+  }
+
+  /**
+   * Label API
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/broadcast-messages/target-broadcasts
+   */
+
+  /**
+   * Creates a label
+   *
+   * @param name - Name of the custom label
+   * @returns An object includes label ID.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/identity/custom-labels#create_label
+   *
+   * @example
+   *
+   * ```js
+   * await client.createLabel('awesome');
+   * // {
+   * //   id: 1712444532121303
+   * // }
+   * ```
+   */
+  createLabel(name: string): Promise<{ id: string }> {
+    return this.axios
+      .post<{ id: string }>(
+        `/me/custom_labels?access_token=${this.accessToken}`,
+        {
+          name,
+        }
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Associates a label to a specific PSID
+   *
+   * @param userId - Facebook page-scoped user ID of the user
+   * @param labelId - ID of the custom label
+   * @returns Success status
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/identity/custom-labels#associate_label
+   *
+   * @example
+   *
+   * ```js
+   * await client.associateLabel(USER_ID, LABEL_ID);
+   * ```
+   */
+  associateLabel(userId: string, labelId: number): Promise<{ success: true }> {
+    return this.axios
+      .post<{ success: true }>(
+        `/${labelId}/label?access_token=${this.accessToken}`,
+        {
+          user: userId,
+        }
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Removes a label currently associated with a PSID
+   *
+   * @param userId - Facebook page-scoped user ID of the user
+   * @param labelId - ID of the custom label
+   * @returns Success status
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/identity/custom-labels#remove_label
+   *
+   * @example
+   *
+   * ```js
+   * await client.dissociateLabel(USER_ID, LABEL_ID);
+   * ```
+   */
+  dissociateLabel(userId: string, labelId: number): Promise<{ success: true }> {
+    return this.axios
+      .delete<{ success: true }>(
+        `/${labelId}/label?access_token=${this.accessToken}`,
+        {
+          data: { user: userId },
+        }
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Retrieves the labels currently associated with a PSID
+   *
+   * @param userId - Facebook page-scoped user ID of the user
+   * @returns Associated labels in pagination result
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/identity/custom-labels#retrieving_labels_by_psid
+   *
+   * @example
+   *
+   * ```js
+   * await client.getAssociatedLabels(USER_ID);
+   * // {
+   * //   data: [
+   * //     {
+   * //       name: 'myLabel',
+   * //       id: '1001200005003',
+   * //     },
+   * //     {
+   * //       name: 'myOtherLabel',
+   * //       id: '1001200005002',
+   * //     },
+   * //   ],
+   * //   paging: {
+   * //     cursors: {
+   * //       before:
+   * //         'QVFIUmx1WTBpMGpJWXprYzVYaVhabW55dVpycko4U2xURGE5ODNtNFZAPal94a1hTUnNVMUtoMVVoTzlzSDktUkMtQkUzWEFLSXlMS3ZALYUw3TURLelZAPOGVR',
+   * //       after:
+   * //         'QVFIUmItNkpTbjVzakxFWGRydzdaVUFNNnNPaUl0SmwzVHN5ZAWZAEQ3lZANDAzTXFIM0NHbHdYSkQ5OG1GaEozdjkzRmxpUFhxTDl4ZAlBibnE4LWt1eGlTa3Bn',
+   * //     },
+   * //   },
+   * // }
+   * ```
+   */
+  getAssociatedLabels(
+    userId: string,
+    options: { fields?: string[] } = {}
+  ): Promise<{
+    data: { name: string; id: string }[];
+    paging: {
+      cursors: {
+        before: string;
+        after: string;
+      };
+    };
+  }> {
+    const fields = options.fields ? options.fields.join(',') : 'name';
+    return this.axios
+      .get<{
+        data: { name: string; id: string }[];
+        paging: {
+          cursors: {
+            before: string;
+            after: string;
+          };
+        };
+      }>(
+        `/${userId}/custom_labels?fields=${fields}&access_token=${this.accessToken}`
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Retrieves details of the label
+   *
+   * @param labelId - ID of the custom label
+   * @param options - Other optional parameters.
+   * @param options.fields - Fields to retrieve with its ID.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/identity/custom-labels#get_label_details
+   *
+   * @example
+   *
+   * ```js
+   * await client.getLabelDetails(LABEL_ID, { fields: ['name'] });
+   * // {
+   * //   id: "1001200005002",
+   * //   name: "myLabel",
+   * // }
+   * ```
+   */
+  getLabelDetails(
+    labelId: number,
+    options: { fields?: string[] } = {}
+  ): Promise<{ name: string; id: string }> {
+    const fields = options.fields ? options.fields.join(',') : 'name';
+    return this.axios
+      .get<{ name: string; id: string }>(
+        `/${labelId}?fields=${fields}&access_token=${this.accessToken}`
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Retrieves a list of custom labels
+   *
+   * @returns Custom labels in pagination result
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/identity/custom-labels#get_all_labels
+   *
+   * @example
+   *
+   * ```js
+   * await client.getLabelList();
+   * // {
+   * //   data: [
+   * //     {
+   * //       name: 'myLabel',
+   * //       id: '1001200005003',
+   * //     },
+   * //     {
+   * //       name: 'myOtherLabel',
+   * //       id: '1001200005002',
+   * //     },
+   * //   ],
+   * //   paging: {
+   * //     cursors: {
+   * //       before:
+   * //         'QVFIUmx1WTBpMGpJWXprYzVYaVhabW55dVpycko4U2xURGE5ODNtNFZAPal94a1hTUnNVMUtoMVVoTzlzSDktUkMtQkUzWEFLSXlMS3ZALYUw3TURLelZAPOGVR',
+   * //       after:
+   * //         'QVFIUmItNkpTbjVzakxFWGRydzdaVUFNNnNPaUl0SmwzVHN5ZAWZAEQ3lZANDAzTXFIM0NHbHdYSkQ5OG1GaEozdjkzRmxpUFhxTDl4ZAlBibnE4LWt1eGlTa3Bn',
+   * //     },
+   * //   },
+   * // }
+   * ```
+   */
+  getLabelList(options: { fields?: string[] } = {}): Promise<{
+    data: { name: string; id: string }[];
+    paging: {
+      cursors: {
+        before: string;
+        after: string;
+      };
+    };
+  }> {
+    const fields = options.fields ? options.fields.join(',') : 'name';
+    return this.axios
+      .get<{
+        data: { name: string; id: string }[];
+        paging: {
+          cursors: {
+            before: string;
+            after: string;
+          };
+        };
+      }>(`/me/custom_labels?fields=${fields}&access_token=${this.accessToken}`)
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Deletes a Label.
+   *
+   * @param labelId -  ID of the custom label to delete.
+   * @returns Success status
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/identity/custom-labels#delete_label
+   *
+   * @example
+   *
+   * ```js
+   * await client.deleteLabel(LABEL_ID);
+   * ```
+   */
+  deleteLabel(labelId: number): Promise<{ success: true }> {
+    return this.axios
+      .delete<{ success: true }>(`/${labelId}?access_token=${this.accessToken}`)
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Uploads specified attachment using URL address, buffer, or stream.
+   *
+   * @param type - Must be one of `image`, `video`, `audio` or `file`.
+   * @param attachment - Attachment to be uploaded.
+   * @param options - Other optional parameters.
+   * @param options.isReusable - Set to `true` to make the saved asset sendable to other message recipients. Defaults to `false`.
+   * @param options.filename - Required when upload from buffer.
+   * @returns An object includes attachment ID
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/reference/attachment-upload-api
+   *
+   * @example
+   *
+   * ```js
+   * await client.uploadAttachment('image', 'http://www.example.com/image.jpg', { isReusable: true });
+   * // { attachmentId: "1857777774821032" }
+   *
+   * // Or using read stream:
+   * const fs = require('fs');
+   * await client.uploadAttachment('image', fs.createReadStream('image.jpg'), { isReusable: true });
+   *
+   * // Or using buffer:
+   * await client.uploadAttachment('image', buffer, {
+   *   isReusable: true,
+   *   filename: 'image.jpg',
+   * });
+   * ```
+   */
+  uploadAttachment(
+    type: 'audio' | 'image' | 'video' | 'file',
+    attachment: string | MessengerTypes.FileData,
+    options: MessengerTypes.UploadOption = {}
+  ): Promise<{ attachmentId: string }> {
+    const args = [];
+
+    const isReusable = options.isReusable || false;
+
+    if (typeof attachment === 'string') {
+      args.push({
+        message: {
+          attachment: {
+            type,
+            payload: {
+              url: attachment,
+              isReusable,
+            },
+          },
+        },
+      });
+    } else {
+      const form = new FormData();
+
+      form.append(
+        'message',
+        JSON.stringify({
+          attachment: {
+            type,
+            payload: {
+              is_reusable: isReusable,
+            },
+          },
+        })
+      );
+
+      form.append('filedata', attachment, omit(options, ['is_reusable']));
+
+      args.push(form, {
+        headers: form.getHeaders(),
+        maxContentLength: Infinity, // Facebook limit is 25MB, set a bigger value and let Facebook handle rejection
+      });
+    }
+
+    return this.axios
+      .post<{ attachmentId: string }>(
+        `/me/message_attachments?access_token=${this.accessToken}`,
+        ...args
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   *
+   * @param audio - Audio to be uploaded.
+   * @param options - Other optional parameters.
+   * @param options.isReusable - Set to `true` to make the saved asset sendable to other message recipients. Defaults to `false`.
+   * @param options.filename - Required when upload from buffer.
+   * @returns An object includes attachment ID
+   *
+   * @example
+   *
+   * ```js
+   * await client.uploadAudio('http://www.example.com/audio.mp3', { isReusable: true });
+   *
+   * // Or using read stream:
+   * const fs = require('fs');
+   * await client.uploadAudio(fs.createReadStream('audio.mp3'), { isReusable: true });
+   *
+   * // Or using buffer:
+   * await client.uploadAudio(buffer, {
+   *   isReusable: true,
+   *   filename: 'audio.mp3',
+   * });
+   * ```
+   */
+  uploadAudio(
+    attachment: string | MessengerTypes.FileData,
+    options?: MessengerTypes.UploadOption
+  ): Promise<{ attachmentId: string }> {
+    return this.uploadAttachment('audio', attachment, options);
+  }
+
+  /**
+   * Uploads image attachment using URL address, buffer, or stream.
+   *
+   * @param image - Image to be uploaded.
+   * @param options - Other optional parameters.
+   * @param options.isReusable - Set to `true` to make the saved asset sendable to other message recipients. Defaults to `false`.
+   * @param options.filename - Required when upload from buffer.
+   * @returns An object includes attachment ID
+   *
+   * @example
+   *
+   * ```js
+   * await client.uploadImage('http://www.example.com/image.jpg', { isReusable: true });
+   *
+   * // Or using read stream:
+   * const fs = require('fs');
+   * await client.uploadImage(fs.createReadStream('image.jpg'), { isReusable: true });
+   *
+   * // Or using buffer:
+   * await client.uploadImage(buffer, {
+   *   isReusable: true,
+   *   filename: 'image.jpg',
+   * });
+   * ```
+   */
+  uploadImage(
+    attachment: string | MessengerTypes.FileData,
+    options?: MessengerTypes.UploadOption
+  ): Promise<{ attachmentId: string }> {
+    return this.uploadAttachment('image', attachment, options);
+  }
+
+  /**
+   * Uploads video attachment using URL address, buffer, or stream.
+   *
+   * @param video - Video to be uploaded.
+   * @param options - Other optional parameters.
+   * @param options.isReusable - Set to `true` to make the saved asset sendable to other message recipients. Defaults to `false`.
+   * @param options.filename - Required when upload from buffer.
+   * @returns An object includes attachment ID
+   *
+   * @example
+   *
+   * ```js
+   * await client.uploadVideo('http://www.example.com/video.mp4', { isReusable: true });
+   *
+   * // Or using read stream:
+   * const fs = require('fs');
+   * await client.uploadVideo(fs.createReadStream('video.mp4'), { isReusable: true });
+   *
+   * // Or using buffer:
+   * await client.uploadVideo(buffer, {
+   *   isReusable: true,
+   *   filename: 'video.mp4',
+   * });
+   * ```
+   */
+  uploadVideo(
+    attachment: string | MessengerTypes.FileData,
+    options?: MessengerTypes.UploadOption
+  ): Promise<{ attachmentId: string }> {
+    return this.uploadAttachment('video', attachment, options);
+  }
+
+  /**
+   * Uploads file attachment using URL address, buffer, or stream.
+   *
+   * @param file - File to be uploaded.
+   * @param options - Other optional parameters.
+   * @param options.isReusable - Set to `true` to make the saved asset sendable to other message recipients. Defaults to `false`.
+   * @param options.filename - Required when upload from buffer.
+   * @returns An object includes attachment ID
+   *
+   * @example
+   *
+   * ```js
+   * await client.uploadFile('http://www.example.com/file.pdf', { isReusable: true });
+   *
+   * // Or using read stream:
+   * const fs = require('fs');
+   * await client.uploadFile(fs.createReadStream('file.pdf'), { isReusable: true });
+   *
+   * // Or using buffer:
+   * await client.uploadFile(buffer, {
+   *   isReusable: true,
+   *   filename: 'file.pdf',
+   * });
+   * ```
+   */
+  uploadFile(
+    attachment: string | MessengerTypes.FileData,
+    options?: MessengerTypes.UploadOption
+  ): Promise<{ attachmentId: string }> {
+    return this.uploadAttachment('file', attachment, options);
+  }
+
+  /**
+   * Handover Protocol API
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/handover-protocol
+   */
+
+  /**
+   * Passes thread control from your app to another app.
+   *
+   * @param recipientId - The PSID of the message recipient.
+   * @param targetAppId - The app ID of the Secondary Receiver to pass thread control to.
+   * @param metadata - Metadata passed to the receiving app in the `pass_thread_control` webhook event.
+   * @returns Success status.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/reference/handover-protocol/pass-thread-control
+   *
+   * @example
+   *
+   * ```js
+   * await client.passThreadControl(USER_ID, APP_ID, 'free formed text for another app');
+   * ```
+   */
+  passThreadControl(
+    recipientId: string,
+    targetAppId: number,
+    metadata?: string
+  ): Promise<{ success: true }> {
+    return this.axios
+      .post<{ success: true }>(
+        `/me/pass_thread_control?access_token=${this.accessToken}`,
+        {
+          recipient: { id: recipientId },
+          targetAppId,
+          metadata,
+        }
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Passes thread control from your app to "Page Inbox" app.
+   *
+   * @param recipientId - The PSID of the message recipient.
+   * @param metadata - Metadata passed to the receiving app in the `pass_thread_control` webhook event.
+   * @returns Success status.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/handover-protocol/pass-thread-control#page_inbox
+   *
+   * @example
+   *
+   * ```js
+   * await client.passThreadControlToPageInbox(
+   *   USER_ID,
+   *   'free formed text for another app'
+   * );
+   * ```
+   */
+  passThreadControlToPageInbox(
+    recipientId: string,
+    metadata?: string
+  ): Promise<{ success: true }> {
+    return this.passThreadControl(recipientId, 263902037430900, metadata);
+  }
+
+  /**
+   * Takes control of a specific thread from a Secondary Receiver app.
+   *
+   * @param recipientId - The PSID of the message recipient.
+   * @param metadata - Metadata passed back to the secondary app in the `take_thread_control` webhook event.
+   * @returns Success status.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/reference/handover-protocol/take-thread-control
+   *
+   * @example
+   *
+   * ```js
+   * await client.takeThreadControl(USER_ID, 'free formed text for another app');
+   * ```
+   */
+  takeThreadControl(
+    recipientId: string,
+    metadata?: string
+  ): Promise<{ success: true }> {
+    return this.axios
+      .post<{ success: true }>(
+        `/me/take_thread_control?access_token=${this.accessToken}`,
+        {
+          recipient: { id: recipientId },
+          metadata,
+        }
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Requests control of a specific thread from a Primary Receiver app.
+   *
+   * @param recipientId - The PSID of the message recipient.
+   * @param metadata - Metadata passed to the primary app in the `request_thread_control` webhook event.
+   * @returns Success status.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/handover-protocol/request-thread-control/
+   *
+   * @example
+   *
+   * ```js
+   * await client.requestThreadControl(USER_ID, 'free formed text for primary app');
+   * ```
+   */
+  requestThreadControl(
+    recipientId: string,
+    metadata?: string
+  ): Promise<{ success: true }> {
+    return this.axios
+      .post<{ success: true }>(
+        `/me/request_thread_control?access_token=${this.accessToken}`,
+        {
+          recipient: { id: recipientId },
+          metadata,
+        }
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Retrieves the list of apps that are Secondary Receivers for a page.
+   *
+   * @returns An array of secondary receivers.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/reference/handover-protocol/secondary-receivers
+   *
+   * @example
+   *
+   * ```js
+   * await client.getSecondaryReceivers();
+   * // [
+   * //   {
+   * //     "id": "12345678910",
+   * //     "name": "David's Composer"
+   * //   },
+   * //   {
+   * //     "id": "23456789101",
+   * //     "name": "Messenger Rocks"
+   * //   }
+   * // ]
+   * ```
+   */
+  getSecondaryReceivers(): Promise<
+    {
+      id: string;
+      name: string;
+    }[]
+  > {
+    return this.axios
+      .get<{
+        data: {
+          id: string;
+          name: string;
+        }[];
+      }>(
+        `/me/secondary_receivers?fields=id,name&access_token=${this.accessToken}`
+      )
+      .then((res) => res.data.data, handleError);
+  }
+
+  /**
+   * Gets the current thread owner.
+   *
+   * @param recipientId - The PSID of the message recipient.
+   *
+   * @returns App Id of the current thread owner.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/handover-protocol/get-thread-owner
+   *
+   * @example
+   *
+   * ```js
+   * await client.getThreadOwner(USER_ID);
+   * // {
+   * //   appId: '12345678910'
+   * // }
+   * ```
+   */
+  getThreadOwner(recipientId: string): Promise<{ appId: string }> {
+    return this.axios
+      .get<{
+        data: [
+          {
+            threadOwner: {
+              appId: string;
+            };
+          }
+        ];
+      }>(
+        `/me/thread_owner?recipient=${recipientId}&access_token=${this.accessToken}`
+      )
+      .then((res) => res.data.data[0].threadOwner, handleError);
+  }
+
+  /**
+   * Retrieves the insights of your Facebook page.
+   *
+   * @param metrics - [The metrics](https://developers.facebook.com/docs/messenger-platform/reference/messaging-insights-api/#metrics) you want to check.
+   * @param options - Optional arguments.
+   * @param options.since - Optional. UNIX timestamp of the start time to get the metric for.
+   * @param options.until - Optional. UNIX timestamp of the end time to get the metric for.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/reference/messaging-insights-api
+   *
+   * @example
+   *
+   * ```js
+   * await client.getInsights(['page_messages_reported_conversations_unique']);
+   * // [
+   * //   {
+   * //     "name": "page_messages_reported_conversations_unique",
+   * //     "period": "day",
+   * //     "values": [
+   * //       {
+   * //         "value": "<VALUE>",
+   * //         "endTime": "<UTC_TIMESTAMP>"
+   * //       },
+   * //       {
+   * //         "value": "<VALUE>",
+   * //         "endTime": "<UTC_TIMESTAMP>"
+   * //       }
+   * //     ]
+   * //   }
+   * // ]
+   * ```
+   */
+  getInsights(
+    metrics: MessengerTypes.InsightMetric[],
+    options: MessengerTypes.InsightOptions = {}
+  ) {
+    return this.axios
+      .get(
+        `/me/insights/?${querystring.stringify({
+          metric: metrics.join(','),
+          access_token: this.accessToken,
+          ...options,
+        })}`
+      )
+      .then((res) => res.data.data, handleError);
+  }
+
+  /**
+   * Retrieves the number of conversations with the Page that have been blocked.
+   *
+   * @param options - Optional arguments.
+   * @param options.since - Optional. UNIX timestamp of the start time to get the metric for.
+   * @param options.until - Optional. UNIX timestamp of the end time to get the metric for.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/reference/messaging-insights-api#metrics
+   *
+   * @example
+   *
+   * ```js
+   * await client.getBlockedConversations();
+   * // {
+   * //   "name": "page_messages_blocked_conversations_unique",
+   * //   "period": "day",
+   * //   "values": [
+   * //     {
+   * //       "value": "<VALUE>",
+   * //       "endTime": "<UTC_TIMESTAMP>"
+   * //     },
+   * //     {
+   * //       "value": "<VALUE>",
+   * //       "endTime": "<UTC_TIMESTAMP>"
+   * //     }
+   * //  ]
+   * // }
+   * ```
+   */
+  getBlockedConversations(options: MessengerTypes.InsightOptions): Promise<{
+    name: 'page_messages_blocked_conversations_unique';
+    period: 'day';
+    values: {
+      value: number | object;
+      endTime: string;
+    }[];
+  }> {
+    return this.getInsights(
+      ['page_messages_blocked_conversations_unique'],
+      options
+    ).then((result) => result[0]);
+  }
+
+  /**
+   * Retrieves the number of conversations from your Page that have been reported by people for reasons such as spam, or containing inappropriate content.
+   *
+   * @param options - Optional arguments.
+   * @param options.since - Optional. UNIX timestamp of the start time to get the metric for.
+   * @param options.until - Optional. UNIX timestamp of the end time to get the metric for.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/reference/messaging-insights-api#metrics
+   *
+   * @example
+   *
+   * ```js
+   * await client.getReportedConversations();
+   * // {
+   * //   "name": "page_messages_reported_conversations_unique",
+   * //   "period": "day",
+   * //   "values": [
+   * //     {
+   * //       "value": "<VALUE>",
+   * //       "endTime": "<UTC_TIMESTAMP>"
+   * //     },
+   * //     {
+   * //       "value": "<VALUE>",
+   * //       "endTime": "<UTC_TIMESTAMP>"
+   * //     }
+   * //   ]
+   * // }
+   * ```
+   */
+  getReportedConversations(options: MessengerTypes.InsightOptions): Promise<{
+    name: 'page_messages_reported_conversations_unique';
+    period: 'day';
+    values: {
+      value: number | object;
+      endTime: string;
+    }[];
+  }> {
+    return this.getInsights(
+      ['page_messages_reported_conversations_unique'],
+      options
+    ).then((result) => result[0]);
+  }
+
+  /**
+   * Retrieves the number of people who have sent a message to your business, not including people who have blocked or reported your business on Messenger. (This number only includes connections made since October 2016.)
+   *
+   * @param options - Optional arguments.
+   * @param options.since - Optional. UNIX timestamp of the start time to get the metric for.
+   * @param options.until - Optional. UNIX timestamp of the end time to get the metric for.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/reference/messaging-insights-api#metrics
+   *
+   * @example
+   *
+   * ```js
+   * await client.getTotalMessagingConnections();
+   * // {
+   * //   name: 'page_messages_total_messaging_connections',
+   * //   period: 'day',
+   * //   values: [
+   * //     { value: 1000, endTime: '2018-03-12T07:00:00+0000' },
+   * //     { value: 1000, endTime: '2018-03-13T07:00:00+0000' },
+   * //   ],
+   * //   title: 'Messaging connections',
+   * //   description:
+   * //     'Daily: The number of people who have sent a message to your business, not including people who have blocked or reported your business on Messenger. (This number only includes connections made since October 2016.)',
+   * //   id:
+   * //     '1386473101668063/insights/page_messages_total_messaging_connections/day',
+   * // }
+   * ```
+   */
+  getTotalMessagingConnections(
+    options: MessengerTypes.InsightOptions
+  ): Promise<{
+    name: 'page_messages_total_messaging_connections';
+    period: 'day';
+    values: {
+      value: number | object;
+      endTime: string;
+    }[];
+  }> {
+    return this.getInsights(
+      ['page_messages_total_messaging_connections'],
+      options
+    ).then((result) => result[0]);
+  }
+
+  /**
+   * Retrieves the number of messaging conversations on Facebook Messenger that began with people who had never messaged with your business before.
+   *
+   * @param options - Optional arguments.
+   * @param options.since - Optional. UNIX timestamp of the start time to get the metric for.
+   * @param options.until - Optional. UNIX timestamp of the end time to get the metric for.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/reference/messaging-insights-api#metrics
+   *
+   * @example
+   *
+   * ```js
+   * await client.getNewConversations();
