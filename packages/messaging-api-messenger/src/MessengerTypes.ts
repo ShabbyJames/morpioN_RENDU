@@ -148,4 +148,67 @@ export type QuickReply =
 
 export type TextMessage = {
   text?: string;
-  quickReplies?: QuickRepl
+  quickReplies?: QuickReply[];
+};
+
+export type AttachmentMessage = {
+  attachment?: Attachment;
+  quickReplies?: QuickReply[];
+};
+
+export type Message = TextMessage | AttachmentMessage;
+
+export type MessagingType =
+  | 'RESPONSE'
+  | 'UPDATE'
+  | 'MESSAGE_TAG'
+  | 'NON_PROMOTIONAL_SUBSCRIPTION';
+
+export type MessageTag =
+  | 'CONFIRMED_EVENT_UPDATE'
+  | 'POST_PURCHASE_UPDATE'
+  | 'ACCOUNT_UPDATE'
+  | 'HUMAN_AGENT';
+
+export type InsightMetric =
+  | 'page_messages_blocked_conversations_unique'
+  | 'page_messages_reported_conversations_unique'
+  | 'page_messages_total_messaging_connections'
+  | 'page_messages_new_conversations_unique';
+
+export type InsightOptions = {
+  since?: number;
+  until?: number;
+};
+
+export type SendOption = {
+  messagingType?: MessagingType;
+  tag?: MessageTag;
+  quickReplies?: QuickReply[];
+  personaId?: string;
+};
+
+export type SenderActionOption = {
+  personaId?: string;
+};
+
+export type UploadOption = {
+  filename?: string;
+  isReusable?: boolean;
+};
+
+export type TemplateButton = {
+  type: string;
+  title: string;
+  url?: string;
+  payload?: string;
+  webviewHeightRatio?: 'compact' | 'tall' | 'full';
+};
+
+export type MenuItem = TemplateButton;
+
+export type TemplateElement = {
+  title: string;
+  imageUrl?: string;
+  subtitle?: string;
+  defaultAction?: {
