@@ -3203,3 +3203,561 @@ export default class MessengerClient {
    *
    * ```js
    * await client.getNewConversations();
+   * // {
+   * //   name: 'page_messages_new_conversations_unique',
+   * //   period: 'day',
+   * //   values: [
+   * //     { value: 1, endTime: '2018-03-12T07:00:00+0000' },
+   * //     { value: 0, endTime: '2018-03-13T07:00:00+0000' },
+   * //   ],
+   * //   title: 'Daily unique new conversations count',
+   * //   description:
+   * //     'Daily: The number of messaging conversations on Facebook Messenger that began with people who had never messaged with your business before.',
+   * //   id:
+   * //     '1386473101668063/insights/page_messages_new_conversations_unique/day',
+   * // }
+   * ```
+   */
+  getNewConversations(options: MessengerTypes.InsightOptions): Promise<{
+    name: 'page_messages_new_conversations_unique';
+    period: 'day';
+    values: {
+      value: number | object;
+      endTime: string;
+    }[];
+  }> {
+    return this.getInsights(
+      ['page_messages_new_conversations_unique'],
+      options
+    ).then((result) => result[0]);
+  }
+
+  /**
+   * Sets values of NLP configs.
+   *
+   * @param config - Configuration of NLP.
+   * @param config.nlpEnabled - Either enable NLP or disable NLP for that Page.
+   * @param config.model - Specifies the NLP model to use. Either one of `{CHINESE, CROATIAN, DANISH, DUTCH, ENGLISH, FRENCH_STANDARD, GERMAN_STANDARD, HEBREW, HUNGARIAN, IRISH, ITALIAN_STANDARD, KOREAN, NORWEGIAN_BOKMAL, POLISH, PORTUGUESE, ROMANIAN, SPANISH, SWEDISH, VIETNAMESE}`, or `CUSTOM`.
+   * @param config.customToken - Access token from Wit.
+   * @param config.verbose - Specifies whether verbose mode if enabled, which returns extra information like the position of the detected entity in the query.
+   * @param config.nest - The number of entities to return, in descending order of confidence. Minimum 1. Maximum 8. Defaults to 1.
+   * @returns
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/built-in-nlp
+   *
+   * @example
+   *
+   * ```js
+   * await client.setNLPConfigs({ nlpEnabled: true });
+   * ```
+   */
+  // FIXME: [type] return type
+  setNLPConfigs(config: MessengerTypes.MessengerNLPConfig = {}): Promise<any> {
+    return this.axios
+      .post(
+        `/me/nlp_configs?${querystring.stringify(
+          snakecaseKeysDeep({
+            ...config,
+            accessToken: this.accessToken,
+          }) as Record<string, any>
+        )}`
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Enables Built-in NLP.
+   *
+   * @returns
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/built-in-nlp
+   *
+   * @example
+   *
+   * ```js
+   * await client.enableNLP();
+   * ```
+   */
+  // FIXME: [type] return type
+  enableNLP(): Promise<any> {
+    return this.setNLPConfigs({ nlpEnabled: true });
+  }
+
+  /**
+   * Disables Built-in NLP.
+   *
+   * @returns
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/built-in-nlp
+   *
+   * @example
+   *
+   * ```js
+   * await client.disableNLP();
+   * ```
+   */
+  // FIXME: [type] return type
+  disableNLP(): Promise<any> {
+    return this.setNLPConfigs({ nlpEnabled: false });
+  }
+
+  /**
+   * Logs custom events by using the [Application Activities Graph API](https://developers.facebook.com/docs/graph-api/reference/application/activities/) endpoint.
+   *
+   * @param activity - Event activity
+   * @param activity.appId - ID of the app.
+   * @param activity.pageId - ID of the page.
+   * @param activity.pageScopedUserId - Facebook page-scoped user ID.
+   * @param activity.events - Custom events.
+   * @returns
+   *
+   * @see https://developers.facebook.com/docs/app-events/bots-for-messenger#logging-custom-events
+   *
+   * @example
+   *
+   * ```js
+   * await client.logCustomEvents({
+   *   appId: APP_ID,
+   *   pageId: PAGE_ID,
+   *   pageScopedUserId: USER_ID,
+   *   events: [
+   *     {
+   *       _eventName: 'fb_mobile_purchase',
+   *       _valueToSum: 55.22,
+   *       _fbCurrency: 'USD',
+   *     },
+   *   ],
+   * });
+   * ```
+   */
+  logCustomEvents({
+    appId,
+    pageId,
+    pageScopedUserId,
+    events,
+  }: {
+    appId: number;
+    pageId: number;
+    pageScopedUserId: string;
+    events: Record<string, any>[];
+  }): Promise<any> {
+    return this.axios
+      .post<any>(`/${appId}/activities`, {
+        event: 'CUSTOM_APP_EVENTS',
+        customEvents: JSON.stringify(events),
+        advertiserTrackingEnabled: 0,
+        applicationTrackingEnabled: 0,
+        extinfo: JSON.stringify(['mb1']),
+        pageId,
+        pageScopedUserId,
+      })
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * @see https://developers.facebook.com/docs/messenger-platform/identity/id-matching#examples
+   *
+   * @example
+   */
+  // FIXME: [type] return type
+  getUserField({
+    field,
+    userId,
+    appSecret,
+    app,
+    page,
+  }: {
+    field: string;
+    userId: string;
+    appSecret: string;
+    app?: string;
+    page?: string;
+  }) {
+    // $appsecret_proof= hash_hmac('sha256', $access_token, $app_secret);
+    const appsecretProof = crypto
+      .createHmac('sha256', appSecret)
+      .update(this.accessToken)
+      .digest('hex');
+
+    const appQueryString = app ? `&app=${app}` : '';
+    const pageQueryString = page ? `&page=${page}` : '';
+
+    return this.axios
+      .get(
+        `/${userId}/${field}?access_token=${this.accessToken}&appsecret_proof=${appsecretProof}${appQueryString}${pageQueryString}`
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Given a user ID for a bot in Messenger, retrieve the IDs for apps owned by the same business
+   *
+   * @param params - Parameters
+   * @param params.userId - Page-scoped user ID.
+   * @param params.appSecret - Secret of the app.
+   * @param params.app - The app to retrieve the IDs.
+   * @param params.page - The page to retrieve the IDs.
+   * @returns User IDs in pagination result
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/identity/id-matching
+   *
+   * @example
+   *
+   * ```js
+   * await client.getIdsForApps({
+   *   userId: USER_ID,
+   *   appSecret: APP_SECRET,
+   * });
+   * // {
+   * //   data: [
+   * //     {
+   * //       id: '10152368852405295',
+   * //       app: {
+   * //         category: 'Business',
+   * //         link: 'https://www.facebook.com/games/?app_id=1419232575008550',
+   * //         name: "John's Game App",
+   * //         id: '1419232575008550',
+   * //       },
+   * //     },
+   * //     {
+   * //       id: '645195294',
+   * //       app: {
+   * //         link: 'https://apps.facebook.com/johnsmovieappns/',
+   * //         name: 'JohnsMovieApp',
+   * //         namespace: 'johnsmovieappns',
+   * //         id: '259773517400382',
+   * //       },
+   * //     },
+   * //   ],
+   * //   paging: {
+   * //     cursors: {
+   * //       before: 'MTQ4OTU4MjQ5Nzc4NjY4OAZDZDA',
+   * //       after: 'NDAwMDExOTA3MDM1ODMwA',
+   * //     },
+   * //   },
+   * // };
+   * ```
+   */
+  getIdsForApps({
+    userId,
+    appSecret,
+    app,
+    page,
+  }: {
+    userId: string;
+    appSecret: string;
+    app?: string;
+    page?: string;
+  }): Promise<{
+    data: {
+      id: string;
+      app: {
+        id: string;
+        link: string;
+        name: string;
+        category?: string;
+        namespace?: string;
+      };
+    }[];
+    paging: {
+      cursors: {
+        before: string;
+        after: string;
+      };
+    };
+  }> {
+    return this.getUserField({
+      field: 'ids_for_apps',
+      userId,
+      appSecret,
+      app,
+      page,
+    });
+  }
+
+  /**
+   * Given a user ID for a Page (associated with a bot), retrieve the IDs for other Pages owned by the same business
+   *
+   * @param params - Parameters
+   * @param params.userId - Page-scoped user ID.
+   * @param params.appSecret - Secret of the app.
+   * @param params.app - The app to retrieve the IDs.
+   * @param params.page - The page to retrieve the IDs.
+   * @returns User IDs in pagination result
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/identity/id-matching
+   *
+   * @example
+   *
+   * ```js
+   * await client.getIdsForPages({
+   *   userId: USER_ID,
+   *   appSecret: APP_SECRET,
+   * });
+   * // {
+   * //   data: [
+   * //     {
+   * //       id: '12345123', // The psid for the user for that page
+   * //       page: {
+   * //         category: 'Musician',
+   * //         link:
+   * //           'https://www.facebook.com/Johns-Next-Great-Thing-380374449010653/',
+   * //         name: "John's Next Great Thing",
+   * //         id: '380374449010653',
+   * //       },
+   * //     },
+   * //   ],
+   * //   paging: {
+   * //     cursors: {
+   * //       before: 'MTQ4OTU4MjQ5Nzc4NjY4OAZDZDA',
+   * //       after: 'NDAwMDExOTA3MDM1ODMwA',
+   * //     },
+   * //   },
+   * // };
+   * ```
+   */
+  getIdsForPages({
+    userId,
+    appSecret,
+    app,
+    page,
+  }: {
+    userId: string;
+    appSecret: string;
+    app?: string;
+    page?: string;
+  }): Promise<{
+    data: {
+      id: string;
+      page: {
+        id: string;
+        link: string;
+        name: string;
+        category?: string;
+        namespace?: string;
+      };
+    }[];
+    paging: {
+      cursors: {
+        before: string;
+        after: string;
+      };
+    };
+  }> {
+    return this.getUserField({
+      field: 'ids_for_pages',
+      userId,
+      appSecret,
+      app,
+      page,
+    });
+  }
+
+  /**
+   * Personas API
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/personas
+   */
+
+  /**
+   * Creates a Persona.
+   *
+   * @param persona - Data of the new persona
+   * @param persona.name - Name of the persona.
+   * @param persona.profilePictureUrl - Profile picture of the persona.
+   * @returns - ID of the persona
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/personas/#create
+   *
+   * @example
+   *
+   * ```js
+   * await client.createPersona({
+   *   name: 'John Mathew',
+   *   profilePictureUrl: 'https://facebook.com/john_image.jpg',
+   * });
+   * // {
+   * //   "id": "<PERSONA_ID>"
+   * // }
+   * ```
+   */
+  createPersona(persona: MessengerTypes.Persona): Promise<{ id: string }> {
+    return this.axios
+      .post<{ id: string }>(
+        `/me/personas?access_token=${this.accessToken}`,
+        persona
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Retrieves the name and profile picture of a persona.
+   *
+   * @param personaId - ID of the persona.
+   * @returns Data of the persona
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/personas/#get
+   *
+   * @example
+   *
+   * ```js
+   * await client.getPersona('PERSONA_ID');
+   * // {
+   * //   "name": "John Mathew",
+   * //   "profile_picture_url": "https://facebook.com/john_image.jpg",
+   * //   "id": "<PERSONA_ID>"
+   * // }
+   * ```
+   */
+  getPersona(personaId: string): Promise<{
+    id: string;
+    name: string;
+    profilePictureUrl: string;
+  }> {
+    return this.axios
+      .get<{
+        id: string;
+        name: string;
+        profilePictureUrl: string;
+      }>(`/${personaId}?access_token=${this.accessToken}`)
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Retrieves personas associated with a page using the cursor.
+   *
+   * @param cursor - Pagination cursor.
+   * @returns - Persona data in pagination result
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/personas/#retrieve_all
+   *
+   * @example
+   *
+   * ```js
+   * await client.getPersonas(cursor);
+   * // {
+   * //   "data": [
+   * //     {
+   * //       "name": "John Mathew",
+   * //       "profile_picture_url": "https://facebook.com/john_image.jpg",
+   * //       "id": "<PERSONA_ID>"
+   * //     },
+   * //     {
+   * //       "name": "David Mark",
+   * //       "profile_picture_url": "https://facebook.com/david_image.jpg",
+   * //       "id": "<PERSONA_ID>"
+   * //     }
+   * //   ],
+   * //   "paging": {
+   * //     "cursors": {
+   * //       "before": "QVFIUlMtR2ZATQlRtVUZALUlloV1",
+   * //       "after": "QVFIUkpnMGx0aTNvUjJNVmJUT0Yw"
+   * //     }
+   * //   }
+   * // }
+   * ```
+   */
+  getPersonas(cursor?: string): Promise<{
+    data: {
+      id: string;
+      name: string;
+      profilePictureUrl: string;
+    }[];
+    paging: { cursors: { before: string; after: string } };
+  }> {
+    return this.axios
+      .get<{
+        data: {
+          id: string;
+          name: string;
+          profilePictureUrl: string;
+        }[];
+        paging: { cursors: { before: string; after: string } };
+      }>(
+        `/me/personas?access_token=${this.accessToken}${
+          cursor ? `&after=${cursor}` : ''
+        }`
+      )
+      .then((res) => res.data, handleError);
+  }
+
+  /**
+   * Retrieves all personas associated with a page.
+   *
+   * @returns an array of all personas
+   *
+   * @example
+   *
+   * ```js
+   * await client.getAllPersonas();
+   * // [
+   * //   {
+   * //     "name": "John Mathew",
+   * //     "profile_picture_url": "https://facebook.com/john_image.jpg",
+   * //     "id": "<PERSONA_ID>"
+   * //   },
+   * //   {
+   * //     "name": "David Mark",
+   * //     "profile_picture_url": "https://facebook.com/david_image.jpg",
+   * //     "id": "<PERSONA_ID>"
+   * //   }
+   * // ]
+   * ```
+   */
+  async getAllPersonas(): Promise<
+    {
+      id: string;
+      name: string;
+      profilePictureUrl: string;
+    }[]
+  > {
+    let allPersonas: {
+      id: string;
+      name: string;
+      profilePictureUrl: string;
+    }[] = [];
+    let cursor;
+
+    do {
+      const {
+        data,
+        paging,
+      }: {
+        data: {
+          id: string;
+          name: string;
+          profilePictureUrl: string;
+        }[];
+        paging: { cursors: { before: string; after: string } };
+        // eslint-disable-next-line no-await-in-loop
+      } = await this.getPersonas(cursor);
+
+      allPersonas = allPersonas.concat(data);
+      cursor = paging ? paging.cursors.after : null;
+    } while (cursor);
+
+    return allPersonas;
+  }
+
+  /**
+   * Deletes a persona.
+   *
+   * @param personaId - ID of the persona.
+   * @returns Success status.
+   *
+   * @see https://developers.facebook.com/docs/messenger-platform/send-messages/personas/#remove
+   *
+   * @example
+   *
+   * ```js
+   * await client.deletePersona('PERSONA_ID');
+   * ```
+   */
+  deletePersona(personaId: string): Promise<{ success: true }> {
+    return this.axios
+      .delete<{ success: true }>(
+        `/${personaId}?access_token=${this.accessToken}`
+      )
+      .then((res) => res.data, handleError);
+  }
+}
