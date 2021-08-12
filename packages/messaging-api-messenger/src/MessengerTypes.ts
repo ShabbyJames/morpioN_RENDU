@@ -87,4 +87,65 @@ export type MediaAttachmentPayload =
 export type MediaAttachmentType = 'audio' | 'video' | 'image' | 'file';
 
 export type FileDataAttachmentPayload = {
-  isReusable
+  isReusable?: boolean;
+};
+
+export type FileDataMediaAttachment = {
+  type: MediaAttachmentType;
+  payload: FileDataAttachmentPayload;
+};
+
+export type FileDataMediaAttachmentMessage = {
+  attachment: FileDataMediaAttachment;
+  quickReplies?: QuickReply[];
+};
+
+export type MediaAttachment = {
+  type: MediaAttachmentType;
+  payload: MediaAttachmentPayload;
+};
+
+export type TemplateAttachmentPayload = {
+  templateType:
+    | 'button'
+    | 'generic'
+    | 'media'
+    | 'receipt'
+    | 'airline_boardingpass'
+    | 'airline_checkin'
+    | 'airline_itinerary'
+    | 'airline_update'
+    | 'one_time_notif_req';
+  [key: string]: any; // FIXME: list all of templates
+};
+
+export type TemplateAttachment = {
+  type: 'template';
+  payload: TemplateAttachmentPayload;
+};
+
+export type Attachment = MediaAttachment | TemplateAttachment;
+
+export type TextQuickReply = {
+  contentType: 'text';
+  title: string;
+  payload: string;
+  imageUrl?: string;
+};
+
+export type UserPhoneNumberQuickReply = {
+  contentType: 'user_phone_number';
+};
+
+export type UserEmailQuickReply = {
+  contentType: 'user_email';
+};
+
+export type QuickReply =
+  | TextQuickReply
+  | UserPhoneNumberQuickReply
+  | UserEmailQuickReply;
+
+export type TextMessage = {
+  text?: string;
+  quickReplies?: QuickRepl
