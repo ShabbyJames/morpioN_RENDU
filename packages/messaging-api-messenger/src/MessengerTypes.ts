@@ -342,4 +342,65 @@ export type PassengerSegmentInfo = {
   productInfo?: ProductInfo[];
 };
 
-export type PriceInfo =
+export type PriceInfo = {
+  title: string;
+  amount: string;
+  currency?: string;
+};
+
+export type AirlineCheckinAttributes = {
+  introMessage: string;
+  locale: string;
+  pnrNumber?: string;
+  checkinUrl: string;
+  flightInfo: FlightInfo[];
+};
+
+export type AirlineItineraryAttributes = {
+  introMessage: string;
+  locale: string;
+  themeColor?: string;
+  pnrNumber: string;
+  passengerInfo: PassengerInfo[];
+  flightInfo: FlightInfo[];
+  passengerSegmentInfo: PassengerSegmentInfo[];
+  priceInfo?: PriceInfo[];
+  basePrice?: string;
+  tax?: string;
+  totalPrice: string;
+  currency: string;
+};
+
+export type UpdateFlightInfo = {
+  flightNumber: string;
+  departureAirport: Airport;
+  arrivalAirport: Airport;
+  flightSchedule: FlightSchedule;
+};
+
+export type AirlineUpdateAttributes = {
+  introMessage: string;
+  themeColor?: string;
+  updateType: 'delay' | 'gate_change' | 'cancellation';
+  locale: string;
+  pnrNumber?: string;
+  updateFlightInfo: UpdateFlightInfo;
+};
+
+export type OneTimeNotifReqAttributes = {
+  title: string;
+  payload: string;
+};
+
+export type SenderAction = 'mark_seen' | 'typing_on' | 'typing_off';
+
+/**
+ * Fields can be retrieved from a person's profile information
+ */
+export type UserProfileField =
+  // Granted by default
+  | 'id'
+  | 'name'
+  | 'first_name'
+  | 'last_name'
+  | '
