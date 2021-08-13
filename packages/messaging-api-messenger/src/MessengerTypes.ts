@@ -281,4 +281,65 @@ export type Airport = {
 
 export type FlightSchedule = {
   boardingTime?: string;
-  departureTime: strin
+  departureTime: string;
+  arrivalTime?: string;
+};
+
+export type FlightInfo = {
+  connectionId: string;
+  segmentId: string | PassengerSegmentInfo;
+  flightNumber: string;
+  aircraftType?: string;
+  departureAirport: Airport;
+  arrivalAirport: Airport;
+  flightSchedule: FlightSchedule;
+  travelClass: 'economy' | 'business' | 'first_class';
+};
+
+export type Field = {
+  label: string;
+  value: string;
+};
+
+export type BoardingPass = {
+  passengerName: string;
+  pnrNumber: string;
+  travelClass?: string;
+  seat?: string;
+  auxiliaryFields?: Field[];
+  secondaryFields?: Field[];
+  logoImageUrl: string;
+  headerImageUrl?: string;
+  headerTextField?: Field;
+  qrCode?: string; // FIXME: qr_code or barcode_image_url
+  barcodeImageUrl?: string;
+  aboveBarCodeImageUrl: string;
+  flightInfo: FlightInfo;
+};
+
+export type AirlineBoardingPassAttributes = {
+  introMessage: string;
+  locale: string;
+  boardingPass: BoardingPass[];
+};
+
+export type PassengerInfo = {
+  passengerId: string;
+  ticketNumber?: string;
+  name: string;
+};
+
+export type ProductInfo = {
+  title: string;
+  value: string;
+};
+
+export type PassengerSegmentInfo = {
+  segmentId: string;
+  passengerId: string;
+  seat: string;
+  seatType: string;
+  productInfo?: ProductInfo[];
+};
+
+export type PriceInfo =
