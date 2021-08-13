@@ -212,3 +212,73 @@ export type TemplateElement = {
   imageUrl?: string;
   subtitle?: string;
   defaultAction?: {
+    type: string;
+    url: string;
+    messengerExtensions?: boolean;
+    webviewHeightRatio?: string;
+    fallbackUrl?: string;
+  };
+  buttons?: TemplateButton[];
+};
+
+export type MediaElement = {
+  mediaType: 'image' | 'video';
+  attachmentId?: string;
+  url?: string;
+  buttons?: TemplateButton[];
+};
+
+export type Address = {
+  street1: string;
+  street2?: string;
+  city: string;
+  postalCode: string;
+  state: string;
+  country: string;
+};
+
+export type Summary = {
+  subtotal?: number;
+  shippingCost?: number;
+  totalTax?: number;
+  totalCost: number;
+};
+
+export type Adjustment = {
+  name?: string;
+  amount?: number;
+};
+
+export type ReceiptElement = {
+  title: string;
+  subtitle?: string;
+  quantity?: number;
+  price: number;
+  currency?: string;
+  imageUrl: string;
+};
+
+export type ReceiptAttributes = {
+  recipientName: string;
+  merchantName?: string;
+  orderNumber: string; // must be unique
+  currency: string;
+  paymentMethod: string;
+  timestamp?: string;
+  orderUrl?: string;
+  elements?: ReceiptElement[];
+  address?: Address;
+  summary: Summary;
+  adjustments?: Adjustment[];
+};
+
+export type Airport = {
+  airportCode: string;
+  city: string;
+  terminal?: string;
+  gate?: string;
+};
+
+export type FlightSchedule = {
+  boardingTime?: string;
+  departureTime: strin
