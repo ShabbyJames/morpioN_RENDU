@@ -548,4 +548,35 @@ export type TokenInfo = {
   issuedAt?: number;
   profileId: string;
   scopes: Scope[];
-  userId: str
+  userId: string;
+};
+
+export type MessagingFeatureReview = {
+  feature: string;
+  status: 'pending' | 'rejected' | 'approved' | 'limited';
+};
+
+export type Persona = {
+  name: string;
+  profilePictureUrl: string;
+};
+
+export type SubscriptionFields = {
+  name: string;
+  version: string;
+};
+
+export type MessengerSubscription = {
+  object: string;
+  callbackUrl: string;
+  active: boolean;
+  fields: SubscriptionFields[];
+};
+
+export type BatchItem = {
+  method: string;
+  relativeUrl: string;
+  name?: string;
+  body?: Record<string, any>;
+  responseAccessPath?: string;
+} & BatchRequestOptions;
