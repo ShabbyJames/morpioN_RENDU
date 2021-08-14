@@ -403,4 +403,72 @@ export type UserProfileField =
   | 'name'
   | 'first_name'
   | 'last_name'
-  | '
+  | 'profile_pic'
+  // Needs approval by Facebook
+  | 'locale'
+  | 'timezone'
+  | 'gender';
+
+/**
+ * The User Profile API allows you to use a Page-scoped ID (PSID) to retrieve user profile information in this format
+ */
+export type User = {
+  id: string;
+  name: string;
+  firstName: string;
+  lastName: string;
+  profilePic: string;
+  locale?: string;
+  timezone?: number;
+  gender?: string;
+};
+
+export type PersistentMenuItem = {
+  locale: string;
+  composerInputDisabled: boolean;
+  callToActions: MenuItem[];
+};
+
+export type PersistentMenu = PersistentMenuItem[];
+
+export type GreetingConfig = {
+  locale: string;
+  text: string;
+};
+
+export type IceBreaker = {
+  question: string;
+  payload: string;
+};
+
+export type UserPersistentMenu = {
+  userLevelPersistentMenu?: PersistentMenu;
+  pageLevelPersistentMenu?: PersistentMenu;
+};
+
+export type MessengerProfile = {
+  getStarted?: {
+    payload: string;
+  };
+  persistentMenu?: PersistentMenu;
+  greeting?: {
+    locale: string;
+    text: string;
+  }[];
+  iceBreakers?: IceBreaker[];
+  whitelistedDomains?: string[];
+  accountLinkingUrl?: string;
+  paymentSettings?: {
+    privacyUrl?: string;
+    publicKey?: string;
+    testUsers?: string[];
+  };
+  homeUrl?: {
+    url: string;
+    webviewHeightRatio: 'tall';
+    webviewShareButton?: 'hide' | 'show';
+    inTest: boolean;
+  };
+};
+
+export type MessengerProfileResp
