@@ -471,4 +471,81 @@ export type MessengerProfile = {
   };
 };
 
-export type MessengerProfileResp
+export type MessengerProfileResponse = {
+  data: MessengerProfile[];
+};
+
+export type MutationSuccessResponse = {
+  result: string;
+};
+
+export type SendMessageSuccessResponse = {
+  recipientId: string;
+  messageId: string;
+};
+
+export type SendSenderActionResponse = {
+  recipientId: string;
+};
+
+export type MessageTagResponse = {
+  tag: MessageTag;
+  description: string;
+}[];
+
+export type FileData = Buffer | fs.ReadStream;
+
+export type BatchRequestOptions = {
+  name?: string;
+  dependsOn?: string;
+  omitResponseOnSuccess?: boolean;
+};
+
+export type Model =
+  | 'CUSTOM'
+  | 'CHINESE'
+  | 'CROATIAN'
+  | 'DANISH'
+  | 'DUTCH'
+  | 'ENGLISH'
+  | 'FRENCH_STANDARD'
+  | 'GERMAN_STANDARD'
+  | 'HEBREW'
+  | 'HUNGARIAN'
+  | 'IRISH'
+  | 'ITALIAN_STANDARD'
+  | 'KOREAN'
+  | 'NORWEGIAN_BOKMAL'
+  | 'POLISH'
+  | 'PORTUGUESE'
+  | 'ROMANIAN'
+  | 'SPANISH'
+  | 'SWEDISH'
+  | 'VIETNAMESE';
+
+export type MessengerNLPConfig = {
+  nlpEnabled?: boolean;
+  model?: Model;
+  customToken?: string;
+  verbose?: boolean;
+  nBest?: number;
+};
+
+export type PageInfo = {
+  name: string;
+  id: string;
+};
+
+type Scope = string;
+
+export type TokenInfo = {
+  appId: string;
+  type: 'PAGE' | 'APP' | 'USER';
+  application: string;
+  dataAccessExpiresAt: number;
+  expiresAt: number;
+  isValid: true;
+  issuedAt?: number;
+  profileId: string;
+  scopes: Scope[];
+  userId: str
