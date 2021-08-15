@@ -219,4 +219,64 @@ describe('sendMessage', () => {
     expect(
       MessengerBatch.sendMessage(
         RECIPIENT_ID,
-        { text: 'H
+        { text: 'Hello' },
+        {
+          name: 'second',
+          dependsOn: 'first',
+          omitResponseOnSuccess: false,
+        }
+      )
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          text: 'Hello',
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+      name: 'second',
+      dependsOn: 'first',
+      omitResponseOnSuccess: false,
+    });
+  });
+});
+
+describe('sendText', () => {
+  it('should create send text request', () => {
+    expect(MessengerBatch.sendText(RECIPIENT_ID, 'Hello')).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          text: 'Hello',
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describe('sendAttachment', () => {
+  it('should create send attachment request', () => {
+    expect(
+      MessengerBatch.sendAttachment(RECIPIENT_ID, {
+        type: 'image',
+        payload: {
+          url: 'https://example.com/pic.png',
+        },
+      })
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          attachment: {
+       
