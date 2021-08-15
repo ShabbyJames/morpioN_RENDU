@@ -156,4 +156,67 @@ describe('sendMessage', () => {
     });
   });
 
-  it('can create request with post_id', () 
+  it('can create request with post_id', () => {
+    expect(
+      MessengerBatch.sendMessage(
+        {
+          postId: 'post-id',
+        },
+        { text: 'Hello' }
+      )
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          text: 'Hello',
+        },
+        recipient: {
+          postId: 'post-id',
+        },
+      },
+    });
+  });
+
+  it('can create request with comment_id', () => {
+    expect(
+      MessengerBatch.sendMessage(
+        {
+          commentId: 'comment-id',
+        },
+        { text: 'Hello' }
+      )
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          text: 'Hello',
+        },
+        recipient: {
+          commentId: 'comment-id',
+        },
+      },
+    });
+  });
+
+  it('should omit options with undefined value', () => {
+    expect(
+      MessengerBatch.sendMessage(
+        RECIPIENT_ID,
+        { text: 'Hello' },
+        {
+          messagingType: 'RESPONSE',
+          accessToken: undefined,
+        }
+      )
+    ).not.toHaveProperty('body.accessToken');
+  });
+
+  it('should support specifying dependencies between operations', () => {
+    expect(
+      MessengerBatch.sendMessage(
+        RECIPIENT_ID,
+        { text: 'H
