@@ -95,4 +95,65 @@ describe('sendMessage', () => {
       )
     ).toEqual({
       method: 'POST',
-      relativeUrl: 'me/messages
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'RESPONSE',
+        message: {
+          text: 'Hello',
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+
+  it('can create request with phone_number', () => {
+    expect(
+      MessengerBatch.sendMessage(
+        {
+          phoneNumber: '+1(212)555-2368',
+          name: { firstName: 'John', lastName: 'Doe' },
+        },
+        { text: 'Hello' }
+      )
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          text: 'Hello',
+        },
+        recipient: {
+          phoneNumber: '+1(212)555-2368',
+          name: { firstName: 'John', lastName: 'Doe' },
+        },
+      },
+    });
+  });
+
+  it('can create request with user_ref', () => {
+    expect(
+      MessengerBatch.sendMessage(
+        {
+          userRef: 'user-ref',
+        },
+        { text: 'Hello' }
+      )
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          text: 'Hello',
+        },
+        recipient: {
+          userRef: 'user-ref',
+        },
+      },
+    });
+  });
+
+  it('can create request with post_id', () 
