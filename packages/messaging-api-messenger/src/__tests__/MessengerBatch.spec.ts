@@ -279,4 +279,65 @@ describe('sendAttachment', () => {
         messagingType: 'UPDATE',
         message: {
           attachment: {
-       
+            type: 'image',
+            payload: {
+              url: 'https://example.com/pic.png',
+            },
+          },
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describe('sendAudio', () => {
+  const request = {
+    method: 'POST',
+    relativeUrl: 'me/messages',
+    body: {
+      messagingType: 'UPDATE',
+      message: {
+        attachment: {
+          type: 'audio',
+          payload: {
+            url: 'https://example.com/audio.mp3',
+          },
+        },
+      },
+      recipient: {
+        id: RECIPIENT_ID,
+      },
+    },
+  };
+  it('should create send audio request with url', () => {
+    expect(
+      MessengerBatch.sendAudio(RECIPIENT_ID, 'https://example.com/audio.mp3')
+    ).toEqual(request);
+  });
+
+  it('should create send audio request with payload', () => {
+    expect(
+      MessengerBatch.sendAudio(RECIPIENT_ID, {
+        url: 'https://example.com/audio.mp3',
+      })
+    ).toEqual(request);
+  });
+});
+
+describe('sendImage', () => {
+  const request = {
+    method: 'POST',
+    relativeUrl: 'me/messages',
+    body: {
+      messagingType: 'UPDATE',
+      message: {
+        attachment: {
+          type: 'image',
+          payload: {
+            url: 'https://example.com/pic.png',
+          },
+        },
+      
