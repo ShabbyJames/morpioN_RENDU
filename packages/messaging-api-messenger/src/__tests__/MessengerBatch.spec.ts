@@ -340,4 +340,60 @@ describe('sendImage', () => {
             url: 'https://example.com/pic.png',
           },
         },
-      
+      },
+      recipient: {
+        id: RECIPIENT_ID,
+      },
+    },
+  };
+  it('should create send image request with url', () => {
+    expect(
+      MessengerBatch.sendImage(RECIPIENT_ID, 'https://example.com/pic.png')
+    ).toEqual(request);
+  });
+
+  it('should create send image request with payload', () => {
+    expect(
+      MessengerBatch.sendImage(RECIPIENT_ID, {
+        url: 'https://example.com/pic.png',
+      })
+    ).toEqual(request);
+  });
+});
+
+describe('sendVideo', () => {
+  const request = {
+    method: 'POST',
+    relativeUrl: 'me/messages',
+    body: {
+      messagingType: 'UPDATE',
+      message: {
+        attachment: {
+          type: 'video',
+          payload: {
+            url: 'https://example.com/video.mp4',
+          },
+        },
+      },
+      recipient: {
+        id: RECIPIENT_ID,
+      },
+    },
+  };
+  it('should create send video request with url', () => {
+    expect(
+      MessengerBatch.sendVideo(RECIPIENT_ID, 'https://example.com/video.mp4')
+    ).toEqual(request);
+  });
+
+  it('should create send video request with payload', () => {
+    expect(
+      MessengerBatch.sendVideo(RECIPIENT_ID, {
+        url: 'https://example.com/video.mp4',
+      })
+    ).toEqual(request);
+  });
+});
+
+describe('sendFile', () => {
+  const re
