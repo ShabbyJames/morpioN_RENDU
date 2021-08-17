@@ -452,4 +452,63 @@ describe('sendTemplate', () => {
           attachment: {
             type: 'template',
             payload: {
-              templa
+              templateType: 'button',
+              text: 'title',
+              buttons: [
+                {
+                  type: 'postback',
+                  title: 'Start Chatting',
+                  payload: 'USER_DEFINED_PAYLOAD',
+                },
+              ],
+            },
+          },
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describe('sendButtonTemplate', () => {
+  it('should create send button template request', () => {
+    expect(
+      MessengerBatch.sendButtonTemplate(RECIPIENT_ID, 'title', [
+        {
+          type: 'postback',
+          title: 'Start Chatting',
+          payload: 'USER_DEFINED_PAYLOAD',
+        },
+      ])
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          attachment: {
+            type: 'template',
+            payload: {
+              templateType: 'button',
+              text: 'title',
+              buttons: [
+                {
+                  type: 'postback',
+                  title: 'Start Chatting',
+                  payload: 'USER_DEFINED_PAYLOAD',
+                },
+              ],
+            },
+          },
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describ
