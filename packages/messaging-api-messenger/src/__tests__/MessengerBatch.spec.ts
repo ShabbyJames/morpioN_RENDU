@@ -396,4 +396,60 @@ describe('sendVideo', () => {
 });
 
 describe('sendFile', () => {
-  const re
+  const request = {
+    method: 'POST',
+    relativeUrl: 'me/messages',
+    body: {
+      messagingType: 'UPDATE',
+      message: {
+        attachment: {
+          type: 'file',
+          payload: {
+            url: 'https://example.com/file.pdf',
+          },
+        },
+      },
+      recipient: {
+        id: RECIPIENT_ID,
+      },
+    },
+  };
+  it('should create send file request with url', () => {
+    expect(
+      MessengerBatch.sendFile(RECIPIENT_ID, 'https://example.com/file.pdf')
+    ).toEqual(request);
+  });
+
+  it('should create send file request with payload', () => {
+    expect(
+      MessengerBatch.sendFile(RECIPIENT_ID, {
+        url: 'https://example.com/file.pdf',
+      })
+    ).toEqual(request);
+  });
+});
+
+describe('sendTemplate', () => {
+  it('should create send template request', () => {
+    expect(
+      MessengerBatch.sendTemplate(RECIPIENT_ID, {
+        templateType: 'button',
+        text: 'title',
+        buttons: [
+          {
+            type: 'postback',
+            title: 'Start Chatting',
+            payload: 'USER_DEFINED_PAYLOAD',
+          },
+        ],
+      })
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          attachment: {
+            type: 'template',
+            payload: {
+              templa
