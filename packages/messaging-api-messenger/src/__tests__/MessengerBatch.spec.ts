@@ -511,4 +511,52 @@ describe('sendButtonTemplate', () => {
   });
 });
 
-describ
+describe('sendGenericTemplate', () => {
+  const elements = [
+    {
+      title: "Welcome to Peter's Hats",
+      imageUrl: 'https://petersfancybrownhats.com/company_image.png',
+      subtitle: "We've got the right hat for everyone.",
+      defaultAction: {
+        type: 'web_url',
+        url: 'https://peterssendreceiveapp.ngrok.io/view?item=103',
+        messengerExtensions: true,
+        webviewHeightRatio: 'tall',
+        fallbackUrl: 'https://peterssendreceiveapp.ngrok.io/',
+      },
+      buttons: [
+        {
+          type: 'postback',
+          title: 'Start Chatting',
+          payload: 'DEVELOPER_DEFINED_PAYLOAD',
+        },
+      ],
+    },
+  ];
+  it('should create send generic template request', () => {
+    expect(MessengerBatch.sendGenericTemplate(RECIPIENT_ID, elements)).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          attachment: {
+            type: 'template',
+            payload: {
+              templateType: 'generic',
+              elements,
+              imageAspectRatio: 'horizontal',
+            },
+          },
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describe('sendReceiptTemplate', () => {
+  const receipt = {
+    recipientName: 'Stephane
