@@ -559,4 +559,54 @@ describe('sendGenericTemplate', () => {
 
 describe('sendReceiptTemplate', () => {
   const receipt = {
-    recipientName: 'Stephane
+    recipientName: 'Stephane Crozatier',
+    orderNumber: '12345678902',
+    currency: 'USD',
+    paymentMethod: 'Visa 2345',
+    orderUrl: 'http://petersapparel.parseapp.com/order?order_id=123456',
+    timestamp: '1428444852',
+    elements: [
+      {
+        title: 'Classic White T-Shirt',
+        subtitle: '100% Soft and Luxurious Cotton',
+        quantity: 2,
+        price: 50,
+        currency: 'USD',
+        imageUrl: 'http://petersapparel.parseapp.com/img/whiteshirt.png',
+      },
+      {
+        title: 'Classic Gray T-Shirt',
+        subtitle: '100% Soft and Luxurious Cotton',
+        quantity: 1,
+        price: 25,
+        currency: 'USD',
+        imageUrl: 'http://petersapparel.parseapp.com/img/grayshirt.png',
+      },
+    ],
+    address: {
+      street1: '1 Hacker Way',
+      street2: '',
+      city: 'Menlo Park',
+      postalCode: '94025',
+      state: 'CA',
+      country: 'US',
+    },
+    summary: {
+      subtotal: 75.0,
+      shippingCost: 4.95,
+      totalTax: 6.19,
+      totalCost: 56.14,
+    },
+    adjustments: [
+      {
+        name: 'New Customer Discount',
+        amount: 20,
+      },
+      {
+        name: '$10 Off Coupon',
+        amount: 10,
+      },
+    ],
+  };
+  it('should create send receipt template request', () => {
+    expect(MessengerBatch.sendReceipt
