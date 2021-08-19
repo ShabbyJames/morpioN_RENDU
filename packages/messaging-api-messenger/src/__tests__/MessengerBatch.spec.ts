@@ -609,4 +609,63 @@ describe('sendReceiptTemplate', () => {
     ],
   };
   it('should create send receipt template request', () => {
-    expect(MessengerBatch.sendReceipt
+    expect(MessengerBatch.sendReceiptTemplate(RECIPIENT_ID, receipt)).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          attachment: {
+            type: 'template',
+            payload: {
+              templateType: 'receipt',
+              ...receipt,
+            },
+          },
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describe('sendMediaTemplate', () => {
+  const elements = [
+    {
+      mediaType: 'image',
+      attachmentId: '1854626884821032',
+      buttons: [
+        {
+          type: 'web_url',
+          url: '<WEB_URL>',
+          title: 'View Website',
+        },
+      ],
+    },
+  ];
+  it('should create send media template request', () => {
+    expect(MessengerBatch.sendMediaTemplate(RECIPIENT_ID, elements)).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          attachment: {
+            type: 'template',
+            payload: {
+              templateType: 'media',
+              elements,
+            },
+          },
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describe('sendAirlineBoardingPassTemplate', () => {
