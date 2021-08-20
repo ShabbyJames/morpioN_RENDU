@@ -821,4 +821,56 @@ describe('sendAirlineCheckinTemplate', () => {
         departureAirport: {
           airportCode: 'SFO',
           city: 'San Francisco',
-         
+          terminal: 'T4',
+          gate: 'G8',
+        },
+        arrivalAirport: {
+          airportCode: 'SEA',
+          city: 'Seattle',
+          terminal: 'T4',
+          gate: 'G8',
+        },
+        flightSchedule: {
+          boardingTime: '2016-01-05T15:05',
+          departureTime: '2016-01-05T15:45',
+          arrivalTime: '2016-01-05T17:30',
+        },
+      },
+    ],
+    checkinUrl: 'https://www.airline.com/check-in',
+  };
+  it('should create send airline checkin template request', () => {
+    expect(
+      MessengerBatch.sendAirlineCheckinTemplate(RECIPIENT_ID, attrs)
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          attachment: {
+            type: 'template',
+            payload: {
+              templateType: 'airline_checkin',
+              ...attrs,
+            },
+          },
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describe('sendAirlineItineraryTemplate', () => {
+  const attrs = {
+    introMessage: "Here's your flight itinerary.",
+    locale: 'en_US',
+    pnrNumber: 'ABCDEF',
+    passengerInfo: [
+      {
+        name: 'Farbound Smith Jr',
+        ticketNumber: '0741234567890',
+       
