@@ -767,4 +767,58 @@ describe('sendAirlineBoardingPassTemplate', () => {
         aboveBarCodeImageUrl: 'https://www.example.com/en/PLAT.png',
         flightInfo: {
           flightNumber: 'KL0642',
-          departureAir
+          departureAirport: {
+            airportCode: 'JFK',
+            city: 'New York',
+            terminal: 'T1',
+            gate: 'D57',
+          },
+          arrivalAirport: {
+            airportCode: 'AMS',
+            city: 'Amsterdam',
+          },
+          flightSchedule: {
+            departureTime: '2016-01-02T19:05',
+            arrivalTime: '2016-01-05T17:30',
+          },
+        },
+      },
+    ],
+  };
+  it('should create send airline boarding pass template request', () => {
+    expect(
+      MessengerBatch.sendAirlineBoardingPassTemplate(RECIPIENT_ID, attrs)
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          attachment: {
+            type: 'template',
+            payload: {
+              templateType: 'airline_boardingpass',
+              ...attrs,
+            },
+          },
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describe('sendAirlineCheckinTemplate', () => {
+  const attrs = {
+    introMessage: 'Check-in is available now.',
+    locale: 'en_US',
+    pnrNumber: 'ABCDEF',
+    flightInfo: [
+      {
+        flightNumber: 'f001',
+        departureAirport: {
+          airportCode: 'SFO',
+          city: 'San Francisco',
+         
