@@ -717,4 +717,54 @@ describe('sendAirlineBoardingPassTemplate', () => {
             city: 'New York',
             terminal: 'T1',
             gate: 'D57',
- 
+          },
+          arrivalAirport: {
+            airportCode: 'AMS',
+            city: 'Amsterdam',
+          },
+          flightSchedule: {
+            departureTime: '2016-01-02T19:05',
+            arrivalTime: '2016-01-05T17:30',
+          },
+        },
+      },
+      {
+        passengerName: 'JONES/FARBOUND',
+        pnrNumber: 'CG4X7U',
+        travelClass: 'business',
+        seat: '74K',
+        auxiliaryFields: [
+          {
+            label: 'Terminal',
+            value: 'T1',
+          },
+          {
+            label: 'Departure',
+            value: '30OCT 19:05',
+          },
+        ],
+        secondaryFields: [
+          {
+            label: 'Boarding',
+            value: '18:30',
+          },
+          {
+            label: 'Gate',
+            value: 'D57',
+          },
+          {
+            label: 'Seat',
+            value: '74K',
+          },
+          {
+            label: 'Sec.Nr.',
+            value: '004',
+          },
+        ],
+        logoImageUrl: 'https://www.example.com/en/logo.png',
+        headerImageUrl: 'https://www.example.com/en/fb/header.png',
+        qrCode: 'M1JONES/FARBOUND  CG4X7U nawouehgawgnapwi3jfa0wfh',
+        aboveBarCodeImageUrl: 'https://www.example.com/en/PLAT.png',
+        flightInfo: {
+          flightNumber: 'KL0642',
+          departureAir
