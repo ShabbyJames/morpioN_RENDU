@@ -669,3 +669,52 @@ describe('sendMediaTemplate', () => {
 });
 
 describe('sendAirlineBoardingPassTemplate', () => {
+  const attrs = {
+    introMessage: 'You are checked in.',
+    locale: 'en_US',
+    boardingPass: [
+      {
+        passengerName: 'SMITH/NICOLAS',
+        pnrNumber: 'CG4X7U',
+        travelClass: 'business',
+        seat: '74J',
+        auxiliaryFields: [
+          {
+            label: 'Terminal',
+            value: 'T1',
+          },
+          {
+            label: 'Departure',
+            value: '30OCT 19:05',
+          },
+        ],
+        secondaryFields: [
+          {
+            label: 'Boarding',
+            value: '18:30',
+          },
+          {
+            label: 'Gate',
+            value: 'D57',
+          },
+          {
+            label: 'Seat',
+            value: '74J',
+          },
+          {
+            label: 'Sec.Nr.',
+            value: '003',
+          },
+        ],
+        logoImageUrl: 'https://www.example.com/en/logo.png',
+        headerImageUrl: 'https://www.example.com/en/fb/header.png',
+        qrCode: 'M1SMITH/NICOLAS  CG4X7U nawouehgawgnapwi3jfa0wfh',
+        aboveBarCodeImageUrl: 'https://www.example.com/en/PLAT.png',
+        flightInfo: {
+          flightNumber: 'KL0642',
+          departureAirport: {
+            airportCode: 'JFK',
+            city: 'New York',
+            terminal: 'T1',
+            gate: 'D57',
+ 
