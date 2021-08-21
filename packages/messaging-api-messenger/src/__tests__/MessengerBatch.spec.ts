@@ -873,4 +873,56 @@ describe('sendAirlineItineraryTemplate', () => {
       {
         name: 'Farbound Smith Jr',
         ticketNumber: '0741234567890',
-       
+        passengerId: 'p001',
+      },
+      {
+        name: 'Nick Jones',
+        ticketNumber: '0741234567891',
+        passengerId: 'p002',
+      },
+    ],
+    flightInfo: [
+      {
+        connectionId: 'c001',
+        segmentId: 's001',
+        flightNumber: 'KL9123',
+        aircraftType: 'Boeing 737',
+        departureAirport: {
+          airportCode: 'SFO',
+          city: 'San Francisco',
+          terminal: 'T4',
+          gate: 'G8',
+        },
+        arrivalAirport: {
+          airportCode: 'SLC',
+          city: 'Salt Lake City',
+          terminal: 'T4',
+          gate: 'G8',
+        },
+        flightSchedule: {
+          departureTime: '2016-01-02T19:45',
+          arrivalTime: '2016-01-02T21:20',
+        },
+        travelClass: 'business',
+      },
+      {
+        connectionId: 'c002',
+        segmentId: 's002',
+        flightNumber: 'KL321',
+        aircraftType: 'Boeing 747-200',
+        travelClass: 'business',
+        departureAirport: {
+          airportCode: 'SLC',
+          city: 'Salt Lake City',
+          terminal: 'T1',
+          gate: 'G33',
+        },
+        arrivalAirport: {
+          airportCode: 'AMS',
+          city: 'Amsterdam',
+          terminal: 'T1',
+          gate: 'G33',
+        },
+        flightSchedule: {
+          departureTime: '2016-01-02T22:45',
+          arri
