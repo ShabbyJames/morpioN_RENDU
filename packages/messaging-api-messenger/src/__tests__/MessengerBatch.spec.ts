@@ -925,4 +925,66 @@ describe('sendAirlineItineraryTemplate', () => {
         },
         flightSchedule: {
           departureTime: '2016-01-02T22:45',
-          arri
+          arrivalTime: '2016-01-03T17:20',
+        },
+      },
+    ],
+    passengerSegmentInfo: [
+      {
+        segmentId: 's001',
+        passengerId: 'p001',
+        seat: '12A',
+        seatType: 'Business',
+      },
+      {
+        segmentId: 's001',
+        passengerId: 'p002',
+        seat: '12B',
+        seatType: 'Business',
+      },
+      {
+        segmentId: 's002',
+        passengerId: 'p001',
+        seat: '73A',
+        seatType: 'World Business',
+        productInfo: [
+          {
+            title: 'Lounge',
+            value: 'Complimentary lounge access',
+          },
+          {
+            title: 'Baggage',
+            value: '1 extra bag 50lbs',
+          },
+        ],
+      },
+      {
+        segmentId: 's002',
+        passengerId: 'p002',
+        seat: '73B',
+        seatType: 'World Business',
+        productInfo: [
+          {
+            title: 'Lounge',
+            value: 'Complimentary lounge access',
+          },
+          {
+            title: 'Baggage',
+            value: '1 extra bag 50lbs',
+          },
+        ],
+      },
+    ],
+    priceInfo: [
+      {
+        title: 'Fuel surcharge',
+        amount: '1597',
+        currency: 'USD',
+      },
+    ],
+    basePrice: '12206',
+    tax: '200',
+    totalPrice: '14003',
+    currency: 'USD',
+  };
+  it('should create send airline itinerary template request', () =
