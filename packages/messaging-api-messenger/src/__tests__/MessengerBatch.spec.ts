@@ -1041,4 +1041,58 @@ describe('sendAirlineUpdateTemplate', () => {
   };
   it('should create send airline flight update template request', () => {
     expect(
-      M
+      MessengerBatch.sendAirlineUpdateTemplate(RECIPIENT_ID, attrs)
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          attachment: {
+            type: 'template',
+            payload: {
+              templateType: 'airline_update',
+              ...attrs,
+            },
+          },
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describe('sendOneTimeNotifReqTemplate', () => {
+  it('should create send one time notif req template request', () => {
+    expect(
+      MessengerBatch.sendOneTimeNotifReqTemplate(RECIPIENT_ID, {
+        title: '<TITLE_TEXT>',
+        payload: '<USER_DEFINED_PAYLOAD>',
+      })
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          attachment: {
+            type: 'template',
+            payload: {
+              templateType: 'one_time_notif_req',
+              title: '<TITLE_TEXT>',
+              payload: '<USER_DEFINED_PAYLOAD>',
+            },
+          },
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describe('getUserProfile', () => {
+  it('should create get user profile request', () => {
