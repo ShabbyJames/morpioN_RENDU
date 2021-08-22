@@ -987,4 +987,58 @@ describe('sendAirlineItineraryTemplate', () => {
     totalPrice: '14003',
     currency: 'USD',
   };
-  it('should create send airline itinerary template request', () =
+  it('should create send airline itinerary template request', () => {
+    expect(
+      MessengerBatch.sendAirlineItineraryTemplate(RECIPIENT_ID, attrs)
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        messagingType: 'UPDATE',
+        message: {
+          attachment: {
+            type: 'template',
+            payload: {
+              templateType: 'airline_itinerary',
+              ...attrs,
+            },
+          },
+        },
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+      },
+    });
+  });
+});
+
+describe('sendAirlineUpdateTemplate', () => {
+  const attrs = {
+    introMessage: 'Your flight is delayed',
+    updateType: 'delay',
+    locale: 'en_US',
+    pnrNumber: 'CF23G2',
+    updateFlightInfo: {
+      flightNumber: 'KL123',
+      departureAirport: {
+        airportCode: 'SFO',
+        city: 'San Francisco',
+        terminal: 'T4',
+        gate: 'G8',
+      },
+      arrivalAirport: {
+        airportCode: 'AMS',
+        city: 'Amsterdam',
+        terminal: 'T4',
+        gate: 'G8',
+      },
+      flightSchedule: {
+        boardingTime: '2015-12-26T10:30',
+        departureTime: '2015-12-26T11:30',
+        arrivalTime: '2015-12-27T07:30',
+      },
+    },
+  };
+  it('should create send airline flight update template request', () => {
+    expect(
+      M
