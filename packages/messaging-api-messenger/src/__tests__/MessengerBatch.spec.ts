@@ -1144,4 +1144,45 @@ describe('getUserProfile', () => {
   });
 
   it('should support specifying dependencies between operations', () => {
-  
+    expect(
+      MessengerBatch.getUserProfile(RECIPIENT_ID, {
+        name: 'second',
+        dependsOn: 'first',
+        omitResponseOnSuccess: false,
+      })
+    ).toEqual({
+      method: 'GET',
+      relativeUrl: `${RECIPIENT_ID}?fields=id,name,first_name,last_name,profile_pic`,
+      name: 'second',
+      dependsOn: 'first',
+      omitResponseOnSuccess: false,
+    });
+  });
+});
+
+describe('#userPersistentMenu', () => {
+  describe('getUserPersistentMenu', () => {
+    it('should create get user persistent menu request', () => {
+      expect(MessengerBatch.getUserPersistentMenu(RECIPIENT_ID)).toEqual({
+        method: 'GET',
+        relativeUrl: `/me/custom_user_settings?psid=${RECIPIENT_ID}`,
+      });
+    });
+
+    it('should support access_token', () => {
+      expect(
+        MessengerBatch.getUserPersistentMenu(RECIPIENT_ID, {
+          accessToken: 'ACCESS_TOKEN',
+        })
+      ).toEqual({
+        method: 'GET',
+        relativeUrl: `/me/custom_user_settings?psid=${RECIPIENT_ID}&access_token=ACCESS_TOKEN`,
+      });
+    });
+
+    it('should support specifying dependencies between operations', () => {
+      expect(
+        MessengerBatch.getUserPersistentMenu(RECIPIENT_ID, {
+          name: 'second',
+          dependsOn: 'first',
+          omitResponseOnSuccess: false
