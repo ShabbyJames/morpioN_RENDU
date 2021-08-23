@@ -1232,4 +1232,48 @@ describe('#userPersistentMenu', () => {
                   type: 'postback',
                   title: 'Restart Conversation',
                   payload: 'RESTART',
-          
+                },
+                {
+                  type: 'web_url',
+                  title: 'Powered by ALOHA.AI, Yoctol',
+                  url: 'https://www.yoctol.com/',
+                },
+              ],
+            },
+          ],
+        },
+      });
+    });
+
+    it('should response correctly if input is not a full Persistent Menu', () => {
+      expect(
+        MessengerBatch.setUserPersistentMenu(RECIPIENT_ID, [
+          {
+            type: 'postback',
+            title: 'Restart Conversation',
+            payload: 'RESTART',
+          },
+          {
+            type: 'web_url',
+            title: 'Powered by ALOHA.AI, Yoctol',
+            url: 'https://www.yoctol.com/',
+          },
+        ])
+      ).toEqual({
+        method: 'POST',
+        relativeUrl: `/me/custom_user_settings`,
+        body: {
+          psid: `${RECIPIENT_ID}`,
+          persistentMenu: [
+            {
+              locale: 'default',
+              composerInputDisabled: false,
+              callToActions: [
+                {
+                  type: 'postback',
+                  title: 'Restart Conversation',
+                  payload: 'RESTART',
+                },
+                {
+                  type: 'web_url',
+                  title: 'P
