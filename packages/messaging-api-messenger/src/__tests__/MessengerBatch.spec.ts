@@ -1276,4 +1276,52 @@ describe('#userPersistentMenu', () => {
                 },
                 {
                   type: 'web_url',
-                  title: 'P
+                  title: 'Powered by ALOHA.AI, Yoctol',
+                  url: 'https://www.yoctol.com/',
+                },
+              ],
+            },
+          ],
+        },
+      });
+    });
+
+    it('should support access_token', () => {
+      expect(
+        MessengerBatch.setUserPersistentMenu(
+          RECIPIENT_ID,
+          [
+            {
+              locale: 'default',
+              composerInputDisabled: false,
+              callToActions: [
+                {
+                  type: 'postback',
+                  title: 'Restart Conversation',
+                  payload: 'RESTART',
+                },
+                {
+                  type: 'web_url',
+                  title: 'Powered by ALOHA.AI, Yoctol',
+                  url: 'https://www.yoctol.com/',
+                },
+              ],
+            },
+          ],
+          {
+            accessToken: 'ACCESS_TOKEN',
+          }
+        )
+      ).toEqual({
+        method: 'POST',
+        relativeUrl: `/me/custom_user_settings?access_token=ACCESS_TOKEN`,
+        body: {
+          psid: `${RECIPIENT_ID}`,
+          persistentMenu: [
+            {
+              locale: 'default',
+              composerInputDisabled: false,
+              callToActions: [
+                {
+                  type: 'postback',
+            
