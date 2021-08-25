@@ -1457,4 +1457,61 @@ describe('sendSenderAction', () => {
         omitResponseOnSuccess: false,
       })
     ).toEqual({
-      met
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+        senderAction: 'typing_on',
+      },
+      name: 'second',
+      dependsOn: 'first',
+      omitResponseOnSuccess: false,
+    });
+  });
+});
+
+describe('typingOn', () => {
+  it('should create send typing on request', () => {
+    expect(MessengerBatch.typingOn(RECIPIENT_ID)).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+        senderAction: 'typing_on',
+      },
+    });
+  });
+});
+
+describe('typingOff', () => {
+  it('should create send typing off request', () => {
+    expect(MessengerBatch.typingOff(RECIPIENT_ID)).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+        senderAction: 'typing_off',
+      },
+    });
+  });
+});
+
+describe('markSeen', () => {
+  it('should create send mark seen request', () => {
+    expect(MessengerBatch.markSeen(RECIPIENT_ID)).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+        senderAction: 'mark_seen',
+      },
+    });
+  }
