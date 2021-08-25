@@ -1371,3 +1371,46 @@ describe('#userPersistentMenu', () => {
         method: 'POST',
         relativeUrl: `/me/custom_user_settings`,
         body: {
+          psid: `${RECIPIENT_ID}`,
+          persistentMenu: [
+            {
+              locale: 'default',
+              composerInputDisabled: false,
+              callToActions: [
+                {
+                  type: 'postback',
+                  title: 'Restart Conversation',
+                  payload: 'RESTART',
+                },
+                {
+                  type: 'web_url',
+                  title: 'Powered by ALOHA.AI, Yoctol',
+                  url: 'https://www.yoctol.com/',
+                },
+              ],
+            },
+          ],
+        },
+        name: 'second',
+        dependsOn: 'first',
+        omitResponseOnSuccess: false,
+      });
+    });
+  });
+
+  describe('deleteUserPersistentMenu', () => {
+    it('should create delete user persistent menu request', () => {
+      expect(MessengerBatch.deleteUserPersistentMenu(RECIPIENT_ID)).toEqual({
+        method: 'DELETE',
+        relativeUrl: `/me/custom_user_settings?psid=${RECIPIENT_ID}&params=[%22persistent_menu%22]`,
+      });
+    });
+
+    it('should support access_token', () => {
+      expect(
+        MessengerBatch.deleteUserPersistentMenu(RECIPIENT_ID, {
+          accessToken: 'ACCESS_TOKEN',
+        })
+      ).toEqual({
+        method: 'DELETE',
+        relativeUrl: `/me/custom_user_settings?psid=${RECIPI
