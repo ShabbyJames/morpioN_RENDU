@@ -1514,4 +1514,56 @@ describe('markSeen', () => {
         senderAction: 'mark_seen',
       },
     });
-  }
+  });
+});
+
+describe('passThreadControl', () => {
+  it('should create pass thread control request', () => {
+    expect(
+      MessengerBatch.passThreadControl(
+        RECIPIENT_ID,
+        263902037430900,
+        'something'
+      )
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/pass_thread_control',
+      body: {
+        recipient: { id: RECIPIENT_ID },
+        targetAppId: 263902037430900,
+        metadata: 'something',
+      },
+    });
+  });
+
+  it('should support specifying dependencies between operations', () => {
+    expect(
+      MessengerBatch.passThreadControl(
+        RECIPIENT_ID,
+        263902037430900,
+        'something',
+        {
+          name: 'second',
+          dependsOn: 'first',
+          omitResponseOnSuccess: false,
+        }
+      )
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/pass_thread_control',
+      body: {
+        recipient: { id: RECIPIENT_ID },
+        targetAppId: 263902037430900,
+        metadata: 'something',
+      },
+      name: 'second',
+      dependsOn: 'first',
+      omitResponseOnSuccess: false,
+    });
+  });
+});
+
+describe('passThreadControlToPageInbox', () => {
+  it('should create pass thread control to inbox request', () => {
+    expect(
+      MessengerBatch.passThreadControlToPageInbox(RE
