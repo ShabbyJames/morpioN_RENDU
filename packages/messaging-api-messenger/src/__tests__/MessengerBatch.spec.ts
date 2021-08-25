@@ -1413,4 +1413,48 @@ describe('#userPersistentMenu', () => {
         })
       ).toEqual({
         method: 'DELETE',
-        relativeUrl: `/me/custom_user_settings?psid=${RECIPI
+        relativeUrl: `/me/custom_user_settings?psid=${RECIPIENT_ID}&params=[%22persistent_menu%22]&access_token=ACCESS_TOKEN`,
+      });
+    });
+
+    it('should support specifying dependencies between operations', () => {
+      expect(
+        MessengerBatch.deleteUserPersistentMenu(RECIPIENT_ID, {
+          name: 'second',
+          dependsOn: 'first',
+          omitResponseOnSuccess: false,
+        })
+      ).toEqual({
+        method: 'DELETE',
+        relativeUrl: `/me/custom_user_settings?psid=${RECIPIENT_ID}&params=[%22persistent_menu%22]`,
+        name: 'second',
+        dependsOn: 'first',
+        omitResponseOnSuccess: false,
+      });
+    });
+  });
+});
+
+describe('sendSenderAction', () => {
+  it('should create send sender action request', () => {
+    expect(MessengerBatch.sendSenderAction(RECIPIENT_ID, 'typing_on')).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/messages',
+      body: {
+        recipient: {
+          id: RECIPIENT_ID,
+        },
+        senderAction: 'typing_on',
+      },
+    });
+  });
+
+  it('should support specifying dependencies between operations', () => {
+    expect(
+      MessengerBatch.sendSenderAction(RECIPIENT_ID, 'typing_on', {
+        name: 'second',
+        dependsOn: 'first',
+        omitResponseOnSuccess: false,
+      })
+    ).toEqual({
+      met
