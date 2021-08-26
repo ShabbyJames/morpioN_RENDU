@@ -1663,4 +1663,54 @@ describe('getThreadOwner', () => {
       MessengerBatch.getThreadOwner(RECIPIENT_ID, {
         name: 'second',
         dependsOn: 'first',
-        omitResp
+        omitResponseOnSuccess: false,
+      })
+    ).toEqual({
+      method: 'GET',
+      relativeUrl: 'me/thread_owner?recipient=1QAZ2WSX',
+      responseAccessPath: 'data[0].threadOwner',
+      name: 'second',
+      dependsOn: 'first',
+      omitResponseOnSuccess: false,
+    });
+  });
+});
+
+describe('associateLabel', () => {
+  it('should create associate label request', () => {
+    expect(MessengerBatch.associateLabel(RECIPIENT_ID, LABEL_ID)).toEqual({
+      method: 'POST',
+      relativeUrl: `${LABEL_ID}/label`,
+      body: {
+        user: RECIPIENT_ID,
+      },
+    });
+  });
+
+  it('should support specifying dependencies between operations', () => {
+    expect(
+      MessengerBatch.associateLabel(RECIPIENT_ID, LABEL_ID, {
+        name: 'second',
+        dependsOn: 'first',
+        omitResponseOnSuccess: false,
+      })
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: `${LABEL_ID}/label`,
+      body: {
+        user: RECIPIENT_ID,
+      },
+      name: 'second',
+      dependsOn: 'first',
+      omitResponseOnSuccess: false,
+    });
+  });
+});
+
+describe('dissociateLabel', () => {
+  it('should create dissociate label request', () => {
+    expect(MessengerBatch.dissociateLabel(RECIPIENT_ID, LABEL_ID)).toEqual({
+      method: 'DELETE',
+      relativeUrl: `${LABEL_ID}/label`,
+      body: {
+       
