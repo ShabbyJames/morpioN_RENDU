@@ -1617,4 +1617,50 @@ describe('takeThreadControl', () => {
 describe('requestThreadControl', () => {
   it('should create request thread control request', () => {
     expect(
-      MessengerBatch.requ
+      MessengerBatch.requestThreadControl(RECIPIENT_ID, 'something')
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/request_thread_control',
+      body: {
+        recipient: { id: RECIPIENT_ID },
+        metadata: 'something',
+      },
+    });
+  });
+
+  it('should support specifying dependencies between operations', () => {
+    expect(
+      MessengerBatch.requestThreadControl(RECIPIENT_ID, 'something', {
+        name: 'second',
+        dependsOn: 'first',
+        omitResponseOnSuccess: false,
+      })
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/request_thread_control',
+      body: {
+        recipient: { id: RECIPIENT_ID },
+        metadata: 'something',
+      },
+      name: 'second',
+      dependsOn: 'first',
+      omitResponseOnSuccess: false,
+    });
+  });
+});
+
+describe('getThreadOwner', () => {
+  it('should create get thread owner request', () => {
+    expect(MessengerBatch.getThreadOwner(RECIPIENT_ID)).toEqual({
+      method: 'GET',
+      relativeUrl: 'me/thread_owner?recipient=1QAZ2WSX',
+      responseAccessPath: 'data[0].threadOwner',
+    });
+  });
+
+  it('should support specifying dependencies between operations', () => {
+    expect(
+      MessengerBatch.getThreadOwner(RECIPIENT_ID, {
+        name: 'second',
+        dependsOn: 'first',
+        omitResp
