@@ -1566,4 +1566,55 @@ describe('passThreadControl', () => {
 describe('passThreadControlToPageInbox', () => {
   it('should create pass thread control to inbox request', () => {
     expect(
-      MessengerBatch.passThreadControlToPageInbox(RE
+      MessengerBatch.passThreadControlToPageInbox(RECIPIENT_ID, 'something')
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/pass_thread_control',
+      body: {
+        recipient: { id: RECIPIENT_ID },
+        targetAppId: 263902037430900,
+        metadata: 'something',
+      },
+    });
+  });
+});
+
+describe('takeThreadControl', () => {
+  it('should create take thread control request', () => {
+    expect(MessengerBatch.takeThreadControl(RECIPIENT_ID, 'something')).toEqual(
+      {
+        method: 'POST',
+        relativeUrl: 'me/take_thread_control',
+        body: {
+          recipient: { id: RECIPIENT_ID },
+          metadata: 'something',
+        },
+      }
+    );
+  });
+
+  it('should support specifying dependencies between operations', () => {
+    expect(
+      MessengerBatch.takeThreadControl(RECIPIENT_ID, 'something', {
+        name: 'second',
+        dependsOn: 'first',
+        omitResponseOnSuccess: false,
+      })
+    ).toEqual({
+      method: 'POST',
+      relativeUrl: 'me/take_thread_control',
+      body: {
+        recipient: { id: RECIPIENT_ID },
+        metadata: 'something',
+      },
+      name: 'second',
+      dependsOn: 'first',
+      omitResponseOnSuccess: false,
+    });
+  });
+});
+
+describe('requestThreadControl', () => {
+  it('should create request thread control request', () => {
+    expect(
+      MessengerBatch.requ
