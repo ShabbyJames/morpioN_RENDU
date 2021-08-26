@@ -1713,4 +1713,52 @@ describe('dissociateLabel', () => {
       method: 'DELETE',
       relativeUrl: `${LABEL_ID}/label`,
       body: {
-       
+        user: RECIPIENT_ID,
+      },
+    });
+  });
+
+  it('should support specifying dependencies between operations', () => {
+    expect(
+      MessengerBatch.dissociateLabel(RECIPIENT_ID, LABEL_ID, {
+        name: 'second',
+        dependsOn: 'first',
+        omitResponseOnSuccess: false,
+      })
+    ).toEqual({
+      method: 'DELETE',
+      relativeUrl: `${LABEL_ID}/label`,
+      body: {
+        user: RECIPIENT_ID,
+      },
+      name: 'second',
+      dependsOn: 'first',
+      omitResponseOnSuccess: false,
+    });
+  });
+});
+
+describe('getAssociatedLabels', () => {
+  it('should create get associated labels request', () => {
+    expect(MessengerBatch.getAssociatedLabels(RECIPIENT_ID)).toEqual({
+      method: 'GET',
+      relativeUrl: `${RECIPIENT_ID}/custom_labels`,
+    });
+  });
+
+  it('should support specifying dependencies between operations', () => {
+    expect(
+      MessengerBatch.getAssociatedLabels(RECIPIENT_ID, {
+        name: 'second',
+        dependsOn: 'first',
+        omitResponseOnSuccess: false,
+      })
+    ).toEqual({
+      method: 'GET',
+      relativeUrl: `${RECIPIENT_ID}/custom_labels`,
+      name: 'second',
+      dependsOn: 'first',
+      omitResponseOnSuccess: false,
+    });
+  });
+});
