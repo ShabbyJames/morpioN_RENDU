@@ -104,4 +104,51 @@ describe('constructor', () => {
     it('with config', () => {
       axios.create = jest.fn().mockReturnValue({
         interceptors: {
-    
+          request: {
+            use: jest.fn(),
+          },
+        },
+      });
+      new MessengerClient({ accessToken: ACCESS_TOKEN, version: '2.6' }); // eslint-disable-line no-new
+
+      expect(axios.create).toBeCalledWith(
+        expect.objectContaining({
+          baseURL: 'https://graph.facebook.com/v2.6/',
+          headers: { 'Content-Type': 'application/json' },
+        })
+      );
+    });
+  });
+
+  it('support origin', () => {
+    axios.create = jest.fn().mockReturnValue({
+      interceptors: {
+        request: {
+          use: jest.fn(),
+        },
+      },
+    });
+    // eslint-disable-next-line no-new
+    new MessengerClient({
+      accessToken: ACCESS_TOKEN,
+      origin: 'https://mydummytestserver.com',
+    });
+
+    expect(axios.create).toBeCalledWith(
+      expect.objectContaining({
+        baseURL: 'https://mydummytestserver.com/v6.0/',
+        headers: { 'Content-Type': 'application/json' },
+      })
+    );
+  });
+});
+
+describe('#version', () => {
+  it('should return version of graph api', () => {
+    expect(new MessengerClient({ accessToken: ACCESS_TOKEN }).version).toEqual(
+      '6.0'
+    );
+    expect(
+      new MessengerClient({ accessToken: ACCESS_TOKEN, version: 'v2.6' })
+        .version
+    ).toEqual('2.6');
