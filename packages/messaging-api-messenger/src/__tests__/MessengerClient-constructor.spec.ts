@@ -152,3 +152,46 @@ describe('#version', () => {
       new MessengerClient({ accessToken: ACCESS_TOKEN, version: 'v2.6' })
         .version
     ).toEqual('2.6');
+    expect(
+      new MessengerClient({ accessToken: ACCESS_TOKEN, version: '2.6' }).version
+    ).toEqual('2.6');
+    expect(() => {
+      // eslint-disable-next-line no-new
+      new MessengerClient({ accessToken: ACCESS_TOKEN, version: 2.6 } as any);
+    }).toThrow('Type of `version` must be string.');
+  });
+});
+
+describe('#axios', () => {
+  it('should return underlying http client', () => {
+    const client = new MessengerClient({ accessToken: ACCESS_TOKEN });
+
+    expect(client.axios.get).toBeDefined();
+    expect(client.axios.post).toBeDefined();
+    expect(client.axios.put).toBeDefined();
+    expect(client.axios.delete).toBeDefined();
+  });
+});
+
+describe('#accessToken', () => {
+  it('should return underlying access token', () => {
+    const client = new MessengerClient({ accessToken: ACCESS_TOKEN });
+
+    expect(client.accessToken).toBe(ACCESS_TOKEN);
+  });
+});
+
+describe('#appSecret', () => {
+  it('should return underlying appSecret', () => {
+    const client = new MessengerClient({
+      accessToken: ACCESS_TOKEN,
+      appSecret: APP_SECRET,
+    });
+
+    expect(client.appSecret).toEqual(APP_SECRET);
+  });
+});
+
+describe('#onRequest', () => {
+  it('should call onRequest when calling any API', async () => {
+    
