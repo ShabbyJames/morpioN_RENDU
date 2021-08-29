@@ -249,3 +249,61 @@ describe('appsecret proof', () => {
     expect(url).toEqual(
       '/me/messages?access_token=foo_token&appsecret_proof=796ba0d8a6b339e476a7b166a9e8ac0a395f7de736dc37de5f2f4397f5854eb8'
     );
+  });
+
+  it('should not add appsecret proof to requests if skipAppSecretProof: true', async () => {
+    expect.assertions(1);
+
+    const client = new MessengerClient({
+      accessToken: ACCESS_TOKEN,
+      appSecret: APP_SECRET,
+      skipAppSecretProof: true,
+    });
+
+    const mock = new MockAdapter(client.axios);
+
+    const USER_ID = 'USER_ID';
+
+    const reply = {
+      recipient_id: USER_ID,
+      message_id: 'mid.1489394984387:3dd22de509',
+    };
+
+    let url;
+    mock.onPost().reply((config) => {
+      url = config.url;
+      return [200, reply];
+    });
+
+    await client.sendText(USER_ID, 'Hello!');
+
+    expect(url).toEqual('/me/messages?access_token=foo_token');
+  });
+
+  it('should add appsecret proof to batch requests if appSecret exists', async () => {
+    expect.assertions(2);
+
+    const client = new MessengerClient({
+      accessToken: ACCESS_TOKEN,
+      appSecret: APP_SECRET,
+    });
+
+    const mock = new MockAdapter(client.axios);
+
+    const USER_ID = 'USER_ID';
+
+    const reply = [
+      {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      },
+      {
+        id: USER_ID,
+        first_name: 'Kevin',
+        last_name: 'Durant',
+        profile_pic: 'https://example.com/pic.png',
+      },
+    ];
+
+    let url;
+ 
