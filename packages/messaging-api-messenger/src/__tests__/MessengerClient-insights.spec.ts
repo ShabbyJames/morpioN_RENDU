@@ -142,4 +142,40 @@ describe('Page Messaging Insights API', () => {
           },
           {
             value: 87175,
-            
+            endTime: '2017-02-04T08:00:00+0000',
+          },
+        ],
+        title: 'Daily unique blocked conversations count',
+        description:
+          'Daily: The number of conversations with the Page that have been blocked.',
+        id: '1234567/insights/?metric=page_messages_blocked_conversations_unique/day',
+      });
+    });
+  });
+
+  describe('#getReportedConversations', () => {
+    it('should call api get Insight data', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        data: [
+          {
+            name: 'page_messages_reported_conversations_unique',
+            period: 'day',
+            values: [
+              {
+                value: 83111,
+                end_time: '2017-02-02T08:00:00+0000',
+              },
+              {
+                value: 85215,
+                end_time: '2017-02-03T08:00:00+0000',
+              },
+              {
+                value: 87175,
+                end_time: '2017-02-04T08:00:00+0000',
+              },
+            ],
+            title: 'Daily unique reported conversations count',
+            description:
+              'Daily: The number of conversations from your Page that have been rep
