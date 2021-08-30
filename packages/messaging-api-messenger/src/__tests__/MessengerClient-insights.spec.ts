@@ -46,4 +46,54 @@ describe('Page Messaging Insights API', () => {
         'page_messages_reported_conversations_unique',
       ]);
 
-    
+      expect(res).toEqual([
+        {
+          name: 'page_messages_reported_conversations_unique',
+        },
+      ]);
+    });
+
+    it('support multiple metrics', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        data: [
+          {
+            name: 'page_messages_reported_conversations_unique',
+          },
+          {
+            name: 'page_messages_blocked_conversations_unique',
+          },
+        ],
+      };
+
+      mock
+        .onGet(
+          `/me/insights/?metric=page_messages_reported_conversations_unique%2Cpage_messages_blocked_conversations_unique&access_token=${ACCESS_TOKEN}`
+        )
+        .reply(200, reply);
+
+      const res = await client.getInsights([
+        'page_messages_reported_conversations_unique',
+        'page_messages_blocked_conversations_unique',
+      ]);
+
+      expect(res).toEqual([
+        {
+          name: 'page_messages_reported_conversations_unique',
+        },
+        {
+          name: 'page_messages_blocked_conversations_unique',
+        },
+      ]);
+    });
+  });
+
+  describe('#getBlockedConversations', () => {
+    it('should call api get Insight data', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        data: [
+          {
+            name: 'page_messages_blocke
