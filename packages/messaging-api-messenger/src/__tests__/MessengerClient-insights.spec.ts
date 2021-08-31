@@ -253,3 +253,35 @@ describe('Page Messaging Insights API', () => {
           { value: 1000, endTime: '2018-03-12T07:00:00+0000' },
           { value: 1000, endTime: '2018-03-13T07:00:00+0000' },
         ],
+        title: 'Messaging connections',
+        description:
+          'Daily: The number of people who have sent a message to your business, not including people who have blocked or reported your business on Messenger. (This number only includes connections made since October 2016.)',
+        id: '1386473101668063/insights/page_messages_total_messaging_connections/day',
+      });
+    });
+  });
+
+  describe('#getNewConversations', () => {
+    it('should call api get Insight data', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        data: [
+          {
+            name: 'page_messages_new_conversations_unique',
+            period: 'day',
+            values: [
+              { value: 1, end_time: '2018-03-12T07:00:00+0000' },
+              { value: 0, end_time: '2018-03-13T07:00:00+0000' },
+            ],
+            title: 'Daily unique new conversations count',
+            description:
+              'Daily: The number of messaging conversations on Facebook Messenger that began with people who had never messaged with your business before.',
+            id: '1386473101668063/insights/page_messages_new_conversations_unique/day',
+          },
+        ],
+      };
+
+      mock
+        .onGet(
+          `/me/insights/?metric=page_messages_new_conversations_unique&
