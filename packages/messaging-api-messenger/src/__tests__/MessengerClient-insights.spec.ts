@@ -178,4 +178,44 @@ describe('Page Messaging Insights API', () => {
             ],
             title: 'Daily unique reported conversations count',
             description:
-              'Daily: The number of conversations from your Page that have been rep
+              'Daily: The number of conversations from your Page that have been reported by people for reasons such as spam, or containing inappropriate content.',
+            id: '1234567/insights/?metric=page_messages_reported_conversations_unique/day',
+          },
+        ],
+      };
+
+      mock
+        .onGet(
+          `/me/insights/?metric=page_messages_reported_conversations_unique&access_token=${ACCESS_TOKEN}`
+        )
+        .reply(200, reply);
+
+      const res = await client.getReportedConversations();
+
+      expect(res).toEqual({
+        name: 'page_messages_reported_conversations_unique',
+        period: 'day',
+        values: [
+          {
+            value: 83111,
+            endTime: '2017-02-02T08:00:00+0000',
+          },
+          {
+            value: 85215,
+            endTime: '2017-02-03T08:00:00+0000',
+          },
+          {
+            value: 87175,
+            endTime: '2017-02-04T08:00:00+0000',
+          },
+        ],
+        title: 'Daily unique reported conversations count',
+        description:
+          'Daily: The number of conversations from your Page that have been reported by people for reasons such as spam, or containing inappropriate content.',
+        id: '1234567/insights/?metric=page_messages_reported_conversations_unique/day',
+      });
+    });
+  });
+
+  describe('#getTotalMessagingConnections', () => {
+    it('should call api get Insight data', async ()
