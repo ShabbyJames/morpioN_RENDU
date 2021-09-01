@@ -284,4 +284,24 @@ describe('Page Messaging Insights API', () => {
 
       mock
         .onGet(
-          `/me/insights/?metric=page_messages_new_conversations_unique&
+          `/me/insights/?metric=page_messages_new_conversations_unique&access_token=${ACCESS_TOKEN}`
+        )
+        .reply(200, reply);
+
+      const res = await client.getNewConversations();
+
+      expect(res).toEqual({
+        name: 'page_messages_new_conversations_unique',
+        period: 'day',
+        values: [
+          { value: 1, endTime: '2018-03-12T07:00:00+0000' },
+          { value: 0, endTime: '2018-03-13T07:00:00+0000' },
+        ],
+        title: 'Daily unique new conversations count',
+        description:
+          'Daily: The number of messaging conversations on Facebook Messenger that began with people who had never messaged with your business before.',
+        id: '1386473101668063/insights/page_messages_new_conversations_unique/day',
+      });
+    });
+  });
+});
