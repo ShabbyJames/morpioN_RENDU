@@ -116,4 +116,57 @@ describe('send api', () => {
 
       const reply = {
         recipient_id: USER_ID,
-        message_id
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendMessage(
+        USER_ID,
+        {
+          text: 'Hello!',
+        },
+        {
+          tag: 'CONFIRMED_EVENT_UPDATE',
+        }
+      );
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        messaging_type: 'MESSAGE_TAG',
+        recipient: {
+          id: USER_ID,
+        },
+        message: {
+          text: 'Hello!',
+        },
+        tag: 'CONFIRMED_EVENT_UPDATE',
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+
+    it('should call messages api with RESPONSE type when it provided as messaging_type', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      }
