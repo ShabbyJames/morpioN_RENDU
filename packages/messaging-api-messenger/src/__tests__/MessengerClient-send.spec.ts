@@ -169,4 +169,60 @@ describe('send api', () => {
         url = config.url;
         data = config.data;
         return [200, reply];
-      }
+      });
+
+      const res = await client.sendMessage(
+        USER_ID,
+        {
+          text: 'Hello!',
+        },
+        {
+          messagingType: 'RESPONSE',
+        }
+      );
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        messaging_type: 'RESPONSE',
+        recipient: {
+          id: USER_ID,
+        },
+        message: {
+          text: 'Hello!',
+        },
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+
+    it('can call messages api using recipient with phone_number', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendMessage(
+        {
+          phoneNumber: '+1(212)555-2368',
+          name: { firstName: 'John', lastName: 'Doe' },
+        },
+        {
+          text: 'Hello!',
+        }
+      );
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        mes
