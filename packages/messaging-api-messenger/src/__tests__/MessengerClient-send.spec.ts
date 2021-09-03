@@ -62,4 +62,58 @@ describe('send api', () => {
           id: USER_ID,
         },
         message: {
-          text:
+          text: 'Hello!',
+        },
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+  });
+
+  describe('#sendMessage', () => {
+    it('should call messages api with default UPDATE type', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendMessage(USER_ID, {
+        text: 'Hello!',
+      });
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        messaging_type: 'UPDATE',
+        recipient: {
+          id: USER_ID,
+        },
+        message: {
+          text: 'Hello!',
+        },
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+
+    it('should call messages api with MESSAGE_TAG type when tag exists', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id
