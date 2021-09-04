@@ -397,4 +397,58 @@ describe('send api', () => {
         }
       );
 
-      expect(url).toEqual(`/me/messages?access_token=${ACCESS
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        messaging_type: 'UPDATE',
+        recipient: {
+          id: USER_ID,
+        },
+        message: {
+          text: 'Hello!',
+          quick_replies: [
+            {
+              content_type: 'text',
+              title: 'Search',
+              payload: '<POSTBACK_PAYLOAD>',
+              image_url: 'http://example.com/img/red.png',
+            },
+          ],
+        },
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+
+    it('should not attach empty array quick_replies to message', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendMessage(
+        USER_ID,
+        {
+          text: 'Hello!',
+        },
+        {
+          quickReplies: [],
+        }
+      );
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        messaging_type: 'UPDATE',
+      
