@@ -340,4 +340,61 @@ describe('send api', () => {
 
       const res = await client.sendMessage(
         {
-          
+          commentId: 'comment-id',
+        },
+        {
+          text: 'Hello!',
+        }
+      );
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        messaging_type: 'UPDATE',
+        recipient: {
+          comment_id: 'comment-id',
+        },
+        message: {
+          text: 'Hello!',
+        },
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+
+    it('should attach quick_replies to message', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendMessage(
+        USER_ID,
+        {
+          text: 'Hello!',
+        },
+        {
+          quickReplies: [
+            {
+              contentType: 'text',
+              title: 'Search',
+              payload: '<POSTBACK_PAYLOAD>',
+              imageUrl: 'http://example.com/img/red.png',
+            },
+          ],
+        }
+      );
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS
