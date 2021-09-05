@@ -510,4 +510,56 @@ describe('send api', () => {
     });
   });
 
-  describe('#sendAtt
+  describe('#sendAttachment', () => {
+    it('should call messages api with attachment', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendAttachment(USER_ID, {
+        type: 'image',
+        payload: {
+          url: 'https://example.com/pic.png',
+        },
+      });
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        messaging_type: 'UPDATE',
+        recipient: {
+          id: USER_ID,
+        },
+        message: {
+          attachment: {
+            type: 'image',
+            payload: {
+              url: 'https://example.com/pic.png',
+            },
+          },
+        },
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+  });
+
+  describe('#sendText', () => {
+    it('should call messages api with text', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_
