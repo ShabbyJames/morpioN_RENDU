@@ -562,4 +562,56 @@ describe('send api', () => {
       const { client, mock } = createMock();
 
       const reply = {
-        recipient_id: USER_
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendText(USER_ID, 'Hello!');
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        messaging_type: 'UPDATE',
+        recipient: {
+          id: USER_ID,
+        },
+        message: {
+          text: 'Hello!',
+        },
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+
+    it('should call messages api with issue resolution text', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendText(USER_ID, 'Hello!', {
+        tag: 'CONFIRMED_EVENT_UPDATE',
+      });
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(J
