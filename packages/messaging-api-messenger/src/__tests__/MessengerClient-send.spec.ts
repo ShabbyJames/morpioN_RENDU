@@ -614,4 +614,57 @@ describe('send api', () => {
       });
 
       expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
-      expect(J
+      expect(JSON.parse(data)).toEqual({
+        messaging_type: 'MESSAGE_TAG',
+        recipient: {
+          id: USER_ID,
+        },
+        message: {
+          text: 'Hello!',
+        },
+        tag: 'CONFIRMED_EVENT_UPDATE',
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+  });
+
+  describe('#sendAudio', () => {
+    it('can call api with audio url', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendAudio(
+        USER_ID,
+        'https://example.com/audio.mp3'
+      );
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        messaging_type: 'UPDATE',
+        recipient: {
+          id: USER_ID,
+        },
+        message: {
+          attachment: {
+            type: 'audio',
+            payload: {
+              url: 'https://example.com/audio.mp3',
+            },
+          },
+   
