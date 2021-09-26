@@ -832,4 +832,54 @@ describe('send api', () => {
       });
     });
 
-    it('can call api with file stream
+    it('can call api with file stream', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendImage(USER_ID, fs.createReadStream('./'));
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(data).toBeInstanceOf(FormData);
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+  });
+
+  describe('#sendVideo', () => {
+    it('can call api with video url', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendVideo(
+        USER_ID,
+        'https://example.com/video.mp4'
+      );
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`
