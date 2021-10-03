@@ -934,4 +934,58 @@ describe('send api', () => {
           attachment: {
             type: 'video',
             payload: {
-              attachment_id:
+              attachment_id: '5566',
+            },
+          },
+        },
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+
+    it('can call api with file stream', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock
+        .onPost(`/me/messages?access_token=${ACCESS_TOKEN}`)
+        .reply((config) => {
+          url = config.url;
+          data = config.data;
+          return [200, reply];
+        });
+
+      const res = await client.sendVideo(USER_ID, fs.createReadStream('./'));
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(data).toBeInstanceOf(FormData);
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+  });
+
+  describe('#sendFile', () => {
+    it('can call api with file url', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
