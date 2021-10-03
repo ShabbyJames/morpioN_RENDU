@@ -989,3 +989,55 @@ describe('send api', () => {
       let data;
       mock.onPost().reply((config) => {
         url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendFile(
+        USER_ID,
+        'https://example.com/word.docx'
+      );
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        messaging_type: 'UPDATE',
+        recipient: {
+          id: USER_ID,
+        },
+        message: {
+          attachment: {
+            type: 'file',
+            payload: {
+              url: 'https://example.com/word.docx',
+            },
+          },
+        },
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+        messageId: 'mid.1489394984387:3dd22de509',
+      });
+    });
+
+    it('can call api with file attachment_id', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+        message_id: 'mid.1489394984387:3dd22de509',
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendFile(USER_ID, {
+        attachmentId: '5566',
+      });
+
+      expect(url).toEqual(`/me/messages?access_token=$
