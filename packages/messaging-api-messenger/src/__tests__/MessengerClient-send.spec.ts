@@ -1192,4 +1192,56 @@ describe('send api', () => {
     });
 
     it('should get correct data according to responseAccessPath', async () => {
+      const { client, mock } = createMock();
+
+      const reply = [
+        {
+          code: 200,
+          headers: [
+            { name: 'Content-Type', value: 'text/javascript; charset=UTF-8' },
+          ],
+          body: '{"data":[{"thread_owner":{"app_id":"501514720355337"}}]}',
+        },
+      ];
+
+      const batch = [MessengerBatch.getThreadOwner(USER_ID)];
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendBatch(batch);
+
+      expect(url).toEqual(`/`);
+      expect(JSON.parse(data)).toEqual({
+        access_token: ACCESS_TOKEN,
+        include_headers: true,
+        batch: [
+          {
+            method: 'GET',
+            relative_url: `me/thread_owner?recipient=${USER_ID}`,
+          },
+        ],
+      });
+
+      expect(res).toEqual([
+        {
+          code: 200,
+          headers: [
+            { name: 'Content-Type', value: 'text/javascript; charset=UTF-8' },
+          ],
+          body: { appId: '501514720355337' },
+        },
+      ]);
+    });
+
+    it('should throw if item length > 50', async () => {
+      const { client } = createMock();
+
+      const bigBatch = new Array(51).fill(
+        MessengerBatch.sendText(USER_ID, 'Hello')
   
