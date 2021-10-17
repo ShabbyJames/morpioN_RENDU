@@ -1244,4 +1244,60 @@ describe('send api', () => {
 
       const bigBatch = new Array(51).fill(
         MessengerBatch.sendText(USER_ID, 'Hello')
-  
+      );
+
+      expect(() => {
+        client.sendBatch(bigBatch);
+      }).toThrow();
+    });
+  });
+
+  describe('#sendSenderAction', () => {
+    it('should call messages api with sender action', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.sendSenderAction(USER_ID, 'typing_on');
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        recipient: {
+          id: USER_ID,
+        },
+        sender_action: 'typing_on',
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+      });
+    });
+  });
+
+  describe('#markSeen', () => {
+    it('should call messages api with mark_seen sender action', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await clien
