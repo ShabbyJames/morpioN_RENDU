@@ -1300,4 +1300,60 @@ describe('send api', () => {
         return [200, reply];
       });
 
-      const res = await clien
+      const res = await client.markSeen(USER_ID);
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        recipient: {
+          id: USER_ID,
+        },
+        sender_action: 'mark_seen',
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+      });
+    });
+  });
+
+  describe('#typingOn', () => {
+    it('should call messages api with typing_on sender action', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.typingOn(USER_ID);
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        recipient: {
+          id: USER_ID,
+        },
+        sender_action: 'typing_on',
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+      });
+    });
+  });
+
+  describe('#typingOff', () => {
+    it('should call messages api with typing_off sender action', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        recipient_id: USER_ID,
+      };
+
+      let
