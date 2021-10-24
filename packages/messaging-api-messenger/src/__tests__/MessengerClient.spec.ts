@@ -763,3 +763,201 @@ describe('Built-in NLP API', () => {
   });
 
   describe('#disableNLP', () => {
+    it('should call api to disable NLP', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        success: true,
+      };
+
+      let url;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        return [200, reply];
+      });
+
+      const res = await client.disableNLP();
+
+      expect(url).toEqual(
+        `/me/nlp_configs?nlp_enabled=false&access_token=1234567890`
+      );
+
+      expect(res).toEqual(reply);
+    });
+  });
+});
+
+describe('Event Logging API', () => {
+  describe('#logCustomEvents', () => {
+    it('should call api to log events', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        success: true,
+      };
+
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.logCustomEvents({
+        appId: 12345,
+        pageId: 67890,
+        pageScopedUserId: USER_ID,
+        events: [
+          {
+            _eventName: 'fb_mobile_purchase',
+            _valueToSum: 55.22,
+            _fb_currency: 'USD',
+          },
+        ],
+      });
+
+      expect(url).toEqual(`/12345/activities`);
+      expect(JSON.parse(data)).toEqual({
+        event: 'CUSTOM_APP_EVENTS',
+        custom_events:
+          '[{"_eventName":"fb_mobile_purchase","_valueToSum":55.22,"_fb_currency":"USD"}]',
+        advertiser_tracking_enabled: 0,
+        application_tracking_enabled: 0,
+        extinfo: '["mb1"]',
+        page_id: 67890,
+        page_scoped_user_id: USER_ID,
+      });
+
+      expect(res).toEqual(reply);
+    });
+  });
+});
+
+describe('ID Matching', () => {
+  describe('getIdsForApps', () => {
+    it('should call api with appsecret_proof', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        data: [
+          {
+            id: '10152368852405295',
+            app: {
+              category: 'Business',
+              link: 'https://www.facebook.com/games/?app_id=1419232575008550',
+              name: "John's Game App",
+              id: '1419232575008550',
+            },
+          },
+          {
+            id: '645195294',
+            app: {
+              link: 'https://apps.facebook.com/johnsmovieappns/',
+              name: 'JohnsMovieApp',
+              namespace: 'johnsmovieappns',
+              id: '259773517400382',
+            },
+          },
+        ],
+        paging: {
+          cursors: {
+            before: 'MTQ4OTU4MjQ5Nzc4NjY4OAZDZDA',
+            after: 'NDAwMDExOTA3MDM1ODMwA',
+          },
+        },
+      };
+
+      let url;
+      mock.onGet().reply((config) => {
+        url = config.url;
+        return [200, reply];
+      });
+
+      const res = await client.getIdsForApps({
+        userId: '12345123',
+        appSecret: APP_SECRET,
+        page: '5678',
+      });
+
+      expect(url).toEqual(
+        `/12345123/ids_for_apps?access_token=${ACCESS_TOKEN}&appsecret_proof=4894f81b47c53ccf240a1130d119db2c69833eac9be09adeebc8e7226fb73e73&page=5678`
+      );
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('getIdsForPages', () => {
+    it('should call api with appsecret_proof', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        data: [
+          {
+            id: '12345123', // The psid for the user for that page
+            page: {
+              category: 'Musician',
+              link: 'https://www.facebook.com/Johns-Next-Great-Thing-380374449010653/',
+              name: "John's Next Great Thing",
+              id: '380374449010653',
+            },
+          },
+        ],
+        paging: {
+          cursors: {
+            before: 'MTQ4OTU4MjQ5Nzc4NjY4OAZDZDA',
+            after: 'NDAwMDExOTA3MDM1ODMwA',
+          },
+        },
+      };
+
+      let url;
+      mock.onGet().reply((config) => {
+        url = config.url;
+        return [200, reply];
+      });
+
+      const res = await client.getIdsForPages({
+        userId: '12345123',
+        appSecret: APP_SECRET,
+        app: '5678',
+      });
+
+      expect(url).toEqual(
+        `/12345123/ids_for_pages?access_token=${ACCESS_TOKEN}&appsecret_proof=4894f81b47c53ccf240a1130d119db2c69833eac9be09adeebc8e7226fb73e73&app=5678`
+      );
+
+      expect(res).toEqual(reply);
+    });
+  });
+});
+
+describe('Error', () => {
+  it('should be formatted correctly', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      error: {
+        message: 'Invalid OAuth access token.',
+        type: 'OAuthException',
+        code: 190,
+        error_subcode: 1234567,
+        fbtrace_id: 'BLBz/WZt8dN',
+      },
+    };
+
+    mock.onAny().reply(400, reply);
+
+    let error;
+    try {
+      await client.sendText(USER_ID, 'Hello!');
+    } catch (err) {
+      error = err;
+    }
+
+    expect(error.message).toEqual(
+      'Messenger API - 190 OAuthException Invalid OAuth access token.'
+    );
+  });
+});
