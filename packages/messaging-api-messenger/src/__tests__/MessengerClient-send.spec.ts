@@ -1356,4 +1356,27 @@ describe('send api', () => {
         recipient_id: USER_ID,
       };
 
-      let
+      let url;
+      let data;
+      mock.onPost().reply((config) => {
+        url = config.url;
+        data = config.data;
+        return [200, reply];
+      });
+
+      const res = await client.typingOff(USER_ID);
+
+      expect(url).toEqual(`/me/messages?access_token=${ACCESS_TOKEN}`);
+      expect(JSON.parse(data)).toEqual({
+        recipient: {
+          id: USER_ID,
+        },
+        sender_action: 'typing_off',
+      });
+
+      expect(res).toEqual({
+        recipientId: USER_ID,
+      });
+    });
+  });
+});
