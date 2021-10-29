@@ -74,4 +74,61 @@ export type ConfirmObject = {
 };
 
 // https://api.slack.com/reference/block-kit/composition-objects#option
-expo
+export type OptionObject = {
+  text: PlainTextObject;
+  value: string;
+  url?: string; // TODO: The url attribute is only available in overflow menus
+};
+
+// https://api.slack.com/reference/block-kit/composition-objects#option_group
+export type OptionGroupObject = {
+  label: PlainTextObject;
+  options: OptionObject[];
+};
+
+// Block Elements
+// https://api.slack.com/reference/block-kit/block-elements
+
+export type BlockElement =
+  | ButtonElement
+  | DatepickerElement
+  | ImageElement
+  | MultiSelectElement
+  | OverflowElement
+  | PlainTextInputElement
+  | RadioButtonsElement
+  | SelectElement;
+
+export type ButtonElement = {
+  type: 'button';
+  text: PlainTextObject;
+  actionId: string;
+  url?: string;
+  value?: string;
+  style?: 'primary' | 'danger';
+  confirm?: ConfirmObject;
+};
+
+export type DatepickerElement = {
+  type: 'datepicker';
+  actionId: string;
+  placeholder?: PlainTextObject;
+  initialDate?: string;
+  confirm?: ConfirmObject;
+};
+
+export type ImageElement = {
+  type: 'image';
+  imageUrl: string;
+  altText: string;
+};
+
+export type MultiSelectElement =
+  | MultiStaticSelectElement
+  | MultiExternalSelectElement
+  | MultiUsersSelectElement
+  | MultiConversationsSelectElement
+  | MultiChannelsSelectElement;
+
+export type MultiStaticSelectElement = {
+  type: 'multi_static
