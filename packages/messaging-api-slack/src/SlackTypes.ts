@@ -131,4 +131,54 @@ export type MultiSelectElement =
   | MultiChannelsSelectElement;
 
 export type MultiStaticSelectElement = {
-  type: 'multi_static
+  type: 'multi_static_select';
+  placeholder: PlainTextObject;
+  actionId: string;
+  options: OptionObject[]; // TODO: If option_groups is specified, this field should not be.
+  optionGroups?: OptionGroupObject[]; // TODO: If options is specified, this field should not be.
+  initialOptions?: OptionObject[];
+  confirm?: ConfirmObject;
+};
+
+export type MultiExternalSelectElement = {
+  type: 'multi_external_select';
+  placeholder: PlainTextObject;
+  actionId: string;
+  minQueryLength?: number;
+  initialOptions?: OptionObject[];
+  confirm?: ConfirmObject;
+};
+
+export type MultiUsersSelectElement = {
+  type: 'multi_users_select';
+  placeholder: PlainTextObject;
+  actionId: string;
+  initialUsers?: string[];
+  confirm?: ConfirmObject;
+};
+
+export type MultiConversationsSelectElement = {
+  type: 'multi_conversations_select';
+  placeholder: PlainTextObject;
+  actionId: string;
+  initialConversations?: string[];
+  confirm?: ConfirmObject;
+};
+
+export type MultiChannelsSelectElement = {
+  type: 'multi_channels_select';
+  placeholder: PlainTextObject;
+  actionId: string;
+  initialChannels?: string[];
+  confirm?: ConfirmObject;
+};
+
+export type OverflowElement = {
+  type: 'overflow';
+  actionId: string;
+  options: OptionObject[];
+  confirm?: ConfirmObject;
+};
+
+export type PlainTextInputElement = {
+  type: 'p
