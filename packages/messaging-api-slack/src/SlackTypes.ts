@@ -181,4 +181,56 @@ export type OverflowElement = {
 };
 
 export type PlainTextInputElement = {
-  type: 'p
+  type: 'plain_text_input';
+  actionId: string;
+  placeholder?: PlainTextObject;
+  initialValue: string;
+  multiline?: boolean;
+  minLength?: number;
+  maxLength?: number;
+};
+
+export type RadioButtonsElement = {
+  type: 'radio_buttons';
+  actionId: string;
+  options: OptionObject[];
+  initialOption?: OptionObject;
+  confirm?: ConfirmObject;
+};
+
+export type SelectElement =
+  | StaticSelectElement
+  | ExternalSelectElement
+  | UsersSelectElement
+  | ConversationsSelectElement
+  | ChannelsSelectElement;
+
+export type StaticSelectElement = {
+  type: 'static_select';
+  placeholder: PlainTextObject;
+  actionId: string;
+  options: OptionObject[]; // TODO: If option_groups is specified, this field should not be.
+  optionGroups?: OptionGroupObject[]; // TODO: If options is specified, this field should not be.
+  initialOption?: OptionObject;
+  confirm?: ConfirmObject;
+};
+
+export type ExternalSelectElement = {
+  type: 'external_select';
+  placeholder: PlainTextObject;
+  actionId: string;
+  minQueryLength?: number;
+  initialOption?: OptionObject;
+  confirm?: ConfirmObject;
+};
+
+export type UsersSelectElement = {
+  type: 'users_select';
+  placeholder: PlainTextObject;
+  actionId: string;
+  initialUser?: string;
+  confirm?: ConfirmObject;
+};
+
+export type ConversationsSelectElement = {
+  type: 'conversations
