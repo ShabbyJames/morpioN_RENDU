@@ -233,4 +233,77 @@ export type UsersSelectElement = {
 };
 
 export type ConversationsSelectElement = {
-  type: 'conversations
+  type: 'conversations_select';
+  placeholder: PlainTextObject;
+  actionId: string;
+  initialConversation?: string;
+  confirm?: ConfirmObject;
+};
+
+export type ChannelsSelectElement = {
+  type: 'channels_select';
+  placeholder: PlainTextObject;
+  actionId: string;
+  initialChannel?: string;
+  confirm?: ConfirmObject;
+};
+
+// Layout Blocks
+// https://api.slack.com/reference/block-kit/blocks
+
+export type MessageBlock =
+  | ActionsBlock
+  | ContextBlock
+  | DividerBlock
+  | FileBlock
+  | ImageBlock
+  | SectionBlock;
+
+export type ModalBlock =
+  | ActionsBlock
+  | ContextBlock
+  | DividerBlock
+  | ImageBlock
+  | InputBlock
+  | SectionBlock;
+
+export type HomeBlock =
+  | ActionsBlock
+  | ContextBlock
+  | DividerBlock
+  | ImageBlock
+  | SectionBlock;
+
+export type ActionsBlockElement =
+  | ButtonElement
+  | SelectElement
+  | OverflowElement
+  | DatepickerElement;
+
+export type ActionsBlock = {
+  type: 'actions';
+  elements: ActionsBlockElement[];
+  blockId?: string;
+};
+
+export type ContextBlockElement = TextObject | ImageElement;
+
+export type ContextBlock = {
+  type: 'context';
+  elements: ContextBlockElement[];
+  blockId?: string;
+};
+
+export type DividerBlock = {
+  type: 'divider';
+  blockId?: string;
+};
+
+export type FileBlock = {
+  type: 'file';
+  externalId: string;
+  source: string;
+  blockId?: string;
+};
+
+export type ImageBlock = {
