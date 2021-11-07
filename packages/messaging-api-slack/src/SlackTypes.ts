@@ -307,3 +307,71 @@ export type FileBlock = {
 };
 
 export type ImageBlock = {
+  type: 'image';
+  imageUrl: string;
+  altText: string;
+  title?: PlainTextObject;
+  blockId?: string;
+};
+
+export type InputBlockElement =
+  | PlainTextInputElement
+  | SelectElement
+  | MultiSelectElement
+  | DatepickerElement;
+
+export type InputBlock = {
+  type: 'input';
+  label: PlainTextObject;
+  element: InputBlockElement;
+  blockId?: string;
+  hint?: PlainTextObject;
+  optional?: boolean;
+};
+
+export type SectionBlock = {
+  type: 'section';
+  text: TextObject;
+  blockId?: string;
+  fields?: TextObject[];
+  accessory?: BlockElement;
+};
+
+// View
+// https://api.slack.com/reference/surfaces/views
+export type ViewCommon = {
+  privateMetadata?: string;
+  callbackId?: string;
+  externalId?: string;
+};
+
+export type ModalView = {
+  type: 'modal';
+  title: PlainTextObject;
+  blocks: ModalBlock[];
+  close?: PlainTextObject;
+  submit?: PlainTextObject;
+  clearOnClose?: boolean;
+  notifyOnClose?: boolean;
+} & ViewCommon;
+
+export type HomeView = {
+  type: 'home';
+  blocks: HomeBlock[];
+} & ViewCommon;
+
+export type View = ModalView | HomeView;
+
+export type SendMessageSuccessResponse = 'ok';
+
+export type OAuthAPIResponse = Record<string, any> & {
+  ok: boolean;
+};
+
+export type AvailableMethod =
+  | 'api.test'
+  | 'apps.permissions.info'
+  | 'apps.permissions.request'
+  | 'auth.revoke'
+  | 'auth.test'
+ 
