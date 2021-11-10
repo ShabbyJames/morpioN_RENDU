@@ -489,4 +489,63 @@ export type AvailableMethod =
   | 'usergroups.users.list'
   | 'usergroups.users.update'
   | 'users.deletePhoto'
-  |
+  | 'users.getPresence'
+  | 'users.identity'
+  | 'users.info'
+  | 'users.list'
+  | 'users.setActive'
+  | 'users.setPhoto'
+  | 'users.setPresence'
+  | 'users.profile.get'
+  | 'users.profile.set'
+  | 'views.open'
+  | 'views.publish'
+  | 'views.update'
+  | 'views.push';
+
+export interface User {
+  id: string;
+  name: string;
+  realName: string;
+}
+
+export type Channel = {
+  id: string;
+  name: string;
+  members?: User[];
+};
+
+// channels.info
+// https://api.slack.com/methods/channels.info
+export type GetInfoOptions = {
+  includeLocale?: boolean;
+};
+
+// users.info
+// https://api.slack.com/methods/users.info
+export type UserInfoOptions = {
+  includeLocale?: boolean;
+};
+
+export type PostMessageOptionalOptions = {
+  asUser?: boolean;
+  attachments?: string | Attachment[];
+  iconEmoji?: string;
+  iconUrl?: string;
+  linkNames?: boolean;
+  parse?: 'none' | 'full';
+  replyBroadcast?: boolean;
+  threadTs?: string;
+  unfurlLinks?: boolean;
+  unfurlMedia?: boolean;
+  username?: string;
+};
+
+export type PostEphemeralOptionalOptions = {
+  /**
+   * Pass true to post the message as the authed user. Defaults to true if the chat:write:bot scope is not included. Otherwise, defaults to false.
+   */
+  asUser?: boolean;
+  /**
+   * A JSON-based array of structured attachments, presented as a URL-encoded string.
+   
