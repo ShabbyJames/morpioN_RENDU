@@ -597,4 +597,26 @@ export type UpdateMessageOptions = Message & {
    */
   asUser?: boolean;
   /**
-   * A JSON-based array of structured
+   * A JSON-based array of structured attachments, presented as a URL-encoded string. This field is required when not presenting text. If you don't include this field, the message's previous attachments will be retained. To remove previous attachments, include an empty array for this field.
+   */
+  attachments?: string | Attachment[];
+  /**
+   * A JSON-based array of structured blocks, presented as a URL-encoded string. If you don't include this field, the message's previous blocks will be retained. To remove previous blocks, include an empty array for this field.
+   */
+  blocks?: any; // FIXME
+  /**
+   * Find and link channel names and usernames. Defaults to none. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, none.
+   */
+  linkNames?: boolean;
+  /**
+   * Change how messages are treated. Defaults to client, unlike chat.postMessage. Accepts either none or full. If you do not specify a value for this field, the original value set for the message will be overwritten with the default, client.
+   */
+  parse?: 'none' | 'full';
+  /**
+   * New text for the message, using the default formatting rules. It's not required when presenting blocks or attachments.
+   */
+  text?: string;
+};
+
+// chat.delete
+// 
