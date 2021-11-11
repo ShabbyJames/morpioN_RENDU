@@ -548,4 +548,53 @@ export type PostEphemeralOptionalOptions = {
   asUser?: boolean;
   /**
    * A JSON-based array of structured attachments, presented as a URL-encoded string.
-   
+   */
+  attachments?: string | Attachment[];
+  /**
+   * Find and link channel names and usernames.
+   */
+  linkNames?: boolean;
+  /**
+   * Change how messages are treated. Defaults to `none`. See below.
+   */
+  parse?: 'none' | 'full';
+};
+
+// chat.postMessage
+// https://api.slack.com/methods/chat.postMessage
+export type PostMessageOptions = PostMessageOptionalOptions &
+  Message & {
+    channel: string;
+  };
+
+// chat.postEphemeral
+// https://api.slack.com/methods/chat.postEphemeral
+export type PostEphemeralOptions = PostEphemeralOptionalOptions &
+  Message & {
+    /**
+     * Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
+     */
+    channel: string;
+    /**
+     * `id` of the user who will receive the ephemeral message. The user should be in the `channel` specified by the channel argument.
+     */
+    user: string;
+  };
+
+// chat.update
+// https://api.slack.com/methods/chat.update
+export type UpdateMessageOptions = Message & {
+  /**
+   * Channel containing the message to be updated.
+   */
+  channel: string;
+  /**
+   * Timestamp of the message to be updated.
+   */
+  ts: string;
+  /**
+   * Pass true to update the message as the authed user. Bot users in this context are considered authed users.
+   */
+  asUser?: boolean;
+  /**
+   * A JSON-based array of structured
