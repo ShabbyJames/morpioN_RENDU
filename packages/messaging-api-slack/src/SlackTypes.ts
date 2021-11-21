@@ -666,3 +666,40 @@ export type MeMessageOptions = {
 export type DeleteScheduledMessageOptions = {
   /**
    * The channel the scheduled message is posting to
+   */
+  channel: string;
+  /**
+   * `scheduledMessageId` returned from call to chat.scheduleMessage
+   */
+  scheduledMessageId: string;
+  /**
+   * Pass true to delete the message as the authed user with chat:write:user scope. Bot users in this context are considered authed users. If unused or false, the message will be deleted with chat:write:bot scope.
+   */
+  asUser?: boolean;
+};
+
+// chat.scheduleMessage
+// https://api.slack.com/methods/chat.scheduleMessage
+export type ScheduleMessageOptions = Message & {
+  /**
+   * Channel, private group, or DM channel to send message to. Can be an encoded ID, or a name. See below for more details.
+   */
+  channel: string;
+  /**
+   * Pass true to post the message as the authed user, instead of as a bot. Defaults to false. See chat.postMessage.
+   */
+  asUser?: boolean;
+  /**
+   * A JSON-based array of structured attachments, presented as a URL-encoded string.
+   */
+  attachments?: string | Attachment[];
+  /**
+   * Find and link channel names and usernames.
+   */
+  linkNames?: boolean;
+  /**
+   * Change how messages are treated. Defaults to none. See chat.postMessage.
+   */
+  parse?: 'none' | 'full';
+  /**
+   * Used in conjunction with thread_ts and indicates whether reply should be made visible to everyone in the channel or conversati
