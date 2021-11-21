@@ -619,4 +619,50 @@ export type UpdateMessageOptions = Message & {
 };
 
 // chat.delete
-// 
+// https://api.slack.com/methods/chat.delete
+export type DeleteMessageOptions = {
+  /**
+   * Channel containing the message to be deleted.
+   */
+  channel: string;
+  /**
+   * Timestamp of the message to be deleted.
+   */
+  ts: string;
+  /**
+   * Pass true to delete the message as the authed user with chat:write:user scope. Bot users in this context are considered authed users. If unused or false, the message will be deleted with chat:write:bot scope.
+   */
+  asUser?: boolean;
+};
+
+// chat.getPermalink
+// https://api.slack.com/methods/chat.getPermalink
+export type GetPermalinkOptions = {
+  /**
+   * The ID of the conversation or channel containing the message
+   */
+  channel: string;
+  /**
+   * A message's ts value, uniquely identifying it within a channel
+   */
+  messageTs: string;
+};
+
+// chat.meMessage
+// https://api.slack.com/methods/chat.meMessage
+export type MeMessageOptions = {
+  /**
+   * Channel to send message to. Can be a public channel, private group or IM channel. Can be an encoded ID, or a name.
+   */
+  channel: string;
+  /**
+   * Text of the message to send.
+   */
+  text: string;
+};
+
+// chat.deleteScheduledMessage
+// https://api.slack.com/methods/chat.deleteScheduledMessage
+export type DeleteScheduledMessageOptions = {
+  /**
+   * The channel the scheduled message is posting to
