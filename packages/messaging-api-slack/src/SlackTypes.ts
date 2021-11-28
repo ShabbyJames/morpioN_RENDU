@@ -750,4 +750,52 @@ export type GetScheduledMessagesOptions = {
 
 // conversations.members
 // https://api.slack.com/methods/conversations.members
-export type Conver
+export type ConversationMembersOptions = {
+  cursor?: string;
+  limit?: number;
+};
+
+// conversations.list
+// https://api.slack.com/methods/conversations.list
+export type ConversationListOptions = {
+  cursor?: string;
+  excludeArchived?: boolean;
+  limit?: number;
+  types?: string;
+};
+
+// users.list
+// https://api.slack.com/methods/users.list
+export type UserListOptions = {
+  cursor?: string;
+  includeLocale?: boolean;
+  limit?: number;
+};
+
+export type ClientConfig = {
+  accessToken: string;
+  origin?: string;
+  onRequest?: OnRequestFunction;
+};
+
+// chat.unfurl
+// https://api.slack.com/methods/chat.unfurl
+export type UnfurlOptions = {
+  /**
+   * Channel ID of the message
+   */
+  channel: string;
+  /**
+   * Timestamp of the message to add unfurl behavior to.
+   */
+  ts: string;
+  /**
+   * URL-encoded JSON map with keys set to URLs featured in the the message, pointing to their unfurl blocks or message attachments.
+   */
+  unfurls: Record<string, any>;
+  /**
+   * Provide a simply-formatted string to send as an ephemeral message to the user as invitation to authenticate further and enable full unfurling behavior
+   */
+  userAuthMessage?: string;
+  /**
+   * Set to true or 1 to indicate the user must install your Slack app to tr
