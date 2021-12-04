@@ -798,4 +798,59 @@ export type UnfurlOptions = {
    */
   userAuthMessage?: string;
   /**
-   * Set to true or 1 to indicate the user must install your Slack app to tr
+   * Set to true or 1 to indicate the user must install your Slack app to trigger unfurls for this domain
+   */
+  userAuthRequired?: boolean;
+  /**
+   * Send users to this custom URL where they will complete authentication in your app to fully trigger unfurling. Value should be properly URL-encoded.
+   */
+  userAuthUrl?: string;
+};
+
+// views.open
+// https://api.slack.com/methods/views.open
+export type OpenViewOptions = {
+  /**
+   * Exchange a trigger to post to the user.
+   */
+  triggerId: string;
+  /**
+   * A view payload.
+   */
+  view: View;
+};
+
+// views.publish
+// https://api.slack.com/methods/views.publish
+export type PublishViewOptions = {
+  /**
+   * `id` of the user you want publish a view to.
+   */
+  userId: string;
+  /**
+   * A view payload.
+   */
+  view: View;
+  /**
+   * A string that represents view state to protect against possible race conditions.
+   */
+  hash?: string;
+};
+
+// views.update
+// https://api.slack.com/methods/views.update
+export type UpdateViewOptions = {
+  /**
+   * A view object.
+   */
+  view: View;
+  /**
+   * A unique identifier of the view set by the developer. Must be unique for all views on a team. Max length of 255 characters. Either viewId or externalId is required.
+   */
+  externalId?: string;
+  /**
+   * A string that represents view state to protect against possible race conditions.
+   */
+  hash?: string;
+  /**
+   *
