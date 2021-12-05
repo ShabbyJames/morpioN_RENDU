@@ -853,4 +853,20 @@ export type UpdateViewOptions = {
    */
   hash?: string;
   /**
-   *
+   * A unique identifier of the view to be updated. Either viewId or externalId is required.
+   */
+  viewId?: string;
+};
+
+// views.push
+// https://api.slack.com/methods/views.push
+export type PushViewOptions = {
+  /**
+   * Exchange a trigger to post to the user.
+   */
+  triggerId: string;
+  /**
+   * A view payload.
+   */
+  view: View;
+};
