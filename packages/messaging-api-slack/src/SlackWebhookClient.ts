@@ -95,4 +95,58 @@ export default class SlackWebhookClient {
   /**
    * Send multiple attachments which let you add more context to a message.
    *
-   * @param attachments
+   * @param attachments -  Messages are attachments, defined as an array. Each object contains the parameters to customize the appearance of a message attachment.
+   *
+   * @see https://api.slack.com/docs/message-attachments
+   *
+   * ```js
+   * await client.sendAttachments([
+   *   {
+   *     fallback: 'some text',
+   *     pretext: 'some pretext',
+   *     color: 'good',
+   *     fields: [
+   *       {
+   *         title: 'aaa',
+   *         value: 'bbb',
+   *         short: false,
+   *       },
+   *     ],
+   *   },
+   *   {
+   *     fallback: 'some other text',
+   *     pretext: 'some pther pretext',
+   *     color: '#FF0000',
+   *     fields: [
+   *       {
+   *         title: 'ccc',
+   *         value: 'ddd',
+   *         short: false,
+   *       },
+   *     ],
+   *   },
+   * ]);
+   * ```
+   */
+
+  sendAttachments(
+    attachments: SlackTypes.Attachment[]
+  ): Promise<SlackTypes.SendMessageSuccessResponse> {
+    return this.sendRawBody({ attachments });
+  }
+
+  /**
+   * Send only one attachment.
+   *
+   * @param attachment - Message is an attachment. The object contains the parameters to customize the appearance of a message attachment.
+   *
+   * @see https://api.slack.com/docs/message-attachments
+   *
+   * ```js
+   * await client.sendAttachment({
+   *   fallback: 'some text',
+   *   pretext: 'some pretext',
+   *   color: 'good',
+   *   fields: [
+   *     {
+   *   
