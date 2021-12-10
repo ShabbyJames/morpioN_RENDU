@@ -149,4 +149,17 @@ export default class SlackWebhookClient {
    *   color: 'good',
    *   fields: [
    *     {
-   *   
+   *       title: 'aaa',
+   *       value: 'bbb',
+   *       short: false,
+   *     },
+   *   ],
+   * });
+   * ```
+   */
+  sendAttachment(
+    attachment: SlackTypes.Attachment
+  ): Promise<SlackTypes.SendMessageSuccessResponse> {
+    return this.sendAttachments([attachment]);
+  }
+}
