@@ -140,4 +140,14 @@ describe('#onRequest', () => {
 
     expect(onRequest).toBeCalledWith({
       method: 'post',
-      url: 'https://slack.com/
+      url: 'https://slack.com/api/path',
+      body: {
+        x: 1,
+      },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Accept: 'application/json, text/plain, */*',
+      },
+    });
+  });
+});
