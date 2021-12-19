@@ -48,4 +48,40 @@ const VIEW_PAYLOAD = {
 };
 
 const VIEW_PAYLOAD_STRING =
-  '{"id":"VMHU10V25","team_id":"T8N4K1JN","type":"modal","title":{"type":"plain_text","text":"Quite a plain modal"},"sub
+  '{"id":"VMHU10V25","team_id":"T8N4K1JN","type":"modal","title":{"type":"plain_text","text":"Quite a plain modal"},"submit":{"type":"plain_text","text":"Create"},"blocks":[{"type":"input","block_id":"a_block_id","label":{"type":"plain_text","text":"A simple label","emoji":true},"optional":false,"element":{"type":"plain_text_input","action_id":"an_action_id"}}],"private_metadata":"Shh it is a secret","callback_id":"identify_your_modals","external_id":"","state":{"values":[]},"hash":"156772938.1827394","clear_on_close":false,"notify_on_close":false}';
+
+const snakecaseMembers = [
+  {
+    id: 'U023BECGF',
+    team_id: 'T021F9ZE2',
+    name: 'bobby',
+    deleted: false,
+    color: '9f69e7',
+    real_name: 'Bobby Tables',
+    tz: 'America/Los_Angeles',
+    tz_label: 'Pacific Daylight Time',
+    tz_offset: -25200,
+    profile: {
+      avatar_hash: 'ge3b51ca72de',
+      current_status: ':mountain_railway: riding a train',
+      first_name: 'Bobby',
+      last_name: 'Tables',
+      real_name: 'Bobby Tables',
+      email: 'bobby@slack.com',
+      skype: 'my-skype-name',
+      phone: '+1 (123) 456 7890',
+      image_24: 'https://...',
+      image_32: 'https://...',
+      image_48: 'https://...',
+      image_72: 'https://...',
+      image_192: 'https://...',
+    },
+    is_admin: true,
+    is_owner: true,
+    updated: 1490054400,
+    has_2fa: false,
+  },
+  {
+    id: 'W07QCRPA4',
+    team_id: 'T0G9PQBBK',
+    name: 'gl
