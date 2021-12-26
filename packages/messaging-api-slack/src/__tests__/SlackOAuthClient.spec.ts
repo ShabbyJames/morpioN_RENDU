@@ -345,4 +345,37 @@ describe('#chat.postMessage', () => {
         querystring.stringify({
           channel: CHANNEL,
           text: 'hello',
-       
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.postMessage({
+      channel: CHANNEL,
+      text: 'hello',
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call chat.postMessage with channel and attachments message', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.postMessage',
+        querystring.stringify({
+          channel: CHANNEL,
+          attachments:
+            '[{"text":"Choose a game to play","fallback":"You are unable to choose a game","callback_id":"wopr_game","color":"#3AA3E3","attachment_type":"default","actions":[{"name":"game","text":"Chess","type":"button","value":"chess"},{"name":"game","text":"Falken\'s Maze","type":"button","value":"maze"},{"name":"game","text":"Thermonuclear War","style":"danger","type":"button","value":"war","confirm":{"title":"Are you sure?","text":"Wouldn\'t you prefer a good game of chess?","ok
