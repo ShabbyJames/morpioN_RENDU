@@ -285,4 +285,64 @@ describe('#callMethod', () => {
       .reply(200, reply);
 
     const res = await client.callMethod('chat.postMessage', {
-      channel: CHAN
+      channel: CHANNEL,
+      text: 'hello',
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should throw if slack api return not ok', async () => {
+    expect.assertions(1);
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: false,
+      error: 'something wrong',
+      ts: '1405895017.000506',
+    };
+
+    mock
+      .onPost(
+        '/chat.postMessage',
+        querystring.stringify({
+          channel: CHANNEL,
+          text: 'hello',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    try {
+      await client.callMethod('chat.postMessage', {
+        channel: CHANNEL,
+        text: 'hello',
+      });
+    } catch (err) {
+      expect(err.message).toEqual('Slack API - something wrong');
+    }
+  });
+});
+
+describe('#chat.postMessage', () => {
+  it('should call chat.postMessage with channel and text message', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.postMessage',
+        querystring.stringify({
+          channel: CHANNEL,
+          text: 'hello',
+       
