@@ -229,4 +229,60 @@ const camelcaseUser = {
   profile: {
     avatarHash: 'ge3b51ca72de',
     currentStatus: ':mountain_railway: riding a train',
-    first
+    firstName: 'Bobby',
+    lastName: 'Tables',
+    realName: 'Bobby Tables',
+    tz: 'America/Los_Angeles',
+    tzLabel: 'Pacific Daylight Time',
+    tzOffset: -25200,
+    email: 'bobby@slack.com',
+    skype: 'my-skype-name',
+    phone: '+1 (123) 456 7890',
+    image24: 'https://...',
+    image32: 'https://...',
+    image48: 'https://...',
+    image72: 'https://...',
+    image192: 'https://...',
+  },
+  isAdmin: true,
+  isOwner: true,
+  updated: 1490054400,
+  has2fa: true,
+};
+
+const createMock = (): { client: SlackOAuthClient; mock: MockAdapter } => {
+  const client = new SlackOAuthClient({
+    accessToken: TOKEN,
+  });
+  const mock = new MockAdapter(client.axios);
+  return { client, mock };
+};
+
+describe('#callMethod', () => {
+  it('should call slack api', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.postMessage',
+        querystring.stringify({
+          channel: CHANNEL,
+          text: 'hello',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.callMethod('chat.postMessage', {
+      channel: CHAN
