@@ -426,4 +426,64 @@ describe('#chat.postMessage', () => {
             },
           ],
         },
-     
+      ],
+      asUser: true,
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call chat.postMessage with channel and text', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.postMessage',
+        querystring.stringify({
+          channel: CHANNEL,
+          text: 'hello',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.postMessage({
+      channel: CHANNEL,
+      text: 'hello',
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should support blocks', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.postMessage',
+        querystring.stringify({
+          channel: CHANNEL,
+          text: 'hello',
+          blocks: '[{"type":"section","text":{"type":"mrkdwn","text":"..."}}]',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*
