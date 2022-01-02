@@ -486,4 +486,64 @@ describe('#chat.postMessage', () => {
           token: TOKEN,
         }),
         {
-          Accept: 'application/json, text/plain, */*
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.postMessage({
+      channel: CHANNEL,
+      text: 'hello',
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: '...',
+          },
+        },
+      ],
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#chat.postEphemeral', () => {
+  it('should call chat.postEphemeral with channel, user and text message', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.postEphemeral',
+        querystring.stringify({
+          channel: CHANNEL,
+          user: USER,
+          text: 'hello',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.postEphemeral({
+      channel: CHANNEL,
+      user: USER,
+      text: 'hello',
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call chat.postEphemeral with channel, user and text and attachment
