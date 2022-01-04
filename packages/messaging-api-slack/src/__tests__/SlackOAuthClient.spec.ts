@@ -579,4 +579,52 @@ describe('#chat.postEphemeral', () => {
       channel: CHANNEL,
       user: USER,
       text: 'hello',
+      attachments: [
+        {
+          text: 'Choose a game to play',
+          fallback: 'You are unable to choose a game',
+          callbackId: 'wopr_game',
+          color: '#3AA3E3',
+          attachmentType: 'default',
+          actions: [
+            {
+              name: 'game',
+              text: 'Chess',
+              type: 'button',
+              value: 'chess',
+            },
+            {
+              name: 'game',
+              text: "Falken's Maze",
+              type: 'button',
+              value: 'maze',
+            },
+            {
+              name: 'game',
+              text: 'Thermonuclear War',
+              style: 'danger',
+              type: 'button',
+              value: 'war',
+              confirm: {
+                title: 'Are you sure?',
+                text: "Wouldn't you prefer a good game of chess?",
+                okText: 'Yes',
+                dismissText: 'No',
+              },
+            },
+          ],
+        },
+      ],
+      asUser: true,
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call chat.postEphemeral with channel, user and attachments message', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
   
