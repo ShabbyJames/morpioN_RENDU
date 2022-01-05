@@ -661,3 +661,57 @@ describe('#chat.postEphemeral', () => {
           attachmentType: 'default',
           actions: [
             {
+              name: 'game',
+              text: 'Chess',
+              type: 'button',
+              value: 'chess',
+            },
+            {
+              name: 'game',
+              text: "Falken's Maze",
+              type: 'button',
+              value: 'maze',
+            },
+            {
+              name: 'game',
+              text: 'Thermonuclear War',
+              style: 'danger',
+              type: 'button',
+              value: 'war',
+              confirm: {
+                title: 'Are you sure?',
+                text: "Wouldn't you prefer a good game of chess?",
+                okText: 'Yes',
+                dismissText: 'No',
+              },
+            },
+          ],
+        },
+      ],
+      asUser: true,
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call chat.postEphemeral with channel, user and text', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.postEphemeral',
+        querystring.stringify({
+          channel: CHANNEL,
+          user: USER,
+          text: 'hello',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*'
