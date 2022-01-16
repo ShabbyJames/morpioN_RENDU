@@ -776,4 +776,55 @@ describe('#chat.postEphemeral', () => {
 });
 
 describe('#chat.update', () => {
-  it('should call chat.update with channel, tex
+  it('should call chat.update with channel, text and ts', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.update',
+        querystring.stringify({
+          channel: CHANNEL,
+          text: 'hello',
+          ts: '1405894322.332768',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.update({
+      channel: CHANNEL,
+      text: 'hello',
+      ts: '1405894322.332768',
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call chat.update with channel, attachments and ts', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.update',
+        querystring.stringify({
+          channel: CHANNEL,
+          attachments:
+            '[{"text":"Choose a game to play","fallback":"You are unable to choose a game","callback_id":"wopr_game","color":"#3AA3E3","attachment_type":"default","actions":[{"name":"game"
