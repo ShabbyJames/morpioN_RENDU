@@ -913,4 +913,65 @@ describe('#chat.update', () => {
 
     const res = await client.chat.update({
       channel: CHANNEL,
-      text: 'hello
+      text: 'hello',
+      ts: '1405895017.000506',
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: '...',
+          },
+        },
+      ],
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#chat.delete', () => {
+  it('should call chat.delete with channel and ts', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      channel: 'C024BE91L',
+      ts: '1417671948.000006',
+    };
+
+    mock
+      .onPost(
+        '/chat.delete',
+        querystring.stringify({
+          channel: CHANNEL,
+          ts: '1405894322.002768',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.delete({
+      channel: CHANNEL,
+      ts: '1405894322.002768',
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call chat.delete with channel, ts and optional options', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      channel: 'C024BE91L',
+      ts: '1417671948.000009',
+    };
+
+    mock
+      .onPost(
+       
