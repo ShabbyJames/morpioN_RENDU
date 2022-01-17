@@ -862,4 +862,55 @@ describe('#chat.update', () => {
               value: 'maze',
             },
             {
-       
+              name: 'game',
+              text: 'Thermonuclear War',
+              style: 'danger',
+              type: 'button',
+              value: 'war',
+              confirm: {
+                title: 'Are you sure?',
+                text: "Wouldn't you prefer a good game of chess?",
+                okText: 'Yes',
+                dismissText: 'No',
+              },
+            },
+          ],
+        },
+      ],
+      asUser: true,
+      ts: '1405894322.332768',
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should support blocks', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.update',
+        querystring.stringify({
+          channel: CHANNEL,
+          text: 'hello',
+          ts: '1405895017.000506',
+          blocks: '[{"type":"section","text":{"type":"mrkdwn","text":"..."}}]',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.update({
+      channel: CHANNEL,
+      text: 'hello
