@@ -1033,4 +1033,55 @@ describe('#chat.meMessage', () => {
 });
 
 describe('#chat.getPermalink', () => {
-  it
+  it('should call chat.getPermalink with channel and text', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      channel: 'C1H9RESGA',
+      permalink: 'https://yoctol.slack.com/archives/C1H9RESGA/p135854651500008',
+    };
+
+    mock
+      .onPost(
+        '/chat.getPermalink',
+        querystring.stringify({
+          channel: CHANNEL,
+          message_ts: '9234567891.321456',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.getPermalink({
+      channel: CHANNEL,
+      message_ts: '9234567891.321456',
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#chat.scheduleMessage', () => {
+  it('should call chat.scheduleMessage with channel, text and post_at', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.scheduleMessage',
+        querystring.stringify({
+          channel: CHANNEL,
+          text: 'hello',
+          post_at: '299876400',
+          token: TOKEN,
