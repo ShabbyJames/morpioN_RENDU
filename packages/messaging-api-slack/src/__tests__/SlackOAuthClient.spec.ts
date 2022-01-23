@@ -1085,3 +1085,38 @@ describe('#chat.scheduleMessage', () => {
           text: 'hello',
           post_at: '299876400',
           token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.scheduleMessage({
+      channel: CHANNEL,
+      text: 'hello',
+      postAt: '299876400',
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call chat.scheduleMessage with channel, attachments and post_at', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.scheduleMessage',
+        querystring.stringify({
+          channel: CHANNEL,
+          attachments:
+            '[{"text":"Choose a game to play","fallback":"You are unable to choose a game","callback_id":"wopr_game","color":"#3AA3E3","attachment_type":"default","actions":[{"name":"game","text":"Chess","type":"button","value":"chess"},{"name":"game","text":"Falken\'s Maze","type":"button","value":"maze"},{"name":"game","text":"Thermonuclear War","style":"danger","type":"button","value":"war","confirm":{"title":"Are you sure?","text":"Wouldn\'t you prefer a good game of chess?","ok_text":"Yes","dismiss_text":"No"}}]}]',
+        
