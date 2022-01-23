@@ -974,4 +974,63 @@ describe('#chat.delete', () => {
 
     mock
       .onPost(
-       
+        '/chat.delete',
+        querystring.stringify({
+          channel: CHANNEL,
+          ts: '1405894322.022768',
+          as_user: true,
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.delete({
+      channel: CHANNEL,
+      ts: '1405894322.022768',
+      asUser: true,
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#chat.meMessage', () => {
+  it('should call chat.meMessage with channel and text', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      channel: 'C024BE91L',
+      ts: '1417671948.000006',
+    };
+
+    mock
+      .onPost(
+        '/chat.meMessage',
+        querystring.stringify({
+          channel: CHANNEL,
+          text: 'hello',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.meMessage({
+      channel: CHANNEL,
+      text: 'hello',
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#chat.getPermalink', () => {
+  it
