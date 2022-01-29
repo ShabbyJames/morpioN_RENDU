@@ -1167,4 +1167,60 @@ describe('#chat.scheduleMessage', () => {
             },
           ],
         },
-     
+      ],
+      asUser: true,
+      postAt: '299876400',
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should support blocks', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      ts: '1405895017.000506',
+      channel: 'C024BE91L',
+      message: {},
+    };
+
+    mock
+      .onPost(
+        '/chat.scheduleMessage',
+        querystring.stringify({
+          channel: 'C1234567890',
+          text: 'hello',
+          post_at: '299876400',
+          blocks: '[{"type":"section","text":{"type":"mrkdwn","text":"..."}}]',
+          token: 'xxxx-xxxxxxxxx-xxxx',
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.scheduleMessage({
+      channel: CHANNEL,
+      text: 'hello',
+      postAt: '299876400',
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: '...',
+          },
+        },
+      ],
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#chat.deleteScheduledMessage', () => {
+  it('should call chat.deleteScheduledMessage with channel and scheduledMessageId', async () => {
+    const { client, 
