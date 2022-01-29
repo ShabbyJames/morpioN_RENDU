@@ -1223,4 +1223,55 @@ describe('#chat.scheduleMessage', () => {
 
 describe('#chat.deleteScheduledMessage', () => {
   it('should call chat.deleteScheduledMessage with channel and scheduledMessageId', async () => {
-    const { client, 
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      channel: 'C024BE91L',
+      ts: '1417671948.040006',
+    };
+
+    mock
+      .onPost(
+        '/chat.deleteScheduledMessage',
+        querystring.stringify({
+          channel: CHANNEL,
+          scheduled_message_id: 'Q1234ABCD',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.deleteScheduledMessage({
+      channel: CHANNEL,
+      scheduledMessageId: 'Q1234ABCD',
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call chat.deleteScheduledMessage with channel, scheduledMessageId and optional options', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      channel: 'C024BE91L',
+      ts: '1417671948.040006',
+    };
+
+    mock
+      .onPost(
+        '/chat.deleteScheduledMessage',
+        querystring.stringify({
+          channel: CHANNEL,
+          scheduled_message_id: 'Q1234ABCD',
+          as_user: true,
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded
