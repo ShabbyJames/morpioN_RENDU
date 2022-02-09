@@ -1621,4 +1621,68 @@ describe('#getUserList', () => {
         }),
         {
           Accept: 'application/json, text/plain, */*',
-          'Conten
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.getUserList();
+
+    expect(res).toEqual({
+      members: camelcaseMembers,
+      next: 'dXNlcjpVMEc5V0ZYTlo=',
+    });
+  });
+
+  it('support no cursor in reply', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      members: snakecaseMembers,
+      cache_ts: 1498777272,
+    };
+
+    mock
+      .onPost(
+        '/users.list',
+        querystring.stringify({
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.getUserList();
+
+    expect(res).toEqual({ members: camelcaseMembers, next: undefined });
+  });
+});
+
+describe('#getAllUserList', () => {
+  it('should call users.list api', async () => {
+    const { client, mock } = createMock();
+
+    const reply1 = {
+      ok: true,
+      members: [snakecaseMembers[0]],
+      cache_ts: 1498777272,
+      response_metadata: {
+        next_cursor: 'cursor1',
+      },
+    };
+
+    const reply2 = {
+      ok: true,
+      members: [snakecaseMembers[1]],
+      cache_ts: 1498777272,
+    };
+
+    mock
+      .onPost(
+        '/users.list',
+        querystring.stringify({
+   
