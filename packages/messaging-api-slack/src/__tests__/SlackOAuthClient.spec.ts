@@ -1449,4 +1449,58 @@ describe('#views.publish', () => {
         '/views.publish',
         querystring.stringify({
           user_id: 'U0BPQUNTA',
-          view: VIEW_PAYLOAD_STRIN
+          view: VIEW_PAYLOAD_STRING,
+          hash: '156772938.1827394',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.views.publish({
+      userId: 'U0BPQUNTA',
+      view: VIEW_PAYLOAD,
+      hash: '156772938.1827394',
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#views.update', () => {
+  it('should call views.update with externalId and view payload', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      view: VIEW_PAYLOAD,
+    };
+
+    mock
+      .onPost(
+        '/views.update',
+        querystring.stringify({
+          external_id: 'bmarley_view2',
+          view: VIEW_PAYLOAD_STRING,
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.views.update({
+      externalId: 'bmarley_view2',
+      view: VIEW_PAYLOAD,
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call views.update with viewId and view payload', async () => {
+    const { client, mock } = c
