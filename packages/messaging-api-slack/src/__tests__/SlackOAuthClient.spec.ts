@@ -1390,4 +1390,63 @@ describe('#views.open', () => {
         }),
         {
           Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/x-www-
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.views.open({
+      triggerId: '12345.98765.abcd2358fdea',
+      view: VIEW_PAYLOAD,
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#views.publish', () => {
+  it('should call views.publish with userId and view payload', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      view: VIEW_PAYLOAD,
+    };
+
+    mock
+      .onPost(
+        '/views.publish',
+        querystring.stringify({
+          user_id: 'U0BPQUNTA',
+          view: VIEW_PAYLOAD_STRING,
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.views.publish({
+      userId: 'U0BPQUNTA',
+      view: VIEW_PAYLOAD,
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call views.publish with userId, view payload and hash', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      view: VIEW_PAYLOAD,
+    };
+
+    mock
+      .onPost(
+        '/views.publish',
+        querystring.stringify({
+          user_id: 'U0BPQUNTA',
+          view: VIEW_PAYLOAD_STRIN
