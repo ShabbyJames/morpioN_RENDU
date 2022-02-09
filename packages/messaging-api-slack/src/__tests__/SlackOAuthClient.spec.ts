@@ -1560,4 +1560,65 @@ describe('#views.update', () => {
     const res = await client.views.update({
       viewId: 'VMM512F2U',
       hash: '156772938.1827394',
-      view: VIEW_
+      view: VIEW_PAYLOAD,
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#views.push', () => {
+  it('should call views.push with triggerId and view payload', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      view: VIEW_PAYLOAD,
+    };
+
+    mock
+      .onPost(
+        '/views.push',
+        querystring.stringify({
+          trigger_id: '12345.98765.abcd2358fdea',
+          view: VIEW_PAYLOAD_STRING,
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.views.push({
+      triggerId: '12345.98765.abcd2358fdea',
+      view: VIEW_PAYLOAD,
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#getUserList', () => {
+  it('should call users.list api', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      members: snakecaseMembers,
+      cache_ts: 1498777272,
+      response_metadata: {
+        next_cursor: 'dXNlcjpVMEc5V0ZYTlo=',
+      },
+    };
+
+    mock
+      .onPost(
+        '/users.list',
+        querystring.stringify({
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Conten
