@@ -1334,3 +1334,60 @@ describe('#chat.unfurl', () => {
     const reply = {
       ok: true,
       channel: 'C024BE91L',
+      ts: '1417671948.990006',
+    };
+
+    mock
+      .onPost(
+        '/chat.unfurl',
+        querystring.stringify({
+          channel: CHANNEL,
+          ts: '1405894322.992768',
+          unfurls: {
+            'https://example.com/': {
+              text: 'Every day is the test.',
+            },
+          },
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.unfurl({
+      channel: CHANNEL,
+      ts: '1405894322.992768',
+      unfurls: {
+        'https://example.com/': {
+          text: 'Every day is the test.',
+        },
+      },
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#views.open', () => {
+  it('should call views.open with triggerId and view payload', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      view: VIEW_PAYLOAD,
+    };
+
+    mock
+      .onPost(
+        '/views.open',
+        querystring.stringify({
+          trigger_id: '12345.98765.abcd2358fdea',
+          view: VIEW_PAYLOAD_STRING,
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-
