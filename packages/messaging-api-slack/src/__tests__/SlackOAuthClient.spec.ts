@@ -1503,4 +1503,61 @@ describe('#views.update', () => {
   });
 
   it('should call views.update with viewId and view payload', async () => {
-    const { client, mock } = c
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      view: VIEW_PAYLOAD,
+    };
+
+    mock
+      .onPost(
+        '/views.update',
+        querystring.stringify({
+          view_id: 'VMM512F2U',
+          view: VIEW_PAYLOAD_STRING,
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.views.update({
+      viewId: 'VMM512F2U',
+      view: VIEW_PAYLOAD,
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should call views.update with viewId, view payload and hash', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      view: VIEW_PAYLOAD,
+    };
+
+    mock
+      .onPost(
+        '/views.update',
+        querystring.stringify({
+          view_id: 'VMM512F2U',
+          hash: '156772938.1827394',
+          view: VIEW_PAYLOAD_STRING,
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.views.update({
+      viewId: 'VMM512F2U',
+      hash: '156772938.1827394',
+      view: VIEW_
