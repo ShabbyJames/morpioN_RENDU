@@ -1274,4 +1274,63 @@ describe('#chat.deleteScheduledMessage', () => {
         }),
         {
           Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/x-www-form-urlencoded
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.deleteScheduledMessage({
+      channel: CHANNEL,
+      scheduledMessageId: 'Q1234ABCD',
+      as_user: true,
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#chat.scheduledMessages.list', () => {
+  it('should call chat.scheduledMessages.list', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      scheduledMessages: [
+        {
+          id: 1298393284,
+          channelId: 'C1H9RESGL',
+          postAt: 1551991428,
+          dateCreated: 1551891734,
+        },
+      ],
+      responseMetadata: {
+        nextCursor: '',
+      },
+    };
+
+    mock
+      .onPost(
+        '/chat.scheduledMessages.list',
+        querystring.stringify({
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.chat.scheduledMessages.list({});
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('#chat.unfurl', () => {
+  it('should call chat.unfurl with channel, ts and unfurls', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      channel: 'C024BE91L',
