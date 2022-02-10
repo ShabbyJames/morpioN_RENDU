@@ -1742,4 +1742,73 @@ describe('#getUserInfo', () => {
   });
 });
 
-describe('#getChannelInfo', ()
+describe('#getChannelInfo', () => {
+  const snakecaseChannelInfo = {
+    id: 'C024BE91L',
+    name: 'fun',
+
+    created: 1360782804,
+    creator: 'U024BE7LH',
+
+    is_archived: false,
+    is_general: false,
+    is_member: true,
+    is_starred: true,
+
+    members: [],
+
+    topic: {},
+    purpose: {},
+
+    last_read: '1401383885.000061',
+    latest: {},
+    unread_count: 0,
+    unread_count_display: 0,
+  };
+
+  const camelcaseChannelInfo = {
+    id: 'C024BE91L',
+    name: 'fun',
+
+    created: 1360782804,
+    creator: 'U024BE7LH',
+
+    isArchived: false,
+    isGeneral: false,
+    isMember: true,
+    isStarred: true,
+
+    members: [],
+
+    topic: {},
+    purpose: {},
+
+    lastRead: '1401383885.000061',
+    latest: {},
+    unreadCount: 0,
+    unreadCountDisplay: 0,
+  };
+
+  it('should call channels.info with channel id', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      channel: snakecaseChannelInfo,
+    };
+
+    mock
+      .onPost(
+        '/channels.info',
+        querystring.stringify({
+          channel: 'C024BE91L',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.getChannelInfo('C024B
