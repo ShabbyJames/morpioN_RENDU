@@ -1685,4 +1685,61 @@ describe('#getAllUserList', () => {
       .onPost(
         '/users.list',
         querystring.stringify({
-   
+          cursor: undefined,
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .replyOnce(200, reply1)
+      .onPost(
+        '/users.list',
+        querystring.stringify({
+          cursor: 'cursor1',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .replyOnce(200, reply2);
+
+    const res = await client.getAllUserList();
+
+    expect(res).toEqual(camelcaseMembers);
+  });
+});
+
+describe('#getUserInfo', () => {
+  it('should call users.info with user id', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      user: snakecaseUser,
+    };
+
+    mock
+      .onPost(
+        '/users.info',
+        querystring.stringify({
+          user: 'U023BECGF',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.getUserInfo('U023BECGF');
+
+    expect(res).toEqual(camelcaseUser);
+  });
+});
+
+describe('#getChannelInfo', ()
