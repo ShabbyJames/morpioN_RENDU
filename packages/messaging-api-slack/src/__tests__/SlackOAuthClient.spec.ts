@@ -1867,4 +1867,58 @@ describe('#getConversationInfo', () => {
     isGeneral: true,
     unlinked: 0,
     nameNormalized: 'general',
-    isReadOnl
+    isReadOnly: false,
+    isShared: false,
+    isExtShared: false,
+    isOrgShared: false,
+    pendingShared: [],
+    isPendingExtShared: false,
+    isMember: true,
+    isPrivate: false,
+    isMpim: false,
+    lastRead: '1502126650.228446',
+    topic: {
+      value: 'For public discussion of generalities',
+      creator: 'W012A3BCD',
+      lastSet: 1449709364,
+    },
+    purpose: {
+      value: 'This part of the workspace is for fun. Make fun here.',
+      creator: 'W012A3BCD',
+      lastSet: 1449709364,
+    },
+    previousNames: ['specifics', 'abstractions', 'etc'],
+    numMembers: 23,
+    locale: 'en-US',
+  };
+
+  it('should call conversations.info with channel id', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      channel: snakecaseChannelInfo,
+    };
+
+    mock
+      .onPost(
+        '/conversations.info',
+        querystring.stringify({
+          channel: 'C024BE91L',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.getConversationInfo('C024BE91L');
+
+    expect(res).toEqual(camelcaseChannelInfo);
+  });
+});
+
+describe('#getConversationMembers', () => {
+  it('should call conve
