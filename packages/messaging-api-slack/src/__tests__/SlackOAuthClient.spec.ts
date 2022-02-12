@@ -1921,4 +1921,56 @@ describe('#getConversationInfo', () => {
 });
 
 describe('#getConversationMembers', () => {
-  it('should call conve
+  it('should call conversations.members api', async () => {
+    const { client, mock } = createMock();
+
+    const members = ['U023BECGF', 'U061F7AUR', 'W012A3CDE'];
+
+    const reply = {
+      ok: true,
+      members,
+      cache_ts: 1498777272,
+      response_metadata: {
+        next_cursor: 'e3VzZXJfaWQ6IFcxMjM0NTY3fQ==',
+      },
+    };
+
+    mock
+      .onPost(
+        '/conversations.members',
+        querystring.stringify({
+          channel: 'C012AB3CD',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.getConversationMembers('C012AB3CD');
+
+    expect(res).toEqual({ members, next: 'e3VzZXJfaWQ6IFcxMjM0NTY3fQ==' });
+  });
+
+  it('support no cursor in reply', async () => {
+    const { client, mock } = createMock();
+
+    const members = ['U023BECGF', 'U061F7AUR', 'W012A3CDE'];
+
+    const reply = {
+      ok: true,
+      members,
+      cache_ts: 1498777272,
+    };
+
+    mock
+      .onPost(
+        '/conversations.members',
+        querystring.stringify({
+          channel: 'C012AB3CD',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
