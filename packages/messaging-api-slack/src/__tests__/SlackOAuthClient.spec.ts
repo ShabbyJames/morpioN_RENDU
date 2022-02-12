@@ -1974,3 +1974,58 @@ describe('#getConversationMembers', () => {
         }),
         {
           Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.getConversationMembers('C012AB3CD');
+
+    expect(res).toEqual({ members, next: undefined });
+  });
+});
+
+describe('#getAllConversationMembers', () => {
+  it('should call conversations.members api', async () => {
+    const { client, mock } = createMock();
+
+    const members = ['U023BECGF', 'U061F7AUR'];
+
+    const reply1 = {
+      ok: true,
+      members: [members[0]],
+      cache_ts: 1498777272,
+      response_metadata: {
+        next_cursor: 'cursor1',
+      },
+    };
+
+    const reply2 = {
+      ok: true,
+      members: [members[1]],
+      cache_ts: 1498777272,
+    };
+
+    mock
+      .onPost(
+        '/conversations.members',
+        querystring.stringify({
+          channel: 'C012AB3CD',
+          cursor: undefined,
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .replyOnce(200, reply1)
+      .onPost(
+        '/conversations.members',
+        querystring.stringify({
+          channel: 'C012AB3CD',
+          cursor: 'cursor1',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'applica
