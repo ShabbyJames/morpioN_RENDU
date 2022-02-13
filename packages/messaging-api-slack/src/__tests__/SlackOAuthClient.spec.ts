@@ -2028,4 +2028,54 @@ describe('#getAllConversationMembers', () => {
           token: TOKEN,
         }),
         {
-          Accept: 'applica
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .replyOnce(200, reply2);
+
+    const res = await client.getAllConversationMembers('C012AB3CD');
+
+    expect(res).toEqual(members);
+  });
+});
+
+describe('#getConversationList', () => {
+  const snakecaseChannels = [
+    {
+      id: 'G0AKFJBEU',
+      name: 'mpdm-mr.banks--slactions-jackson--beforebot-1',
+      is_channel: false,
+      is_group: true,
+      is_im: false,
+      created: 1493657761,
+      creator: 'U061F7AUR',
+      is_archived: false,
+      is_general: false,
+      unlinked: 0,
+      name_normalized: 'mpdm-mr.banks--slactions-jackson--beforebot-1',
+      is_shared: false,
+      is_ext_shared: false,
+      is_org_shared: false,
+      pending_shared: [],
+      is_pending_ext_shared: false,
+      is_member: true,
+      is_private: true,
+      is_mpim: true,
+      last_read: '0000000000.000000',
+      latest: {
+        type: 'message',
+        user: 'U061F7AUR',
+        text: 'test',
+        ts: '1493657775.857762',
+      },
+      unread_count: 0,
+      unread_count_display: 0,
+      is_open: true,
+      topic: {
+        value: 'Group messaging',
+        creator: 'U061F7AUR',
+        last_set: 1493657761,
+      },
+      purpose: {
+        value: 'Group messaging with: @mr.banks
