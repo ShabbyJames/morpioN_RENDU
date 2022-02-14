@@ -2134,4 +2134,62 @@ describe('#getConversationList', () => {
       },
       unreadCount: 0,
       unreadCountDisplay: 0,
-     
+      isOpen: true,
+      topic: {
+        value: 'Group messaging',
+        creator: 'U061F7AUR',
+        lastSet: 1493657761,
+      },
+      purpose: {
+        value: 'Group messaging with: @mr.banks @slactions-jackson @beforebot',
+        creator: 'U061F7AUR',
+        lastSet: 1493657761,
+      },
+      priority: 0,
+    },
+    {
+      id: 'D0C0F7S8Y',
+      created: 1498500348,
+      isIm: true,
+      isOrgShared: false,
+      user: 'U0BS9U4SV',
+      isUserDeleted: false,
+      priority: 0,
+    },
+    {
+      id: 'D0BSHH4AD',
+      created: 1498511030,
+      isIm: true,
+      isOrgShared: false,
+      user: 'U0C0NS9HN',
+      isUserDeleted: false,
+      priority: 0,
+    },
+  ];
+
+  it('should call conversations.list api', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      channels: snakecaseChannels,
+      cache_ts: 1498777272,
+      response_metadata: {
+        next_cursor: 'aW1faWQ6RDBCSDk1RExI',
+      },
+    };
+
+    mock
+      .onPost(
+        '/conversations.list',
+        querystring.stringify({
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.ge
