@@ -2192,4 +2192,58 @@ describe('#getConversationList', () => {
       )
       .reply(200, reply);
 
-    const res = await client.ge
+    const res = await client.getConversationList();
+
+    expect(res).toEqual({
+      channels: camelcaseChannels,
+      next: 'aW1faWQ6RDBCSDk1RExI',
+    });
+  });
+
+  it('support no cursor in reply', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      ok: true,
+      channels: snakecaseChannels,
+      cache_ts: 1498777272,
+    };
+
+    mock
+      .onPost(
+        '/conversations.list',
+        querystring.stringify({
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .reply(200, reply);
+
+    const res = await client.getConversationList();
+
+    expect(res).toEqual({ channels: camelcaseChannels, next: undefined });
+  });
+});
+
+describe('#getAllConversationList', () => {
+  const snakecaseChannels = [
+    {
+      id: 'C012AB3CD',
+      name: 'general',
+      is_channel: true,
+      is_group: false,
+      is_im: false,
+      created: 1449252889,
+      creator: 'U012A3CDE',
+      is_archived: false,
+      is_general: true,
+      unlinked: 0,
+      name_normalized: 'general',
+      is_shared: false,
+      is_ext_shared: false,
+      is_org_shared: false,
+      pending_shared: [],
+      is_pending_ext_shared: false,
