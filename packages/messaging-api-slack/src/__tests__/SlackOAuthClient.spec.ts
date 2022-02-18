@@ -2348,4 +2348,58 @@ describe('#getAllConversationList', () => {
       unlinked: 0,
       nameNormalized: 'random',
       isShared: false,
-      isExtShared: fa
+      isExtShared: false,
+      isOrgShared: false,
+      pendingShared: [],
+      isPendingExtShared: false,
+      isMember: true,
+      isPrivate: false,
+      isMpim: false,
+      topic: {
+        value: 'Non-work banter and water cooler conversation',
+        creator: '',
+        lastSet: 0,
+      },
+      purpose: {
+        value:
+          "A place for non-work-related flimflam, faffing, hodge-podge or jibber-jabber you'd prefer to keep out of more focused work-related channels.",
+        creator: '',
+        lastSet: 0,
+      },
+      previousNames: [],
+      numMembers: 4,
+    },
+  ];
+
+  it('should call conversations.list api', async () => {
+    const { client, mock } = createMock();
+
+    const reply1 = {
+      ok: true,
+      channels: [snakecaseChannels[0]],
+      cache_ts: 1498777272,
+      response_metadata: {
+        next_cursor: 'cursor1',
+      },
+    };
+
+    const reply2 = {
+      ok: true,
+      channels: [snakecaseChannels[1]],
+      cache_ts: 1498777272,
+    };
+
+    mock
+      .onPost(
+        '/conversations.list',
+        querystring.stringify({
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .replyOnce(200, reply1)
+      .onPost(
+        '/co
