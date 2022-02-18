@@ -2292,4 +2292,60 @@ describe('#getAllConversationList', () => {
       purpose: {
         value:
           "A place for non-work-related flimflam, faffing, hodge-podge or jibber-jabber you'd prefer to keep out of more focused work-related channels.",
-        creator: ''
+        creator: '',
+        last_set: 0,
+      },
+      previous_names: [],
+      num_members: 4,
+    },
+  ];
+
+  const camelcaseChannels = [
+    {
+      id: 'C012AB3CD',
+      name: 'general',
+      isChannel: true,
+      isGroup: false,
+      isIm: false,
+      created: 1449252889,
+      creator: 'U012A3CDE',
+      isArchived: false,
+      isGeneral: true,
+      unlinked: 0,
+      nameNormalized: 'general',
+      isShared: false,
+      isExtShared: false,
+      isOrgShared: false,
+      pendingShared: [],
+      isPendingExtShared: false,
+      isMember: true,
+      isPrivate: false,
+      isMpim: false,
+      topic: {
+        value: 'Company-wide announcements and work-based matters',
+        creator: '',
+        lastSet: 0,
+      },
+      purpose: {
+        value:
+          'This channel is for team-wide communication and announcements. All team members are in this channel.',
+        creator: '',
+        lastSet: 0,
+      },
+      previousNames: [],
+      numMembers: 4,
+    },
+    {
+      id: 'C061EG9T2',
+      name: 'random',
+      isChannel: true,
+      isGroup: false,
+      isIm: false,
+      created: 1449252889,
+      creator: 'U061F7AUR',
+      isArchived: false,
+      isGeneral: false,
+      unlinked: 0,
+      nameNormalized: 'random',
+      isShared: false,
+      isExtShared: fa
