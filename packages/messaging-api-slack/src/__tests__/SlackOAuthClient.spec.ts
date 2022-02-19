@@ -2402,4 +2402,20 @@ describe('#getAllConversationList', () => {
       )
       .replyOnce(200, reply1)
       .onPost(
-        '/co
+        '/conversations.list',
+        querystring.stringify({
+          cursor: 'cursor1',
+          token: TOKEN,
+        }),
+        {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      )
+      .replyOnce(200, reply2);
+
+    const res = await client.getAllConversationList();
+
+    expect(res).toEqual(camelcaseChannels);
+  });
+});
