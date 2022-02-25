@@ -50,4 +50,32 @@ const client = new TelegramClient({
 
 ### Error Handling
 
-`messaging-api-telegram` uses [axios](https://github.com/axios/axios
+`messaging-api-telegram` uses [axios](https://github.com/axios/axios) as HTTP client. We use [axios-error](https://github.com/bottenderjs/messaging-apis/tree/master/packages/axios-error) package to wrap API error instances for better formatting error messages. Directly calling `console.log` with the error instance will return formatted message. If you'd like to get the axios `request`, `response`, or `config`, you can still get them via those keys on the error instance.
+
+```js
+client.getWebhookInfo().catch((error) => {
+  console.log(error); // formatted error message
+  console.log(error.stack); // error stack trace
+  console.log(error.config); // axios request config
+  console.log(error.request); // HTTP request
+  console.log(error.response); // HTTP response
+});
+```
+
+<br />
+
+## API Reference
+
+All methods return a Promise.
+
+<br />
+
+### Webhook API
+
+- [getWebhookInfo](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getwebhookinfo)
+- [getUpdates](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getupdates)
+- [setWebhook](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#setwebhook)
+- [deleteWebhook](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#deletewebhook)
+
+<br />
+
