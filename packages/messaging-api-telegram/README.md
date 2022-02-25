@@ -79,3 +79,16 @@ All methods return a Promise.
 
 <br />
 
+<a id="send-api" />
+
+### Send API - [Official Docs](https://core.telegram.org/bots/api#available-methods)
+
+- [sendMessage](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendmessage)
+- [sendPhoto](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendphoto)
+- [sendAudio](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendaudio)
+- [sendDocument](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#senddocument)
+- [sendSticker](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendsticker)
+- [sendVideo](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendvideo)
+- [sendVoice](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendvoice)
+- [sendVideoNote](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendvideonote)
+- [sendMediaGroup](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendmedi
