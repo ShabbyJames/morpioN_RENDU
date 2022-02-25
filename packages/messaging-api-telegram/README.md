@@ -91,4 +91,19 @@ All methods return a Promise.
 - [sendVideo](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendvideo)
 - [sendVoice](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendvoice)
 - [sendVideoNote](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendvideonote)
-- [sendMediaGroup](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendmedi
+- [sendMediaGroup](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendmediagroup)
+- [sendLocation](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendlocation)
+- [sendVenue](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendvenue)
+- [sendContact](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendcontact)
+- [sendChatAction](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendchataction)
+
+<br />
+
+### Get API
+
+- [getMe](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getme)
+- [getUserProfilePhotos](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getuserprofilephotos)
+- [getFile](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getfile)
+- [getFileLink](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getfilelink)
+- [getChat](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getchat)
+- [getChatAdministrators](htt
