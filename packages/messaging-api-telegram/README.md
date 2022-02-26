@@ -119,4 +119,18 @@ All methods return a Promise.
 - [editMessageReplyMarkup](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#editmessagereplymarkup)
 - [deleteMessage](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#deletemessage)
 - [editMessageLiveLocation](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#editmessagelivelocation)
-- [stopMessageLiveLocation](https://bottenderjs.github.io/messaging-apis/latest/
+- [stopMessageLiveLocation](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#stopmessagelivelocation)
+
+<br />
+
+### Group API
+
+- [kickChatMember](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#kickchatmember)
+- [unbanChatMember](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#unbanchatmember)
+- [restrictChatMember](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#restrictchatmember)
+- [promoteChatMember](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#promotechatmember)
+- [exportChatInviteLink](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#exportchatinvitelink)
+- [deleteChatPhoto](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#deletechatphoto)
+- [setChatTitle](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#setchattitle)
+- [setChatDescription](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#setchatdescription)
+- [setChatStickerSet](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram
