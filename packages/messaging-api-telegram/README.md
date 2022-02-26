@@ -106,4 +106,17 @@ All methods return a Promise.
 - [getFile](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getfile)
 - [getFileLink](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getfilelink)
 - [getChat](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getchat)
-- [getChatAdministrators](htt
+- [getChatAdministrators](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getchatadministrators)
+- [getChatMembersCount](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getchatmemberscount)
+- [getChatMember](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getchatmember)
+
+<br />
+
+### Updating API
+
+- [editMessageText](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#editmessagetext)
+- [editMessageCaption](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#editmessagecaption)
+- [editMessageReplyMarkup](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#editmessagereplymarkup)
+- [deleteMessage](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#deletemessage)
+- [editMessageLiveLocation](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#editmessagelivelocation)
+- [stopMessageLiveLocation](https://bottenderjs.github.io/messaging-apis/latest/
