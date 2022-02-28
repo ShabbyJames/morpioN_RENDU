@@ -133,4 +133,26 @@ All methods return a Promise.
 - [deleteChatPhoto](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#deletechatphoto)
 - [setChatTitle](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#setchattitle)
 - [setChatDescription](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#setchatdescription)
-- [setChatStickerSet](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram
+- [setChatStickerSet](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#setchatstickerset)
+- [deleteChatStickerSet](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#deletechatstickerset)
+- [pinChatMessage](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#pinchatmessage)
+- [unpinChatMessage](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#unpinchatmessage)
+- [leaveChat](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#leavechat)
+
+<br />
+
+### Payments API
+
+- [sendInvoice](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendinvoice)
+- [answerShippingQuery](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#answershippingquery)
+- [answerPreCheckoutQuery](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#answerprecheckoutquery)
+
+<br />
+
+### Inline mode API
+
+- [answerInlineQuery](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#answerinlinequery)
+
+<br />
+
+### Game
