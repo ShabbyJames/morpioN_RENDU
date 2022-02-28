@@ -155,4 +155,54 @@ All methods return a Promise.
 
 <br />
 
-### Game
+### Game API
+
+- [sendGame](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#sendgame)
+- [setGameScore](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#setgamescore)
+- [getGameHighScores](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#getgamehighscores)
+
+<br />
+
+### Others
+
+- [forwardMessage](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_telegram.TelegramClient.html#forwardmessage)
+
+<br />
+
+## Debug Tips
+
+### Log Requests Details
+
+To enable default request debugger, use following `DEBUG` env variable:
+
+```sh
+DEBUG=messaging-api:request
+```
+
+If you want to use a custom request logging function, just provide your own `onRequest`:
+
+```js
+const client = new TelegramClient({
+  accessToken: ACCESS_TOKEN,
+  onRequest: ({ method, url, headers, body }) => {
+    /* */
+  },
+});
+```
+
+## Testing
+
+### Point Requests to Your Dummy Server
+
+To avoid sending requests to real Telegram server, specify the `origin` option when constructing your client:
+
+```js
+const { TelegramClient } = require('messaging-api-telegram');
+
+const client = new TelegramClient({
+  accessToken: ACCESS_TOKEN,
+  origin: 'https://mydummytestserver.com',
+});
+```
+
+> Warning: Don't do this on you
