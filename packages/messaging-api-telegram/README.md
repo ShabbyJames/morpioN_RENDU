@@ -205,4 +205,4 @@ const client = new TelegramClient({
 });
 ```
 
-> Warning: Don't do this on you
+> Warning: Don't do this on your production server.
