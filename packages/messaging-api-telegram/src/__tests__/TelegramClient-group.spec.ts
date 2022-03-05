@@ -118,4 +118,54 @@ describe('group api', () => {
           until_date: 1577721600,
         }
       );
-      expect(r
+      expect(res).toEqual(result);
+    });
+    it('should restrict chat member with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/restrictChatMember', {
+          chat_id: 427770117,
+          user_id: 313534466,
+          permissions: {
+            can_send_messages: true,
+            can_send_media_messages: true,
+            can_send_polls: true,
+            can_send_other_messages: true,
+            can_add_web_page_previews: true,
+            can_change_info: true,
+            can_invite_users: true,
+            can_pin_messages: true,
+          },
+          until_date: 1577721600,
+        })
+        .reply(200, reply);
+
+      const res = await client.restrictChatMember(
+        427770117,
+        313534466,
+        {
+          canSendMessages: true,
+          canSendMediaMessages: true,
+          canSendPolls: true,
+          canSendOtherMessages: true,
+          canAddWebPagePreviews: true,
+          canChangeInfo: true,
+          canInviteUsers: true,
+          canPinMessages: true,
+        },
+        {
+          untilDate: 1577721600,
+        }
+      );
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#promoteChatMember', () => {
+    const result = true;
+    const reply = {
+      ok: true,
+      result,
+    };
+
+  
