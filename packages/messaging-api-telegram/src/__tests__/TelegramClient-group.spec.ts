@@ -70,4 +70,52 @@ describe('group api', () => {
         .reply(200, reply);
 
       const res = await client.unbanChatMember(427770117, 313534466);
-      expect(res).toEqual
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#restrictChatMember', () => {
+    const result = true;
+    const reply = {
+      ok: true,
+      result,
+    };
+
+    it('should restrict chat member with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/restrictChatMember', {
+          chat_id: 427770117,
+          user_id: 313534466,
+          permissions: {
+            can_send_messages: true,
+            can_send_media_messages: true,
+            can_send_polls: true,
+            can_send_other_messages: true,
+            can_add_web_page_previews: true,
+            can_change_info: true,
+            can_invite_users: true,
+            can_pin_messages: true,
+          },
+          until_date: 1577721600,
+        })
+        .reply(200, reply);
+
+      const res = await client.restrictChatMember(
+        427770117,
+        313534466,
+        {
+          can_send_messages: true,
+          can_send_media_messages: true,
+          can_send_polls: true,
+          can_send_other_messages: true,
+          can_add_web_page_previews: true,
+          can_change_info: true,
+          can_invite_users: true,
+          can_pin_messages: true,
+        },
+        {
+          until_date: 1577721600,
+        }
+      );
+      expect(r
