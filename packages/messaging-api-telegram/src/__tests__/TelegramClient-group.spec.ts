@@ -168,4 +168,44 @@ describe('group api', () => {
       result,
     };
 
-  
+    it('should pormote chat member with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/promoteChatMember', {
+          chat_id: 427770117,
+          user_id: 313534466,
+          can_change_info: true,
+          can_post_messages: true,
+          can_edit_messages: true,
+          can_delete_messages: true,
+          can_invite_users: true,
+          can_restrict_members: true,
+          can_pin_messages: true,
+          can_promote_members: true,
+        })
+        .reply(200, reply);
+
+      const res = await client.promoteChatMember(427770117, 313534466, {
+        can_change_info: true,
+        can_post_messages: true,
+        can_edit_messages: true,
+        can_delete_messages: true,
+        can_invite_users: true,
+        can_restrict_members: true,
+        can_pin_messages: true,
+        can_promote_members: true,
+      });
+      expect(res).toEqual(result);
+    });
+
+    it('should pormote chat member with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/promoteChatMember', {
+          chat_id: 427770117,
+          user_id: 313534466,
+          can_change_info: true,
+          can_post_messages: true,
+          can_edit_messages: true,
+          can_delete_messages: true,
+    
