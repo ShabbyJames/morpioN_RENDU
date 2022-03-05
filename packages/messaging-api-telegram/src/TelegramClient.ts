@@ -1815,3 +1815,196 @@ export default class TelegramClient {
    * @param product.description - Product description, 1-255 characters
    * @param product.payload - Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use for your internal processes.
    * @param product.providerToken - Payments provider token, obtained via Botfather
+   * @param product.startParameter - Unique deep-linking parameter that can be used to generate this invoice when used as a start parameter
+   * @param product.currency - Three-letter ISO 4217 currency code, see more on currencies
+   * @param product.prices - Price breakdown, a list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.)
+   * @param options - Options for other optional parameters.
+   * @returns On success, the sent Message is returned.
+   *
+   * @see https://core.telegram.org/bots/api#sendinvoice
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendInvoice(CHAT_ID, {
+   *   title: 'product name',
+   *   description: 'product description',
+   *   payload: 'bot-defined invoice payload',
+   *   providerToken: 'PROVIDER_TOKEN',
+   *   startParameter: 'pay',
+   *   currency: 'USD',
+   *   prices: [
+   *     { label: 'product', amount: 11000 },
+   *     { label: 'tax', amount: 11000 },
+   *   ],
+   * });
+   * ```
+   */
+  sendInvoice(
+    chatId: number,
+    product: TelegramTypes.Product,
+    options?: TelegramTypes.SendInvoiceOption
+  ): Promise<TelegramTypes.Message> {
+    return this.request('/sendInvoice', {
+      chatId,
+      ...product,
+      ...options,
+    });
+  }
+
+  /**
+   * If you sent an invoice requesting a shipping address and the parameter is_flexible was specified, the Bot API will send an Update with a shipping_query field to the bot. Use this method to reply to shipping queries. On success, True is returned.
+   *
+   * @param shippingQueryId - Unique identifier for the query to be answered
+   * @param ok - Specify True if delivery to the specified address is possible and False if there are any problems (for example, if delivery to the specified address is not possible)
+   * @param options - Options for other optional parameters.
+   *
+   * @see https://core.telegram.org/bots/api#answershippingquery
+   *
+   * @example
+   *
+   * ```js
+   * await client.answerShippingQuery('UNIQUE_ID', true);
+   * ```
+   */
+  answerShippingQuery(
+    shippingQueryId: string,
+    ok: boolean,
+    options?: TelegramTypes.AnswerShippingQueryOption
+  ): Promise<boolean> {
+    return this.request('/answerShippingQuery', {
+      shippingQueryId,
+      ok,
+      ...options,
+    });
+  }
+
+  /**
+   * Once the user has confirmed their payment and shipping details, the Bot API sends the final confirmation in the form of an Update with the field pre_checkout_query. Use this method to respond to such pre-checkout queries. Note: The Bot API must receive an answer within 10 seconds after the pre-checkout query was sent.
+   *
+   * @param preCheckoutQueryId - Unique identifier for the query to be answered
+   * @param ok - Specify True if everything is alright (goods are available, etc.) and the bot is ready to proceed with the order. Use False if there are any problems.
+   * @param options - Optional parameters for other parameters.
+   * @returns On success, True is returned.
+   *
+   * @see https://core.telegram.org/bots/api#answerprecheckoutquery
+   *
+   * @example
+   *
+   * ```js
+   * await client.answerPreCheckoutQuery('UNIQUE_ID', true);
+   * ```
+   */
+  answerPreCheckoutQuery(
+    preCheckoutQueryId: string,
+    ok: boolean,
+    options?: TelegramTypes.AnswerPreCheckoutQueryOption
+  ): Promise<boolean> {
+    return this.request('/answerPreCheckoutQuery', {
+      preCheckoutQueryId,
+      ok,
+      ...options,
+    });
+  }
+
+  /**
+   * @see https://core.telegram.org/bots/api#setpassportdataerrors
+   */
+  // TODO: implement setPassportDataErrors
+
+  /**
+   * Use this method to send a game.
+   *
+   * @param chatId - Unique identifier for the target chat
+   * @param gameShortName - Short name of the game, serves as the unique identifier for the game. Set up your games via Botfather.
+   * @param options - Options for other optional parameters.
+   * @returns On success, the sent Message is returned.
+   *
+   * @see https://core.telegram.org/bots/api#sendgame
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendGame(CHAT_ID, 'Mario Bros.', {
+   *   disableNotification: true,
+   * });
+   * ```
+   */
+  sendGame(
+    chatId: number,
+    gameShortName: string,
+    options?: TelegramTypes.SendGameOption
+  ): Promise<TelegramTypes.Message> {
+    return this.request('/sendGame', {
+      chatId,
+      gameShortName,
+      ...options,
+    });
+  }
+
+  /**
+   * Use this method to set the score of the specified user in a game.
+   *
+   * @param userId - User identifier
+   * @param score - New score, must be non-negative
+   * @param options - Options for other optional parameters.
+   * @returns On success, if the message was sent by the bot, returns the edited Message, otherwise returns True. Returns an error, if the new score is not greater than the user's current score in the chat and force is False.
+   *
+   * @see https://core.telegram.org/bots/api#setgamescore
+   *
+   * @example
+   *
+   * ```js
+   * await client.setGameScore(USER_ID, 999);
+   * ```
+   */
+  setGameScore(
+    userId: number,
+    score: number,
+    options?: TelegramTypes.SetGameScoreOption
+  ): Promise<TelegramTypes.Message | boolean> {
+    return this.request('/setGameScore', {
+      userId,
+      score,
+      ...options,
+    });
+  }
+
+  /**
+   * Use this method to get data for high score tables. Will return the score of the specified user and several of his neighbors in a game. On success, returns an Array of GameHighScore objects.
+   *
+   * This method will currently return scores for the target user, plus two of his closest neighbors on each side. Will also return the top three users if the user and his neighbors are not among them. Please note that this behavior is subject to change.
+   *
+   * @param userId - Target user id
+   * @param options - Optional parameters for other parameters.
+   * @returns Will return the score of the specified user and several of his neighbors in a game. On success, returns an Array of GameHighScore objects.
+   *
+   * @see https://core.telegram.org/bots/api#getgamehighscores
+   *
+   * @example
+   *
+   * ```js
+   * await client.getGameHighScores(USER_ID);
+   * // [
+   * //   {
+   * //     position: 1,
+   * //     user: {
+   * //       id: 427770117,
+   * //       isBot: false,
+   * //       firstName: 'first',
+   * //     },
+   * //     score: 999,
+   * //   },
+   * // ]
+   * ```
+   */
+  getGameHighScores(
+    userId: number,
+    options?: TelegramTypes.GetGameHighScoresOption
+  ): Promise<TelegramTypes.GameHighScore[]> {
+    return this.request('/getGameHighScores', {
+      userId,
+      ...options,
+    });
+  }
+}
