@@ -208,4 +208,48 @@ describe('group api', () => {
           can_post_messages: true,
           can_edit_messages: true,
           can_delete_messages: true,
-    
+          can_invite_users: true,
+          can_restrict_members: true,
+          can_pin_messages: true,
+          can_promote_members: true,
+        })
+        .reply(200, reply);
+
+      const res = await client.promoteChatMember(427770117, 313534466, {
+        canChangeInfo: true,
+        canPostMessages: true,
+        canEditMessages: true,
+        canDeleteMessages: true,
+        canInviteUsers: true,
+        canRestrictMembers: true,
+        canPinMessages: true,
+        canPromoteMembers: true,
+      });
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#setChatPermissions', () => {
+    const result = true;
+    const reply = {
+      ok: true,
+      result,
+    };
+
+    it('should set chat permissions with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/setChatPermissions', {
+          chat_id: 427770117,
+          permissions: {
+            can_send_messages: true,
+            can_send_media_messages: true,
+            can_send_polls: true,
+            can_send_other_messages: true,
+            can_add_web_page_previews: true,
+            can_change_info: true,
+            can_invite_users: true,
+            can_pin_messages: true,
+          },
+        })
+        .reply(
