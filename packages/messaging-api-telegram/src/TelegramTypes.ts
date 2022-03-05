@@ -2379,3 +2379,170 @@ export type SendInvoiceOption = {
   /**
    * Photo size
    */
+  photoSize?: number;
+
+  /**
+   * Photo width
+   */
+  photoWidth?: number;
+
+  /**
+   * Photo height
+   */
+  photoHeight?: number;
+
+  /**
+   * Pass True, if you require the user's full name to complete the order
+   */
+  needName?: boolean;
+
+  /**
+   * Pass True, if you require the user's phone number to complete the order
+   */
+  needPhoneNumber?: boolean;
+
+  /**
+   * Pass True, if you require the user's email address to complete the order
+   */
+  needEmail?: boolean;
+
+  /**
+   * Pass True, if you require the user's shipping address to complete the order
+   */
+  needShippingAddress?: boolean;
+
+  /**
+   * Pass True, if user's phone number should be sent to provider
+   */
+  sendPhoneNumberToProvider?: boolean;
+
+  /**
+   * Pass True, if user's email address should be sent to provider
+   */
+  sendEmailToProvider?: boolean;
+
+  /**
+   * Pass True, if the final price depends on the shipping method
+   */
+  isFlexible?: boolean;
+
+  /**
+   * Sends the message silently. Users will receive a notification with no sound.
+   *
+   * - https://telegram.org/blog/channels-2-0#silent-messages
+   */
+  disableNotification?: boolean;
+
+  /**
+   * If the message is a reply, ID of the original message
+   */
+  replyToMessageId?: number;
+
+  /**
+   * A JSON-serialized object for an inline keyboard. If empty, one 'Pay total price' button will be shown. If not empty, the first button must be a Pay button.
+   *
+   * - https://core.telegram.org/bots#inline-keyboards-and-on-the-fly-updating
+   * - https://core.telegram.org/bots/api#inlinekeyboardmarkup
+   */
+  replyMarkup?: InlineKeyboardMarkup;
+};
+
+export type AnswerShippingQueryOption =
+  | {
+      /**
+       * Required if ok is True. A JSON-serialized array of available shipping options.
+       */
+      shippingOptions?: ShippingOption[];
+    }
+  | {
+      /**
+       * Required if ok is False. Error message in human readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable'). Telegram will display this message to the user.
+       */
+      errorMessage?: string;
+    };
+
+export type AnswerPreCheckoutQueryOption = {
+  /**
+   * Required if ok is False. Error message in human readable form that explains the reason for failure to proceed with the checkout (e.g. "Sorry, somebody just bought the last of our amazing black T-shirts while you were busy filling out your payment details. Please choose a different color or garment!"). Telegram will display this message to the user.
+   */
+  errorMessage?: string;
+};
+
+export type AnswerCallbackQueryOption = {
+  /**
+   * Text of the notification. If not specified, nothing will be shown to the user, 0-200 characters
+   */
+  text?: string;
+
+  /**
+   * If true, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.
+   */
+  showAlert?: boolean;
+
+  /**
+   * URL that will be opened by the user's client. If you have created a Game and accepted the conditions via `@Botfather`, specify the URL that opens your game – note that this will only work if the query comes from a callback_game button.
+   *
+   * Otherwise, you may use links like t.me/your_bot?start=XXXX that open your bot with a parameter.
+   */
+  url?: string;
+
+  /**
+   * The maximum amount of time in seconds that the result of the callback query may be cached client-side. Telegram apps will support caching starting in version 3.14. Defaults to 0.
+   */
+  cacheTime?: number;
+};
+
+export type SendGameOption = {
+  /**
+   * Sends the message silently. Users will receive a notification with no sound.
+   *
+   * - https://telegram.org/blog/channels-2-0#silent-messages
+   */
+  disableNotification?: boolean;
+
+  /**
+   * If the message is a reply, ID of the original message
+   */
+  replyToMessageId?: number;
+
+  /**
+   * A JSON-serialized object for an inline keyboard. If empty, one ‘Play game_title’ button will be shown. If not empty, the first button must launch the game.
+   *
+   * - https://core.telegram.org/bots#inline-keyboards-and-on-the-fly-updating
+   * - https://core.telegram.org/bots/api#inlinekeyboardmarkup
+   */
+  replyMarkup?: InlineKeyboardMarkup;
+};
+
+export type SetGameScoreOption = EditOption & {
+  /**
+   * Pass True, if the high score is allowed to decrease. This can be useful when fixing mistakes or banning cheaters
+   */
+  force?: boolean;
+
+  /**
+   * Pass True, if the game message should not be automatically edited to include the current scoreboard
+   */
+  disableEditMessage?: boolean;
+};
+
+export type GetGameHighScoresOption = EditOption;
+
+export type CreateNewStickerSetOption = {
+  /**
+   * Pass True, if a set of mask stickers should be created
+   */
+  containsMasks?: boolean;
+
+  /**
+   * A JSON-serialized object for position where the mask should be placed on faces
+   */
+  maskPosition?: MaskPosition;
+};
+
+export type AddStickerToSetOption = {
+  /**
+   * A JSON-serialized object for position where the mask should be placed on faces
+   */
+  maskPosition?: MaskPosition;
+};
