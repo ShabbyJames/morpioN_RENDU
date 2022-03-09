@@ -349,4 +349,52 @@ describe('group api', () => {
       };
 
       mock
-        .onPos
+        .onPost('/setChatTitle', {
+          chat_id: 427770117,
+          title: 'New Title',
+        })
+        .reply(200, reply);
+
+      const res = await client.setChatTitle(427770117, 'New Title');
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#setChatDescription', () => {
+    it('should set chat description', async () => {
+      const { client, mock } = createMock();
+      const result = true;
+      const reply = {
+        ok: true,
+        result,
+      };
+
+      mock
+        .onPost('/setChatDescription', {
+          chat_id: 427770117,
+          description: 'New Description',
+        })
+        .reply(200, reply);
+
+      const res = await client.setChatDescription(427770117, 'New Description');
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#setChatStickerSet', () => {
+    it('should set a new group sticker set', async () => {
+      const { client, mock } = createMock();
+      const result = true;
+      const reply = {
+        ok: true,
+        result,
+      };
+
+      mock
+        .onPost('/setChatStickerSet', {
+          chat_id: 427770117,
+          sticker_set_name: 'Sticker Set Name',
+        })
+        .reply(200, reply);
+
+      const res = await client.setChatStickerSet(427770117,
