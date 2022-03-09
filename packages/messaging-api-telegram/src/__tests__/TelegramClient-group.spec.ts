@@ -292,4 +292,61 @@ describe('group api', () => {
         canSendOtherMessages: true,
         canAddWebPagePreviews: true,
         canChangeInfo: true,
-        
+        canInviteUsers: true,
+        canPinMessages: true,
+      });
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#exportChatInviteLink', () => {
+    it('should export chat invite link', async () => {
+      const { client, mock } = createMock();
+      const result = true;
+      const reply = {
+        ok: true,
+        result,
+      };
+
+      mock
+        .onPost('/exportChatInviteLink', {
+          chat_id: 427770117,
+        })
+        .reply(200, reply);
+
+      const res = await client.exportChatInviteLink(427770117);
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#deleteChatPhoto', () => {
+    it('should delete chat photo', async () => {
+      const { client, mock } = createMock();
+      const result = true;
+      const reply = {
+        ok: true,
+        result,
+      };
+
+      mock
+        .onPost('/deleteChatPhoto', {
+          chat_id: 427770117,
+        })
+        .reply(200, reply);
+
+      const res = await client.deleteChatPhoto(427770117);
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#setChatTitle', () => {
+    it('should set chat title', async () => {
+      const { client, mock } = createMock();
+      const result = true;
+      const reply = {
+        ok: true,
+        result,
+      };
+
+      mock
+        .onPos
