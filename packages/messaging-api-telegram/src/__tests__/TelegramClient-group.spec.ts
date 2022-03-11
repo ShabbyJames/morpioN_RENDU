@@ -448,4 +448,57 @@ describe('group api', () => {
     it('should pin a message in chat with camelcase', async () => {
       const { client, mock } = createMock();
       mock
-        .onPost('/pin
+        .onPost('/pinChatMessage', {
+          chat_id: 427770117,
+          message_id: 1,
+          disable_notification: true,
+        })
+        .reply(200, reply);
+
+      const res = await client.pinChatMessage(427770117, 1, {
+        disableNotification: true,
+      });
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#unpinChatMessage', () => {
+    it('should unpin a message in chat', async () => {
+      const { client, mock } = createMock();
+      const result = true;
+      const reply = {
+        ok: true,
+        result,
+      };
+
+      mock
+        .onPost('/unpinChatMessage', {
+          chat_id: 427770117,
+        })
+        .reply(200, reply);
+
+      const res = await client.unpinChatMessage(427770117);
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#leaveChat', () => {
+    it('should leave chat', async () => {
+      const { client, mock } = createMock();
+      const result = true;
+      const reply = {
+        ok: true,
+        result,
+      };
+
+      mock
+        .onPost('/leaveChat', {
+          chat_id: 427770117,
+        })
+        .reply(200, reply);
+
+      const res = await client.leaveChat(427770117);
+      expect(res).toEqual(result);
+    });
+  });
+})
