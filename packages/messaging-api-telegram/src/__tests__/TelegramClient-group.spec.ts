@@ -501,4 +501,4 @@ describe('group api', () => {
       expect(res).toEqual(result);
     });
   });
-})
+});
