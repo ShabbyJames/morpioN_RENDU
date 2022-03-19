@@ -1060,3 +1060,852 @@ describe('send api', () => {
       expect(res).toEqual(result);
     });
   });
+
+  describe('#sendVoice', () => {
+    const result = {
+      messageId: 1,
+      from: {
+        id: 313534466,
+        firstName: 'first',
+        username: 'a_bot',
+      },
+      chat: {
+        id: 427770117,
+        firstName: 'first',
+        lastName: 'last',
+        type: 'private',
+      },
+      date: 1499403678,
+      document: {
+        fileName: '1.ogg',
+        mimeType: 'audio/ogg',
+        fileId: 'BQADBAADApYAAgcZZAfj2-xeidueWwI',
+        fileSize: 10870,
+      },
+      caption: 'gooooooodVoice',
+    };
+    const reply = {
+      ok: true,
+      result: {
+        message_id: 1,
+        from: {
+          id: 313534466,
+          first_name: 'first',
+          username: 'a_bot',
+        },
+        chat: {
+          id: 427770117,
+          first_name: 'first',
+          last_name: 'last',
+          type: 'private',
+        },
+        date: 1499403678,
+        document: {
+          file_name: '1.ogg',
+          mime_type: 'audio/ogg',
+          file_id: 'BQADBAADApYAAgcZZAfj2-xeidueWwI',
+          file_size: 10870,
+        },
+        caption: 'gooooooodVoice',
+      },
+    };
+
+    it('should send voice message to user with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendVoice', {
+          chat_id: 427770117,
+          voice: 'https://example.com/voice.ogg',
+          caption: 'gooooooodVoice',
+          parse_mode: 'Markdown',
+          duration: 1,
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendVoice(
+        427770117,
+        'https://example.com/voice.ogg',
+        {
+          caption: 'gooooooodVoice',
+          parse_mode: 'Markdown',
+          duration: 1,
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+
+    it('should send voice message to user with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendVoice', {
+          chat_id: 427770117,
+          voice: 'https://example.com/voice.ogg',
+          caption: 'gooooooodVoice',
+          parse_mode: 'Markdown',
+          duration: 1,
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendVoice(
+        427770117,
+        'https://example.com/voice.ogg',
+        {
+          caption: 'gooooooodVoice',
+          parseMode: ParseMode.Markdown,
+          duration: 1,
+          disableNotification: true,
+          replyToMessageId: 9527,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#sendVideoNote', () => {
+    const result = {
+      messageId: 1,
+      from: {
+        id: 313534466,
+        firstName: 'first',
+        username: 'a_bot',
+      },
+      chat: {
+        id: 427770117,
+        firstName: 'first',
+        lastName: 'last',
+        type: 'private',
+      },
+      date: 1499403678,
+      document: {
+        fileName: 'madora.mp4',
+        mimeType: 'video/mp4',
+        thumb: {
+          fileId: 'AAQEABM6g94ZAAQOG1S88OjS3BsBAAIC',
+          fileSize: 2874,
+          width: 90,
+          height: 90,
+        },
+        fileId: 'CgADBAADwJQAAogcZAdPTKP2PGMdhwI',
+        fileSize: 40582,
+      },
+    };
+    const reply = {
+      ok: true,
+      result: {
+        message_id: 1,
+        from: {
+          id: 313534466,
+          first_name: 'first',
+          username: 'a_bot',
+        },
+        chat: {
+          id: 427770117,
+          first_name: 'first',
+          last_name: 'last',
+          type: 'private',
+        },
+        date: 1499403678,
+        document: {
+          file_name: 'madora.mp4',
+          mime_type: 'video/mp4',
+          thumb: {
+            file_id: 'AAQEABM6g94ZAAQOG1S88OjS3BsBAAIC',
+            file_size: 2874,
+            width: 90,
+            height: 90,
+          },
+          file_id: 'CgADBAADwJQAAogcZAdPTKP2PGMdhwI',
+          file_size: 40582,
+        },
+      },
+    };
+
+    it('should send video note message to user with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendVideoNote', {
+          chat_id: 427770117,
+          video_note: 'https://example.com/video_note.mp4',
+          duration: 40,
+          length: 1,
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendVideoNote(
+        427770117,
+        'https://example.com/video_note.mp4',
+        {
+          duration: 40,
+          length: 1,
+          thumb: 'thumb',
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+
+    it('should send video note message to user with camelecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendVideoNote', {
+          chat_id: 427770117,
+          video_note: 'https://example.com/video_note.mp4',
+          duration: 40,
+          length: 1,
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendVideoNote(
+        427770117,
+        'https://example.com/video_note.mp4',
+        {
+          duration: 40,
+          length: 1,
+          thumb: 'thumb',
+          disableNotification: true,
+          replyToMessageId: 9527,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#sendMediaGroup', () => {
+    // TODO: the real result related to request.
+    const result = {
+      messageId: 1,
+      from: {
+        id: 313534466,
+        firstName: 'first',
+        username: 'a_bot',
+      },
+      chat: {
+        id: 427770117,
+        firstName: 'first',
+        lastName: 'last',
+        type: 'private',
+      },
+      date: 1499403678,
+      photo: [
+        {
+          fileId: 'BQADBAADApYAAgcZZAfj2-xeidueWwI',
+          width: 1000,
+          height: 1000,
+        },
+      ],
+    };
+    const reply = {
+      ok: true,
+      result: {
+        message_id: 1,
+        from: {
+          id: 313534466,
+          first_name: 'first',
+          username: 'a_bot',
+        },
+        chat: {
+          id: 427770117,
+          first_name: 'first',
+          last_name: 'last',
+          type: 'private',
+        },
+        date: 1499403678,
+        photo: [
+          {
+            file_id: 'BQADBAADApYAAgcZZAfj2-xeidueWwI',
+            width: 1000,
+            height: 1000,
+          },
+        ],
+      },
+    };
+
+    it('should send a group of photos and videos as an album with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendMediaGroup', {
+          chat_id: 427770117,
+          media: [
+            {
+              type: 'photo',
+              media: 'BQADBAADApYAAgcZZAfj2-xeidueWwI',
+              caption: 'caption',
+              parse_mode: 'Markdown',
+            },
+            {
+              type: 'video',
+              media: 'AgADBAADAUw6G3sdZAeh53f0F11Zgsk',
+              caption: 'caption',
+              parse_mode: 'Markdown',
+              width: 1,
+              height: 2,
+              duration: 3,
+              supports_streaming: true,
+            },
+          ],
+          disable_notification: true,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendMediaGroup(
+        427770117,
+        [
+          {
+            type: InputMediaType.Photo,
+            media: 'BQADBAADApYAAgcZZAfj2-xeidueWwI',
+            caption: 'caption',
+            parse_mode: 'Markdown',
+          },
+          {
+            type: InputMediaType.Video,
+            media: 'AgADBAADAUw6G3sdZAeh53f0F11Zgsk',
+            caption: 'caption',
+            thumb: 'thumb',
+            parse_mode: 'Markdown',
+            width: 1,
+            height: 2,
+            duration: 3,
+            supports_streaming: true,
+          },
+        ],
+        { disable_notification: true }
+      );
+
+      expect(res).toEqual(result);
+    });
+
+    it('should send a group of photos and videos as an album with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendMediaGroup', {
+          chat_id: 427770117,
+          media: [
+            {
+              type: 'photo',
+              media: 'BQADBAADApYAAgcZZAfj2-xeidueWwI',
+              caption: 'caption',
+              parse_mode: 'Markdown',
+            },
+            {
+              type: 'video',
+              media: 'AgADBAADAUw6G3sdZAeh53f0F11Zgsk',
+              caption: 'caption',
+              parse_mode: 'Markdown',
+              width: 1,
+              height: 2,
+              duration: 3,
+              supports_streaming: true,
+            },
+          ],
+          disable_notification: true,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendMediaGroup(
+        427770117,
+        [
+          {
+            type: InputMediaType.Photo,
+            media: 'BQADBAADApYAAgcZZAfj2-xeidueWwI',
+            caption: 'caption',
+            parseMode: 'Markdown',
+          },
+          {
+            type: InputMediaType.Video,
+            media: 'AgADBAADAUw6G3sdZAeh53f0F11Zgsk',
+            caption: 'caption',
+            thumb: 'thumb',
+            parseMode: 'Markdown',
+            width: 1,
+            height: 2,
+            duration: 3,
+            supportsStreaming: true,
+          },
+        ],
+        { disableNotification: true }
+      );
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#sendLocation', () => {
+    const result = {
+      messageId: 1,
+      from: {
+        id: 313534466,
+        firstName: 'first',
+        username: 'a_bot',
+      },
+      chat: {
+        id: 427770117,
+        firstName: 'first',
+        lastName: 'last',
+        type: 'private',
+      },
+      date: 1499403678,
+      location: {
+        latitude: 30.000005,
+        longitude: 45,
+      },
+    };
+    const reply = {
+      ok: true,
+      result: {
+        message_id: 1,
+        from: {
+          id: 313534466,
+          first_name: 'first',
+          username: 'a_bot',
+        },
+        chat: {
+          id: 427770117,
+          first_name: 'first',
+          last_name: 'last',
+          type: 'private',
+        },
+        date: 1499403678,
+        location: {
+          latitude: 30.000005,
+          longitude: 45,
+        },
+      },
+    };
+
+    it('should send location message to user with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendLocation', {
+          chat_id: 427770117,
+          latitude: 30,
+          longitude: 45,
+          live_period: 60,
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendLocation(
+        427770117,
+        {
+          latitude: 30,
+          longitude: 45,
+        },
+        {
+          live_period: 60,
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+    it('should send location message to user with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendLocation', {
+          chat_id: 427770117,
+          latitude: 30,
+          longitude: 45,
+          live_period: 60,
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendLocation(
+        427770117,
+        {
+          latitude: 30,
+          longitude: 45,
+        },
+        {
+          livePeriod: 60,
+          disableNotification: true,
+          replyToMessageId: 9527,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#sendVenue', () => {
+    const result = {
+      messageId: 1,
+      from: {
+        id: 313534466,
+        firstName: 'first',
+        username: 'a_bot',
+      },
+      chat: {
+        id: 427770117,
+        firstName: 'first',
+        lastName: 'last',
+        type: 'private',
+      },
+      date: 1499403678,
+      location: {
+        latitude: 30.000005,
+        longitude: 45,
+      },
+      venue: {
+        location: {
+          latitude: 30.000005,
+          longitude: 45,
+        },
+        title: 'a_title',
+        address: 'an_address',
+      },
+    };
+    const reply = {
+      ok: true,
+      result: {
+        message_id: 1,
+        from: {
+          id: 313534466,
+          first_name: 'first',
+          username: 'a_bot',
+        },
+        chat: {
+          id: 427770117,
+          first_name: 'first',
+          last_name: 'last',
+          type: 'private',
+        },
+        date: 1499403678,
+        location: {
+          latitude: 30.000005,
+          longitude: 45,
+        },
+        venue: {
+          location: {
+            latitude: 30.000005,
+            longitude: 45,
+          },
+          title: 'a_title',
+          address: 'an_address',
+        },
+      },
+    };
+
+    it('should send venue message to user with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendVenue', {
+          chat_id: 427770117,
+          latitude: 30,
+          longitude: 45,
+          title: 'a_title',
+          address: 'an_address',
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendVenue(
+        427770117,
+        {
+          latitude: 30,
+          longitude: 45,
+          title: 'a_title',
+          address: 'an_address',
+        },
+        {
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+
+    it('should send venue message to user with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendVenue', {
+          chat_id: 427770117,
+          latitude: 30,
+          longitude: 45,
+          title: 'a_title',
+          address: 'an_address',
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendVenue(
+        427770117,
+        {
+          latitude: 30,
+          longitude: 45,
+          title: 'a_title',
+          address: 'an_address',
+        },
+        {
+          disableNotification: true,
+          replyToMessageId: 9527,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#sendContact', () => {
+    const result = {
+      messageId: 1,
+      from: {
+        id: 313534466,
+        firstName: 'first',
+        username: 'a_bot',
+      },
+      chat: {
+        id: 427770117,
+        firstName: 'first',
+        lastName: 'last',
+        type: 'private',
+      },
+      date: 1499403678,
+      contact: {
+        phoneNumber: '886123456789',
+        firstName: 'first',
+      },
+    };
+    const reply = {
+      ok: true,
+      result: {
+        message_id: 1,
+        from: {
+          id: 313534466,
+          first_name: 'first',
+          username: 'a_bot',
+        },
+        chat: {
+          id: 427770117,
+          first_name: 'first',
+          last_name: 'last',
+          type: 'private',
+        },
+        date: 1499403678,
+        contact: {
+          phone_number: '886123456789',
+          first_name: 'first',
+        },
+      },
+    };
+
+    it('should send contact message to user with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendContact', {
+          chat_id: 427770117,
+          phone_number: '886123456789',
+          first_name: 'first',
+          last_name: 'last',
+          vcard: 'vcard',
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendContact(
+        427770117,
+        {
+          phone_number: '886123456789',
+          first_name: 'first',
+        },
+        {
+          last_name: 'last',
+          vcard: 'vcard',
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+
+    it('should send contact message to user with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendContact', {
+          chat_id: 427770117,
+          phone_number: '886123456789',
+          first_name: 'first',
+          last_name: 'last',
+          vcard: 'vcard',
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendContact(
+        427770117,
+        {
+          phoneNumber: '886123456789',
+          firstName: 'first',
+        },
+        {
+          lastName: 'last',
+          vcard: 'vcard',
+          disableNotification: true,
+          replyToMessageId: 9527,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#sendPoll', () => {
+    const result = {
+      messageId: 1,
+      from: {
+        id: 313534466,
+        firstName: 'first',
+        username: 'a_bot',
+      },
+      chat: {
+        id: 427770117,
+        firstName: 'first',
+        lastName: 'last',
+        type: 'private',
+      },
+      date: 1499403678,
+      poll: {
+        id: '6095870087057637377',
+        question: 'q',
+        options: [
+          {
+            text: 'a',
+            voterCount: 0,
+          },
+          {
+            text: 'b',
+            voterCount: 0,
+          },
+          {
+            text: 'c',
+            voterCount: 0,
+          },
+        ],
+        isClosed: false,
+      },
+    };
+    const reply = {
+      ok: true,
+      result: {
+        message_id: 1,
+        from: {
+          id: 313534466,
+          first_name: 'first',
+          username: 'a_bot',
+        },
+        chat: {
+          id: 427770117,
+          first_name: 'first',
+          last_name: 'last',
+          type: 'private',
+        },
+        date: 1499403678,
+        poll: {
+          id: '6095870087057637377',
+          question: 'q',
+          options: [
+            {
+              text: 'a',
+              voter_count: 0,
+            },
+            {
+              text: 'b',
+              voter_count: 0,
+            },
+            {
+              text: 'c',
+              voter_count: 0,
+            },
+          ],
+          is_closed: false,
+        },
+      },
+    };
+
+    it('should send poll message to user with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendPoll', {
+          chat_id: 427770117,
+          question: 'q',
+          options: ['a', 'b', 'c'],
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendPoll(427770117, 'q', ['a', 'b', 'c'], {
+        disable_notification: true,
+        reply_to_message_id: 9527,
+      });
+
+      expect(res).toEqual(result);
+    });
+
+    it('should send poll message to user with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendPoll', {
+          chat_id: 427770117,
+          question: 'q',
+          options: ['a', 'b', 'c'],
+          disable_notification: true,
+          reply_to_message_id: 9527,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendPoll(427770117, 'q', ['a', 'b', 'c'], {
+        disableNotification: true,
+        replyToMessageId: 9527,
+      });
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#sendChatAction', () => {
+    const result = true;
+    const reply = {
+      ok: true,
+      result,
+    };
+
+    it("should tell the user that something is happening on the bot's side", async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/sendChatAction', {
+          chat_id: 427770117,
+          action: 'typing',
+        })
+        .reply(200, reply);
+
+      const res = await client.sendChatAction(427770117, ChatAction.Typing);
+
+      expect(res).toEqual(result);
+    });
+  });
+});
