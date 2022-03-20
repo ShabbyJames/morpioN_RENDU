@@ -170,4 +170,61 @@ describe('sticker set api', () => {
       },
     };
 
-    it('should add a sticker to set with snakecase', 
+    it('should add a sticker to set with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock.onPost('/addStickerToSet', mock_params).reply(200, reply);
+
+      const res = await client.addStickerToSet(
+        1,
+        'sticker_set_name',
+        'https://example.com/sticker.png',
+        '💛',
+        {
+          mask_position: {
+            point: 'eyes',
+            x_shift: 10,
+            y_shift: 10,
+            scale: 1,
+          },
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+
+    it('should add a sticker to set with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock.onPost('/addStickerToSet', mock_params).reply(200, reply);
+
+      const res = await client.addStickerToSet(
+        1,
+        'sticker_set_name',
+        'https://example.com/sticker.png',
+        '💛',
+        {
+          maskPosition: {
+            point: 'eyes',
+            xShift: 10,
+            yShift: 10,
+            scale: 1,
+          },
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#setStickerPositionInSet', () => {
+    const result = true;
+    const reply = {
+      ok: true,
+      result,
+    };
+
+    const mock_params = {
+      sticker: 'CAADBAADQwEAAhA1aAABVQO2hjT7dSEWB',
+      position: 0,
+    };
+
+    it('should 
