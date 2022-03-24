@@ -238,4 +238,59 @@ describe('webhooks', () => {
 
   describe('#deleteWebhook', () => {
     it('should response webhook is already deleted', async () => {
-      const { client, 
+      const { client, mock } = createMock();
+      const result = true;
+      const reply = {
+        ok: true,
+        result,
+        description: 'Webhook is already deleted',
+      };
+
+      mock.onPost('/deleteWebhook').reply(200, reply);
+
+      const res = await client.deleteWebhook();
+
+      expect(res).toEqual(result);
+    });
+  });
+});
+
+describe('get api', () => {
+  describe('#getMe', () => {
+    it('should response bot profile', async () => {
+      const { client, mock } = createMock();
+      const result = {
+        id: 313534466,
+        firstName: 'first',
+        username: 'a_bot',
+      };
+      const reply = {
+        ok: true,
+        result: {
+          id: 313534466,
+          first_name: 'first',
+          username: 'a_bot',
+        },
+      };
+
+      mock.onPost('/getMe').reply(200, reply);
+
+      const res = await client.getMe();
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#getUserProfilePhotos', () => {
+    const result = {
+      totalCount: 3,
+      photos: [
+        [
+          {
+            fileId: 'AgADBAADGTo4Gz8cZAeR-ouu4XBx78EeqRkABHahi76pN-aO0UoDA050',
+            fileSize: 14650,
+            width: 160,
+            height: 160,
+          },
+          {
+            fileId: 'AgADBAADGTo4Gz8cZAeR-ouu4XBx78EeqRkABKCfooqT
