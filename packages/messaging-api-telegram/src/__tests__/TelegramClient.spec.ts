@@ -39,4 +39,52 @@ describe('webhooks', () => {
           },
         },
         {
-          updateId: 51340051
+          updateId: 513400513,
+          message: {
+            messageId: 4,
+            from: {
+              id: 313534466,
+              firstName: 'first',
+              lastName: 'last',
+              username: 'username',
+            },
+            chat: {
+              id: 313534466,
+              firstName: 'first',
+              lastName: 'last',
+              username: 'username',
+              type: 'private',
+            },
+            date: 1484944975,
+            sticker: {
+              width: 512,
+              height: 512,
+              emoji: '\ud83d\ude0d',
+              thumb: {
+                fileId: 'AAQEABMr6HIwAAT9WnLtRCT6KIgiAAIC',
+                fileSize: 2828,
+                width: 128,
+                height: 128,
+              },
+              fileId: 'BQADBAADrwgAAjn8EwY1EPt_ycp8OwI',
+              fileSize: 14102,
+            },
+          },
+        },
+      ];
+      const reply = {
+        ok: true,
+        result: [
+          {
+            update_id: 513400512,
+            message: {
+              message_id: 3,
+              from: {
+                id: 313534466,
+                first_name: 'first',
+                last_name: 'last',
+                username: 'username',
+              },
+              chat: {
+                id: 313534466,
+                f
