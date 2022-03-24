@@ -191,4 +191,51 @@ describe('webhooks', () => {
       const { client, mock } = createMock();
       mock.onPost('/setWebhook').reply(200, reply);
 
-      const res = await cli
+      const res = await client.setWebhook('https://4a16faff.ngrok.io/');
+
+      expect(res).toEqual(result);
+    });
+
+    it('should ignore certificate options and transform all options to snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/setWebhook', {
+          url: 'https://4a16faff.ngrok.io/',
+          max_connections: 40,
+          allowed_updates: [],
+        })
+        .reply(200, reply);
+
+      const res = await client.setWebhook('https://4a16faff.ngrok.io/', {
+        certificate: 'qq',
+        maxConnections: 40,
+        allowedUpdates: [],
+      });
+
+      expect(res).toEqual(result);
+    });
+
+    it('should work well with snakecase options', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/setWebhook', {
+          url: 'https://4a16faff.ngrok.io/',
+          max_connections: 40,
+          allowed_updates: [],
+        })
+        .reply(200, reply);
+
+      const res = await client.setWebhook('https://4a16faff.ngrok.io/', {
+        certificate: 'qq',
+        // @ts-expect-error
+        max_connections: 40,
+        allowed_updates: [],
+      });
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#deleteWebhook', () => {
+    it('should response webhook is already deleted', async () => {
+      const { client, 
