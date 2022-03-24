@@ -136,4 +136,59 @@ describe('webhooks', () => {
         .onPost('/getUpdates', {
           offset: 9527,
           limit: 10,
-          time
+          timeout: 0,
+          allowed_updates: [],
+        })
+        .reply(200, reply);
+
+      const res = await client.getUpdates({
+        offset: 9527,
+        limit: 10,
+        timeout: 0,
+        allowedUpdates: [],
+      });
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#getWebhookInfo', () => {
+    it('should response webhook info', async () => {
+      const { client, mock } = createMock();
+      const result = {
+        url: 'https://4a16faff.ngrok.io/',
+        hasCustomCertificate: false,
+        pendingUpdateCount: 0,
+        maxConnections: 40,
+      };
+      const reply = {
+        ok: true,
+        result: {
+          url: 'https://4a16faff.ngrok.io/',
+          has_custom_certificate: false,
+          pending_update_count: 0,
+          max_connections: 40,
+        },
+      };
+
+      mock.onPost('/getWebhookInfo').reply(200, reply);
+
+      const res = await client.getWebhookInfo();
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#setWebhook', () => {
+    const result = true;
+    const reply = {
+      ok: true,
+      result,
+      description: 'Webhook was set',
+    };
+
+    it('should response webhook was set', async () => {
+      const { client, mock } = createMock();
+      mock.onPost('/setWebhook').reply(200, reply);
+
+      const res = await cli
