@@ -443,3 +443,142 @@ describe('updating api', () => {
     const result = {
       messageId: 66,
       from: {
+        id: 313534466,
+        firstName: 'first',
+        username: 'a_bot',
+      },
+      chat: {
+        id: 427770117,
+        firstName: 'first',
+        lastName: 'last',
+        type: 'private',
+      },
+      date: 1499402829,
+      location: {
+        latitude: 11,
+        longitude: 22,
+      },
+    };
+    const reply = {
+      ok: true,
+      result: {
+        message_id: 66,
+        from: {
+          id: 313534466,
+          first_name: 'first',
+          username: 'a_bot',
+        },
+        chat: {
+          id: 427770117,
+          first_name: 'first',
+          last_name: 'last',
+          type: 'private',
+        },
+        date: 1499402829,
+        location: {
+          latitude: 11,
+          longitude: 22,
+        },
+      },
+    };
+
+    it('should edit live location message with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/editMessageLiveLocation', {
+          latitude: 11,
+          longitude: 22,
+          chat_id: 427770117,
+          message_id: 66,
+        })
+        .reply(200, reply);
+
+      const res = await client.editMessageLiveLocation(
+        {
+          latitude: 11,
+          longitude: 22,
+        },
+        {
+          chat_id: 427770117,
+          message_id: 66,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+    it('should edit live location message with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/editMessageLiveLocation', {
+          latitude: 11,
+          longitude: 22,
+          chat_id: 427770117,
+          message_id: 66,
+        })
+        .reply(200, reply);
+
+      const res = await client.editMessageLiveLocation(
+        {
+          latitude: 11,
+          longitude: 22,
+        },
+        {
+          chatId: 427770117,
+          messageId: 66,
+        }
+      );
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#stopPoll', () => {
+    const result = {
+      id: '6107039600482451458',
+      question: 'q',
+      options: [
+        {
+          text: 'a',
+          voterCount: 1,
+        },
+        {
+          text: 'b',
+          voterCount: 0,
+        },
+      ],
+      isClosed: true,
+    };
+    const reply = {
+      ok: true,
+      result: {
+        id: '6107039600482451458',
+        question: 'q',
+        options: [
+          {
+            text: 'a',
+            voter_count: 1,
+          },
+          {
+            text: 'b',
+            voter_count: 0,
+          },
+        ],
+        is_closed: true,
+      },
+    };
+
+    it('should stop poll', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/stopPoll', {
+          chat_id: 427770117,
+          message_id: 66,
+        })
+        .reply(200, reply);
+
+      const res = await client.stopPoll(427770117, 66);
+
+      expect(res).toEqual(result);
+    });
+  });
+});
