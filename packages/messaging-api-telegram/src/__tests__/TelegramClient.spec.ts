@@ -293,4 +293,53 @@ describe('get api', () => {
             height: 160,
           },
           {
-            fileId: 'AgADBAADGTo4Gz8cZAeR-ouu4XBx78EeqRkABKCfooqT
+            fileId: 'AgADBAADGTo4Gz8cZAeR-ouu4XBx78EeqRkABKCfooqTgFUX0EoD5B1C',
+            fileSize: 39019,
+            width: 320,
+            height: 320,
+          },
+          {
+            fileId: 'AgADBAADGTo4Gz8cZAeR-ouu4XBx78EeqRkABPL_pC9K3UpI0koD1B1C',
+            fileSize: 132470,
+            width: 640,
+            height: 640,
+          },
+        ],
+        [
+          {
+            fileId: 'AgABXQSPEUo4Gz8cZAeR-ouu7XBx93EeqRkABHahi76pN-aO0UoDO203',
+            fileSize: 14220,
+            width: 160,
+            height: 160,
+          },
+          {
+            fileId: 'AgADBAADGTo4Gz8cZAeR-ouu4XBx78EeqRkABKCfooqTgFUX0EoDAT90',
+            fileSize: 35122,
+            width: 320,
+            height: 320,
+          },
+          {
+            fileId: 'UtAqweADGTo4Gz8cZAeR-ouu4XBx78EeqRkABPL_pM4A1UpI0koD65K2',
+            fileSize: 106356,
+            width: 640,
+            height: 640,
+          },
+        ],
+      ],
+    };
+    const reply = {
+      ok: true,
+      result: {
+        total_count: 3,
+        photos: [
+          [
+            {
+              file_id:
+                'AgADBAADGTo4Gz8cZAeR-ouu4XBx78EeqRkABHahi76pN-aO0UoDA050',
+              file_size: 14650,
+              width: 160,
+              height: 160,
+            },
+            {
+              file_id:
+                'AgADBAADGTo4Gz8cZAeR-ouu4XBx78EeqRkABKCfoo
