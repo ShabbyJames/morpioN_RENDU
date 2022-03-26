@@ -390,4 +390,49 @@ describe('get api', () => {
           offset: 0,
           limit: 2,
         })
-  
+        .reply(200, reply);
+
+      const res = await client.getUserProfilePhotos(313534466, {
+        offset: 0,
+        limit: 2,
+      });
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#getFile', () => {
+    it('should response info about the file', async () => {
+      const { client, mock } = createMock();
+      const result = {
+        fileId: 'UtAqweADGTo4Gz8cZAeR-ouu4XBx78EeqRkABPL_pM4A1UpI0koD65K2',
+        fileSize: 106356,
+        filePath: 'photos/1068230105874016297.jpg',
+      };
+      const reply = {
+        ok: true,
+        result: {
+          file_id: 'UtAqweADGTo4Gz8cZAeR-ouu4XBx78EeqRkABPL_pM4A1UpI0koD65K2',
+          file_size: 106356,
+          file_path: 'photos/1068230105874016297.jpg',
+        },
+      };
+
+      mock
+        .onPost('/getFile', {
+          file_id: 'UtAqweADGTo4Gz8cZAeR-ouu4XBx78EeqRkABPL_pM4A1UpI0koD65K2',
+        })
+        .reply(200, reply);
+
+      const res = await client.getFile(
+        'UtAqweADGTo4Gz8cZAeR-ouu4XBx78EeqRkABPL_pM4A1UpI0koD65K2'
+      );
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#getFileLink', () => {
+    it('should response file link about the file', async () => {
+      const { client, mock } = createMock();
+      const filePath = 'photos/106823010587401
