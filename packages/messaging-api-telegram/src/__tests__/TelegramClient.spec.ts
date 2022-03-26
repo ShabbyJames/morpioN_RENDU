@@ -435,4 +435,59 @@ describe('get api', () => {
   describe('#getFileLink', () => {
     it('should response file link about the file', async () => {
       const { client, mock } = createMock();
-      const filePath = 'photos/106823010587401
+      const filePath = 'photos/1068230105874016297.jpg';
+      const reply = {
+        ok: true,
+        result: {
+          file_id: 'UtAqweADGTo4Gz8cZAeR-ouu4XBx78EeqRkABPL_pM4A1UpI0koD65K2',
+          file_size: 106356,
+          file_path: filePath,
+        },
+      };
+
+      mock
+        .onPost('/getFile', {
+          file_id: 'UtAqweADGTo4Gz8cZAeR-ouu4XBx78EeqRkABPL_pM4A1UpI0koD65K2',
+        })
+        .reply(200, reply);
+
+      const res = await client.getFileLink(
+        'UtAqweADGTo4Gz8cZAeR-ouu4XBx78EeqRkABPL_pM4A1UpI0koD65K2'
+      );
+
+      expect(res).toEqual(
+        `https://api.telegram.org/file/bot${ACCESS_TOKEN}/${filePath}`
+      );
+    });
+  });
+
+  describe('#getChat', () => {
+    it('should response information about the chat', async () => {
+      const { client, mock } = createMock();
+      const result = {
+        id: 313534466,
+        firstName: 'first',
+        lastName: 'last',
+        username: 'username',
+        type: 'private',
+      };
+      const reply = {
+        ok: true,
+        result: {
+          id: 313534466,
+          first_name: 'first',
+          last_name: 'last',
+          username: 'username',
+          type: 'private',
+        },
+      };
+
+      mock
+        .onPost('/getChat', {
+          chat_id: 313534466,
+        })
+        .reply(200, reply);
+
+      const res = await client.getChat(313534466);
+
+      expect(res
