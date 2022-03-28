@@ -543,4 +543,61 @@ describe('get api', () => {
       const result = '6';
       const reply = {
         ok: true,
-     
+        result,
+      };
+
+      mock
+        .onPost('/getChatMembersCount', {
+          chat_id: -427770117,
+        })
+        .reply(200, reply);
+
+      const res = await client.getChatMembersCount(-427770117);
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#getChatMember', () => {
+    it('should response information about a member of the chat.', async () => {
+      const { client, mock } = createMock();
+      const result = {
+        user: {
+          id: 313534466,
+          firstName: 'first',
+          lastName: 'last',
+          username: 'username',
+          languangeCode: 'zh-TW',
+        },
+        status: 'creator',
+      };
+      const reply = {
+        ok: true,
+        result: {
+          user: {
+            id: 313534466,
+            first_name: 'first',
+            last_name: 'last',
+            username: 'username',
+            languange_code: 'zh-TW',
+          },
+          status: 'creator',
+        },
+      };
+
+      mock
+        .onPost('/getChatMember', {
+          chat_id: -427770117,
+          user_id: 313534466,
+        })
+        .reply(200, reply);
+
+      const res = await client.getChatMember(-427770117, 313534466);
+
+      expect(res).toEqual(result);
+    });
+  });
+});
+
+describe('inline mode api', () => {
+  describe('#answ
