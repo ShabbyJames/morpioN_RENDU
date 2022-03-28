@@ -490,4 +490,57 @@ describe('get api', () => {
 
       const res = await client.getChat(313534466);
 
-      expect(res
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#getChatAdministrators', () => {
+    it('should response a list of administrators in the chat.', async () => {
+      const { client, mock } = createMock();
+      const result = [
+        {
+          user: {
+            id: 313534466,
+            firstName: 'first',
+            lastName: 'last',
+            username: 'username',
+            languangeCode: 'zh-TW',
+          },
+          status: 'creator',
+        },
+      ];
+      const reply = {
+        ok: true,
+        result: [
+          {
+            user: {
+              id: 313534466,
+              first_name: 'first',
+              last_name: 'last',
+              username: 'username',
+              languange_code: 'zh-TW',
+            },
+            status: 'creator',
+          },
+        ],
+      };
+
+      mock
+        .onPost('/getChatAdministrators', {
+          chat_id: -427770117,
+        })
+        .reply(200, reply);
+
+      const res = await client.getChatAdministrators(-427770117);
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#getChatMembersCount', () => {
+    it('should response the number of members in the chat.', async () => {
+      const { client, mock } = createMock();
+      const result = '6';
+      const reply = {
+        ok: true,
+     
