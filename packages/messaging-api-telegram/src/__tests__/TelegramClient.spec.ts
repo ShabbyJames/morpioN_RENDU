@@ -600,4 +600,56 @@ describe('get api', () => {
 });
 
 describe('inline mode api', () => {
-  describe('#answ
+  describe('#answerInlineQuery', () => {
+    const result = true;
+    const reply = {
+      ok: true,
+      result,
+    };
+
+    it('should send answers to an inline query with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/answerInlineQuery', {
+          inline_query_id: 'INLINE_QUERY_ID',
+          results: [
+            {
+              type: 'photo',
+              id: 'UNIQUE_ID',
+              photo_file_id: 'FILEID',
+              title: 'PHOTO_TITLE',
+            },
+            {
+              type: 'audio',
+              id: 'UNIQUE_ID',
+              audio_file_id: 'FILEID',
+              caption: 'AUDIO_TITLE',
+            },
+          ],
+          cache_time: 1000,
+        })
+        .reply(200, reply);
+
+      const res = await client.answerInlineQuery(
+        'INLINE_QUERY_ID',
+        [
+          {
+            type: 'photo',
+            id: 'UNIQUE_ID',
+            // @ts-expect-error
+            photo_file_id: 'FILEID',
+            title: 'PHOTO_TITLE',
+          },
+          {
+            type: 'audio',
+            id: 'UNIQUE_ID',
+            // @ts-expect-error
+            audio_file_id: 'FILEID',
+            caption: 'AUDIO_TITLE',
+          },
+        ],
+        {
+          cache_time: 1000,
+        }
+      );
+      expect(res).toEqua
