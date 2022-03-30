@@ -754,4 +754,61 @@ describe('inline mode api', () => {
   });
 });
 
-describ
+describe('other api', () => {
+  describe('#forwardMessage', () => {
+    const result = {
+      messageId: 1,
+      from: {
+        id: 313534466,
+        firstName: 'first',
+        username: 'a_bot',
+      },
+      chat: {
+        id: 427770117,
+        firstName: 'first',
+        lastName: 'last',
+        type: 'private',
+      },
+      date: 1499402829,
+      forwardFrom: {
+        id: 357830311,
+        firstName: 'first_2',
+        lastName: 'last_2',
+        languageCode: 'zh-TW',
+      },
+      forwardDate: 1499849644,
+      text: 'hi',
+    };
+    const reply = {
+      ok: true,
+      result: {
+        message_id: 1,
+        from: {
+          id: 313534466,
+          first_name: 'first',
+          username: 'a_bot',
+        },
+        chat: {
+          id: 427770117,
+          first_name: 'first',
+          last_name: 'last',
+          type: 'private',
+        },
+        date: 1499402829,
+        forward_from: {
+          id: 357830311,
+          first_name: 'first_2',
+          last_name: 'last_2',
+          language_code: 'zh-TW',
+        },
+        forward_date: 1499849644,
+        text: 'hi',
+      },
+    };
+
+    it('should forward messages of any kind with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/forwardMessage', {
+          chat_id: 427770117,
+          from_c
