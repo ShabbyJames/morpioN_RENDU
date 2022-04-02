@@ -811,4 +811,62 @@ describe('other api', () => {
       mock
         .onPost('/forwardMessage', {
           chat_id: 427770117,
-          from_c
+          from_chat_id: 313534466,
+          message_id: 203,
+          disable_notification: true,
+        })
+        .reply(200, reply);
+
+      const res = await client.forwardMessage(427770117, 313534466, 203, {
+        // @ts-expect-error
+        disable_notification: true,
+      });
+
+      expect(res).toEqual(result);
+    });
+
+    it('should forward messages of any kind with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/forwardMessage', {
+          chat_id: 427770117,
+          from_chat_id: 313534466,
+          message_id: 203,
+          disable_notification: true,
+        })
+        .reply(200, reply);
+
+      const res = await client.forwardMessage(427770117, 313534466, 203, {
+        disableNotification: true,
+      });
+
+      expect(res).toEqual(result);
+    });
+  });
+
+  describe('#stopMessageLiveLocation', () => {
+    const result = {
+      messageId: 66,
+      from: {
+        id: 313534466,
+        firstName: 'first',
+        username: 'a_bot',
+      },
+      chat: {
+        id: 427770117,
+        firstName: 'first',
+        lastName: 'last',
+        type: 'private',
+      },
+      date: 1499402829,
+      location: {
+        latitude: 30.000005,
+        longitude: 45,
+      },
+    };
+    const reply = {
+      ok: true,
+      result: {
+        message_id: 66,
+        from: {
+          id: 
