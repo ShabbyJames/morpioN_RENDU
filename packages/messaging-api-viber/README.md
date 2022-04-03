@@ -115,4 +115,31 @@ client.sendText(USER_ID, 'Hello', {
         bgLoop: true,
         actionType: 'open-url',
         actionBody: 'www.tut.by',
-        image
+        image: 'www.tut.by/img.jpg',
+        text: 'Key text',
+        textVAlign: 'middle',
+        textHAlign: 'center',
+        textOpacity: 60,
+        textSize: 'regular',
+      },
+    ],
+  },
+});
+```
+
+<img src="https://developers.viber.com/docs/img/example_keyboard.png" width="300" />
+
+<br />
+
+<a id="broadcast-api" />
+
+### Broadcast API - [Official Docs](https://developers.viber.com/docs/api/rest-bot-api/#broadcast-message)
+
+Those API methods use the same parameters as the send methods with a few variations described below. You should specify a list of receivers instead of a single receiver.
+
+- [broadcastMessage](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcastmessage)
+- [broadcastText](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcasttext)
+- [broadcastPicture](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcastpicture)
+- [broadcastVideo](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcastvideo)
+- [broadcastFile](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcastfile)
+- [broa
