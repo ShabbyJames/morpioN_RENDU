@@ -59,4 +59,31 @@ client.setWebhook(url).catch((error) => {
   console.log(error.stack); // error stack trace
   console.log(error.config); // axios request config
   console.log(error.request); // HTTP request
-  console.log(error.response); // HTTP resp
+  console.log(error.response); // HTTP response
+});
+```
+
+<br />
+
+## API Reference
+
+All methods return a Promise.
+
+<br />
+
+### Webhook API
+
+- [setWebhook](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#setwebhook)
+- [removeWebhook](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#removewebhook)
+
+<br />
+
+### Send API
+
+- [sendMessage](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendmessage)
+- [sendText](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendtext)
+- [sendPicture](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendpicture)
+- [sendVideo](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendvideo)
+- [sendFile](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendfile)
+- [sendContact](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendcontact)
+- [sendLocation](https://bottenderjs.github.io/messaging-apis/latest/clas
