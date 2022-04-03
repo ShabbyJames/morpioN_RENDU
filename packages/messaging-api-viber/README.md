@@ -142,4 +142,16 @@ Those API methods use the same parameters as the send methods with a few variati
 - [broadcastPicture](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcastpicture)
 - [broadcastVideo](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcastvideo)
 - [broadcastFile](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcastfile)
-- [broa
+- [broadcastContact](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcastcontact)
+- [broadcastLocation](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcastlocation)
+- [broadcastURL](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcasturl)
+- [broadcastSticker](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcaststicker)
+- [broadcastCarouselContent](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#broadcastcarouselcontent)
+
+| Param         | Type            | Description                                                                                                                                                        |
+| ------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| broadcastList | `Array<String>` | This mandatory parameter defines the recipients for the message. Every user must be subscribed and have a valid user id. The maximum list length is 300 receivers. |
+
+Example:
+
+`
