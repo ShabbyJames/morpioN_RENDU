@@ -869,4 +869,56 @@ describe('other api', () => {
       result: {
         message_id: 66,
         from: {
-          id: 
+          id: 313534466,
+          first_name: 'first',
+          username: 'a_bot',
+        },
+        chat: {
+          id: 427770117,
+          first_name: 'first',
+          last_name: 'last',
+          type: 'private',
+        },
+        date: 1499402829,
+        location: {
+          latitude: 30.000005,
+          longitude: 45,
+        },
+      },
+    };
+
+    it('should stop updating a live location message with snakecase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/stopMessageLiveLocation', {
+          chat_id: 427770117,
+          message_id: 66,
+        })
+        .reply(200, reply);
+
+      const res = await client.stopMessageLiveLocation({
+        // @ts-expect-error
+        chat_id: 427770117,
+        message_id: 66,
+      });
+
+      expect(res).toEqual(result);
+    });
+    it('should stop updating a live location message with camelcase', async () => {
+      const { client, mock } = createMock();
+      mock
+        .onPost('/stopMessageLiveLocation', {
+          chat_id: 427770117,
+          message_id: 66,
+        })
+        .reply(200, reply);
+
+      const res = await client.stopMessageLiveLocation({
+        chatId: 427770117,
+        messageId: 66,
+      });
+
+      expect(res).toEqual(result);
+    });
+  });
+});
