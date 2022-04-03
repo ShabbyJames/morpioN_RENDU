@@ -86,4 +86,33 @@ All methods return a Promise.
 - [sendVideo](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendvideo)
 - [sendFile](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendfile)
 - [sendContact](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendcontact)
-- [sendLocation](https://bottenderjs.github.io/messaging-apis/latest/clas
+- [sendLocation](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendlocation)
+- [sendURL](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendurl)
+- [sendSticker](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendsticker)
+- [sendCarouselContent](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#sendcarouselcontent)
+
+<br />
+
+<a id="keyboards" />
+
+### Keyboards - [Official Docs](https://developers.viber.com/docs/api/rest-bot-api/#keyboards)
+
+The Viber API allows sending a custom keyboard using the send_message API, to supply the user with a set of predefined replies or actions. Keyboards can be attached to any message type and be sent and displayed together. To attach a keyboard to a message simply add the keyboard’s parameters to the options:
+
+```js
+client.sendText(USER_ID, 'Hello', {
+  keyboard: {
+    type: 'keyboard',
+    defaultHeight: true,
+    bgColor: '#FFFFFF',
+    buttons: [
+      {
+        columns: 6,
+        rows: 1,
+        bgColor: '#2db9b9',
+        bgMediaType: 'gif',
+        bgMedia: 'http://www.url.by/test.gif',
+        bgLoop: true,
+        actionType: 'open-url',
+        actionBody: 'www.tut.by',
+        image
