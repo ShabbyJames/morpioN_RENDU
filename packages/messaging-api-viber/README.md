@@ -154,4 +154,63 @@ Those API methods use the same parameters as the send methods with a few variati
 
 Example:
 
-`
+```js
+await client.broadcastText(
+  [
+    'pttm25kSGUo1919sBORWyA==',
+    '2yBSIsbzs7sSrh4oLm2hdQ==',
+    'EGAZ3SZRi6zW1D0uNYhQHg==',
+    'kBQYX9LrGyF5mm8JTxdmpw==',
+  ],
+  'a broadcast to everybody'
+);
+// {
+//   messageToken: 40808912438712,
+//   status: 0,
+//   statusMessage: 'ok',
+//   failedList: [
+//     {
+//       receiver: 'pttm25kSGUo1919sBORWyA==',
+//       status: 6,
+//       statusMessage: 'Not subscribed',
+//     },
+//     {
+//       receiver: 'EGAZ3SZRi6zW1D0uNYhQHg==',
+//       status: 5,
+//       statusMessage: 'Not found',
+//     },
+//   ],
+// }
+```
+
+<br />
+
+### Get Account Info
+
+- [getAccountInfo](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#getaccountinfo)
+
+<br />
+
+### Get User Details
+
+- [getUserDetails](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#getuserdetails)
+
+<br />
+
+### Get Online
+
+- [getOnlineStatus](https://bottenderjs.github.io/messaging-apis/latest/classes/messaging_api_viber.ViberClient.html#getonlinestatus)
+
+<br />
+
+## Debug Tips
+
+### Log Requests Details
+
+To enable default request debugger, use following `DEBUG` env variable:
+
+```sh
+DEBUG=messaging-api:request
+```
+
+If you want to use a custom request logging function, just provide your own `onRe
