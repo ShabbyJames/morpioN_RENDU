@@ -172,3 +172,51 @@ describe('send message', () => {
           text: 'Photo description',
           media: 'http://www.images.com/img.jpg',
           thumbnail: 'http://www.images.com/thumb.jpg',
+        })
+        .reply(200, reply);
+
+      const res = await client.sendPicture(RECEIVER, {
+        text: 'Photo description',
+        media: 'http://www.images.com/img.jpg',
+        thumbnail: 'http://www.images.com/thumb.jpg',
+      });
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#sendVideo', () => {
+    it('should call viber api', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        status: 0,
+        statusMessage: 'ok',
+        messageToken: 5098034272017990000,
+      };
+
+      mock
+        .onPost(`/send_message`, {
+          receiver: RECEIVER,
+          sender: {
+            name: 'John McClane',
+            avatar: 'http://avatar.example.com',
+          },
+          type: 'video',
+          media: 'http://www.images.com/video.mp4',
+          size: 10000,
+          thumbnail: 'http://www.images.com/thumb.jpg',
+          duration: 10,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendVideo(RECEIVER, {
+        media: 'http://www.images.com/video.mp4',
+        size: 10000,
+        thumbnail: 'http://www.images.com/thumb.jpg',
+        duration: 10,
+      });
+
+      expect(res).toEqual(reply);
+    });
+  });
