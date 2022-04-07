@@ -116,4 +116,59 @@ describe('send message', () => {
 
       const res = await client.sendMessage(RECEIVER, {
         type: 'text',
-      
+        text: 'Hello',
+      });
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#sendText', () => {
+    it('should call viber api', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        status: 0,
+        statusMessage: 'ok',
+        messageToken: 5098034272017990000,
+      };
+
+      mock
+        .onPost(`/send_message`, {
+          receiver: RECEIVER,
+          sender: {
+            name: 'John McClane',
+            avatar: 'http://avatar.example.com',
+          },
+          type: 'text',
+          text: 'Hello',
+        })
+        .reply(200, reply);
+
+      const res = await client.sendText(RECEIVER, 'Hello');
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#sendPicture', () => {
+    it('should call viber api', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        status: 0,
+        statusMessage: 'ok',
+        messageToken: 5098034272017990000,
+      };
+
+      mock
+        .onPost(`/send_message`, {
+          receiver: RECEIVER,
+          sender: {
+            name: 'John McClane',
+            avatar: 'http://avatar.example.com',
+          },
+          type: 'picture',
+          text: 'Photo description',
+          media: 'http://www.images.com/img.jpg',
+          thumbnail: 'http://www.images.com/thumb.jpg',
