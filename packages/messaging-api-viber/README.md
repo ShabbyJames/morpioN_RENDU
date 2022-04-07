@@ -213,4 +213,30 @@ To enable default request debugger, use following `DEBUG` env variable:
 DEBUG=messaging-api:request
 ```
 
-If you want to use a custom request logging function, just provide your own `onRe
+If you want to use a custom request logging function, just provide your own `onRequest`:
+
+```js
+const client = new ViberClient({
+  accessToken: ACCESS_TOKEN,
+  onRequest: ({ method, url, headers, body }) => {
+    /* */
+  },
+});
+```
+
+## Testing
+
+### Point Requests to Your Dummy Server
+
+To avoid sending requests to real Viber server, specify the `origin` option when constructing your client:
+
+```js
+const { ViberClient } = require('messaging-api-viber');
+
+const client = new ViberClient({
+  accessToken: ACCESS_TOKEN,
+  origin: 'https://mydummytestserver.com',
+});
+```
+
+> Warning: Don't do this on your production server.
