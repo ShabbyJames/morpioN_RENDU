@@ -229,3 +229,143 @@ export type RichMediaButton = {
   actionBody: string;
   textSize?: 'small' | 'medium' | 'large';
   textVAlign?: 'middle';
+  textHAlign?: 'left' | 'middle' | 'right';
+  image?: string;
+};
+
+export type RichMediaMessage = {
+  type: 'rich_media';
+  richMedia: RichMedia;
+} & MessageOptions;
+
+export type AccountInfo = {
+  id: string;
+  name: string;
+  uri: string;
+  icon: string;
+  background: string;
+  category: string;
+  subcategory: string;
+  location: {
+    lon: number;
+    lat: number;
+  };
+  country: string;
+  webhook: string;
+  eventTypes:
+    | EventType.Delivered
+    | EventType.Seen
+    | EventType.Failed
+    | EventType.ConversationStarted;
+  subscribersCount: number;
+  members: {
+    id: string;
+    name: string;
+    avatar: string;
+    role: string;
+  }[];
+};
+
+export type UserDetails = {
+  id: string;
+  name: string;
+  avatar: string;
+  country: string;
+  language: string;
+  primaryDeviceOs: string;
+  apiVersion: number;
+  viberVersion: string;
+  mcc: number;
+  mnc: number;
+  deviceType: string;
+};
+
+export type UserOnlineStatus = {
+  id: string;
+  onlineStatus: 0 | 1 | 2 | 3 | 4;
+  onlineStatusMessage: 'online';
+};
+
+export type Keyboard = {
+  type: 'keyboard';
+  buttons: KeyboardButton[];
+  bgColor?: string;
+  defaultHeight?: boolean;
+  customDefaultHeight?: number;
+  heightScale?: number;
+  buttonsGroupColumns?: number;
+  buttonsGroupRows?: number;
+  inputFieldState?: 'regular' | 'minimized' | 'hidden';
+  favoritesMetadata?: any;
+};
+
+export type KeyboardButton = {
+  columns?: number;
+  rows?: number;
+  bgColor?: string;
+  silent?: boolean;
+  bgMediaType?: 'picture' | 'gif';
+  bgMedia?: string;
+  bgMediaScaleType?: 'crop' | 'fill' | 'fit';
+  imageScaleType?: 'crop' | 'fill' | 'fit';
+  bgLoop?: boolean;
+  actionType?:
+    | 'reply'
+    | 'open-url'
+    | 'location-picker'
+    | 'share-phone'
+    | 'none';
+  actionBody: string;
+  image?: string;
+  text?: string;
+  textVAlign?: 'top' | 'middle' | 'bottom';
+  textHAlign?: 'left' | 'center' | 'right';
+  textPaddings?: [number, number, number, number];
+  textOpacity?: number;
+  textSize?: 'small' | 'regular' | 'large';
+  openURLType?: 'internal' | 'external';
+  openURLMediaType?: 'not-media' | 'video' | 'gif' | 'picture';
+  textBgGradientColor?: string;
+  textShouldFit?: boolean;
+  internalBrowser?: KeyboardButtonInternalBrowser;
+  map?: KeyboardButtonMap;
+  frame?: KeyboardButtonFrame;
+  mediaPlayer?: KeyboardButtonMediaPlayer;
+};
+
+export type KeyboardButtonInternalBrowser = {
+  actionButton?:
+    | 'forward'
+    | 'send'
+    | 'open-externally'
+    | 'send-to-bot'
+    | 'none';
+  actionPredefinedURL?: string;
+  titleType?: 'domain' | 'default';
+  customTitle?: string;
+  mode?:
+    | 'fullscreen'
+    | 'fullscreen-portrait'
+    | 'fullscreen-landscape'
+    | 'partial-size';
+  footerType?: 'default' | 'hidden';
+  actionReplyData?: string;
+};
+
+export type KeyboardButtonMap = {
+  latitude?: number;
+  longitude?: number;
+};
+
+export type KeyboardButtonFrame = {
+  borderWidth?: number;
+  borderColor?: string;
+  cornerRadius?: number;
+};
+
+export type KeyboardButtonMediaPlayer = {
+  title?: string;
+  subtitle?: string;
+  thumbnailURL?: string;
+  loop?: boolean;
+};
