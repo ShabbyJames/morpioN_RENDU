@@ -60,4 +60,60 @@ describe('webhooks', () => {
       mock
         .onPost('/set_webhook', {
           url: 'https://4a16faff.ngrok.io/',
-          event_types: ['delivered', 'seen
+          event_types: ['delivered', 'seen', 'conversation_started'],
+        })
+        .reply(200, reply);
+
+      const res = await client.setWebhook('https://4a16faff.ngrok.io/', [
+        EventType.Delivered,
+        EventType.Seen,
+        EventType.ConversationStarted,
+      ]);
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#removeWebhook', () => {
+    it('should remove subscribed webhook', async () => {
+      const { client, mock } = createMock();
+      const reply = {
+        status: 0,
+        statusMessage: 'ok',
+      };
+
+      mock.onPost('/set_webhook', { url: '' }).reply(200, reply);
+
+      const res = await client.removeWebhook();
+
+      expect(res).toEqual(reply);
+    });
+  });
+});
+
+describe('send message', () => {
+  describe('#sendMessage', () => {
+    it('should call viber api', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        status: 0,
+        statusMessage: 'ok',
+        messageToken: 5098034272017990000,
+      };
+
+      mock
+        .onPost(`/send_message`, {
+          receiver: RECEIVER,
+          sender: {
+            name: 'John McClane',
+            avatar: 'http://avatar.example.com',
+          },
+          type: 'text',
+          text: 'Hello',
+        })
+        .reply(200, reply);
+
+      const res = await client.sendMessage(RECEIVER, {
+        type: 'text',
+      
