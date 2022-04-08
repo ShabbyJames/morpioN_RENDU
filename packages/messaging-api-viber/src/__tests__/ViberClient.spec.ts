@@ -326,4 +326,58 @@ describe('send message', () => {
 
       const reply = {
         status: 0,
-        statusMessage
+        statusMessage: 'ok',
+        messageToken: 5098034272017990000,
+      };
+
+      mock
+        .onPost(`/send_message`, {
+          receiver: RECEIVER,
+          sender: {
+            name: 'John McClane',
+            avatar: 'http://avatar.example.com',
+          },
+          type: 'contact',
+          contact: {
+            name: 'Itamar',
+            phone_number: '+972511123123',
+          },
+        })
+        .reply(200, reply);
+
+      const res = await client.sendContact(RECEIVER, {
+        name: 'Itamar',
+        // @ts-expect-error
+        phone_number: '+972511123123',
+      });
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#sendLocation', () => {
+    it('should call viber api', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        status: 0,
+        statusMessage: 'ok',
+        messageToken: 5098034272017990000,
+      };
+
+      mock
+        .onPost(`/send_message`, {
+          receiver: RECEIVER,
+          sender: {
+            name: 'John McClane',
+            avatar: 'http://avatar.example.com',
+          },
+          type: 'location',
+          location: {
+            lat: '37.7898',
+            lon: '-122.3942',
+          },
+        })
+        .reply(200, reply);
+
+      const res = await client.sendLocati
