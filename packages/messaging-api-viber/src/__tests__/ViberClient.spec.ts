@@ -435,4 +435,48 @@ describe('send message', () => {
             avatar: 'http://avatar.example.com',
           },
           type: 'sticker',
-          sticker_id: 46105
+          sticker_id: 46105,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendSticker(RECEIVER, 46105);
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#sendCarouselContent', () => {
+    it('should call viber api', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        status: 0,
+        statusMessage: 'ok',
+        messageToken: 5098034272017990000,
+      };
+
+      const richMedia = {
+        type: 'rich_media',
+        buttonsGroupColumns: 6,
+        buttonsGroupRows: 7,
+        bgColor: '#FFFFFF',
+        buttons: [
+          {
+            columns: 6,
+            rows: 3,
+            actionType: 'open-url',
+            actionBody: 'https://www.google.com',
+            image: 'http://html-test:8080/myweb/guy/assets/imageRMsmall2.png',
+          },
+          {
+            columns: 6,
+            rows: 2,
+            text: '<font color=#323232><b>Headphones with Microphone, On-ear Wired earphones</b></font><font color=#777777><br>Sound Intone </font><font color=#6fc133>$17.99</font>',
+            actionType: 'open-url',
+            actionBody: 'https://www.google.com',
+            textSize: 'medium',
+            textVAlign: 'middle',
+            textHAlign: 'left',
+          },
+          {
+       
