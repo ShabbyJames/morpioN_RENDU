@@ -380,4 +380,59 @@ describe('send message', () => {
         })
         .reply(200, reply);
 
-      const res = await client.sendLocati
+      const res = await client.sendLocation(RECEIVER, {
+        lat: '37.7898',
+        lon: '-122.3942',
+      });
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#sendURL', () => {
+    it('should call viber api', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        status: 0,
+        statusMessage: 'ok',
+        messageToken: 5098034272017990000,
+      };
+
+      mock
+        .onPost(`/send_message`, {
+          receiver: RECEIVER,
+          sender: {
+            name: 'John McClane',
+            avatar: 'http://avatar.example.com',
+          },
+          type: 'url',
+          media: 'http://developers.viber.com',
+        })
+        .reply(200, reply);
+
+      const res = await client.sendURL(RECEIVER, 'http://developers.viber.com');
+
+      expect(res).toEqual(reply);
+    });
+  });
+
+  describe('#sendSticker', () => {
+    it('should call viber api', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        status: 0,
+        statusMessage: 'ok',
+        messageToken: 5098034272017990000,
+      };
+
+      mock
+        .onPost(`/send_message`, {
+          receiver: RECEIVER,
+          sender: {
+            name: 'John McClane',
+            avatar: 'http://avatar.example.com',
+          },
+          type: 'sticker',
+          sticker_id: 46105
