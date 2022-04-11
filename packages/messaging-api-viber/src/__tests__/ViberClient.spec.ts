@@ -516,4 +516,44 @@ describe('send message', () => {
             textVAlign: 'middle',
             textHAlign: 'left',
           },
-        
+          {
+            columns: 6,
+            rows: 1,
+            actionType: 'reply',
+            actionBody: 'https://www.google.com',
+            text: '<font color=#ffffff>Buy</font>',
+            textSize: 'large',
+            textVAlign: 'middle',
+            textHAlign: 'middle',
+            image: 'https://s14.postimg.org/4mmt4rw1t/Button.png',
+          },
+          {
+            columns: 6,
+            rows: 1,
+            actionType: 'reply',
+            actionBody: 'https://www.google.com',
+            text: '<font color=#8367db>MORE DETAILS</font>',
+            textSize: 'small',
+            textVAlign: 'middle',
+            textHAlign: 'middle',
+          },
+        ],
+      };
+
+      const pascalcaseRichMedia = {
+        Type: 'rich_media',
+        ButtonsGroupColumns: 6,
+        ButtonsGroupRows: 7,
+        BgColor: '#FFFFFF',
+        Buttons: [
+          {
+            Columns: 6,
+            Rows: 3,
+            ActionType: 'open-url',
+            ActionBody: 'https://www.google.com',
+            Image: 'http://html-test:8080/myweb/guy/assets/imageRMsmall2.png',
+          },
+          {
+            Columns: 6,
+            Rows: 2,
+            Text: '<font color=#323232><b>Headphones with Microphone, On-ear Wired earphones</b></f
