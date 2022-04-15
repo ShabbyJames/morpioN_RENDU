@@ -634,4 +634,49 @@ describe('send message', () => {
           },
           type: 'rich_media',
           min_api_version: 2,
-          rich_media: pascalcaseRichMedi
+          rich_media: pascalcaseRichMedia,
+        })
+        .reply(200, reply);
+
+      const res = await client.sendCarouselContent(RECEIVER, richMedia);
+
+      expect(res).toEqual(reply);
+    });
+
+    it('should support pascalcase', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        status: 0,
+        statusMessage: 'ok',
+        messageToken: 5098034272017990000,
+      };
+
+      const richMedia = {
+        Type: 'rich_media',
+        ButtonsGroupColumns: 6,
+        ButtonsGroupRows: 7,
+        BgColor: '#FFFFFF',
+        Buttons: [
+          {
+            Columns: 6,
+            Rows: 3,
+            ActionType: 'open-url',
+            ActionBody: 'https://www.google.com',
+            Image: 'http://html-test:8080/myweb/guy/assets/imageRMsmall2.png',
+          },
+          {
+            Columns: 6,
+            Rows: 2,
+            Text: '<font color=#323232><b>Headphones with Microphone, On-ear Wired earphones</b></font><font color=#777777><br>Sound Intone </font><font color=#6fc133>$17.99</font>',
+            ActionType: 'open-url',
+            ActionBody: 'https://www.google.com',
+            TextSize: 'medium',
+            TextVAlign: 'middle',
+            TextHAlign: 'left',
+          },
+          {
+            Columns: 6,
+            Rows: 1,
+            ActionType: 'reply',
+            ActionBody: 'http
