@@ -768,4 +768,65 @@ describe('keyboards', () => {
       messageToken: 5098034272017990000,
     };
 
-    const ke
+    const keyboard = {
+      type: 'keyboard',
+      defaultHeight: true,
+      buttons: [
+        {
+          actionType: 'reply',
+          actionBody: 'reply to me',
+          text: 'Key text',
+          textSize: 'regular',
+        },
+      ],
+    };
+
+    const pascalcaseKeyboard = {
+      Type: 'keyboard',
+      DefaultHeight: true,
+      Buttons: [
+        {
+          ActionType: 'reply',
+          ActionBody: 'reply to me',
+          Text: 'Key text',
+          TextSize: 'regular',
+        },
+      ],
+    };
+
+    mock
+      .onPost(`/send_message`, {
+        receiver: RECEIVER,
+        sender: {
+          name: 'John McClane',
+          avatar: 'http://avatar.example.com',
+        },
+        type: 'text',
+        text: 'Hello',
+        keyboard: pascalcaseKeyboard,
+      })
+      .reply(200, reply);
+
+    const res = await client.sendText(RECEIVER, 'Hello', {
+      keyboard,
+    });
+
+    expect(res).toEqual(reply);
+  });
+
+  it('should support pascalcase', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      status: 0,
+      statusMessage: 'ok',
+      messageToken: 5098034272017990000,
+    };
+
+    const keyboard = {
+      Type: 'keyboard',
+      DefaultHeight: true,
+      Buttons: [
+        {
+          ActionType: 'reply',
+          ActionBod
