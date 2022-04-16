@@ -718,4 +718,54 @@ describe('send message', () => {
             Rows: 1,
             ActionType: 'reply',
             ActionBody: 'https://www.google.com',
- 
+            Text: '<font color=#ffffff>Buy</font>',
+            TextSize: 'large',
+            TextVAlign: 'middle',
+            TextHAlign: 'middle',
+            Image: 'https://s14.postimg.org/4mmt4rw1t/Button.png',
+          },
+          {
+            Columns: 6,
+            Rows: 1,
+            ActionType: 'reply',
+            ActionBody: 'https://www.google.com',
+            Text: '<font color=#8367db>MORE DETAILS</font>',
+            TextSize: 'small',
+            TextVAlign: 'middle',
+            TextHAlign: 'middle',
+          },
+        ],
+      };
+
+      mock
+        .onPost(`/send_message`, {
+          receiver: RECEIVER,
+          sender: {
+            name: 'John McClane',
+            avatar: 'http://avatar.example.com',
+          },
+          type: 'rich_media',
+          min_api_version: 2,
+          rich_media: richMedia,
+        })
+        .reply(200, reply);
+
+      // @ts-expect-error
+      const res = await client.sendCarouselContent(RECEIVER, richMedia);
+
+      expect(res).toEqual(reply);
+    });
+  });
+});
+
+describe('keyboards', () => {
+  it('should work with message api', async () => {
+    const { client, mock } = createMock();
+
+    const reply = {
+      status: 0,
+      statusMessage: 'ok',
+      messageToken: 5098034272017990000,
+    };
+
+    const ke
