@@ -829,4 +829,56 @@ describe('keyboards', () => {
       Buttons: [
         {
           ActionType: 'reply',
-          ActionBod
+          ActionBody: 'reply to me',
+          Text: 'Key text',
+          TextSize: 'regular',
+        },
+      ],
+    };
+
+    mock
+      .onPost(`/send_message`, {
+        receiver: RECEIVER,
+        sender: {
+          name: 'John McClane',
+          avatar: 'http://avatar.example.com',
+        },
+        type: 'text',
+        text: 'Hello',
+        keyboard,
+      })
+      .reply(200, reply);
+
+    const res = await client.sendText(RECEIVER, 'Hello', {
+      // @ts-expect-error
+      keyboard,
+    });
+
+    expect(res).toEqual(reply);
+  });
+});
+
+describe('get account info', () => {
+  describe('#getAccountInfo', () => {
+    it('should call viber api', async () => {
+      const { client, mock } = createMock();
+
+      const reply = {
+        status: 0,
+        statusMessage: 'ok',
+        id: 'pa:75346594275468546724',
+        name: 'account name',
+        uri: 'accountUri',
+        icon: 'http://example.com',
+        background: 'http://example.com',
+        category: 'category',
+        subcategory: 'sub category',
+        location: {
+          lon: 0.1,
+          lat: 0.2,
+        },
+        country: 'UK',
+        webhook: 'https://my.site.com',
+        eventTypes: ['delivered', 'seen'],
+        subscribersCount: 35,
+    
