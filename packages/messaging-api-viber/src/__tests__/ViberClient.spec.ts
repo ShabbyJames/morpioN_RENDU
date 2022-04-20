@@ -881,4 +881,63 @@ describe('get account info', () => {
         webhook: 'https://my.site.com',
         eventTypes: ['delivered', 'seen'],
         subscribersCount: 35,
-    
+        members: [
+          {
+            id: '01234567890A=',
+            name: 'my name',
+            avatar: 'http://example.com',
+            role: 'admin',
+          },
+        ],
+      };
+
+      mock.onPost(`/get_account_info`, {}).reply(200, reply);
+
+      const res = await client.getAccountInfo();
+
+      expect(res).toEqual(reply);
+    });
+  });
+});
+
+describe('get user details', () => {
+  describe('#getUserDetails', () => {
+    it('should call viber api', async () => {
+      const { client, mock } = createMock();
+
+      const user = {
+        id: '01234567890A=',
+        name: 'John McClane',
+        avatar: 'http://avatar.example.com',
+        country: 'UK',
+        language: 'en',
+        primaryDeviceOs: 'android 7.1',
+        apiVersion: 1,
+        viberVersion: '6.5.0',
+        mcc: 1,
+        mnc: 1,
+        deviceType: 'iPhone9,4',
+      };
+
+      const reply = {
+        status: 0,
+        status_message: 'ok',
+        message_token: 4912661846655238145,
+        user,
+      };
+
+      mock
+        .onPost(`/get_user_details`, {
+          id: '01234567890A=',
+        })
+        .reply(200, reply);
+
+      const res = await client.getUserDetails('01234567890A=');
+
+      expect(res).toEqual(user);
+    });
+  });
+});
+
+describe('get online', () => {
+  describe('#getOnlineStatu
