@@ -940,4 +940,48 @@ describe('get user details', () => {
 });
 
 describe('get online', () => {
-  describe('#getOnlineStatu
+  describe('#getOnlineStatus', () => {
+    it('should call viber api', async () => {
+      const { client, mock } = createMock();
+
+      const users = [
+        {
+          id: '01234567890=',
+          onlineStatus: 0,
+          onlineStatusMessage: 'online',
+        },
+        {
+          id: '01234567891=',
+          onlineStatus: 1,
+          onlineStatusMessage: 'offline',
+          lastOnline: 1457764197627,
+        },
+        {
+          id: '01234567893=',
+          onlineStatus: 3,
+          onlineStatusMessage: 'tryLater',
+        },
+      ];
+
+      const reply = {
+        status: 0,
+        status_message: 'ok',
+        users,
+      };
+
+      mock
+        .onPost(`/get_online`, {
+          ids: ['01234567890=', '01234567891=', '01234567893='],
+        })
+        .reply(200, reply);
+
+      const res = await client.getOnlineStatus([
+        '01234567890=',
+        '01234567891=',
+        '01234567893=',
+      ]);
+
+      expect(res).toEqual(users);
+    });
+  });
+});
