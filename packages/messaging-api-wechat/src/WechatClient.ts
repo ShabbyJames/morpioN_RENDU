@@ -77,4 +77,56 @@ export default class WechatClient {
     this.appId = config.appId;
     this.appSecret = config.appSecret;
     this.onRequest = config.onRequest || onRequest;
-    co
+    const { origin } = config;
+
+    this.axios = axios.create({
+      baseURL: `${origin || 'https://api.weixin.qq.com'}/cgi-bin/`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    this.axios.interceptors.request.use(
+      createRequestInterceptor({
+        onRequest: this.onRequest,
+      })
+    );
+  }
+
+  private async refreshToken(): Promise<void> {
+    const { accessToken, expiresIn } = await this.getAccessToken();
+
+    this.accessToken = accessToken;
+    this.tokenExpiresAt = Date.now() + expiresIn * 1000;
+  }
+
+  private async refreshTokenWhenExpired(): Promise<void> {
+    if (Date.now() > this.tokenExpiresAt) {
+      await this.refreshToken();
+    }
+  }
+
+  /**
+   * 获取 access_token
+   *
+   * @returns Access token info
+   *
+   * @see https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140183
+   *
+   * @example
+   *
+   * ```js
+   * await client.getAccessToken();
+   * // {
+   * //   accessToken: "ACCESS_TOKEN",
+   * //   expiresIn: 7200
+   * // }
+   * ```
+   */
+  getAccessToken(): Promise<WechatTypes.AccessToken> {
+    return this.axios
+      .get<
+        | { access_token: string; expires_in: number }
+        | WechatTypes.FailedResponseData
+      >(
+        `/token?grant_type=client_creden
