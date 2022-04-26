@@ -129,4 +129,62 @@ export default class WechatClient {
         | { access_token: string; expires_in: number }
         | WechatTypes.FailedResponseData
       >(
-        `/token?grant_type=client_creden
+        `/token?grant_type=client_credential&appid=${this.appId}&secret=${this.appSecret}`
+      )
+      .then(throwErrorIfAny)
+      .then(
+        (res) =>
+          camelcaseKeys(res.data, {
+            deep: true,
+          }) as any
+      );
+  }
+
+  /**
+   * 临时素材
+   *
+   * 媒体文件保存时间为 3 天，即 3 天后 media_id 失效。
+   *
+   * 图片（image）- 2M，支持 PNG,JPEG,JPG,GIF 格式
+   * 语音（voice）- 2M，播放长度不超过 60s，支持 AMR,MP3 格式
+   * 视频（video）- 10MB，支持 MP4 格式
+   * 缩略图（thumb）- 64KB，支持 JPG 格式
+   */
+
+  /**
+   * 多媒体文件上传接口
+   *
+   * @param type - Type of the media to upload.
+   * @param media - Buffer or stream of the media to upload.
+   * @returns Info of the uploaded media.
+   *
+   * @see https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1444738726
+   *
+   * @example
+   *
+   * ```js
+   * const fs = require('fs');
+   *
+   * const buffer = fs.readFileSync('test.jpg');
+   *
+   * await client.uploadMedia('image', buffer);
+   * // {
+   * //   type: 'image',
+   * //   mediaId: 'MEDIA_ID',
+   * //   createdAt: 123456789
+   * // }
+   * ```
+   */
+  async uploadMedia(
+    type: WechatTypes.MediaType,
+    media: Buffer | fs.ReadStream
+  ): Promise<WechatTypes.UploadedMedia> {
+    await this.refreshTokenWhenExpired();
+
+    const form = new FormData();
+
+    form.append('media', media);
+
+    return this.axios
+      .post<
+        | {
