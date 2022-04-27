@@ -187,4 +187,56 @@ export default class WechatClient {
 
     return this.axios
       .post<
-        | {
+        | { type: string; media_id: string; created_at: number }
+        | WechatTypes.FailedResponseData
+      >(`/media/upload?access_token=${this.accessToken}&type=${type}`, form, {
+        headers: form.getHeaders(),
+      })
+      .then(throwErrorIfAny)
+      .then(
+        (res) =>
+          camelcaseKeys(res.data, {
+            deep: true,
+          }) as any
+      );
+  }
+
+  /**
+   * 下载多媒体文件接口
+   *
+   * @param mediaId - ID of the media to get.
+   * @returns Info of the media.
+   *
+   * @see https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1444738727
+   *
+   * @example
+   *
+   * ```js
+   * await client.getMedia(MEDIA_ID);
+   * // {
+   * //   videoUrl: "..."
+   * // }
+   * ```
+   */
+  async getMedia(mediaId: string): Promise<WechatTypes.Media> {
+    await this.refreshTokenWhenExpired();
+
+    return this.axios
+      .get<{ video_url: string } | WechatTypes.FailedResponseData>(
+        `/media/get?access_token=${this.accessToken}&media_id=${mediaId}`
+      )
+      .then(throwErrorIfAny)
+      .then(
+        (res) =>
+          camelcaseKeys(res.data, {
+            deep: true,
+          }) as any
+      );
+  }
+
+  /**
+   * 发送消息-客服消息
+   *
+   * @internal
+   *
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service
