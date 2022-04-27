@@ -239,4 +239,63 @@ export default class WechatClient {
    *
    * @internal
    *
-   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7
+   */
+  async sendRawBody(
+    body: {
+      touser: string;
+    } & WechatTypes.SendMessageOptions &
+      (
+        | {
+            msgtype: 'text';
+            text: {
+              content: string;
+            };
+          }
+        | {
+            msgtype: 'image';
+            image: {
+              mediaId: string;
+            };
+          }
+        | {
+            msgtype: 'voice';
+            voice: {
+              mediaId: string;
+            };
+          }
+        | {
+            msgtype: 'video';
+            video: WechatTypes.Video;
+          }
+        | {
+            msgtype: 'music';
+            music: WechatTypes.Music;
+          }
+        | {
+            msgtype: 'news';
+            news: WechatTypes.News;
+          }
+        | {
+            msgtype: 'mpnews';
+            mpnews: {
+              mediaId: string;
+            };
+          }
+        | {
+            msgtype: 'msgmenu';
+            msgmenu: WechatTypes.MsgMenu;
+          }
+        | {
+            msgtype: 'wxcard';
+            wxcard: {
+              cardId: string;
+            };
+          }
+        | {
+            msgtype: 'miniprogrampage';
+            miniprogrampage: WechatTypes.MiniProgramPage;
+          }
+      )
+  ): Promise<WechatTypes.SucceededResponseData> {
+   
