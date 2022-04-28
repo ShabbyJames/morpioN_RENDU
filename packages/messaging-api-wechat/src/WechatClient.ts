@@ -298,4 +298,59 @@ export default class WechatClient {
           }
       )
   ): Promise<WechatTypes.SucceededResponseData> {
-   
+    await this.refreshTokenWhenExpired();
+
+    return this.axios
+      .post<WechatTypes.ResponseData>(
+        `/message/custom/send?access_token=${this.accessToken}`,
+        snakecaseKeys(body, { deep: true })
+      )
+      .then(throwErrorIfAny)
+      .then(
+        (res) =>
+          camelcaseKeys(res.data, {
+            deep: true,
+          }) as any
+      );
+  }
+
+  /**
+   * 发送文本消息
+   *
+   * @param userId - User ID of the recipient
+   * @param text - Text to be sent.
+   * @param options - The other parameters.
+   * @returns Error code and error message.
+   *
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendText(USER_ID, 'Hello!');
+   * ```
+   */
+  sendText(
+    userId: string,
+    text: string,
+    options?: WechatTypes.SendMessageOptions
+  ): Promise<WechatTypes.SucceededResponseData> {
+    return this.sendRawBody({
+      touser: userId,
+      msgtype: 'text',
+      text: {
+        content: text,
+      },
+      ...options,
+    });
+  }
+
+  /**
+   * 发送图片消息
+   *
+   * @param userId - User ID of the recipient
+   * @param mediaId - ID of the media to be sent.
+   * @param options - The other parameters.
+   * @returns Error code and error message.
+   *
+   * @see https:/
