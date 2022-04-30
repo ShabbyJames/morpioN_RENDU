@@ -353,4 +353,63 @@ export default class WechatClient {
    * @param options - The other parameters.
    * @returns Error code and error message.
    *
-   * @see https:/
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendImage(USER_ID, 'MEDIA_ID');
+   * ```
+   */
+  sendImage(
+    userId: string,
+    mediaId: string,
+    options?: WechatTypes.SendMessageOptions
+  ): Promise<WechatTypes.SucceededResponseData> {
+    return this.sendRawBody({
+      touser: userId,
+      msgtype: 'image',
+      image: {
+        mediaId,
+      },
+      ...options,
+    });
+  }
+
+  /**
+   * 发送语音消息
+   *
+   * @param userId - User ID of the recipient
+   * @param mediaId - ID of the media to be sent.
+   * @param options - The other parameters.
+   * @returns Error code and error message.
+   *
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendVoice(USER_ID, 'MEDIA_ID');
+   * ```
+   */
+  sendVoice(
+    userId: string,
+    mediaId: string,
+    options?: WechatTypes.SendMessageOptions
+  ): Promise<WechatTypes.SucceededResponseData> {
+    return this.sendRawBody({
+      touser: userId,
+      msgtype: 'voice',
+      voice: {
+        mediaId,
+      },
+      ...options,
+    });
+  }
+
+  /**
+   * 发送视频消息
+   *
+   * @param userId - User ID of the recipient
+   * @param video - Info of the video to be sent.
+   * @param options - Th
