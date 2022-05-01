@@ -519,3 +519,60 @@ export default class WechatClient {
       msgtype: 'news',
       news,
       ...options,
+    });
+  }
+
+  /**
+   * 发送图文消息（点击跳转到图文消息页面）
+   *
+   * 图文消息条数限制在 8 条以内，注意，如果图文数超过 8，则将会无响应。
+   *
+   * @param userId - User ID of the recipient
+   * @param mediaId - ID of the media to be sent.
+   * @param options - The other parameters.
+   * @returns Error code and error message.
+   *
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendMPNews(USER_ID, 'MEDIA_ID');
+   * ```
+   */
+  sendMPNews(
+    userId: string,
+    mediaId: string,
+    options?: WechatTypes.SendMessageOptions
+  ): Promise<WechatTypes.SucceededResponseData> {
+    return this.sendRawBody({
+      touser: userId,
+      msgtype: 'mpnews',
+      mpnews: {
+        mediaId,
+      },
+      ...options,
+    });
+  }
+
+  /**
+   * 发送菜单消息
+   *
+   * @param userId - User ID of the recipient
+   * @param msgMenu - Data of the msg menu to be sent.
+   * @param options - The other parameters.
+   * @returns Error code and error message.
+   *
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendMsgMenu(USER_ID, {
+   *   headContent: 'HEAD',
+   *   list: [
+   *     {
+   *       id: '101',
+   *       content: 'Yes',
+   *     },
+   *    
