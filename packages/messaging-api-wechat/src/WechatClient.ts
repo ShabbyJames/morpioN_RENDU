@@ -412,4 +412,57 @@ export default class WechatClient {
    *
    * @param userId - User ID of the recipient
    * @param video - Info of the video to be sent.
-   * @param options - Th
+   * @param options - The other parameters.
+   * @returns Error code and error message.
+   *
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendVideo(USER_ID, {
+   *   mediaId: 'MEDIA_ID',
+   *   thumbMediaId: 'THUMB_MEDIA_ID',
+   *   title: 'VIDEO_TITLE',
+   *   description: 'VIDEO_DESCRIPTION',
+   * });
+   * ```
+   */
+  sendVideo(
+    userId: string,
+    video: WechatTypes.Video,
+    options?: WechatTypes.SendMessageOptions
+  ): Promise<WechatTypes.SucceededResponseData> {
+    return this.sendRawBody({
+      touser: userId,
+      msgtype: 'video',
+      video,
+      ...options,
+    });
+  }
+
+  /**
+   * 发送音乐消息
+   *
+   * @param userId - User ID of the recipient
+   * @param news - Data of the music to be sent.
+   * @param options - The other parameters.
+   * @returns Error code and error message.
+   *
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendMusic(USER_ID, {
+   *   musicurl: 'MUSIC_URL',
+   *   hqmusicurl: 'HQ_MUSIC_URL',
+   *   thumbMediaId: 'THUMB_MEDIA_ID',
+   *   title: 'MUSIC_TITLE',
+   *   description: 'MUSIC_DESCRIPTION',
+   * });
+   * ```
+   */
+  sendMusic(
+    userId: string,
+    music: WechatTypes.Mus
