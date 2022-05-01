@@ -465,4 +465,57 @@ export default class WechatClient {
    */
   sendMusic(
     userId: string,
-    music: WechatTypes.Mus
+    music: WechatTypes.Music,
+    options?: WechatTypes.SendMessageOptions
+  ): Promise<WechatTypes.SucceededResponseData> {
+    return this.sendRawBody({
+      touser: userId,
+      msgtype: 'music',
+      music,
+      ...options,
+    });
+  }
+
+  /**
+   * 发送图文消息（点击跳转到外链）
+   *
+   * 图文消息条数限制在 8 条以内，注意，如果图文数超过 8，则将会无响应。
+   *
+   * @param userId - User ID of the recipient
+   * @param news - Data of the news to be sent.
+   * @param options - The other parameters.
+   * @returns Error code and error message.
+   *
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendNews(USER_ID, {
+   *   articles: [
+   *     {
+   *       title: 'Happy Day',
+   *       description: 'Is Really A Happy Day',
+   *       url: 'URL',
+   *       picurl: 'PIC_URL',
+   *     },
+   *     {
+   *       title: 'Happy Day',
+   *       description: 'Is Really A Happy Day',
+   *       url: 'URL',
+   *       picurl: 'PIC_URL',
+   *     },
+   *   ],
+   * });
+   * ```
+   */
+  sendNews(
+    userId: string,
+    news: WechatTypes.News,
+    options?: WechatTypes.SendMessageOptions
+  ): Promise<WechatTypes.SucceededResponseData> {
+    return this.sendRawBody({
+      touser: userId,
+      msgtype: 'news',
+      news,
+      ...options,
