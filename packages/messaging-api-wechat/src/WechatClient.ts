@@ -632,4 +632,37 @@ export default class WechatClient {
    * 发送小程序卡片（要求小程序与公众号已关联）
    *
    * @param userId - User ID of the recipient
-   * @param miniProgramPage - Info of the mini program
+   * @param miniProgramPage - Info of the mini program page to be sent.
+   * @param options - The other parameters.
+   * @returns Error code and error message.
+   *
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendMiniProgramPage(USER_ID, {
+   *   title: 'title',
+   *   appid: 'appid',
+   *   pagepath: 'pagepath',
+   *   thumbMediaId: 'thumb_media_id',
+   * });
+   * ```
+   */
+  sendMiniProgramPage(
+    userId: string,
+    miniProgramPage: WechatTypes.MiniProgramPage,
+    options?: WechatTypes.SendMessageOptions
+  ): Promise<WechatTypes.SucceededResponseData> {
+    return this.sendRawBody({
+      touser: userId,
+      msgtype: 'miniprogrampage',
+      miniprogrampage: miniProgramPage,
+      ...options,
+    });
+  }
+
+  // TODO: implement typing
+
+  // TODO: 客服帳號相關
+}
