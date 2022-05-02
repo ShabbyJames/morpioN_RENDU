@@ -575,4 +575,61 @@ export default class WechatClient {
    *       id: '101',
    *       content: 'Yes',
    *     },
-   *    
+   *     {
+   *       id: '102',
+   *       content: 'No',
+   *     },
+   *   ],
+   *   'tailContent': 'Tail',
+   * });
+   * ```
+   */
+  sendMsgMenu(
+    userId: string,
+    msgMenu: WechatTypes.MsgMenu,
+    options?: WechatTypes.SendMessageOptions
+  ): Promise<WechatTypes.SucceededResponseData> {
+    return this.sendRawBody({
+      touser: userId,
+      msgtype: 'msgmenu',
+      msgmenu: msgMenu,
+      ...options,
+    });
+  }
+
+  /**
+   * 发送卡券
+   *
+   * @param userId - User ID of the recipient
+   * @param cardId - ID of the card to be sent.
+   * @param options - The other parameters.
+   * @returns Error code and error message.
+   *
+   * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7
+   *
+   * @example
+   *
+   * ```js
+   * await client.sendWXCard(USER_ID, '123dsdajkasd231jhksad');
+   * ```
+   */
+  sendWXCard(
+    userId: string,
+    cardId: string,
+    options?: WechatTypes.SendMessageOptions
+  ): Promise<WechatTypes.SucceededResponseData> {
+    return this.sendRawBody({
+      touser: userId,
+      msgtype: 'wxcard',
+      wxcard: {
+        cardId,
+      },
+      ...options,
+    });
+  }
+
+  /**
+   * 发送小程序卡片（要求小程序与公众号已关联）
+   *
+   * @param userId - User ID of the recipient
+   * @param miniProgramPage - Info of the mini program
