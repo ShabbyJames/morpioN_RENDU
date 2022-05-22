@@ -527,4 +527,38 @@
 
 "@jest/types@^26.6.2":
   version "26.6.2"
-  resolved "https://registry.yarnpkg.com/@jest/ty
+  resolved "https://registry.yarnpkg.com/@jest/types/-/types-26.6.2.tgz#bef5a532030e1d88a2f5a6d933f84e97226ed48e"
+  integrity sha512-fC6QCp7Sc5sX6g8Tvbmj4XUTbyrik0akgRy03yjXbQaBWWNWGE7SGtJk98m0N8nzegD/7SggrUlivxo5ax4KWQ==
+  dependencies:
+    "@types/istanbul-lib-coverage" "^2.0.0"
+    "@types/istanbul-reports" "^3.0.0"
+    "@types/node" "*"
+    "@types/yargs" "^15.0.0"
+    chalk "^4.0.0"
+
+"@lerna/add@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/add/-/add-4.0.0.tgz#c36f57d132502a57b9e7058d1548b7a565ef183f"
+  integrity sha512-cpmAH1iS3k8JBxNvnMqrGTTjbY/ZAiKa1ChJzFevMYY3eeqbvhsBKnBcxjRXtdrJ6bd3dCQM+ZtK+0i682Fhng==
+  dependencies:
+    "@lerna/bootstrap" "4.0.0"
+    "@lerna/command" "4.0.0"
+    "@lerna/filter-options" "4.0.0"
+    "@lerna/npm-conf" "4.0.0"
+    "@lerna/validation-error" "4.0.0"
+    dedent "^0.7.0"
+    npm-package-arg "^8.1.0"
+    p-map "^4.0.0"
+    pacote "^11.2.6"
+    semver "^7.3.4"
+
+"@lerna/bootstrap@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/bootstrap/-/bootstrap-4.0.0.tgz#5f5c5e2c6cfc8fcec50cb2fbe569a8c607101891"
+  integrity sha512-RkS7UbeM2vu+kJnHzxNRCLvoOP9yGNgkzRdy4UV2hNalD7EP41bLvRVOwRYQ7fhc2QcbhnKNdOBihYRL0LcKtw==
+  dependencies:
+    "@lerna/command" "4.0.0"
+    "@lerna/filter-options" "4.0.0"
+    "@lerna/has-npm-version" "4.0.0"
+    "@lerna/npm-install" "4.0.0"
+    "@lerna/package-graph" 
