@@ -697,4 +697,40 @@
 "@lerna/create@4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@lerna/create/-/create-4.0.0.tgz#b6947e9b5dfb6530321952998948c3e63d64d730"
-  integrity sha512-mVOB1niKByEUfxlbKTM1UNECWAjwUdiioIbRQZE
+  integrity sha512-mVOB1niKByEUfxlbKTM1UNECWAjwUdiioIbRQZEeEabtjCL69r9rscIsjlGyhGWCfsdAG5wfq4t47nlDXdLLag==
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    "@lerna/command" "4.0.0"
+    "@lerna/npm-conf" "4.0.0"
+    "@lerna/validation-error" "4.0.0"
+    dedent "^0.7.0"
+    fs-extra "^9.1.0"
+    globby "^11.0.2"
+    init-package-json "^2.0.2"
+    npm-package-arg "^8.1.0"
+    p-reduce "^2.1.0"
+    pacote "^11.2.6"
+    pify "^5.0.0"
+    semver "^7.3.4"
+    slash "^3.0.0"
+    validate-npm-package-license "^3.0.4"
+    validate-npm-package-name "^3.0.0"
+    whatwg-url "^8.4.0"
+    yargs-parser "20.2.4"
+
+"@lerna/describe-ref@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/describe-ref/-/describe-ref-4.0.0.tgz#53c53b4ea65fdceffa072a62bfebe6772c45d9ec"
+  integrity sha512-eTU5+xC4C5Gcgz+Ey4Qiw9nV2B4JJbMulsYJMW8QjGcGh8zudib7Sduj6urgZXUYNyhYpRs+teci9M2J8u+UvQ==
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    npmlog "^4.1.2"
+
+"@lerna/diff@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/diff/-/diff-4.0.0.tgz#6d3071817aaa4205a07bf77cfc6e932796d48b92"
+  integrity sha512-jYPKprQVg41+MUMxx6cwtqsNm0Yxx9GDEwdiPLwcUTFx+/qKCEwifKNJ1oGIPBxyEHX2PFCOjkK39lHoj2qiag==
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    "@lerna/command" "4.0.0"
+    "@lerna/valida
