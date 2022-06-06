@@ -664,4 +664,37 @@
     "@lerna/write-log-file" "4.0.0"
     clone-deep "^4.0.1"
     dedent "^0.7.0"
-    execa "^5.0.
+    execa "^5.0.0"
+    is-ci "^2.0.0"
+    npmlog "^4.1.2"
+
+"@lerna/conventional-commits@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/conventional-commits/-/conventional-commits-4.0.0.tgz#660fb2c7b718cb942ead70110df61f18c6f99750"
+  integrity sha512-CSUQRjJHFrH8eBn7+wegZLV3OrNc0Y1FehYfYGhjLE2SIfpCL4bmfu/ViYuHh9YjwHaA+4SX6d3hR+xkeseKmw==
+  dependencies:
+    "@lerna/validation-error" "4.0.0"
+    conventional-changelog-angular "^5.0.12"
+    conventional-changelog-core "^4.2.2"
+    conventional-recommended-bump "^6.1.0"
+    fs-extra "^9.1.0"
+    get-stream "^6.0.0"
+    lodash.template "^4.5.0"
+    npm-package-arg "^8.1.0"
+    npmlog "^4.1.2"
+    pify "^5.0.0"
+    semver "^7.3.4"
+
+"@lerna/create-symlink@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/create-symlink/-/create-symlink-4.0.0.tgz#8c5317ce5ae89f67825443bd7651bf4121786228"
+  integrity sha512-I0phtKJJdafUiDwm7BBlEUOtogmu8+taxq6PtIrxZbllV9hWg59qkpuIsiFp+no7nfRVuaasNYHwNUhDAVQBig==
+  dependencies:
+    cmd-shim "^4.1.0"
+    fs-extra "^9.1.0"
+    npmlog "^4.1.2"
+
+"@lerna/create@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/create/-/create-4.0.0.tgz#b6947e9b5dfb6530321952998948c3e63d64d730"
+  integrity sha512-mVOB1niKByEUfxlbKTM1UNECWAjwUdiioIbRQZE
