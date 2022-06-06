@@ -634,4 +634,34 @@
 
 "@lerna/collect-uncommitted@4.0.0":
   version "4.0.0"
-  resol
+  resolved "https://registry.yarnpkg.com/@lerna/collect-uncommitted/-/collect-uncommitted-4.0.0.tgz#855cd64612969371cfc2453b90593053ff1ba779"
+  integrity sha512-ufSTfHZzbx69YNj7KXQ3o66V4RC76ffOjwLX0q/ab//61bObJ41n03SiQEhSlmpP+gmFbTJ3/7pTe04AHX9m/g==
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    chalk "^4.1.0"
+    npmlog "^4.1.2"
+
+"@lerna/collect-updates@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/collect-updates/-/collect-updates-4.0.0.tgz#8e208b1bafd98a372ff1177f7a5e288f6bea8041"
+  integrity sha512-bnNGpaj4zuxsEkyaCZLka9s7nMs58uZoxrRIPJ+nrmrZYp1V5rrd+7/NYTuunOhY2ug1sTBvTAxj3NZQ+JKnOw==
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    "@lerna/describe-ref" "4.0.0"
+    minimatch "^3.0.4"
+    npmlog "^4.1.2"
+    slash "^3.0.0"
+
+"@lerna/command@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/command/-/command-4.0.0.tgz#991c7971df8f5bf6ae6e42c808869a55361c1b98"
+  integrity sha512-LM9g3rt5FsPNFqIHUeRwWXLNHJ5NKzOwmVKZ8anSp4e1SPrv2HNc1V02/9QyDDZK/w+5POXH5lxZUI1CHaOK/A==
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    "@lerna/package-graph" "4.0.0"
+    "@lerna/project" "4.0.0"
+    "@lerna/validation-error" "4.0.0"
+    "@lerna/write-log-file" "4.0.0"
+    clone-deep "^4.0.1"
+    dedent "^0.7.0"
+    execa "^5.0.
