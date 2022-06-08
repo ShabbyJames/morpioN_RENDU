@@ -821,4 +821,41 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@lerna/import/-/import-4.0.0.tgz#bde656c4a451fa87ae41733ff8a8da60547c5465"
   integrity sha512-FaIhd+4aiBousKNqC7TX1Uhe97eNKf5/SC7c5WZANVWtC7aBWdmswwDt3usrzCNpj6/Wwr9EtEbYROzxKH8ffg==
-  depende
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    "@lerna/command" "4.0.0"
+    "@lerna/prompt" "4.0.0"
+    "@lerna/pulse-till-done" "4.0.0"
+    "@lerna/validation-error" "4.0.0"
+    dedent "^0.7.0"
+    fs-extra "^9.1.0"
+    p-map-series "^2.1.0"
+
+"@lerna/info@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/info/-/info-4.0.0.tgz#b9fb0e479d60efe1623603958a831a88b1d7f1fc"
+  integrity sha512-8Uboa12kaCSZEn4XRfPz5KU9XXoexSPS4oeYGj76s2UQb1O1GdnEyfjyNWoUl1KlJ2i/8nxUskpXIftoFYH0/Q==
+  dependencies:
+    "@lerna/command" "4.0.0"
+    "@lerna/output" "4.0.0"
+    envinfo "^7.7.4"
+
+"@lerna/init@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/init/-/init-4.0.0.tgz#dadff67e6dfb981e8ccbe0e6a310e837962f6c7a"
+  integrity sha512-wY6kygop0BCXupzWj5eLvTUqdR7vIAm0OgyV9WHpMYQGfs1V22jhztt8mtjCloD/O0nEe4tJhdG62XU5aYmPNQ==
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    "@lerna/command" "4.0.0"
+    fs-extra "^9.1.0"
+    p-map "^4.0.0"
+    write-json-file "^4.3.0"
+
+"@lerna/link@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/link/-/link-4.0.0.tgz#c3a38aabd44279d714e90f2451e31b63f0fb65ba"
+  integrity sha512-KlvPi7XTAcVOByfaLlOeYOfkkDcd+bejpHMCd1KcArcFTwijOwXOVi24DYomIeHvy6HsX/IUquJ4PPUJIeB4+w==
+  dependencies:
+    "@lerna/command" "4.0.0"
+    "@lerna/package-graph" "4.0.0"
+    
