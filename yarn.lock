@@ -797,4 +797,28 @@
 
 "@lerna/gitlab-client@4.0.0":
   version "4.0.0"
-  resolved "https://re
+  resolved "https://registry.yarnpkg.com/@lerna/gitlab-client/-/gitlab-client-4.0.0.tgz#00dad73379c7b38951d4b4ded043504c14e2b67d"
+  integrity sha512-OMUpGSkeDWFf7BxGHlkbb35T7YHqVFCwBPSIR6wRsszY8PAzCYahtH3IaJzEJyUg6vmZsNl0FSr3pdA2skhxqA==
+  dependencies:
+    node-fetch "^2.6.1"
+    npmlog "^4.1.2"
+    whatwg-url "^8.4.0"
+
+"@lerna/global-options@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/global-options/-/global-options-4.0.0.tgz#c7d8b0de6a01d8a845e2621ea89e7f60f18c6a5f"
+  integrity sha512-TRMR8afAHxuYBHK7F++Ogop2a82xQjoGna1dvPOY6ltj/pEx59pdgcJfYcynYqMkFIk8bhLJJN9/ndIfX29FTQ==
+
+"@lerna/has-npm-version@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/has-npm-version/-/has-npm-version-4.0.0.tgz#d3fc3292c545eb28bd493b36e6237cf0279f631c"
+  integrity sha512-LQ3U6XFH8ZmLCsvsgq1zNDqka0Xzjq5ibVN+igAI5ccRWNaUsE/OcmsyMr50xAtNQMYMzmpw5GVLAivT2/YzCg==
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    semver "^7.3.4"
+
+"@lerna/import@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/import/-/import-4.0.0.tgz#bde656c4a451fa87ae41733ff8a8da60547c5465"
+  integrity sha512-FaIhd+4aiBousKNqC7TX1Uhe97eNKf5/SC7c5WZANVWtC7aBWdmswwDt3usrzCNpj6/Wwr9EtEbYROzxKH8ffg==
+  depende
