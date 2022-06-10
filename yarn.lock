@@ -858,4 +858,39 @@
   dependencies:
     "@lerna/command" "4.0.0"
     "@lerna/package-graph" "4.0.0"
-    
+    "@lerna/symlink-dependencies" "4.0.0"
+    p-map "^4.0.0"
+    slash "^3.0.0"
+
+"@lerna/list@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/list/-/list-4.0.0.tgz#24b4e6995bd73f81c556793fe502b847efd9d1d7"
+  integrity sha512-L2B5m3P+U4Bif5PultR4TI+KtW+SArwq1i75QZ78mRYxPc0U/piau1DbLOmwrdqr99wzM49t0Dlvl6twd7GHFg==
+  dependencies:
+    "@lerna/command" "4.0.0"
+    "@lerna/filter-options" "4.0.0"
+    "@lerna/listable" "4.0.0"
+    "@lerna/output" "4.0.0"
+
+"@lerna/listable@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/listable/-/listable-4.0.0.tgz#d00d6cb4809b403f2b0374fc521a78e318b01214"
+  integrity sha512-/rPOSDKsOHs5/PBLINZOkRIX1joOXUXEtyUs5DHLM8q6/RP668x/1lFhw6Dx7/U+L0+tbkpGtZ1Yt0LewCLgeQ==
+  dependencies:
+    "@lerna/query-graph" "4.0.0"
+    chalk "^4.1.0"
+    columnify "^1.5.4"
+
+"@lerna/log-packed@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/log-packed/-/log-packed-4.0.0.tgz#95168fe2e26ac6a71e42f4be857519b77e57a09f"
+  integrity sha512-+dpCiWbdzgMAtpajLToy9PO713IHoE6GV/aizXycAyA07QlqnkpaBNZ8DW84gHdM1j79TWockGJo9PybVhrrZQ==
+  dependencies:
+    byte-size "^7.0.0"
+    columnify "^1.5.4"
+    has-unicode "^2.0.1"
+    npmlog "^4.1.2"
+
+"@lerna/npm-conf@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/npm-conf/-/
