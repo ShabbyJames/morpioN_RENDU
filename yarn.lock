@@ -1054,4 +1054,38 @@
     "@lerna/prerelease-id-from-version" "4.0.0"
     "@lerna/prompt" "4.0.0"
     "@lerna/pulse-till-done" "4.0.0"
-    "@lerna/run-lifecycle" "4.
+    "@lerna/run-lifecycle" "4.0.0"
+    "@lerna/run-topologically" "4.0.0"
+    "@lerna/validation-error" "4.0.0"
+    "@lerna/version" "4.0.0"
+    fs-extra "^9.1.0"
+    libnpmaccess "^4.0.1"
+    npm-package-arg "^8.1.0"
+    npm-registry-fetch "^9.0.0"
+    npmlog "^4.1.2"
+    p-map "^4.0.0"
+    p-pipe "^3.1.0"
+    pacote "^11.2.6"
+    semver "^7.3.4"
+
+"@lerna/pulse-till-done@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/pulse-till-done/-/pulse-till-done-4.0.0.tgz#04bace7d483a8205c187b806bcd8be23d7bb80a3"
+  integrity sha512-Frb4F7QGckaybRhbF7aosLsJ5e9WuH7h0KUkjlzSByVycxY91UZgaEIVjS2oN9wQLrheLMHl6SiFY0/Pvo0Cxg==
+  dependencies:
+    npmlog "^4.1.2"
+
+"@lerna/query-graph@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/query-graph/-/query-graph-4.0.0.tgz#09dd1c819ac5ee3f38db23931143701f8a6eef63"
+  integrity sha512-YlP6yI3tM4WbBmL9GCmNDoeQyzcyg1e4W96y/PKMZa5GbyUvkS2+Jc2kwPD+5KcXou3wQZxSPzR3Te5OenaDdg==
+  dependencies:
+    "@lerna/package-graph" "4.0.0"
+
+"@lerna/resolve-symlink@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/resolve-symlink/-/resolve-symlink-4.0.0.tgz#6d006628a210c9b821964657a9e20a8c9a115e14"
+  integrity sha512-RtX8VEUzqT+uLSCohx8zgmjc6zjyRlh6i/helxtZTMmc4+6O4FS9q5LJas2uGO2wKvBlhcD6siibGt7dIC3xZA==
+  dependencies:
+    fs-extra "^9.1.0"
+    npmlog "^4.1.2"
