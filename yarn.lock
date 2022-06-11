@@ -1089,3 +1089,35 @@
   dependencies:
     fs-extra "^9.1.0"
     npmlog "^4.1.2"
+    read-cmd-shim "^2.0.0"
+
+"@lerna/rimraf-dir@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/rimraf-dir/-/rimraf-dir-4.0.0.tgz#2edf3b62d4eb0ef4e44e430f5844667d551ec25a"
+  integrity sha512-QNH9ABWk9mcMJh2/muD9iYWBk1oQd40y6oH+f3wwmVGKYU5YJD//+zMiBI13jxZRtwBx0vmBZzkBkK1dR11cBg==
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    npmlog "^4.1.2"
+    path-exists "^4.0.0"
+    rimraf "^3.0.2"
+
+"@lerna/run-lifecycle@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/run-lifecycle/-/run-lifecycle-4.0.0.tgz#e648a46f9210a9bcd7c391df6844498cb5079334"
+  integrity sha512-IwxxsajjCQQEJAeAaxF8QdEixfI7eLKNm4GHhXHrgBu185JcwScFZrj9Bs+PFKxwb+gNLR4iI5rpUdY8Y0UdGQ==
+  dependencies:
+    "@lerna/npm-conf" "4.0.0"
+    npm-lifecycle "^3.1.5"
+    npmlog "^4.1.2"
+
+"@lerna/run-topologically@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/run-topologically/-/run-topologically-4.0.0.tgz#af846eeee1a09b0c2be0d1bfb5ef0f7b04bb1827"
+  integrity sha512-EVZw9hGwo+5yp+VL94+NXRYisqgAlj0jWKWtAIynDCpghRxCE5GMO3xrQLmQgqkpUl9ZxQFpICgYv5DW4DksQA==
+  dependencies:
+    "@lerna/query-graph" "4.0.0"
+    p-queue "^6.6.2"
+
+"@lerna/run@4.0.0":
+  version "4.0.0"
+  resolved "ht
