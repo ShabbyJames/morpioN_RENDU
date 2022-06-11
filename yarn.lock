@@ -987,4 +987,36 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@lerna/package/-/package-4.0.0.tgz#1b4c259c4bcff45c876ee1d591a043aacbc0d6b7"
   integrity sha512-l0M/izok6FlyyitxiQKr+gZLVFnvxRQdNhzmQ6nRnN9dvBJWn+IxxpM+cLqGACatTnyo9LDzNTOj2Db3+s0s8Q==
-  depende
+  dependencies:
+    load-json-file "^6.2.0"
+    npm-package-arg "^8.1.0"
+    write-pkg "^4.0.0"
+
+"@lerna/prerelease-id-from-version@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/prerelease-id-from-version/-/prerelease-id-from-version-4.0.0.tgz#c7e0676fcee1950d85630e108eddecdd5b48c916"
+  integrity sha512-GQqguzETdsYRxOSmdFZ6zDBXDErIETWOqomLERRY54f4p+tk4aJjoVdd9xKwehC9TBfIFvlRbL1V9uQGHh1opg==
+  dependencies:
+    semver "^7.3.4"
+
+"@lerna/profiler@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/profiler/-/profiler-4.0.0.tgz#8a53ab874522eae15d178402bff90a14071908e9"
+  integrity sha512-/BaEbqnVh1LgW/+qz8wCuI+obzi5/vRE8nlhjPzdEzdmWmZXuCKyWSEzAyHOJWw1ntwMiww5dZHhFQABuoFz9Q==
+  dependencies:
+    fs-extra "^9.1.0"
+    npmlog "^4.1.2"
+    upath "^2.0.1"
+
+"@lerna/project@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/project/-/project-4.0.0.tgz#ff84893935833533a74deff30c0e64ddb7f0ba6b"
+  integrity sha512-o0MlVbDkD5qRPkFKlBZsXZjoNTWPyuL58564nSfZJ6JYNmgAptnWPB2dQlAc7HWRZkmnC2fCkEdoU+jioPavbg==
+  dependencies:
+    "@lerna/package" "4.0.0"
+    "@lerna/validation-error" "4.0.0"
+    cosmiconfig "^7.0.0"
+    dedent "^0.7.0"
+    dot-prop "^6.0.1"
+    glob-parent "^5.1.1"
+    globby "^1
