@@ -924,4 +924,35 @@
 
 "@lerna/npm-publish@4.0.0":
   version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@lerna/npm-publish/-/npm-publish-4.0.0.tgz#84eb62e876fe949ae1fd
+  resolved "https://registry.yarnpkg.com/@lerna/npm-publish/-/npm-publish-4.0.0.tgz#84eb62e876fe949ae1fd62c60804423dbc2c4472"
+  integrity sha512-vQb7yAPRo5G5r77DRjHITc9piR9gvEKWrmfCH7wkfBnGWEqu7n8/4bFQ7lhnkujvc8RXOsYpvbMQkNfkYibD/w==
+  dependencies:
+    "@lerna/otplease" "4.0.0"
+    "@lerna/run-lifecycle" "4.0.0"
+    fs-extra "^9.1.0"
+    libnpmpublish "^4.0.0"
+    npm-package-arg "^8.1.0"
+    npmlog "^4.1.2"
+    pify "^5.0.0"
+    read-package-json "^3.0.0"
+
+"@lerna/npm-run-script@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/npm-run-script/-/npm-run-script-4.0.0.tgz#dfebf4f4601442e7c0b5214f9fb0d96c9350743b"
+  integrity sha512-Jmyh9/IwXJjOXqKfIgtxi0bxi1pUeKe5bD3S81tkcy+kyng/GNj9WSqD5ZggoNP2NP//s4CLDAtUYLdP7CU9rA==
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    "@lerna/get-npm-exec-opts" "4.0.0"
+    npmlog "^4.1.2"
+
+"@lerna/otplease@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/otplease/-/otplease-4.0.0.tgz#84972eb43448f8a1077435ba1c5e59233b725850"
+  integrity sha512-Sgzbqdk1GH4psNiT6hk+BhjOfIr/5KhGBk86CEfHNJTk9BK4aZYyJD4lpDbDdMjIV4g03G7pYoqHzH765T4fxw==
+  dependencies:
+    "@lerna/prompt" "4.0.0"
+
+"@lerna/output@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/output/-/output-4.0.0.tgz#b1d72215c0e35483e4f3e9994debc82c621851f2"
+  integrity sha512-Un1sHtO1AD7buDQrpnaYTi2EG6sLF+KOPEAMxeUYG5qG3khTs2Zgzq5WE3dt2N/bKh7naESt20JjIW6tBE
