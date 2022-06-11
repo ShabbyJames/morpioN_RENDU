@@ -955,4 +955,36 @@
 "@lerna/output@4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@lerna/output/-/output-4.0.0.tgz#b1d72215c0e35483e4f3e9994debc82c621851f2"
-  integrity sha512-Un1sHtO1AD7buDQrpnaYTi2EG6sLF+KOPEAMxeUYG5qG3khTs2Zgzq5WE3dt2N/bKh7naESt20JjIW6tBE
+  integrity sha512-Un1sHtO1AD7buDQrpnaYTi2EG6sLF+KOPEAMxeUYG5qG3khTs2Zgzq5WE3dt2N/bKh7naESt20JjIW6tBELP0w==
+  dependencies:
+    npmlog "^4.1.2"
+
+"@lerna/pack-directory@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/pack-directory/-/pack-directory-4.0.0.tgz#8b617db95d20792f043aaaa13a9ccc0e04cb4c74"
+  integrity sha512-NJrmZNmBHS+5aM+T8N6FVbaKFScVqKlQFJNY2k7nsJ/uklNKsLLl6VhTQBPwMTbf6Tf7l6bcKzpy7aePuq9UiQ==
+  dependencies:
+    "@lerna/get-packed" "4.0.0"
+    "@lerna/package" "4.0.0"
+    "@lerna/run-lifecycle" "4.0.0"
+    npm-packlist "^2.1.4"
+    npmlog "^4.1.2"
+    tar "^6.1.0"
+    temp-write "^4.0.0"
+
+"@lerna/package-graph@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/package-graph/-/package-graph-4.0.0.tgz#16a00253a8ac810f72041481cb46bcee8d8123dd"
+  integrity sha512-QED2ZCTkfXMKFoTGoccwUzjHtZMSf3UKX14A4/kYyBms9xfFsesCZ6SLI5YeySEgcul8iuIWfQFZqRw+Qrjraw==
+  dependencies:
+    "@lerna/prerelease-id-from-version" "4.0.0"
+    "@lerna/validation-error" "4.0.0"
+    npm-package-arg "^8.1.0"
+    npmlog "^4.1.2"
+    semver "^7.3.4"
+
+"@lerna/package@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/package/-/package-4.0.0.tgz#1b4c259c4bcff45c876ee1d591a043aacbc0d6b7"
+  integrity sha512-l0M/izok6FlyyitxiQKr+gZLVFnvxRQdNhzmQ6nRnN9dvBJWn+IxxpM+cLqGACatTnyo9LDzNTOj2Db3+s0s8Q==
+  depende
