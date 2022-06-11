@@ -1019,4 +1019,39 @@
     dedent "^0.7.0"
     dot-prop "^6.0.1"
     glob-parent "^5.1.1"
-    globby "^1
+    globby "^11.0.2"
+    load-json-file "^6.2.0"
+    npmlog "^4.1.2"
+    p-map "^4.0.0"
+    resolve-from "^5.0.0"
+    write-json-file "^4.3.0"
+
+"@lerna/prompt@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/prompt/-/prompt-4.0.0.tgz#5ec69a803f3f0db0ad9f221dad64664d3daca41b"
+  integrity sha512-4Ig46oCH1TH5M7YyTt53fT6TuaKMgqUUaqdgxvp6HP6jtdak6+amcsqB8YGz2eQnw/sdxunx84DfI9XpoLj4bQ==
+  dependencies:
+    inquirer "^7.3.3"
+    npmlog "^4.1.2"
+
+"@lerna/publish@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/publish/-/publish-4.0.0.tgz#f67011305adeba120066a3b6d984a5bb5fceef65"
+  integrity sha512-K8jpqjHrChH22qtkytA5GRKIVFEtqBF6JWj1I8dWZtHs4Jywn8yB1jQ3BAMLhqmDJjWJtRck0KXhQQKzDK2UPg==
+  dependencies:
+    "@lerna/check-working-tree" "4.0.0"
+    "@lerna/child-process" "4.0.0"
+    "@lerna/collect-updates" "4.0.0"
+    "@lerna/command" "4.0.0"
+    "@lerna/describe-ref" "4.0.0"
+    "@lerna/log-packed" "4.0.0"
+    "@lerna/npm-conf" "4.0.0"
+    "@lerna/npm-dist-tag" "4.0.0"
+    "@lerna/npm-publish" "4.0.0"
+    "@lerna/otplease" "4.0.0"
+    "@lerna/output" "4.0.0"
+    "@lerna/pack-directory" "4.0.0"
+    "@lerna/prerelease-id-from-version" "4.0.0"
+    "@lerna/prompt" "4.0.0"
+    "@lerna/pulse-till-done" "4.0.0"
+    "@lerna/run-lifecycle" "4.
