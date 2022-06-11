@@ -893,4 +893,35 @@
 
 "@lerna/npm-conf@4.0.0":
   version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@lerna/npm-conf/-/
+  resolved "https://registry.yarnpkg.com/@lerna/npm-conf/-/npm-conf-4.0.0.tgz#b259fd1e1cee2bf5402b236e770140ff9ade7fd2"
+  integrity sha512-uS7H02yQNq3oejgjxAxqq/jhwGEE0W0ntr8vM3EfpCW1F/wZruwQw+7bleJQ9vUBjmdXST//tk8mXzr5+JXCfw==
+  dependencies:
+    config-chain "^1.1.12"
+    pify "^5.0.0"
+
+"@lerna/npm-dist-tag@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/npm-dist-tag/-/npm-dist-tag-4.0.0.tgz#d1e99b4eccd3414142f0548ad331bf2d53f3257a"
+  integrity sha512-F20sg28FMYTgXqEQihgoqSfwmq+Id3zT23CnOwD+XQMPSy9IzyLf1fFVH319vXIw6NF6Pgs4JZN2Qty6/CQXGw==
+  dependencies:
+    "@lerna/otplease" "4.0.0"
+    npm-package-arg "^8.1.0"
+    npm-registry-fetch "^9.0.0"
+    npmlog "^4.1.2"
+
+"@lerna/npm-install@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/npm-install/-/npm-install-4.0.0.tgz#31180be3ab3b7d1818a1a0c206aec156b7094c78"
+  integrity sha512-aKNxq2j3bCH3eXl3Fmu4D54s/YLL9WSwV8W7X2O25r98wzrO38AUN6AB9EtmAx+LV/SP15et7Yueg9vSaanRWg==
+  dependencies:
+    "@lerna/child-process" "4.0.0"
+    "@lerna/get-npm-exec-opts" "4.0.0"
+    fs-extra "^9.1.0"
+    npm-package-arg "^8.1.0"
+    npmlog "^4.1.2"
+    signal-exit "^3.0.3"
+    write-pkg "^4.0.0"
+
+"@lerna/npm-publish@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/npm-publish/-/npm-publish-4.0.0.tgz#84eb62e876fe949ae1fd
