@@ -1149,4 +1149,35 @@
   integrity sha512-BABo0MjeUHNAe2FNGty1eantWp8u83BHSeIMPDxNq0MuW2K3CiQRaeWT3EGPAzXpGt0+hVzBrA6+OT0GPn7Yuw==
   dependencies:
     "@lerna/create-symlink" "4.0.0"
-    "@lerna/resolve-symlink"
+    "@lerna/resolve-symlink" "4.0.0"
+    "@lerna/symlink-binary" "4.0.0"
+    fs-extra "^9.1.0"
+    p-map "^4.0.0"
+    p-map-series "^2.1.0"
+
+"@lerna/timer@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/timer/-/timer-4.0.0.tgz#a52e51bfcd39bfd768988049ace7b15c1fd7a6da"
+  integrity sha512-WFsnlaE7SdOvjuyd05oKt8Leg3ENHICnvX3uYKKdByA+S3g+TCz38JsNs7OUZVt+ba63nC2nbXDlUnuT2Xbsfg==
+
+"@lerna/validation-error@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/validation-error/-/validation-error-4.0.0.tgz#af9d62fe8304eaa2eb9a6ba1394f9aa807026d35"
+  integrity sha512-1rBOM5/koiVWlRi3V6dB863E1YzJS8v41UtsHgMr6gB2ncJ2LsQtMKlJpi3voqcgh41H8UsPXR58RrrpPpufyw==
+  dependencies:
+    npmlog "^4.1.2"
+
+"@lerna/version@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/version/-/version-4.0.0.tgz#532659ec6154d8a8789c5ab53878663e244e3228"
+  integrity sha512-otUgiqs5W9zGWJZSCCMRV/2Zm2A9q9JwSDS7s/tlKq4mWCYriWo7+wsHEA/nPTMDyYyBO5oyZDj+3X50KDUzeA==
+  dependencies:
+    "@lerna/check-working-tree" "4.0.0"
+    "@lerna/child-process" "4.0.0"
+    "@lerna/collect-updates" "4.0.0"
+    "@lerna/command" "4.0.0"
+    "@lerna/conventional-commits" "4.0.0"
+    "@lerna/github-client" "4.0.0"
+    "@lerna/gitlab-client" "4.0.0"
+    "@lerna/output" "4.0.0"
+    "@lerna/prere
