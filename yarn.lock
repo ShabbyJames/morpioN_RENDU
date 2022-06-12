@@ -1120,4 +1120,33 @@
 
 "@lerna/run@4.0.0":
   version "4.0.0"
-  resolved "ht
+  resolved "https://registry.yarnpkg.com/@lerna/run/-/run-4.0.0.tgz#4bc7fda055a729487897c23579694f6183c91262"
+  integrity sha512-9giulCOzlMPzcZS/6Eov6pxE9gNTyaXk0Man+iCIdGJNMrCnW7Dme0Z229WWP/UoxDKg71F2tMsVVGDiRd8fFQ==
+  dependencies:
+    "@lerna/command" "4.0.0"
+    "@lerna/filter-options" "4.0.0"
+    "@lerna/npm-run-script" "4.0.0"
+    "@lerna/output" "4.0.0"
+    "@lerna/profiler" "4.0.0"
+    "@lerna/run-topologically" "4.0.0"
+    "@lerna/timer" "4.0.0"
+    "@lerna/validation-error" "4.0.0"
+    p-map "^4.0.0"
+
+"@lerna/symlink-binary@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/symlink-binary/-/symlink-binary-4.0.0.tgz#21009f62d53a425f136cb4c1a32c6b2a0cc02d47"
+  integrity sha512-zualodWC4q1QQc1pkz969hcFeWXOsVYZC5AWVtAPTDfLl+TwM7eG/O6oP+Rr3fFowspxo6b1TQ6sYfDV6HXNWA==
+  dependencies:
+    "@lerna/create-symlink" "4.0.0"
+    "@lerna/package" "4.0.0"
+    fs-extra "^9.1.0"
+    p-map "^4.0.0"
+
+"@lerna/symlink-dependencies@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/symlink-dependencies/-/symlink-dependencies-4.0.0.tgz#8910eca084ae062642d0490d8972cf2d98e9ebbd"
+  integrity sha512-BABo0MjeUHNAe2FNGty1eantWp8u83BHSeIMPDxNq0MuW2K3CiQRaeWT3EGPAzXpGt0+hVzBrA6+OT0GPn7Yuw==
+  dependencies:
+    "@lerna/create-symlink" "4.0.0"
+    "@lerna/resolve-symlink"
