@@ -1180,4 +1180,43 @@
     "@lerna/github-client" "4.0.0"
     "@lerna/gitlab-client" "4.0.0"
     "@lerna/output" "4.0.0"
-    "@lerna/prere
+    "@lerna/prerelease-id-from-version" "4.0.0"
+    "@lerna/prompt" "4.0.0"
+    "@lerna/run-lifecycle" "4.0.0"
+    "@lerna/run-topologically" "4.0.0"
+    "@lerna/validation-error" "4.0.0"
+    chalk "^4.1.0"
+    dedent "^0.7.0"
+    load-json-file "^6.2.0"
+    minimatch "^3.0.4"
+    npmlog "^4.1.2"
+    p-map "^4.0.0"
+    p-pipe "^3.1.0"
+    p-reduce "^2.1.0"
+    p-waterfall "^2.1.1"
+    semver "^7.3.4"
+    slash "^3.0.0"
+    temp-write "^4.0.0"
+    write-json-file "^4.3.0"
+
+"@lerna/write-log-file@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@lerna/write-log-file/-/write-log-file-4.0.0.tgz#18221a38a6a307d6b0a5844dd592ad53fa27091e"
+  integrity sha512-XRG5BloiArpXRakcnPHmEHJp+4AtnhRtpDIHSghmXD5EichI1uD73J7FgPp30mm2pDRq3FdqB0NbwSEsJ9xFQg==
+  dependencies:
+    npmlog "^4.1.2"
+    write-file-atomic "^3.0.3"
+
+"@microsoft/tsdoc-config@0.15.2":
+  version "0.15.2"
+  resolved "https://registry.yarnpkg.com/@microsoft/tsdoc-config/-/tsdoc-config-0.15.2.tgz#eb353c93f3b62ab74bdc9ab6f4a82bcf80140f14"
+  integrity sha512-mK19b2wJHSdNf8znXSMYVShAHktVr/ib0Ck2FA3lsVBSEhSI/TfXT7DJQkAYgcztTuwazGcg58ZjYdk0hTCVrA==
+  dependencies:
+    "@microsoft/tsdoc" "0.13.2"
+    ajv "~6.12.6"
+    jju "~1.4.0"
+    resolve "~1.19.0"
+
+"@microsoft/tsdoc@0.13.2":
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/@microsoft/t
