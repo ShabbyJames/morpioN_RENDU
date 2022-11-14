@@ -6406,4 +6406,39 @@ parent-module@^1.0.0:
 
 parse-author@^2.0.0:
   version "2.0.0"
-  resolved "https://registry.yarnpkg.com/parse-author/-/parse-a
+  resolved "https://registry.yarnpkg.com/parse-author/-/parse-author-2.0.0.tgz#d3460bf1ddd0dfaeed42da754242e65fb684a81f"
+  integrity sha1-00YL8d3Q367tQtp1QkLmX7aEqB8=
+  dependencies:
+    author-regex "^1.0.0"
+
+parse-json@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/parse-json/-/parse-json-4.0.0.tgz#be35f5425be1f7f6c747184f98a788cb99477ee0"
+  integrity sha1-vjX1Qlvh9/bHRxhPmKeIy5lHfuA=
+  dependencies:
+    error-ex "^1.3.1"
+    json-parse-better-errors "^1.0.1"
+
+parse-json@^5.0.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/parse-json/-/parse-json-5.2.0.tgz#c76fc66dee54231c962b22bcc8a72cf2f99753cd"
+  integrity sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==
+  dependencies:
+    "@babel/code-frame" "^7.0.0"
+    error-ex "^1.3.1"
+    json-parse-even-better-errors "^2.3.0"
+    lines-and-columns "^1.1.6"
+
+parse-path@^4.0.0:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/parse-path/-/parse-path-4.0.4.tgz#4bf424e6b743fb080831f03b536af9fc43f0ffea"
+  integrity sha512-Z2lWUis7jlmXC1jeOG9giRO2+FsuyNipeQ43HAjqAZjwSe3SEf+q/84FGPHoso3kyntbxa4c4i77t3m6fGf8cw==
+  dependencies:
+    is-ssh "^1.3.0"
+    protocols "^1.4.0"
+    qs "^6.9.4"
+    query-string "^6.13.8"
+
+parse-url@^6.0.0:
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/parse-url/-/parse-url-6.0.5.tgz#4acab8982c
