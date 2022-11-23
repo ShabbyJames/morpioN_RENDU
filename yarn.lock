@@ -6857,4 +6857,32 @@ readable-stream@^2.0.6, readable-stream@~2.3.6:
 
 readdir-scoped-modules@^1.0.0:
   version "1.1.0"
-  r
+  resolved "https://registry.yarnpkg.com/readdir-scoped-modules/-/readdir-scoped-modules-1.1.0.tgz#8d45407b4f870a0dcaebc0e28670d18e74514309"
+  integrity sha512-asaikDeqAQg7JifRsZn1NJZXo9E+VwlyCfbkZhwyISinqk5zNS6266HS5kah6P0SaQKGF6SkNnZVHUzHFYxYDw==
+  dependencies:
+    debuglog "^1.0.1"
+    dezalgo "^1.0.0"
+    graceful-fs "^4.1.2"
+    once "^1.3.0"
+
+readdirp@~3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/readdirp/-/readdirp-3.6.0.tgz#74a370bd857116e245b29cc97340cd431a02a6c7"
+  integrity sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==
+  dependencies:
+    picomatch "^2.2.1"
+
+redent@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/redent/-/redent-3.0.0.tgz#e557b7998316bb53c9f1f56fa626352c6963059f"
+  integrity sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==
+  dependencies:
+    indent-string "^4.0.0"
+    strip-indent "^3.0.0"
+
+regex-not@^1.0.0, regex-not@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/regex-not/-/regex-not-1.0.2.tgz#1f4ece27e00b0b65e0247a6810e6a85d83a5752c"
+  integrity sha512-J6SDjUgDxQj5NusnOtdFxDwN/+HWykR8GELwctJ7mdqhcyy1xEc4SRFHUXvxTp661YaVKAjfRLZ9cCqS6tn32A==
+  dependencies:
+    extend
